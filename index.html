@@ -338,6 +338,86 @@
       color: var(--muted);
     }
 
+    /* TABLE */
+
+    .table-wrap {
+      margin-top: 12px;
+      background: rgba(10, 17, 35, 0.98);
+      border-radius: var(--radius);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+
+    .table-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+      background: #020617;
+    }
+
+    .table-controls input,
+    .table-controls select {
+      padding: 6px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.96);
+      color: var(--text);
+      font-size: 0.85rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+    }
+
+    thead {
+      background: rgba(15, 23, 42, 1);
+    }
+
+    th, td {
+      padding: 8px 10px;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    tr:nth-child(even) {
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .badge {
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      display: inline-block;
+    }
+
+    .badge-liberal {
+      border-color: #22c55e;
+      color: #4ade80;
+    }
+
+    .badge-conservative {
+      border-color: #60a5fa;
+      color: #93c5fd;
+    }
+
+    .badge-mixed {
+      border-color: #fbbf24;
+      color: #facc15;
+    }
+
     footer {
       border-top: 1px solid rgba(31, 41, 55, 0.9);
       padding: 14px 6vw 22px;
@@ -360,6 +440,12 @@
       }
       .two-col {
         grid-template-columns: minmax(0, 1fr);
+      }
+      table {
+        font-size: 0.8rem;
+      }
+      th, td {
+        padding: 6px 6px;
       }
     }
   </style>
@@ -416,45 +502,47 @@
       </div>
     </section>
 
+    <!-- CAMPUS VIBES WITH TABLE -->
     <section id="vibes">
       <div class="section-header">
         <h2>Campus Vibes: Liberal, Conservative, or Just Chaos?</h2>
         <p>
-          Every campus has a vibe. This is a quick starting list based on how students and rankings usually describe them.
+          Every campus has a vibe. Use the table to search by name, state, or vibe and see a quick snapshot.
         </p>
       </div>
 
-      <div class="two-col">
-        <div>
-          <p><strong>How to use this:</strong></p>
-          <ul>
-            <li>These are schools people <em>often</em> call more liberal or more conservative.</li>
-            <li>Based on public rankings + student reviews, not official labels.</li>
-            <li>There are all kinds of people on every campus – this is vibe, not gospel.</li>
-          </ul>
+      <div class="table-wrap">
+        <div class="table-controls">
+          <input id="searchInput" type="text" placeholder="Search college or state..." />
+          <select id="vibeFilter">
+            <option value="">All vibes</option>
+            <option value="liberal">More liberal</option>
+            <option value="mixed">Mixed</option>
+            <option value="conservative">More conservative</option>
+          </select>
         </div>
-        <div class="list-block">
-          <h3>Feels more liberal (according to a lot of students)</h3>
-          <ul>
-            <li>American University (Washington, D.C.)</li>
-            <li>University of Vermont</li>
-            <li>Oberlin College</li>
-            <li>New York University (NYU)</li>
-            <li>UC Berkeley</li>
-          </ul>
-
-          <h3 style="margin-top:8px;">Feels more conservative</h3>
-          <ul>
-            <li>Liberty University</li>
-            <li>Grove City College</li>
-            <li>Brigham Young University (Provo)</li>
-            <li>Pensacola Christian College</li>
-            <li>Bob Jones University</li>
-          </ul>
-        </div>
+        <table>
+          <thead>
+            <tr>
+              <th data-sort="name">College</th>
+              <th data-sort="state">State</th>
+              <th data-sort="type">Type</th>
+              <th data-sort="vibeScore">Vibe Score</th>
+              <th data-sort="vibe">Vibe</th>
+            </tr>
+          </thead>
+          <tbody id="collegeTableBody">
+            <!-- rows injected by JS -->
+          </tbody>
+        </table>
       </div>
+
+      <p class="disclaimer">
+        Vibe labels are based on public rankings + student chatter. Not official, not gospel, just a starting point.
+      </p>
     </section>
 
+    <!-- RANK MY COLLEGE -->
     <section id="rank">
       <div class="section-header">
         <h2>Rank My College</h2>
@@ -500,6 +588,7 @@
       </form>
     </section>
 
+    <!-- ALTERNATIVES -->
     <section id="alt">
       <div class="section-header">
         <h2>Escape Routes: Not Just “Drop Out and Pray”</h2>
@@ -536,6 +625,7 @@
       </div>
     </section>
 
+    <!-- STUDY TOOLS -->
     <section id="tools">
       <div class="section-header">
         <h2>Study Tools That Don’t Get You Expelled</h2>
@@ -571,8 +661,10 @@
   </footer>
 
   <script>
+    // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
 
+    // Demo form handler
     const rankForm = document.getElementById("rankForm");
     if (rankForm) {
       rankForm.addEventListener("submit", function (e) {
@@ -588,6 +680,96 @@
         alert("Got it. Your rating is logged in your browser console for now.");
         rankForm.reset();
       });
+    }
+
+    // College data for table
+    const colleges = [
+      { name: "American University", state: "DC", type: "Private", vibe: "liberal", vibeScore: 82 },
+      { name: "University of Vermont", state: "VT", type: "Public", vibe: "liberal", vibeScore: 80 },
+      { name: "Oberlin College", state: "OH", type: "Private", vibe: "liberal", vibeScore: 88 },
+      { name: "New York University", state: "NY", type: "Private", vibe: "liberal", vibeScore: 78 },
+      { name: "UC Berkeley", state: "CA", type: "Public", vibe: "liberal", vibeScore: 85 },
+      { name: "Liberty University", state: "VA", type: "Private", vibe: "conservative", vibeScore: 25 },
+      { name: "Grove City College", state: "PA", type: "Private", vibe: "conservative", vibeScore: 28 },
+      { name: "Brigham Young University (Provo)", state: "UT", type: "Private", vibe: "conservative", vibeScore: 30 },
+      { name: "Pensacola Christian College", state: "FL", type: "Private", vibe: "conservative", vibeScore: 22 },
+      { name: "Bob Jones University", state: "SC", type: "Private", vibe: "conservative", vibeScore: 20 },
+      { name: "Arizona State University", state: "AZ", type: "Public", vibe: "mixed", vibeScore: 55 },
+      { name: "Ohio State University", state: "OH", type: "Public", vibe: "mixed", vibeScore: 50 }
+    ];
+
+    const tableBody = document.getElementById("collegeTableBody");
+    const searchInput = document.getElementById("searchInput");
+    const vibeFilter = document.getElementById("vibeFilter");
+    const headers = document.querySelectorAll("th[data-sort]");
+
+    let sortKey = "name";
+    let sortDir = "asc";
+
+    function getVibeLabel(vibe) {
+      if (vibe === "liberal") return "More liberal";
+      if (vibe === "conservative") return "More conservative";
+      return "Mixed";
+    }
+
+    function getVibeClass(vibe) {
+      if (vibe === "liberal") return "badge badge-liberal";
+      if (vibe === "conservative") return "badge badge-conservative";
+      return "badge badge-mixed";
+    }
+
+    function renderTable() {
+      const term = searchInput.value.toLowerCase();
+      const vibe = vibeFilter.value;
+
+      let filtered = colleges.filter(c => {
+        const matchesSearch =
+          c.name.toLowerCase().includes(term) ||
+          c.state.toLowerCase().includes(term);
+        const matchesVibe = !vibe || c.vibe === vibe;
+        return matchesSearch && matchesVibe;
+      });
+
+      filtered.sort((a, b) => {
+        let x = a[sortKey];
+        let y = b[sortKey];
+        if (typeof x === "string") x = x.toLowerCase();
+        if (typeof y === "string") y = y.toLowerCase();
+        if (x < y) return sortDir === "asc" ? -1 : 1;
+        if (x > y) return sortDir === "asc" ? 1 : -1;
+        return 0;
+      });
+
+      tableBody.innerHTML = "";
+      filtered.forEach(c => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${c.name}</td>
+          <td>${c.state}</td>
+          <td>${c.type}</td>
+          <td>${c.vibeScore}</td>
+          <td><span class="${getVibeClass(c.vibe)}">${getVibeLabel(c.vibe)}</span></td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    }
+
+    if (searchInput && vibeFilter && tableBody) {
+      searchInput.addEventListener("input", renderTable);
+      vibeFilter.addEventListener("change", renderTable);
+      headers.forEach(h => {
+        h.addEventListener("click", () => {
+          const key = h.getAttribute("data-sort");
+          if (sortKey === key) {
+            sortDir = sortDir === "asc" ? "desc" : "asc";
+          } else {
+            sortKey = key;
+            sortDir = "asc";
+          }
+          renderTable();
+        });
+      });
+      renderTable();
     }
   </script>
 </body>
