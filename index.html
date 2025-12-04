@@ -67,6 +67,609 @@
       display: flex;
       gap: 14px;
       font-size: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--muted);
+    }
+
+    nav a:hover {
+      background: rgba(148, 163, 184, 0.15);
+      color: var(--text);
+    }
+
+    /* LAYOUT */
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 6vw 40px;
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    /* HERO */
+
+    .hero {
+      margin-top: 10px;
+      padding: 32px 22px 26px;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.14), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(249, 115, 22, 0.2), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 40%, #020617 100%);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "0101 1010 0110 1001";
+      position: absolute;
+      right: -40px;
+      bottom: -6px;
+      font-size: 2.8rem;
+      color: rgba(15, 23, 42, 0.8);
+      letter-spacing: 0.15em;
+      white-space: nowrap;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 3vw + 1.4rem, 2.8rem);
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 620px;
+      margin-bottom: 18px;
+      font-size: 0.97rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .tagline {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+      font-size: 0.8rem;
+    }
+
+    .pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      color: var(--muted);
+    }
+
+    /* SECTIONS / TYPO */
+
+    .section-header h2 {
+      font-size: 1.7rem;
+      margin-bottom: 6px;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    p {
+      margin-bottom: 8px;
+    }
+
+    ul {
+      margin-left: 18px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* CARDS */
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .card {
+      background: rgba(10, 17, 35, 0.98);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 16px 16px 14px;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+    }
+
+    .card h3 {
+      margin-bottom: 6px;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      margin-bottom: 6px;
+      font-size: 0.92rem;
+    }
+
+    .card-links {
+      margin-top: 6px;
+      font-size: 0.86rem;
+    }
+
+    .card-links a {
+      display: inline-block;
+      margin-right: 8px;
+      margin-bottom: 4px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--muted);
+      font-size: 0.8rem;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .card-links a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .disclaimer {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* FORM STYLES */
+
+    .form-card {
+      max-width: 640px;
+      margin-top: 18px;
+    }
+
+    .form-row {
+      margin-bottom: 12px;
+    }
+
+    .form-row label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9rem;
+    }
+
+    .form-row textarea {
+      resize: vertical;
+      min-height: 70px;
+    }
+
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.4);
+    }
+
+    .form-note {
+      margin-top: 6px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* GRID SPLIT */
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .list-block h3 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .list-block ul {
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 16px 6vw 24px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 720px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      nav {
+        flex-wrap: wrap;
+      }
+      .hero {
+        padding: 24px 18px 20px;
+      }
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">ihatecollege<span>.com</span></div>
+    <nav>
+      <a href="#why">Why College Sucks</a>
+      <a href="#vibes">Campus Vibes</a>
+      <a href="#rank">Rank My College</a>
+      <a href="#alt">Alternatives</a>
+      <a href="#tools">Study Tools</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <h1>I Hate College (But I’m Still Stuck Here)</h1>
+      <p>
+        College is stupid expensive, insanely stressful, and way more political than anyone warned you.
+        ihatecollege.com is the brutally honest dashboard: real talk about cost, campus vibe, and
+        escape routes so you don’t get buried in debt and burnout.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#vibes" class="btn btn-primary">Explore Campus Vibes</a>
+        <a href="#rank" class="btn btn-secondary">Rank My College</a>
+      </div>
+
+      <div class="tagline">
+        No brochure fluff. No guidance counselor fantasy. Just what actually helps.
+      </div>
+      <div class="pill-row">
+        <span class="pill">🎓 College reality check</span>
+        <span class="pill">💸 Debt & cost awareness</span>
+        <span class="pill">🧠 Survival & alternatives</span>
+      </div>
+    </section>
+
+    <!-- WHY COLLEGE SUCKS / CONTEXT -->
+    <section id="why">
+      <div class="section-header">
+        <h2>Why So Many People Hate College Right Now</h2>
+        <p>
+          You’re not crazy for questioning the whole thing. Surveys in recent years show a big shift:
+          fewer people think a four-year degree is automatically “worth it”, especially once loans and
+          mental health are factored in. This site exists so you’re not walking blind into four years
+          of stress and a five-figure bill.
+        </p>
+      </div>
+      <p>Common reasons people are over it:</p>
+      <ul>
+        <li>Tuition keeps climbing faster than starting salaries.</li>
+        <li>Many students report serious stress and burnout once they get on campus.</li>
+        <li>Campuses can feel like political war zones instead of places to actually learn.</li>
+        <li>Alternatives — trades, bootcamps, online certs, and AI-powered hustles — are getting better every year.</li>
+      </ul>
+      <p class="disclaimer">
+        This isn’t “drop out immediately” advice. It’s “know what you’re getting into and what your options are” advice.
+      </p>
+    </section>
+
+    <!-- CAMPUS VIBES SECTION -->
+    <section id="vibes">
+      <div class="section-header">
+        <h2>Campus Vibes: Liberal, Conservative, or Just Chaotic?</h2>
+        <p>
+          Every campus has a vibe. Some feel super activist and progressive, some are more religious or traditional,
+          and a lot are just a weird mix. The goal for ihatecollege.com is a live “vibe map” built from public rankings
+          plus student opinions. This is a simple preview with example schools people often describe as more liberal
+          or more conservative.
+        </p>
+      </div>
+
+      <div class="two-col">
+        <div>
+          <p>
+            In the full version, you’ll be able to search any college and see:
+          </p>
+          <ul>
+            <li>A 0–100 vibe score based on crowd input (0–40 = more conservative, 41–59 = mixed, 60–100 = more liberal).</li>
+            <li>Real student comments instead of brochure quotes.</li>
+            <li>How the vibe compares to other schools in the same region or tier.</li>
+          </ul>
+          <p class="disclaimer">
+            Important: campus politics are complicated. There are liberal students at “conservative” schools and
+            conservative students at “liberal” schools. These examples are based on public rankings and student
+            reviews, not official labels.
+          </p>
+        </div>
+
+        <div class="list-block">
+          <h3>Examples people often call “more liberal”</h3>
+          <ul>
+            <li>American University (Washington, D.C.)</li>
+            <li>University of Vermont</li>
+            <li>Oberlin College</li>
+            <li>New York University (NYU)</li>
+            <li>UC Berkeley</li>
+          </ul>
+
+          <h3 style="margin-top:10px;">Examples people often call “more conservative”</h3>
+          <ul>
+            <li>Liberty University</li>
+            <li>Grove City College</li>
+            <li>Brigham Young University (Provo)</li>
+            <li>Pensacola Christian College</li>
+            <li>Bob Jones University</li>
+          </ul>
+
+          <p class="disclaimer">
+            These lists are just a starting point, not endorsements. The real power comes when students rate
+            their own campuses and push the scores up or down.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RANK MY COLLEGE FORM -->
+    <section id="rank">
+      <div class="section-header">
+        <h2>Rank My College: Tell the Truth They Don’t Put in the Brochure</h2>
+        <p>
+          This is where you rate your campus like it’s a restaurant on DoorDash.
+          Be blunt. Future students deserve to know what they’re walking into — the cost, the politics, the burnout,
+          and anything that actually works.
+        </p>
+      </div>
+
+      <form id="rankForm" class="card form-card">
+        <div class="form-row">
+          <label for="collegeName">College name</label>
+          <input id="collegeName" name="collegeName" type="text" required />
+        </div>
+
+        <div class="form-row">
+          <label for="hateScore">“I Hate This Place” Score (1–10)</label>
+          <input id="hateScore" name="hateScore" type="number" min="1" max="10" required />
+        </div>
+
+        <div class="form-row">
+          <label for="politics">Campus politics vibe</label>
+          <select id="politics" name="politics" required>
+            <option value="">Select one</option>
+            <option value="liberal">Feels more liberal</option>
+            <option value="balanced">Mixed / balanced</option>
+            <option value="conservative">Feels more conservative</option>
+            <option value="idk">Not sure / don’t care</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="topHates">Top 3 things you hate (cost, professors, dorms, politics, etc.)</label>
+          <textarea id="topHates" name="topHates" required></textarea>
+        </div>
+
+        <div class="form-row">
+          <label for="oneGood">One thing your college actually does well</label>
+          <textarea id="oneGood" name="oneGood"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit My Rant (Demo)</button>
+        <p class="form-note">
+          In this early version, your review doesn’t go public yet – it just logs in your browser.
+          Next step: saving reviews to a database and showing live campus report cards.
+        </p>
+      </form>
+    </section>
+
+    <!-- ALTERNATIVES & HUSTLES WITH REAL LINKS -->
+    <section id="alt">
+      <div class="section-header">
+        <h2>Escape Routes: Real Alternatives to the Classic 4-Year Trap</h2>
+        <p>
+          If you hate college, you don’t just have two options (suffer or drop out blind).
+          You can build smarter options while you’re still in the game.
+          These are starting points you can click today and explore on your own.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <!-- CARD 1: SKILLS-FIRST ONLINE PROGRAMS -->
+        <article class="card">
+          <h3>1. Skills-First Online Programs</h3>
+          <p>
+            Short, focused programs that actually teach you something you can sell:
+            IT, data, UX, project management, marketing, AI. No campus drama, just skills and a certificate.
+          </p>
+          <p>Good places to explore:</p>
+          <div class="card-links">
+            <a href="https://grow.google/intl/ssa-en/google-career-certificates/" target="_blank" rel="noopener">
+              Google Career Certificates
+            </a>
+            <a href="https://www.coursera.org/professional-certificates" target="_blank" rel="noopener">
+              Coursera Professional Certificates
+            </a>
+            <a href="https://www.coursera.org/courses" target="_blank" rel="noopener">
+              Browse 10,000+ Online Courses
+            </a>
+          </div>
+          <p class="disclaimer">
+            Look for programs with real portfolios and job support. Don’t just chase logos.
+          </p>
+        </article>
+
+        <!-- CARD 2: TRADES & APPRENTICESHIPS -->
+        <article class="card">
+          <h3>2. Trades & Apprenticeships</h3>
+          <p>
+            Electrician, HVAC, welding, plumbing, medical tech – jobs that still need humans and often pay while you learn.
+            Less theory, more “I can actually fix something and bill for it.”
+          </p>
+          <p>To find legit programs:</p>
+          <div class="card-links">
+            <a href="https://www.apprenticeship.gov/" target="_blank" rel="noopener">
+              Apprenticeship.gov (U.S. Finder)
+            </a>
+            <a href="https://www.apprenticeship.gov/apprenticeship-job-finder" target="_blank" rel="noopener">
+              Search Apprenticeships by Location
+            </a>
+            <a href="https://www.fldoe.org/academics/career-adult-edu/apprenticeship-programs/" target="_blank" rel="noopener">
+              Florida Apprenticeship Programs
+            </a>
+          </div>
+          <p class="disclaimer">
+            Many of these paths have lower total cost and clearer job outcomes than random majors.
+          </p>
+        </article>
+
+        <!-- CARD 3: AI & CREATOR HUSTLES -->
+        <article class="card">
+          <h3>3. AI & Creator Hustles</h3>
+          <p>
+            Use AI and content tools to make money while you’re still in school:
+            niche sites, TikTok/IG content, templates, notes, simple services.
+            Start small, test fast, scale what actually works.
+          </p>
+          <p>Tools worth playing with:</p>
+          <div class="card-links">
+            <a href="https://www.notion.com/templates/category/school" target="_blank" rel="noopener">
+              Notion Student Templates
+            </a>
+            <a href="https://www.canva.com/social-media/" target="_blank" rel="noopener">
+              Canva Social Media Creator
+            </a>
+            <a href="https://www.canva.com/features/ai-social-media-post-generator/" target="_blank" rel="noopener">
+              Canva AI Post Generator
+            </a>
+          </div>
+          <p class="disclaimer">
+            Not “get rich in a week” – but real tools you can use to build skill and income instead of just scrolling.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- STUDY TOOLS / CHEAT SHEET PREVIEW -->
+    <section id="tools">
+      <div class="section-header">
+        <h2>Study Tools That Don’t Get You Expelled</h2>
+        <p>
+          You don’t need to read 400 pages for every quiz. The idea for ihatecollege.com is a hub of
+          legal study helpers – cheat sheets, templates, and systems that make classes survivable.
+          These are example categories you’ll eventually host here.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <h3>Fast Formula Sheets</h3>
+          <p>
+            Math, stats, econ: the bare-minimum formulas and examples you need in one place instead of 10 tabs.
+            In the full version of this site, you’ll click and download subject-specific sheets.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Essay & Writing Templates</h3>
+          <p>
+            Plug-and-play structures for essays, discussion posts, and emails to professors,
+            so you waste less time staring at a blank screen.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Planner & System Dashboards</h3>
+          <p>
+            Notion-style dashboards so you know what’s due, what’s late, and what you can ignore.
+            You can start now by grabbing existing free templates and customizing them.
+          </p>
+          <div class="card-links">
+            <a href="https://www.notion.com/templates/category/student-planner" target="_blank" rel="noopener">
+              Notion Student Planners
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <p class="disclaimer">
+        Coming soon on ihatecollege.com: actual downloadable resources and user-submitted tools.
+        No exam keys, no plagiarism marketplaces – just stuff that helps you learn faster.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> ihatecollege.com – Student opinions only. Not affiliated with any college.
+    Nothing here is financial, legal, or academic advising.
+  </footer>
+
+  <script>
+    // Set current year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Simple demo handler for the Rank My College form
+    const rankForm = document.getElementById("rankForm");
+    if (rankForm) {
+      rankForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const data = {
+          collegeName: document.getElementById("collegeName").value.trim(),
+          hateScore: document.getElementById("hateScore").value,
+          politics: document.getElementById("politics").value,
+          topHates: document.getElementById("topHates").value.trim(),
+          oneGood: document.getElementById("oneGood").value.trim()
+        };
+        console.log("Rank My College submission (demo only):", data);
+        alert("Thanks for being honest. In this demo, your ranking is saved only in your browser console.\nNext version: live campus report cards.");
+        rankForm.reset();
+      });
+    }
+  </script>
+</body>
+</html>    }
+
+    nav {
+      display: flex;
+      gap: 14px;
+      font-size: 0.9rem;
     }
 
     nav a {
