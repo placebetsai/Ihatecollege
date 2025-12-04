@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: #050816;
+  color: #e5e7eb;
+  font-family: system-ui, sans-serif;
+}
+
+.card {
+  background: #0a1123;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid #1f2937;
+}
