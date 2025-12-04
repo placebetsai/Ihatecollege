@@ -7,15 +7,14 @@
   <style>
     :root {
       --bg: #050816;
-      --bg-soft: #0b1220;
       --card: #020617;
       --accent: #f97316;
-      --accent-soft: rgba(249, 115, 22, 0.15);
+      --accent-soft: rgba(249, 115, 22, 0.22);
       --text: #e5e7eb;
       --muted: #9ca3af;
       --border: #1f2937;
       --radius-lg: 18px;
-      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.5);
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.55);
       --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
         "Segoe UI", sans-serif;
     }
@@ -48,8 +47,8 @@
       justify-content: space-between;
       align-items: center;
       padding: 12px 6vw;
-      background: rgba(3, 7, 18, 0.95);
-      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+      background: rgba(3, 7, 18, 0.96);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.22);
       backdrop-filter: blur(16px);
     }
 
@@ -62,6 +61,626 @@
     .logo span {
       color: var(--accent);
     }
+
+    nav {
+      display: flex;
+      gap: 12px;
+      font-size: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--muted);
+    }
+
+    nav a:hover {
+      background: rgba(148, 163, 184, 0.18);
+      color: var(--text);
+    }
+
+    /* LAYOUT */
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 26px 6vw 40px;
+    }
+
+    section {
+      margin-bottom: 36px;
+    }
+
+    .section-header h2 {
+      font-size: 1.7rem;
+      margin-bottom: 6px;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    p {
+      margin-bottom: 6px;
+    }
+
+    ul {
+      margin-left: 18px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* HERO */
+
+    .hero {
+      margin-top: 6px;
+      padding: 28px 20px 22px;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.18), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(249, 115, 22, 0.25), transparent 55%),
+        linear-gradient(135deg, #020617, #020617 40%, #020617 100%);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "0101 1010 0110 1001";
+      position: absolute;
+      right: -40px;
+      bottom: -6px;
+      font-size: 2.8rem;
+      color: rgba(15, 23, 42, 0.8);
+      letter-spacing: 0.15em;
+      white-space: nowrap;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 3vw + 1.4rem, 2.8rem);
+      margin-bottom: 8px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 620px;
+      margin-bottom: 14px;
+      font-size: 0.96rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+      font-size: 0.8rem;
+    }
+
+    .pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.88);
+      border: 1px solid rgba(148, 163, 184, 0.34);
+      color: var(--muted);
+    }
+
+    /* FEATURE CARDS (3 big blocks under hero) */
+
+    .feature-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .feature-card {
+      background: rgba(10, 17, 35, 0.98);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 14px 14px 12px;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.45);
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .feature-icon {
+      font-size: 1.4rem;
+    }
+
+    .feature-title {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .feature-text {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* BUTTONS */
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 9px 18px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #111827;
+      box-shadow: 0 10px 25px rgba(249, 115, 22, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(249, 115, 22, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(15, 23, 42, 0.96);
+      color: var(--text);
+      border-color: rgba(148, 163, 184, 0.4);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(15, 23, 42, 1);
+    }
+
+    /* GENERIC CARD GRID */
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .card {
+      background: rgba(10, 17, 35, 0.98);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 16px 16px 14px;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+    }
+
+    .card h3 {
+      margin-bottom: 6px;
+      font-size: 1.05rem;
+    }
+
+    .card p {
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .card-links {
+      margin-top: 4px;
+      font-size: 0.86rem;
+    }
+
+    .card-links a {
+      display: inline-block;
+      margin-right: 8px;
+      margin-bottom: 4px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--muted);
+      font-size: 0.8rem;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .card-links a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .disclaimer {
+      margin-top: 6px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* TWO-COL BLOCK */
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 16px;
+      align-items: flex-start;
+      margin-top: 10px;
+    }
+
+    .list-block h3 {
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    /* FORM */
+
+    .form-card {
+      max-width: 620px;
+      margin-top: 14px;
+    }
+
+    .form-row {
+      margin-bottom: 10px;
+    }
+
+    .form-row label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.96);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9rem;
+    }
+
+    .form-row textarea {
+      resize: vertical;
+      min-height: 70px;
+    }
+
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.4);
+    }
+
+    .form-note {
+      margin-top: 4px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 14px 6vw 22px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 720px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      nav {
+        flex-wrap: wrap;
+      }
+      .hero {
+        padding: 22px 16px 20px;
+      }
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">ihatecollege<span>.com</span></div>
+    <nav>
+      <a href="#vibes">Campus Vibes</a>
+      <a href="#rank">Rank My College</a>
+      <a href="#alt">Alternatives</a>
+      <a href="#tools">Study Tools</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <h1>I Hate College (But I’m Still Stuck Here)</h1>
+      <p>
+        College is stupid expensive, insanely stressful, and full of politics.
+        ihatecollege.com is for people who want real info, not brochure bullshit.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#vibes" class="btn btn-primary">Check Campus Vibes</a>
+        <a href="#alt" class="btn btn-secondary">See Escape Routes</a>
+      </div>
+
+      <div class="pill-row">
+        <span class="pill">🎓 Real student energy</span>
+        <span class="pill">💸 Debt & value awareness</span>
+        <span class="pill">🧠 Survive or escape smarter</span>
+      </div>
+
+      <div class="feature-row">
+        <div class="feature-card">
+          <div class="feature-icon">🔥</div>
+          <div class="feature-title">Campus Vibe Heat Map</div>
+          <div class="feature-text">
+            Quick snapshot of which schools feel more liberal, more conservative, or just chaotic.
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🧾</div>
+          <div class="feature-title">Rank My College</div>
+          <div class="feature-text">
+            Drop your own rating and rant so other people don’t walk in blind.
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📚</div>
+          <div class="feature-title">Study Power-Ups</div>
+          <div class="feature-text">
+            Legal cheat sheets, templates, and tools so you pass without living in the library.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAMPUS VIBES -->
+    <section id="vibes">
+      <div class="section-header">
+        <h2>Campus Vibes: Liberal, Conservative, or Just Chaos?</h2>
+        <p>
+          Every campus has a vibe. Some feel super activist and progressive, some are more religious and traditional,
+          and a lot are just a weird mix. This is a quick visual starting point.
+        </p>
+      </div>
+
+      <div class="two-col">
+        <div>
+          <p><strong>How to read this:</strong></p>
+          <ul>
+            <li>These are schools people <em>often</em> call more liberal or more conservative.</li>
+            <li>Based on public rankings + student reviews, not official labels.</li>
+            <li>There are all kinds of people on every campus – this is vibe, not gospel.</li>
+          </ul>
+          <p class="disclaimer">
+            Eventually this will be a full interactive table with scores and comments. For now, it gives you a
+            fast “what am I walking into?” snapshot.
+          </p>
+        </div>
+
+        <div class="list-block">
+          <h3>Feels more liberal (according to a lot of students)</h3>
+          <ul>
+            <li>American University (Washington, D.C.)</li>
+            <li>University of Vermont</li>
+            <li>Oberlin College</li>
+            <li>New York University (NYU)</li>
+            <li>UC Berkeley</li>
+          </ul>
+
+          <h3 style="margin-top:8px;">Feels more conservative</h3>
+          <ul>
+            <li>Liberty University</li>
+            <li>Grove City College</li>
+            <li>Brigham Young University (Provo)</li>
+            <li>Pensacola Christian College</li>
+            <li>Bob Jones University</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- RANK MY COLLEGE -->
+    <section id="rank">
+      <div class="section-header">
+        <h2>Rank My College</h2>
+        <p>
+          Rate your school like it’s a restaurant. Be blunt. You might save someone four years and six figures.
+        </p>
+      </div>
+
+      <form id="rankForm" class="card form-card">
+        <div class="form-row">
+          <label for="collegeName">College name</label>
+          <input id="collegeName" name="collegeName" type="text" required />
+        </div>
+
+        <div class="form-row">
+          <label for="hateScore">“I Hate This Place” score (1–10)</label>
+          <input id="hateScore" name="hateScore" type="number" min="1" max="10" required />
+        </div>
+
+        <div class="form-row">
+          <label for="politics">Campus politics vibe</label>
+          <select id="politics" name="politics" required>
+            <option value="">Select one</option>
+            <option value="liberal">Feels more liberal</option>
+            <option value="balanced">Mixed / balanced</option>
+            <option value="conservative">Feels more conservative</option>
+            <option value="idk">Not sure / don’t care</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="topHates">Top 3 things you hate</label>
+          <textarea id="topHates" name="topHates" placeholder="Cost, professors, dorms, politics, administration..."></textarea>
+        </div>
+
+        <div class="form-row">
+          <label for="oneGood">One thing they actually do well</label>
+          <textarea id="oneGood" name="oneGood" placeholder="Clubs, certain majors, campus, internships, etc."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit My Rating</button>
+        <p class="form-note">
+          Right now your rating just logs in your own browser console. Next step is saving and showing live rankings.
+        </p>
+      </form>
+    </section>
+
+    <!-- ALTERNATIVES -->
+    <section id="alt">
+      <div class="section-header">
+        <h2>Escape Routes: Not Just “Drop Out and Pray”</h2>
+        <p>
+          You don’t have to choose between hating college forever or quitting with no plan.
+          These are real paths people use to get skills and money without drowning in debt.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <h3>Skills-First Online Programs</h3>
+          <p>
+            Fast programs that teach real skills: IT, data, UX, project management, marketing, AI.
+          </p>
+          <div class="card-links">
+            <a href="https://grow.google/intl/ssa-en/google-career-certificates/" target="_blank" rel="noopener">
+              Google Career Certificates
+            </a>
+            <a href="https://www.coursera.org/professional-certificates" target="_blank" rel="noopener">
+              Coursera Certificates
+            </a>
+            <a href="https://www.coursera.org/courses" target="_blank" rel="noopener">
+              Browse Online Courses
+            </a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Trades & Apprenticeships</h3>
+          <p>
+            Electrician, HVAC, welding, plumbing, medical tech. Often paid while you learn, less debt.
+          </p>
+          <div class="card-links">
+            <a href="https://www.apprenticeship.gov/" target="_blank" rel="noopener">
+              Apprenticeship.gov
+            </a>
+            <a href="https://www.apprenticeship.gov/apprenticeship-job-finder" target="_blank" rel="noopener">
+              Find Apprenticeships
+            </a>
+            <a href="https://www.fldoe.org/academics/career-adult-edu/apprenticeship-programs/" target="_blank" rel="noopener">
+              Florida Programs
+            </a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>AI & Creator Hustles</h3>
+          <p>
+            Use AI + content to make money while you’re still in school: niche sites, short-form content, templates.
+          </p>
+          <div class="card-links">
+            <a href="https://www.notion.com/templates/category/school" target="_blank" rel="noopener">
+              Notion Student Templates
+            </a>
+            <a href="https://www.canva.com/social-media/" target="_blank" rel="noopener">
+              Canva Social Media Tools
+            </a>
+            <a href="https://www.canva.com/features/ai-social-media-post-generator/" target="_blank" rel="noopener">
+              Canva AI Post Generator
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- STUDY TOOLS -->
+    <section id="tools">
+      <div class="section-header">
+        <h2>Study Tools That Don’t Get You Expelled</h2>
+        <p>
+          You don’t need to grind 12 hours a day. Use smarter tools, not more pain.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <h3>Fast Formula Sheets</h3>
+          <p>
+            One-page hits for math, stats, econ – so you’re not hunting through 300 pages the night before.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Essay & Writing Templates</h3>
+          <p>
+            Plug-and-play layouts for essays, discussion posts, and “sorry I missed class” emails.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Planner Dashboards</h3>
+          <p>
+            Keep assignments, exams, and bills in one place instead of in your panic dreams.
+          </p>
+          <div class="card-links">
+            <a href="https://www.notion.com/templates/category/student-planner" target="_blank" rel="noopener">
+              Free Notion Planners
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <p class="disclaimer">
+        Right now we’re linking to free tools you can grab today. You can later swap these for your own
+        cheat-sheet packs, templates, and paid bundles.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> ihatecollege.com – Student opinions only. Not affiliated with any college.
+    Nothing here is financial, legal, or academic advising.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const rankForm = document.getElementById("rankForm");
+    if (rankForm) {
+      rankForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const data = {
+          collegeName: document.getElementById("collegeName").value.trim(),
+          hateScore: document.getElementById("hateScore").value,
+          politics: document.getElementById("politics").value,
+          topHates: document.getElementById("topHates").value.trim(),
+          oneGood: document.getElementById("oneGood").value.trim()
+        };
+        console.log("Rank My College submission:", data);
+        alert("Got it. Your rating is logged in your browser console for now.");
+        rankForm.reset();
+      });
+    }
+  </script>
+</body>
+</html>    }
 
     nav {
       display: flex;
