@@ -3,4 +3,7 @@
   { "name": "University of Vermont", "state": "VT", "type": "Public", "vibe": "liberal", "vibeScore": 80 },
   { "name": "Oberlin College", "state": "OH", "type": "Private", "vibe": "liberal", "vibeScore": 88 },
   { "name": "UC Berkeley", "state": "CA", "type": "Public", "vibe": "liberal", "vibeScore": 85 },
-  { "name": "Liberty University", "state": "VA", "type": "Private", "vibe": "con
+  { "name": "Liberty University", "state": "VA", "type": "Private", "vibe": "conservative", "vibeScore": 25 },
+  { "name": "BYU Provo", "state": "UT", "type": "Private", "vibe": "conservative", "vibeScore": 30 },
+  { "name": "Arizona State University", "state": "AZ", "type": "Public", "vibe": "mixed", "vibeScore": 55 }
+]
