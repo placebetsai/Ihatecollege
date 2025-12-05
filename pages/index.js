@@ -1,12 +1,73 @@
+import React from 'react';
+import Link from 'next/link';
+
+export default function Home() {
+  const page = {
+    minHeight: '100vh',
+    background:
+      'radial-gradient(circle at top left, #0f172a 0, #020617 55%, #000 100%)',
+    color: '#f9fafb',
+    fontFamily:
+      'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    padding: '20px 14px 36px',
+  };
+
+  const shell = {
+    maxWidth: '1100px',
+    margin: '0 auto',
+  };
+
+  const heroCard = {
+    borderRadius: '20px',
+    padding: '22px 18px',
+    marginTop: '12px', // space under the top navbar
+    background:
+      'linear-gradient(145deg, rgba(15,23,42,0.95), rgba(15,23,42,0.85))',
+    boxShadow: '0 24px 60px rgba(0,0,0,0.6)',
+    border: '1px solid rgba(148,163,184,0.35)',
+  };
+
+  const heroKicker = {
+    fontSize: '11px',
+    letterSpacing: '0.22em',
+    textTransform: 'uppercase',
+    color: '#9ca3af',
+    marginBottom: '8px',
+  };
+
+  const heroTitle = {
+    fontSize: '26px',
+    lineHeight: 1.2,
+    fontWeight: 800,
+    marginBottom: '10px',
+  };
+
+  const highlight = { color: '#fbbf24' };
+
+  const heroSubtitle = {
+    fontSize: '13px',
+    color: '#d1d5db',
+    maxWidth: '620px',
+    marginBottom: '16px',
+  };
+
+  const heroButtons = {
+    display: 'flex',
+    flexWrap: 'wrap',
+    flexDirection: 'column',
+    gap: '10px',
+    marginBottom: '22px',
+  };
+
   const btnPrimary = {
     textDecoration: 'none',
     padding: '10px 18px',
     borderRadius: '999px',
-    background:
-      'linear-gradient(135deg, #fbbf24, #f97316)',
+    background: 'linear-gradient(135deg, #fbbf24, #f97316)',
     color: '#111827',
     fontWeight: 700,
     fontSize: '14px',
+    textAlign: 'center',
   };
 
   const btnSecondary = {
@@ -16,12 +77,13 @@
     border: '1px solid rgba(148,163,184,0.6)',
     color: '#e5e7eb',
     fontSize: '14px',
+    textAlign: 'center',
   };
 
   const statsGrid = {
     display: 'grid',
     gap: '10px',
-    marginBottom: '26px',
+    marginBottom: '24px',
   };
 
   const statRow = {
@@ -40,7 +102,7 @@
   const sectionTitle = {
     fontSize: '20px',
     fontWeight: 700,
-    margin: '26px 0 12px',
+    margin: '24px 0 12px',
   };
 
   const altGrid = {
@@ -65,7 +127,7 @@
   const testimonials = {
     display: 'grid',
     gap: '12px',
-    marginBottom: '24px',
+    marginBottom: '22px',
   };
 
   const tCard = {
@@ -86,7 +148,7 @@
   const pathGrid = {
     display: 'grid',
     gap: '8px',
-    marginBottom: '16px',
+    marginBottom: '14px',
   };
 
   const pathLink = {
@@ -101,7 +163,7 @@
   };
 
   const footer = {
-    marginTop: '18px',
+    marginTop: '16px',
     fontSize: '12px',
     color: '#6b7280',
     textAlign: 'center',
@@ -110,39 +172,13 @@
   return (
     <div style={page}>
       <div style={shell}>
-        {/* NAV */}
-        <header style={navBar}>
-          <div style={navBrand}>
-            <span style={{ color: '#fbbf24' }}>IHATECOLLEGE</span>
-            <span style={{ color: '#38bdf8' }}>.COM</span>
-          </div>
-
-          <nav style={navLinks}>
-            <span style={navActive}>Home</span>
-            <Link href="/Alternatives" style={navLink}>
-              Alternatives
-            </Link>
-            <Link href="/debt-calculator" style={navLink}>
-              Debt Calculator
-            </Link>
-            <Link href="/cheat-sheets" style={navLink}>
-              Cheat Sheets
-            </Link>
-            <Link href="/rank-your-school" style={navLink}>
-              Rank Your School
-            </Link>
-            <Link href="/contact" style={navLink}>
-              Contact
-            </Link>
-          </nav>
-        </header>
-
-        {/* HERO CARD */}
         <main style={heroCard}>
           <div style={heroKicker}>YOU DON&apos;T HAVE TO SIGN YOUR LIFE AWAY</div>
+
           <h1 style={heroTitle}>
             College is <span style={highlight}>optional.</span> Debt isn&apos;t.
           </h1>
+
           <p style={heroSubtitle}>
             Before you lock in $50k+ of loans, compare trades, tech certs,
             bootcamps, and real alternatives. Run the numbers. Hear from
@@ -158,7 +194,6 @@
             </Link>
           </div>
 
-          {/* SNAPSHOT ROWS */}
           <div style={statsGrid}>
             <div style={statRow}>
               <span style={statLabel}>Avg 4-year total cost</span>
@@ -178,7 +213,6 @@
             </div>
           </div>
 
-          {/* ALTERNATIVE PREVIEW */}
           <h2 style={sectionTitle}>High-income paths that DON&apos;T require a degree</h2>
           <div style={altGrid}>
             <Link href="/Alternatives#tech" style={altCard}>
@@ -202,7 +236,6 @@
             </Link>
           </div>
 
-          {/* TESTIMONIALS */}
           <h2 style={sectionTitle}>Real people. Real results.</h2>
           <div style={testimonials}>
             <div style={tCard}>
@@ -228,7 +261,6 @@
             </div>
           </div>
 
-          {/* PATH CTA */}
           <h2 style={sectionTitle}>Choose your path</h2>
           <div style={pathGrid}>
             <Link href="/Alternatives#trades" style={pathLink}>
@@ -249,4 +281,4 @@
       </div>
     </div>
   );
-                         }
+              }
