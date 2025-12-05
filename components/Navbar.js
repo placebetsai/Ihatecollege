@@ -1,97 +1,46 @@
-// components/NavBar.js
-import Link from 'next/link';
-import { useState } from 'react';
-import { useRouter } from 'next/router';
+import Link from "next/link";
+import { useState } from "react";
 
-const links = [
-  { href: '/', label: 'Home' },
-  { href: '/alternatives', label: 'Alternatives' },
-  { href: '/debt-calculator', label: 'Debt Calculator' },
-  { href: '/rank-your-school', label: 'Rank Your School' },
-  { href: '/cheat-sheets', label: 'Cheat Sheets' },
-  { href: '/contact', label: 'Contact' },
-];
-
-function NavLink({ href, label, currentPath, onClick }) {
-  const isActive = href === '/'
-    ? currentPath === '/'
-    : currentPath.startsWith(href);
-
-  return (
-    <Link
-      href={href}
-      onClick={onClick}
-      className={`px-3 py-2 text-sm font-medium transition-colors
-      ${isActive ? 'text-amber-300' : 'text-slate-200 hover:text-white'}`}
-    >
-      {label}
-    </Link>
-  );
-}
-
-export default function NavBar() {
+export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
-
-  const toggle = () => setOpen(o => !o);
-  const close = () => setOpen(false);
 
   return (
-    <header className="sticky top-0 z-30 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
+    <nav className="bg-black/90 backdrop-blur text-white border-b border-white/10 fixed top-0 left-0 w-full z-50">
+      <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+        
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2" onClick={close}>
-          <span className="rounded-full bg-gradient-to-tr from-amber-400 to-emerald-400 px-3 py-1 text-xs font-semibold text-slate-950">
-            IH
-          </span>
-          <div className="flex flex-col leading-tight">
-            <span className="text-xs font-semibold tracking-[0.28em] text-slate-300">
-              IHATECOLLEGE.COM
-            </span>
-            <span className="text-[11px] text-slate-400">
-              No brochure fluff. Just reality.
-            </span>
-          </div>
+        <Link href="/" className="text-2xl font-bold tracking-wide">
+          I Hate College
         </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden items-center gap-1 md:flex">
-          {links.map(link => (
-            <NavLink
-              key={link.href}
-              {...link}
-              currentPath={router.pathname}
-            />
-          ))}
-        </nav>
-
-        {/* Mobile burger */}
+        {/* Mobile toggle */}
         <button
-          type="button"
-          onClick={toggle}
-          className="inline-flex items-center justify-center rounded-full border border-slate-700 p-2 text-slate-200 hover:bg-slate-800 md:hidden"
-          aria-label="Toggle navigation"
+          className="md:hidden text-xl"
+          onClick={() => setOpen(!open)}
         >
-          <span className="block h-0.5 w-5 bg-current"></span>
-          <span className="mt-1 block h-0.5 w-5 bg-current"></span>
+          ☰
         </button>
+
+        {/* Desktop nav */}
+        <div className="hidden md:flex gap-8 text-sm font-medium">
+          <Link href="/alternatives" className="hover:text-amber-400">Alternatives</Link>
+          <Link href="/cheatsheets" className="hover:text-amber-400">Cheat Sheets</Link>
+          <Link href="/rank" className="hover:text-amber-400">Rank Schools</Link>
+          <Link href="/cost" className="hover:text-amber-400">Cost Calc</Link>
+          <Link href="/contact" className="hover:text-amber-400">Contact</Link>
+        </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile dropdown */}
       {open && (
-        <div className="border-t border-slate-800 bg-slate-950 md:hidden">
-          <nav className="mx-auto flex max-w-6xl flex-col px-4 py-2">
-            {links.map(link => (
-              <NavLink
-                key={link.href}
-                {...link}
-                currentPath={router.pathname}
-                onClick={close}
-              />
-            ))}
-          </nav>
+        <div className="md:hidden bg-black border-t border-white/10 flex flex-col px-6 py-4 gap-4">
+          <Link href="/alternatives" onClick={() => setOpen(false)}>Alternatives</Link>
+          <Link href="/cheatsheets" onClick={() => setOpen(false)}>Cheat Sheets</Link>
+          <Link href="/rank" onClick={() => setOpen(false)}>Rank Schools</Link>
+          <Link href="/cost" onClick={() => setOpen(false)}>Cost Calc</Link>
+          <Link href="/contact" onClick={() => setOpen(false)}>Contact</Link>
         </div>
       )}
-    </header>
+    </nav>
   );
-                       }
+  }
