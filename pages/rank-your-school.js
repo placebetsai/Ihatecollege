@@ -1,74 +1,52 @@
 import Head from 'next/head';
-import { useState } from 'react';
 
-export default function RankYourSchoolPage() {
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    setSubmitted(true);
-  }
-
+export default function ContactPage() {
   return (
     <>
       <Head>
-        <title>Rank your school – ihatecollege.com</title>
+        <title>Contact – ihatecollege.com</title>
         <meta
           name="description"
-          content="Anonymous form to vent about your school and rate the vibes, politics, and actual value."
+          content="Got a story, idea, or collab pitch? Reach out to ihatecollege.com."
         />
       </Head>
 
       <div className="page-header">
-        <div className="page-kicker">RANK YOUR SCHOOL</div>
-        <h1 className="page-title">Roast or praise your campus.</h1>
+        <div className="page-kicker">CONTACT</div>
+        <h1 className="page-title">Got a story or idea?</h1>
         <p className="page-subtitle">
-          Quick, anonymous rating. In a future version these will roll into public scores and
-          vibe maps by campus.
+          This isn&apos;t a giant company. It&apos;s just people who think students deserve the real
+          picture. Reach out if you want to contribute, send data, or partner.
         </p>
       </div>
 
-      <form className="simple-form" onSubmit={handleSubmit}>
+      <div className="simple-form">
         <label>
-          College name
-          <input type="text" required placeholder="e.g. State University at Somewhere" />
+          Your name (optional)
+          <input type="text" placeholder="You can stay anonymous" />
         </label>
 
         <label>
-          &quot;I hate this place&quot; score (1–10)
-          <input type="number" min="1" max="10" required />
+          Email (if you want a reply)
+          <input type="email" placeholder="you@example.com" />
         </label>
 
         <label>
-          Campus politics vibe
-          <select defaultValue="mixed">
-            <option value="mostly-liberal">Mostly liberal</option>
-            <option value="mostly-conservative">Mostly conservative</option>
-            <option value="mixed">Mixed / depends on major</option>
-            <option value="chaos">Just chaos</option>
-          </select>
+          Message
+          <textarea placeholder="Stories from campus, collab ideas, or anything else." />
         </label>
 
-        <label>
-          Top 3 things you hate
-          <textarea placeholder="Parking, admin, profs, tuition, dining hall, whatever…" />
-        </label>
+        <a
+          href="mailto:placebetsai@gmail.com?subject=ihatecollege.com%20Contact"
+          className="btn-secondary"
+        >
+          Open email app
+        </a>
 
-        <label>
-          One thing they actually do well
-          <textarea placeholder="If you can think of anything." />
-        </label>
-
-        <button type="submit" className="btn-primary">
-          Submit (local only)
-        </button>
-
-        {submitted && (
-          <p style={{ fontSize: '0.8rem', marginTop: '0.6rem', color: '#9ca3af' }}>
-            Saved for now in this session only. Future version will push this into anonymous rankings.
-          </p>
-        )}
-      </form>
+        <p style={{ fontSize: '0.8rem', marginTop: '0.6rem', color: '#9ca3af' }}>
+          For now this just opens your email app. Future version: direct form submission.
+        </p>
+      </div>
     </>
   );
-          }
+}
