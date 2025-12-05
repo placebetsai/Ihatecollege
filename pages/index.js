@@ -133,13 +133,3 @@ export default function HomePage() {
             <h3>Tech Path</h3>
             <p>Cybersecurity • Cloud • IT Support • Bootcamps</p>
           </Link>
-
-          <Link href="/Alternatives" className="cta-card skills">
-            <h3>No-Degree High Income</h3>
-            <p>Real estate • Sales • Adjusting • Notary signing</p>
-          </Link>
-        </div>
-      </section>
-    </>
-  );
-            }
