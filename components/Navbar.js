@@ -1,19 +1,14 @@
-import Link from "next/link";
-import styles from "../styles/Navbar.module.css";
+<nav>
+  <div className="logo">
+    <Link href="/">IHATECOLLEGE<span>.COM</span></Link>
+  </div>
 
-export default function Navbar() {
-  return (
-    <nav className={styles.nav}>
-      <div className={styles.logo}>IHATECOLLEGE<span>.COM</span></div>
-
-      <ul className={styles.navLinks}>
-        <li><Link href="/">Home</Link></li>
-        <li><Link href="/alternatives">Alternatives</Link></li>
-        <li><Link href="/calculator">Debt Calculator</Link></li>
-        <li><Link href="/cheatsheets">Cheat Sheets</Link></li>
-        <li><Link href="/rank">Rank Your School</Link></li>
-        <li><Link href="/contact">Contact</Link></li>
-      </ul>
-    </nav>
-  );
-}
+  <div className="nav-links">
+    <Link href="/">Home</Link>
+    <Link href="/alternatives">Alternatives</Link>
+    <Link href="/calculator">Debt Calculator</Link>
+    <Link href="/cheatsheets">Cheat Sheets</Link>
+    <Link href="/rank">Rank Your School</Link>
+    <Link href="/contact">Contact</Link>
+  </div>
+</nav>
