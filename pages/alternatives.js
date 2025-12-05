@@ -77,4 +77,18 @@ export default function AlternativesPage() {
               ))}
             </div>
             <h3>{alt.title}</h3>
-            <p>{
+            <p>{alt.description}</p>
+            <a href={alt.url} target="_blank" rel="noopener noreferrer" className="resource-link">
+              Visit resource →
+            </a>
+          </article>
+        ))}
+      </div>
+
+      <p style={{ marginTop: '1.5rem', fontSize: '0.85rem', color: '#9ca3af' }}>
+        Not financial advice. Always check local wages, hiring trends, and reviews before you drop
+        money on any program.
+      </p>
+    </>
+  );
+}
