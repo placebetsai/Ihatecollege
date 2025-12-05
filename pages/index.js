@@ -1,687 +1,362 @@
 // pages/index.js
-
 import Head from "next/head";
-import { useState, useMemo } from "react";
-
-const CAMPUS_VIBES = [
-  { name: "American University", state: "DC", type: "Private", score: 82, vibe: "More liberal" },
-  { name: "University of Vermont", state: "VT", type: "Public", score: 80, vibe: "More liberal" },
-  { name: "Oberlin College", state: "OH", type: "Private", score: 88, vibe: "More liberal" },
-  { name: "UC Berkeley", state: "CA", type: "Public", score: 85, vibe: "More liberal" },
-  { name: "New York University", state: "NY", type: "Private", score: 78, vibe: "More liberal" },
-  { name: "Liberty University", state: "VA", type: "Private", score: 25, vibe: "More conservative" },
-  { name: "Grove City College", state: "PA", type: "Private", score: 28, vibe: "More conservative" },
-  { name: "Brigham Young University (Provo)", state: "UT", type: "Private", score: 30, vibe: "More conservative" },
-];
-
-const ALTERNATIVE_CARDS = [
-  {
-    title: "Tech career certificates",
-    caption: "3–12 months · job-focused · remote-friendly",
-    bullets: [
-      "IT support, cybersecurity, UX, data, project management.",
-      "Cheaper than a full degree; stackable as you go.",
-      "Pairs well with remote work or side hustles.",
-    ],
-    tag: "Tech certs",
-  },
-  {
-    title: "Trades & apprenticeships",
-    caption: "Paid training · hands-on · huge shortages",
-    bullets: [
-      "Electrician, HVAC, welding, plumbing, elevator tech, medical tech.",
-      "Earn while you learn instead of taking on debt.",
-      "Transferable skills if you move states.",
-    ],
-    tag: "Hands-on work",
-  },
-  {
-    title: "Bootcamps & sprints",
-    caption: "3–6 months · intense · portfolio-driven",
-    bullets: [
-      "Coding, cloud, cybersecurity, data, UX.",
-      "Best if you treat it like a full-time job.",
-      "Often includes interview prep + career services.",
-    ],
-    tag: "Short & intense",
-  },
-  {
-    title: "AI & creator hustles",
-    caption: "Low upfront cost · laptop-based",
-    bullets: [
-      "Short-form content, automation services, templates.",
-      "AI helps with scripting, editing, posting.",
-      "Not instant money, but not gate-kept either.",
-    ],
-    tag: "Online income",
-  },
-];
-
-const CHEAT_SHEETS = [
-  {
-    title: "Numbers & formulas",
-    bullets: [
-      "Algebra / calc one-pagers.",
-      "Stats: z-scores, p-values, “which test when?”.",
-      "Finance basics: loans, interest, payoff timelines.",
-    ],
-    tags: ["Math & stats", "Money basics"],
-  },
-  {
-    title: "Essays & emails",
-    bullets: [
-      "Essay skeletons: intro / body / conclusion patterns.",
-      "\"I missed class\" and \"I need an extension\" email templates.",
-      "Discussion post patterns for when you didn’t read everything.",
-    ],
-    tags: ["Communication", "Templates"],
-  },
-  {
-    title: "Survival dashboards",
-    bullets: [
-      "One view for assignments, work, and bills.",
-      "Weekly reset checklist.",
-      "Simple \"am I actually passing\" grade tracker.",
-    ],
-    tags: ["Organization", "Weekly reset"],
-  },
-];
+import Link from "next/link";
+import Navbar from "../components/Navbar";
 
 export default function Home() {
-  const [campusSearch, setCampusSearch] = useState("");
-
-  // rank form
-  const [rankForm, setRankForm] = useState({
-    college: "",
-    score: "",
-    politics: "",
-    hateThings: "",
-    goodThing: "",
-  });
-  const [rankSaved, setRankSaved] = useState(false);
-
-  // contact
-  const [contactForm, setContactForm] = useState({ name: "", email: "", message: "" });
-  const [contactSent, setContactSent] = useState(false);
-
-  // cost calculator
-  const [costInputs, setCostInputs] = useState({
-    totalDebt: "",
-    interestRate: "",
-    monthlyPayment: "",
-  });
-  const [costResult, setCostResult] = useState(null);
-  const [costError, setCostError] = useState("");
-
-  const filteredCampuses = useMemo(() => {
-    const term = campusSearch.trim().toLowerCase();
-    if (!term) return CAMPUS_VIBES;
-    return CAMPUS_VIBES.filter((c) =>
-      (c.name + c.state + c.type + c.vibe).toLowerCase().includes(term)
-    );
-  }, [campusSearch]);
-
-  function handleRankChange(e) {
-    const { name, value } = e.target;
-    setRankForm((prev) => ({ ...prev, [name]: value }));
-    setRankSaved(false);
-  }
-
-  function handleRankSubmit(e) {
-    e.preventDefault();
-    setRankSaved(true);
-  }
-
-  function handleContactChange(e) {
-    const { name, value } = e.target;
-    setContactForm((prev) => ({ ...prev, [name]: value }));
-    setContactSent(false);
-  }
-
-  function handleContactSubmit(e) {
-    e.preventDefault();
-    setContactSent(true);
-  }
-
-  function handleCostChange(e) {
-    const { name, value } = e.target;
-    setCostInputs((prev) => ({ ...prev, [name]: value }));
-    setCostResult(null);
-    setCostError("");
-  }
-
-  function handleCostCalculate(e) {
-    e.preventDefault();
-    const P = parseFloat(costInputs.totalDebt);
-    const annualRate = parseFloat(costInputs.interestRate);
-    const M = parseFloat(costInputs.monthlyPayment);
-
-    if (!P || !annualRate || !M) {
-      setCostError("Fill in all three fields with real numbers.");
-      setCostResult(null);
-      return;
-    }
-
-    const r = annualRate / 100 / 12;
-
-    if (M <= P * r) {
-      setCostError(
-        "That monthly payment is too low. You won’t ever touch principal – bump it up."
-      );
-      setCostResult(null);
-      return;
-    }
-
-    const n = -Math.log(1 - (r * P) / M) / Math.log(1 + r);
-
-    const months = Math.round(n);
-    const years = months / 12;
-    const totalPaid = M * months;
-    const interestPaid = totalPaid - P;
-
-    setCostError("");
-    setCostResult({
-      months,
-      years,
-      totalPaid,
-      interestPaid,
-    });
-  }
-
-  function formatMoney(x) {
-    if (!isFinite(x)) return "-";
-    return x.toLocaleString(undefined, { maximumFractionDigits: 0 });
-  }
-
   return (
     <>
       <Head>
-        <title>I Hate College – No brochure fluff. Just reality.</title>
+        <title>I Hate College – Real Alternatives, Debt Calculator, Trades & Bootcamps</title>
         <meta
           name="description"
-          content="ihatecollege.com is the reality dashboard: campus vibes, cost pressure, and escape routes so you don’t end up buried in loans and burnout."
+          content="Before you take on student debt, compare real alternatives: trades, bootcamps, tech certs, creator paths, and a brutal debt calculator."
+        />
+        <meta property="og:title" content="I Hate College – Real Alternatives" />
+        <meta
+          property="og:description"
+          content="See real options beyond the 4-year degree: trades, tech certs, bootcamps, and more."
         />
       </Head>
 
-      <div className="min-h-screen bg-slate-950 text-slate-50">
-        <main className="mx-auto max-w-6xl px-4 pb-16 pt-8">
+      <div className="home-root">
+        <Navbar />
+
+        <main className="home-main">
           {/* HERO */}
-          <section className="space-y-5">
-            <span className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-emerald-300">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-300" />
-              No brochure fluff. Just what it really feels like.
-            </span>
-
-            <div className="space-y-3">
-              <h1 className="max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl">
-                I Hate College.
-                <span className="block text-slate-300">
-                  But I still don&apos;t want to be broke.
-                </span>
+          <section className="hero">
+            <div className="hero-text">
+              <p className="hero-kicker">YOU DON&apos;T HAVE TO SIGN YOUR LIFE AWAY</p>
+              <h1 className="hero-title">
+                College is <span className="hero-title-highlight">optional</span>. Debt isn&apos;t.
               </h1>
-              <p className="max-w-2xl text-sm text-slate-300">
-                College is stupid expensive, insanely political, and way more stress than the
-                brochures admit. ihatecollege.com is the dashboard for reality: campus vibes, cost
-                pressure, and actual escape routes so you don&apos;t end up buried in loans and
-                burnout.
+              <p className="hero-subtitle">
+                Before you lock in $50k+ of loans, compare trades, tech certs, bootcamps, and real
+                alternatives. Run the numbers. Hear from students. Then decide.
+              </p>
+
+              <div className="hero-actions">
+                <Link href="/alternatives" className="hero-btn hero-btn-primary">
+                  Explore alternatives
+                </Link>
+                <Link href="/cost" className="hero-btn hero-btn-secondary">
+                  Run debt calculator
+                </Link>
+              </div>
+
+              <p className="hero-footnote">
+                No &quot;drop out and manifest&quot; bullshit. Just options nobody told you about.
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-3">
-              <a
-                href="#campus-vibes"
-                className="inline-flex items-center gap-2 rounded-full bg-amber-400 px-4 py-2 text-sm font-semibold text-slate-950 shadow-lg shadow-amber-400/25"
-              >
-                ● Check campus vibes
-              </a>
-              <a
-                href="#alternatives"
-                className="inline-flex items-center gap-2 rounded-full border border-sky-400/60 bg-sky-500/10 px-4 py-2 text-sm font-semibold text-sky-300"
-              >
-                See real alternatives
-              </a>
-            </div>
-          </section>
-
-          {/* CAMPUS VIBES */}
-          <section id="campus-vibes" className="mt-10 space-y-4">
-            <div className="flex flex-wrap items-end justify-between gap-3">
-              <div className="space-y-1">
-                <h2 className="text-lg font-semibold tracking-tight">
-                  Campus vibes: liberal, conservative, or just chaos?
-                </h2>
-                <p className="text-xs text-slate-400">
-                  Quick snapshot so you don&apos;t walk in shocked. Based on public rankings +
-                  student chatter. Not official – just a starting point.
-                </p>
+            <div className="hero-panel">
+              <div className="hero-panel-header">
+                <span className="hero-chip">Snapshot</span>
+                <span className="hero-panel-title">4-Year vs Trade vs Cert</span>
               </div>
-              <div className="w-full max-w-xs">
-                <input
-                  type="text"
-                  placeholder="Search college or state…"
-                  value={campusSearch}
-                  onChange={(e) => setCampusSearch(e.target.value)}
-                  className="w-full rounded-full border border-white/15 bg-slate-900/70 px-3 py-2 text-xs text-slate-100 placeholder:text-slate-500"
-                />
-              </div>
-            </div>
-
-            <div className="overflow-x-auto rounded-3xl border border-white/10 bg-slate-900/70">
-              <table className="min-w-full text-left text-xs">
-                <thead className="border-b border-white/10 bg-slate-900/90 text-[11px] uppercase tracking-wide text-slate-400">
-                  <tr>
-                    <th className="px-4 py-3">College</th>
-                    <th className="px-4 py-3">State</th>
-                    <th className="px-4 py-3">Type</th>
-                    <th className="px-4 py-3">Vibe score</th>
-                    <th className="px-4 py-3">Vibe</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredCampuses.map((c) => (
-                    <tr key={c.name} className="border-t border-white/5 odd:bg-slate-900/40">
-                      <td className="px-4 py-2.5 text-slate-100">{c.name}</td>
-                      <td className="px-4 py-2.5 text-slate-300">{c.state}</td>
-                      <td className="px-4 py-2.5 text-slate-300">{c.type}</td>
-                      <td className="px-4 py-2.5 text-slate-100">{c.score}</td>
-                      <td className="px-4 py-2.5">
-                        <span
-                          className={`inline-flex rounded-full px-2.5 py-0.5 text-[11px] ${
-                            c.vibe.includes("liberal")
-                              ? "bg-emerald-500/15 text-emerald-300"
-                              : "bg-sky-500/15 text-sky-300"
-                          }`}
-                        >
-                          {c.vibe}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                  {filteredCampuses.length === 0 && (
-                    <tr>
-                      <td colSpan={5} className="px-4 py-4 text-center text-slate-400">
-                        Nothing found. Try a different name or state.
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          {/* COST / DEBT CALCULATOR */}
-          <section id="cost" className="mt-12 grid gap-6 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
-            <div className="space-y-3 rounded-3xl border border-white/10 bg-slate-900/80 p-4">
-              <h2 className="text-lg font-semibold tracking-tight">
-                Debt reality check – how long are you stuck?
-              </h2>
-              <p className="text-xs text-slate-400">
-                Punch in your total loans, average interest rate, and what you can pay each month.
-                This is the &quot;how many years of my life is this?&quot; calculator.
-              </p>
-
-              <form onSubmit={handleCostCalculate} className="mt-2 space-y-3 text-sm">
-                <div className="space-y-1">
-                  <label className="text-xs text-slate-300">Total student debt ($)</label>
-                  <input
-                    type="number"
-                    name="totalDebt"
-                    value={costInputs.totalDebt}
-                    onChange={handleCostChange}
-                    className="w-full rounded-xl border border-white/15 bg-slate-950/80 px-3 py-2 text-sm text-slate-100"
-                  />
-                </div>
-
-                <div className="space-y-1">
-                  <label className="text-xs text-slate-300">
-                    Average interest rate (% per year)
-                  </label>
-                  <input
-                    type="number"
-                    step="0.01"
-                    name="interestRate"
-                    value={costInputs.interestRate}
-                    onChange={handleCostChange}
-                    className="w-full rounded-xl border border-white/15 bg-slate-950/80 px-3 py-2 text-sm text-slate-100"
-                  />
-                </div>
-
-                <div className="space-y-1">
-                  <label className="text-xs text-slate-300">
-                    What you can realistically pay per month ($)
-                  </label>
-                  <input
-                    type="number"
-                    name="monthlyPayment"
-                    value={costInputs.monthlyPayment}
-                    onChange={handleCostChange}
-                    className="w-full rounded-xl border border-white/15 bg-slate-950/80 px-3 py-2 text-sm text-slate-100"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="mt-1 inline-flex items-center justify-center rounded-full bg-amber-400 px-4 py-2 text-sm font-semibold text-slate-950 shadow-lg shadow-amber-400/25"
-                >
-                  Run the numbers
-                </button>
-
-                {costError && (
-                  <p className="mt-2 text-xs font-medium text-rose-300">{costError}</p>
-                )}
-              </form>
-            </div>
-
-            <div className="space-y-3 rounded-3xl border border-dashed border-white/15 bg-slate-950/40 p-4 text-xs text-slate-300">
-              <h3 className="text-sm font-semibold text-slate-50">Result snapshot</h3>
-              {!costResult && !costError && (
-                <p className="text-slate-400">
-                  Put numbers in on the left and this box will tell you:
-                  <br />
-                  • How many months / years you&apos;re paying
-                  <br />
-                  • Total you&apos;ll hand over
-                  <br />
-                  • How much of that is just interest
-                </p>
-              )}
-
-              {costResult && (
-                <div className="space-y-2">
-                  <p>
-                    <span className="text-slate-400">Time to pay off:</span>{" "}
-                    <span className="font-semibold text-emerald-300">
-                      {costResult.months} months (~{costResult.years.toFixed(1)} years)
-                    </span>
-                  </p>
-                  <p>
-                    <span className="text-slate-400">Total paid over time:</span>{" "}
-                    <span className="font-semibold">
-                      ${formatMoney(costResult.totalPaid)}
-                    </span>
-                  </p>
-                  <p>
-                    <span className="text-slate-400">Of which is pure interest:</span>{" "}
-                    <span className="font-semibold text-amber-300">
-                      ${formatMoney(costResult.interestPaid)}
-                    </span>
-                  </p>
-                  <p className="mt-2 text-slate-400">
-                    Homework: Compare that timeline with doing a cheaper cert, trade, or transfer
-                    and using the income jump to nuke this faster.
-                  </p>
-                </div>
-              )}
-            </div>
-          </section>
-
-          {/* ALTERNATIVES */}
-          <section id="alternatives" className="mt-12 space-y-4">
-            <div className="space-y-1">
-              <h2 className="text-lg font-semibold tracking-tight">
-                Real alternatives to the 4-year trap
-              </h2>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2">
-              {ALTERNATIVE_CARDS.map((card) => (
-                <article
-                  key={card.title}
-                  className="flex flex-col justify-between rounded-3xl border border-white/10 bg-slate-900/80 p-4 text-sm"
-                >
-                  <div className="space-y-2">
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">
-                          {card.tag}
-                        </p>
-                        <h3 className="text-sm font-semibold text-slate-50">
-                          {card.title}
-                        </h3>
-                      </div>
-                      <p className="max-w-[8rem] text-[11px] text-right text-slate-300">
-                        {card.caption}
-                      </p>
-                    </div>
-                    <ul className="space-y-1 text-slate-200">
-                      {card.bullets.map((b) => (
-                        <li key={b} className="flex gap-2">
-                          <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-slate-400" />
-                          <span>{b}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          {/* CHEAT SHEETS */}
-          <section id="cheat-sheets" className="mt-12 space-y-4">
-            <div className="space-y-1">
-              <h2 className="text-lg font-semibold tracking-tight">
-                Cheat sheet vault (legal kind)
-              </h2>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-3">
-              {CHEAT_SHEETS.map((sheet) => (
-                <article
-                  key={sheet.title}
-                  className="flex flex-col justify-between rounded-3xl border border-white/10 bg-slate-900/80 p-4 text-sm"
-                >
-                  <div className="space-y-2">
-                    <h3 className="text-sm font-semibold text-slate-50">
-                      {sheet.title}
-                    </h3>
-                    <ul className="space-y-1 text-slate-200">
-                      {sheet.bullets.map((b) => (
-                        <li key={b} className="flex gap-2">
-                          <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-slate-400" />
-                          <span>{b}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="mt-3 flex flex-wrap gap-1.5">
-                    {sheet.tags.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-full bg-slate-800/70 px-2 py-0.5 text-[11px] text-slate-200"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          {/* RANK YOUR SCHOOL */}
-          <section
-            id="rank"
-            className="mt-12 grid gap-6 rounded-3xl border border-white/10 bg-slate-900/70 p-5 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]"
-          >
-            <div className="space-y-3">
-              <h2 className="text-lg font-semibold tracking-tight">
-                Rank your college like it&apos;s a restaurant
-              </h2>
-
-              <form className="space-y-3 text-sm" onSubmit={handleRankSubmit}>
-                <div className="space-y-1">
-                  <label className="text-xs text-slate-300">College name</label>
-                  <input
-                    type="text"
-                    name="college"
-                    value={rankForm.college}
-                    onChange={handleRankChange}
-                    className="w-full rounded-xl border border-white/15 bg-slate-950/80 px-3 py-2 text-sm text-slate-100"
-                  />
-                </div>
-
-                <div className="space-y-1">
-                  <label className="text-xs text-slate-300">
-                    &quot;I Hate This Place&quot; score (1–10)
-                  </label>
-                  <input
-                    type="number"
-                    min="1"
-                    max="10"
-                    name="score"
-                    value={rankForm.score}
-                    onChange={handleRankChange}
-                    className="w-full rounded-xl border border-white/15 bg-slate-950/80 px-3 py-2 text-sm text-slate-100"
-                  />
-                </div>
-
-                <div className="space-y-1">
-                  <label className="text-xs text-slate-300">Campus politics vibe</label>
-                  <select
-                    name="politics"
-                    value={rankForm.politics}
-                    onChange={handleRankChange}
-                    className="w-full rounded-xl border border-white/15 bg-slate-950/80 px-3 py-2 text-sm text-slate-100"
-                  >
-                    <option value="">Select one</option>
-                    <option value="More liberal">More liberal</option>
-                    <option value="More conservative">More conservative</option>
-                    <option value="Mixed / chaos">Mixed / chaos</option>
-                  </select>
-                </div>
-
-                <div className="space-y-1">
-                  <label className="text-xs text-slate-300">Top 3 things you hate</label>
-                  <textarea
-                    name="hateThings"
-                    rows={3}
-                    value={rankForm.hateThings}
-                    onChange={handleRankChange}
-                    className="w-full rounded-xl border border-white/15 bg-slate-950/80 px-3 py-2 text-sm text-slate-100"
-                  />
-                </div>
-
-                <div className="space-y-1">
-                  <label className="text-xs text-slate-300">One thing they actually do well</label>
-                  <textarea
-                    name="goodThing"
-                    rows={2}
-                    value={rankForm.goodThing}
-                    onChange={handleRankChange}
-                    className="w-full rounded-xl border border-white/15 bg-slate-950/80 px-3 py-2 text-sm text-slate-100"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="mt-1 inline-flex items-center justify-center rounded-full bg-amber-400 px-4 py-2 text-sm font-semibold text-slate-950 shadow-lg shadow-amber-400/25"
-                >
-                  Submit my rating
-                </button>
-
-                {rankSaved && (
-                  <p className="mt-1 text-xs text-emerald-300">
-                    Saved in this browser. Future version will push this into global rankings.
-                  </p>
-                )}
-              </form>
-            </div>
-
-            <div className="space-y-3 rounded-2xl border border-dashed border-white/15 bg-slate-950/40 p-4 text-xs text-slate-300">
-              <h3 className="text-sm font-semibold text-slate-50">Why this matters</h3>
-              <ul className="space-y-2">
-                <li className="flex gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-400" />
-                  <span>
-                    Real &quot;I hate this place&quot; scores tell you where people are actually
-                    miserable, not just what the brochure says.
-                  </span>
+              <ul className="hero-stats">
+                <li>
+                  <span>Avg 4-year total cost</span>
+                  <strong>$100k+ with living costs</strong>
                 </li>
-                <li className="flex gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-400" />
-                  <span>
-                    Paired with cost + debt numbers, this becomes a stay / transfer / bail
-                    decision tool.
-                  </span>
+                <li>
+                  <span>Time in class</span>
+                  <strong>4+ years</strong>
+                </li>
+                <li>
+                  <span>Typical trade / cert path</span>
+                  <strong>6–24 months</strong>
+                </li>
+                <li>
+                  <span>Working while you train?</span>
+                  <strong>Often yes (apprenticeships)</strong>
                 </li>
               </ul>
+              <Link href="/cost" className="hero-panel-link">
+                See what your debt really costs →
+              </Link>
             </div>
           </section>
 
-          {/* CONTACT */}
-          <section id="contact" className="mt-12 space-y-3">
-            <h2 className="text-lg font-semibold tracking-tight">
-              Contact (quietly)
-            </h2>
-            <p className="text-xs text-slate-400">
-              Got a story, idea, or collab pitch? Right now this just confirms on-screen – future
-              version can wire it to an actual inbox.
-            </p>
+          {/* FEATURE GRID */}
+          <section className="features">
+            <article className="feature-card">
+              <h2>💸 Debt Calculator</h2>
+              <p>
+                Plug in total loans, interest, and a real monthly payment. See how many years of
+                your life that degree actually costs you.
+              </p>
+              <Link href="/cost" className="feature-link">
+                Run the numbers →
+              </Link>
+            </article>
 
-            <form
-              className="space-y-3 rounded-3xl border border-white/10 bg-slate-900/80 p-4 text-sm"
-              onSubmit={handleContactSubmit}
-            >
-              <div className="space-y-1">
-                <label className="text-xs text-slate-300">Name (optional)</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={contactForm.name}
-                  onChange={handleContactChange}
-                  className="w-full rounded-xl border border-white/15 bg-slate-950/80 px-3 py-2 text-sm text-slate-100"
-                />
-              </div>
+            <article className="feature-card">
+              <h2>🛠 Trades & Tech Paths</h2>
+              <p>
+                HVAC, electrician, cybersecurity, cloud, medical tech. Real paths with shorter
+                training and decent pay – without 4 years in a lecture hall.
+              </p>
+              <Link href="/alternatives" className="feature-link">
+                See real career options →
+              </Link>
+            </article>
 
-              <div className="space-y-1">
-                <label className="text-xs text-slate-300">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={contactForm.email}
-                  onChange={handleContactChange}
-                  className="w-full rounded-xl border border-white/15 bg-slate-950/80 px-3 py-2 text-sm text-slate-100"
-                />
-              </div>
-
-              <div className="space-y-1">
-                <label className="text-xs text-slate-300">Message</label>
-                <textarea
-                  name="message"
-                  rows={4}
-                  value={contactForm.message}
-                  onChange={handleContactChange}
-                  className="w-full rounded-xl border border-white/15 bg-slate-950/80 px-3 py-2 text-sm text-slate-100"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="inline-flex items-center justify-center rounded-full bg-sky-500 px-4 py-2 text-sm font-semibold text-slate-950 shadow-lg shadow-sky-500/25"
-              >
-                Send message
-              </button>
-
-              {contactSent && (
-                <p className="mt-1 text-xs text-emerald-300">
-                  Got it. In a real version this would send straight to email instead of just
-                  showing this.
-                </p>
-              )}
-            </form>
+            <article className="feature-card">
+              <h2>🔥 Rank Your School</h2>
+              <p>
+                Forget glossy brochures. Students anonymously rate their schools on cost, stress,
+                politics, and &quot;I hate this place&quot; score.
+              </p>
+              <Link href="/rank" className="feature-link">
+                Roast or praise your school →
+              </Link>
+            </article>
           </section>
 
-          {/* FOOTER */}
-          <footer className="mt-10 border-t border-white/10 pt-4 text-[11px] text-slate-500">
-            <p>
-              This is not financial advice, legal advice, or therapy. It&apos;s the reality check
-              nobody put on the brochure.
-            </p>
-            <p className="mt-1">© {new Date().getFullYear()} ihatecollege.com</p>
-          </footer>
+          {/* CHEAT SHEETS TEASER */}
+          <section className="strip">
+            <div className="strip-inner">
+              <div>
+                <h2>Cheat Sheet Vault (coming alive)</h2>
+                <p>
+                  Email templates, exam planning, loan call scripts, &quot;I&apos;m drowning&quot;
+                  checklists – the stuff everyone ends up writing from scratch at 2 a.m.
+                </p>
+              </div>
+              <Link href="/cheatsheets" className="strip-link">
+                Peek the vault →
+              </Link>
+            </div>
+          </section>
         </main>
       </div>
+
+      <style jsx>{`
+        .home-root {
+          min-height: 100vh;
+          background: radial-gradient(circle at top, #1f2937 0, #020617 55%);
+          color: #f9fafb;
+        }
+        .home-main {
+          max-width: 1120px;
+          margin: 0 auto;
+          padding: 2rem 1.5rem 3rem;
+        }
+
+        .hero {
+          display: grid;
+          grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+          gap: 2rem;
+          align-items: center;
+          margin-top: 1rem;
+        }
+        @media (max-width: 860px) {
+          .hero {
+            grid-template-columns: minmax(0, 1fr);
+          }
+        }
+
+        .hero-text {
+          max-width: 36rem;
+        }
+        .hero-kicker {
+          font-size: 0.7rem;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: #a5b4fc;
+          margin-bottom: 0.75rem;
+        }
+        .hero-title {
+          font-size: 2.7rem;
+          line-height: 1.05;
+          font-weight: 800;
+          margin-bottom: 0.75rem;
+        }
+        @media (min-width: 900px) {
+          .hero-title {
+            font-size: 3.1rem;
+          }
+        }
+        .hero-title-highlight {
+          background: linear-gradient(to right, #fbbf24, #f97316);
+          -webkit-background-clip: text;
+          color: transparent;
+        }
+        .hero-subtitle {
+          font-size: 0.95rem;
+          color: #e5e7eb;
+          margin-bottom: 1.3rem;
+        }
+        .hero-actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.75rem;
+          margin-bottom: 0.6rem;
+        }
+        .hero-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.7rem 1.5rem;
+          border-radius: 999px;
+          font-size: 0.9rem;
+          font-weight: 600;
+          text-decoration: none;
+          white-space: nowrap;
+        }
+        .hero-btn-primary {
+          background: #fbbf24;
+          color: #020617;
+        }
+        .hero-btn-secondary {
+          border: 1px solid #38bdf8;
+          color: #e0f2fe;
+          background: rgba(15, 23, 42, 0.9);
+        }
+        .hero-footnote {
+          font-size: 0.8rem;
+          color: #9ca3af;
+        }
+
+        .hero-panel {
+          border-radius: 1.5rem;
+          border: 1px solid rgba(148, 163, 184, 0.7);
+          background: radial-gradient(circle at top left, #0f172a 0, #020617 70%);
+          padding: 1.1rem 1.1rem 1rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+          box-shadow: 0 18px 45px rgba(0, 0, 0, 0.7);
+        }
+        .hero-panel-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .hero-panel-title {
+          font-size: 0.85rem;
+          color: #e5e7eb;
+          font-weight: 600;
+        }
+        .hero-chip {
+          font-size: 0.7rem;
+          border-radius: 999px;
+          padding: 0.2rem 0.55rem;
+          background: rgba(56, 189, 248, 0.2);
+          color: #7dd3fc;
+        }
+        .hero-stats {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          font-size: 0.78rem;
+          border-radius: 0.9rem;
+          background: rgba(15, 23, 42, 0.9);
+          border: 1px solid rgba(148, 163, 184, 0.4);
+          overflow: hidden;
+        }
+        .hero-stats li {
+          display: flex;
+          justify-content: space-between;
+          padding: 0.55rem 0.75rem;
+        }
+        .hero-stats li:nth-child(odd) {
+          background: rgba(15, 23, 42, 0.9);
+        }
+        .hero-stats li:nth-child(even) {
+          background: rgba(15, 23, 42, 0.7);
+        }
+        .hero-stats span {
+          color: #9ca3af;
+        }
+        .hero-stats strong {
+          color: #e5e7eb;
+          font-weight: 600;
+        }
+        .hero-panel-link {
+          font-size: 0.8rem;
+          color: #fbbf24;
+          font-weight: 600;
+          text-decoration: none;
+        }
+
+        .features {
+          margin-top: 3rem;
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 1.25rem;
+        }
+        @media (max-width: 900px) {
+          .features {
+            grid-template-columns: minmax(0, 1fr);
+          }
+        }
+        .feature-card {
+          background: rgba(15, 23, 42, 0.95);
+          border-radius: 1.25rem;
+          padding: 1.2rem 1rem;
+          border: 1px solid rgba(148, 163, 184, 0.5);
+          font-size: 0.9rem;
+        }
+        .feature-card h2 {
+          font-size: 1.1rem;
+          margin-bottom: 0.4rem;
+        }
+        .feature-card p {
+          font-size: 0.85rem;
+          color: #d1d5db;
+          margin-bottom: 0.6rem;
+        }
+        .feature-link {
+          font-size: 0.83rem;
+          font-weight: 600;
+          color: #fbbf24;
+          text-decoration: none;
+        }
+
+        .strip {
+          margin-top: 3rem;
+        }
+        .strip-inner {
+          border-radius: 1.3rem;
+          border: 1px solid rgba(56, 189, 248, 0.6);
+          background: linear-gradient(
+            to right,
+            rgba(8, 47, 73, 0.95),
+            rgba(15, 23, 42, 0.98)
+          );
+          padding: 1.2rem 1.2rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+          font-size: 0.9rem;
+        }
+        .strip-inner h2 {
+          font-size: 1rem;
+          font-weight: 600;
+          margin-bottom: 0.2rem;
+        }
+        .strip-inner p {
+          font-size: 0.8rem;
+          color: #e5e7eb;
+          max-width: 28rem;
+        }
+        .strip-link {
+          font-size: 0.82rem;
+          font-weight: 600;
+          color: #fbbf24;
+          text-decoration: none;
+          white-space: nowrap;
+        }
+        @media (max-width: 720px) {
+          .strip-inner {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+        }
+      `}</style>
     </>
   );
-      }
+                  }
