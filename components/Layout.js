@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/alternatives', label: 'Alternatives' },
+  // NOTE: capital A to match Alternatives.js on disk
+  { href: '/Alternatives', label: 'Alternatives' },
   { href: '/debt-calculator', label: 'Debt Calculator' },
   { href: '/cheat-sheets', label: 'Cheat Sheets' },
   { href: '/rank-your-school', label: 'Rank Your School' },
