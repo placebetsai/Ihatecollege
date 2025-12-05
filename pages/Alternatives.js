@@ -1,82 +1,29 @@
-export const alternatives = [
-  {
-    category: "Tech Career Certificates",
-    items: [
-      {
-        name: "CompTIA Certifications",
-        url: "https://www.comptia.org/",
-        description: "Industry-standard IT & cybersecurity certs (A+, Network+, Security+)."
-      },
-      {
-        name: "Fullstack Academy Cyber Bootcamp",
-        url: "https://www.fullstackacademy.com/programs/cybersecurity-bootcamp",
-        description: "Cybersecurity bootcamp with remote options."
-      },
-      {
-        name: "Course Report – Best Cyber Bootcamps",
-        url: "https://www.coursereport.com/best-cyber-security-bootcamps",
-        description: "Compare top cybersecurity bootcamps."
-      },
-      {
-        name: "SANS Institute / GIAC",
-        url: "https://www.sans.org/",
-        description: "Elite cybersecurity training and certs."
-      }
-    ]
-  },
-  {
-    category: "Trades & Apprenticeships",
-    items: [
-      {
-        name: "Penn Foster HVAC Technician",
-        url: "https://www.pennfoster.edu/programs-and-degrees/construction/hvac-technician-career-diploma",
-        description: "Online HVAC certification training."
-      },
-      {
-        name: "DMAC Trade School",
-        url: "https://dmaceducation.online/",
-        description: "Online HVAC, electrical, plumbing, solar training."
-      },
-      {
-        name: "Blue Collar Virtual Trade School",
-        url: "https://thebluecollarrecruiter.com/vts-overview/",
-        description: "Remote training for multiple blue-collar trades."
-      }
-    ]
-  },
-  {
-    category: "Bootcamps & Sprints",
-    items: [
-      {
-        name: "ClimbHire Bootcamp Guides",
-        url: "https://climbhire.co/career-development/it-bootcamps/",
-        description: "Overview of IT bootcamps and hiring trends."
-      },
-      {
-        name: "SwitchUp Bootcamp Reviews",
-        url: "https://www.switchup.org/",
-        description: "Compare coding, data, and cyber bootcamps."
-      }
-    ]
-  },
-  {
-    category: "AI & Creator Hustles",
-    items: [
-      {
-        name: "YouTube Creator Academy",
-        url: "https://www.youtube.com/creators/",
-        description: "Free guide to building a YouTube audience."
-      },
-      {
-        name: "Canva Creator Program",
-        url: "https://www.canva.com/creators/",
-        description: "Earn by designing templates."
-      },
-      {
-        name: "Fiverr Freelance Marketplace",
-        url: "https://www.fiverr.com/",
-        description: "Earn with AI services, automation, content."
-      }
-    ]
-  }
-];
+import { alternatives } from "../data/alternatives";
+
+export default function AlternativesPage() {
+  return (
+    <main className="p-6 max-w-4xl mx-auto">
+      <h1 className="text-3xl font-bold mb-6">Real Alternatives to the 4-Year Trap</h1>
+
+      {alternatives.map((section, index) => (
+        <div key={index} className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">{section.category}</h2>
+
+          <div className="space-y-4">
+            {section.items.map((item, i) => (
+              <a
+                key={i}
+                href={item.url}
+                target="_blank"
+                className="block p-4 rounded-lg bg-neutral-900 border border-neutral-700 hover:bg-neutral-800"
+              >
+                <h3 className="text-lg font-bold">{item.name}</h3>
+                <p className="text-sm text-neutral-300">{item.description}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </main>
+  );
+}
