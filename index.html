@@ -6,17 +6,18 @@
   <title>I Hate College – Brutally Honest College Reality</title>
   <style>
     :root {
-      --bg: #050816;
+      --bg: #020617;
+      --bg-alt: #020617;
       --card: #020617;
       --accent: #f97316;
+      --accent-soft: rgba(249, 115, 22, 0.18);
       --accent2: #22c55e;
       --accent3: #3b82f6;
-      --accent-soft: rgba(249, 115, 22, 0.18);
       --text: #e5e7eb;
       --muted: #9ca3af;
       --border: #1f2937;
       --radius: 18px;
-      --shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
       --font: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
         "Segoe UI", sans-serif;
     }
@@ -30,7 +31,7 @@
     body {
       font-family: var(--font);
       background:
-        radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
+        radial-gradient(circle at top, #0f172a 0, #020617 45%, #000 100%);
       color: var(--text);
       line-height: 1.5;
     }
@@ -40,7 +41,7 @@
       text-decoration: none;
     }
 
-    /* HEADER / NAV */
+    /* HEADER */
 
     header {
       position: sticky;
@@ -49,34 +50,23 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 6vw;
-      background: linear-gradient(
-        90deg,
-        rgba(15, 23, 42, 0.96),
-        rgba(15, 23, 42, 0.98),
-        rgba(15, 23, 42, 0.96)
-      );
+      padding: 10px 5vw;
+      background: rgba(15, 23, 42, 0.96);
       border-bottom: 1px solid rgba(148, 163, 184, 0.25);
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(14px);
     }
 
-    .logo-wrap {
+    .logo {
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-    .logo-mark {
+    .logo-icon {
       width: 30px;
       height: 30px;
       border-radius: 999px;
-      background: conic-gradient(
-        from 230deg,
-        #f97316,
-        #22c55e,
-        #3b82f6,
-        #f97316
-      );
+      background: conic-gradient(from 230deg, #f97316, #22c55e, #3b82f6, #f97316);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -88,8 +78,8 @@
 
     .logo-text {
       font-weight: 800;
-      font-size: 1.25rem;
-      letter-spacing: 0.04em;
+      font-size: 1.2rem;
+      letter-spacing: 0.05em;
     }
 
     .logo-text span {
@@ -98,19 +88,19 @@
 
     nav {
       display: flex;
-      gap: 8px;
-      font-size: 0.9rem;
+      gap: 6px;
+      font-size: 0.85rem;
       flex-wrap: wrap;
     }
 
     nav a {
-      padding: 6px 10px;
+      padding: 5px 9px;
       border-radius: 999px;
       color: var(--muted);
     }
 
     nav a:hover {
-      background: rgba(148, 163, 184, 0.18);
+      background: rgba(148, 163, 184, 0.2);
       color: var(--text);
     }
 
@@ -119,7 +109,7 @@
     main {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 24px 6vw 40px;
+      padding: 20px 5vw 40px;
     }
 
     section {
@@ -130,16 +120,16 @@
 
     .hero {
       position: relative;
-      border-radius: 26px;
-      padding: 26px 22px 22px;
+      border-radius: 24px;
+      padding: 22px 20px 20px;
       background:
-        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.24), transparent 55%),
-        radial-gradient(circle at 100% 0, rgba(249, 115, 22, 0.28), transparent 55%),
+        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.25), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(249, 115, 22, 0.25), transparent 55%),
         linear-gradient(135deg, #020617, #020617 40%, #020617 100%);
       box-shadow: var(--shadow);
       overflow: hidden;
       display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
       gap: 18px;
     }
 
@@ -147,37 +137,36 @@
       content: "0101 1010 0110 1001";
       position: absolute;
       right: -40px;
-      bottom: -8px;
-      font-size: 2.6rem;
+      bottom: -6px;
+      font-size: 2.4rem;
       color: rgba(15, 23, 42, 0.9);
       letter-spacing: 0.15em;
       white-space: nowrap;
     }
 
     .hero h1 {
-      font-size: clamp(2.2rem, 3vw + 1.3rem, 2.8rem);
+      font-size: clamp(2.2rem, 3vw + 1.2rem, 2.8rem);
       margin-bottom: 8px;
     }
 
-    .hero-tagline {
+    .hero-sub {
       color: var(--muted);
-      max-width: 620px;
-      margin-bottom: 12px;
+      max-width: 640px;
       font-size: 0.96rem;
+      margin-bottom: 14px;
     }
 
-    .hero-cta {
+    .hero-buttons {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
       margin-bottom: 10px;
     }
 
     .pill-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 4px;
+      gap: 6px;
       font-size: 0.8rem;
     }
 
@@ -185,66 +174,47 @@
       padding: 4px 10px;
       border-radius: 999px;
       background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(148, 163, 184, 0.35);
+      border: 1px solid rgba(148, 163, 184, 0.4);
       color: var(--muted);
     }
 
-    .hero-visual {
-      position: relative;
-      border-radius: 22px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: radial-gradient(circle at 0 0, #0f172a, #020617 60%);
-      padding: 16px;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
-      overflow: hidden;
-    }
-
-    .hero-strip {
-      display: flex;
-      flex-direction: column;
+    .hero-grid {
+      display: grid;
       gap: 8px;
       font-size: 0.8rem;
     }
 
-    .strip-row {
+    .hero-card {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 6px 8px;
+      padding: 7px 10px;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(15, 23, 42, 0.95);
       border: 1px solid rgba(55, 65, 81, 0.9);
     }
 
-    .strip-label {
+    .hero-card-label {
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
-    .strip-dot {
+    .dot {
       width: 8px;
       height: 8px;
       border-radius: 999px;
     }
 
-    .strip-dot.green {
-      background: var(--accent2);
-    }
+    .dot.green { background: var(--accent2); }
+    .dot.red { background: #ef4444; }
+    .dot.blue { background: var(--accent3); }
 
-    .strip-dot.red {
-      background: #ef4444;
-    }
-
-    .strip-dot.blue {
-      background: var(--accent3);
-    }
-
-    .strip-pill {
+    .hero-small-pill {
       padding: 2px 8px;
       border-radius: 999px;
-      font-size: 0.7rem;
       border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 0.72rem;
       color: var(--muted);
     }
 
@@ -255,24 +225,24 @@
       align-items: center;
       justify-content: center;
       border-radius: 999px;
-      padding: 9px 18px;
-      font-size: 0.94rem;
-      font-weight: 600;
+      padding: 8px 16px;
       border: 1px solid transparent;
+      font-size: 0.9rem;
+      font-weight: 600;
       cursor: pointer;
       text-decoration: none;
-      transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
     }
 
     .btn-primary {
       background: linear-gradient(135deg, #f97316, #fb923c);
       color: #020617;
-      box-shadow: 0 10px 25px rgba(249, 115, 22, 0.4);
+      box-shadow: 0 10px 25px rgba(249, 115, 22, 0.45);
     }
 
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 14px 30px rgba(249, 115, 22, 0.5);
+      box-shadow: 0 14px 32px rgba(249, 115, 22, 0.55);
     }
 
     .btn-secondary {
@@ -285,16 +255,16 @@
       background: rgba(15, 23, 42, 1);
     }
 
-    /* SECTIONS */
+    /* GENERIC SECTION STUFF */
 
     .section-header h2 {
-      font-size: 1.6rem;
-      margin-bottom: 6px;
+      font-size: 1.5rem;
+      margin-bottom: 4px;
     }
 
     .section-header p {
       color: var(--muted);
-      font-size: 0.95rem;
+      font-size: 0.94rem;
     }
 
     .card-grid {
@@ -305,25 +275,25 @@
     }
 
     .card {
-      background: rgba(10, 17, 35, 0.98);
+      background: rgba(10, 17, 35, 0.97);
       border-radius: var(--radius);
       border: 1px solid rgba(31, 41, 55, 0.9);
       padding: 14px 14px 12px;
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55);
+      font-size: 0.92rem;
     }
 
     .card h3 {
-      font-size: 1.03rem;
+      font-size: 1.02rem;
       margin-bottom: 4px;
     }
 
     .card p {
-      font-size: 0.9rem;
       color: var(--muted);
       margin-bottom: 6px;
     }
 
-    .card-tag-row {
+    .tag-row {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
@@ -338,20 +308,9 @@
       color: var(--muted);
     }
 
-    .tag.green {
-      border-color: #22c55e;
-      color: #4ade80;
-    }
-
-    .tag.blue {
-      border-color: #60a5fa;
-      color: #93c5fd;
-    }
-
-    .tag.orange {
-      border-color: #fb923c;
-      color: #fed7aa;
-    }
+    .tag.green { border-color: #22c55e; color: #4ade80; }
+    .tag.blue { border-color: #60a5fa; color: #93c5fd; }
+    .tag.orange { border-color: #fb923c; color: #fed7aa; }
 
     .card-links a {
       display: inline-block;
@@ -360,9 +319,9 @@
       padding: 4px 9px;
       border-radius: 999px;
       border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 0.78rem;
       color: var(--muted);
-      font-size: 0.8rem;
-      background: rgba(15, 23, 42, 0.95);
+      background: rgba(15, 23, 42, 0.96);
     }
 
     .card-links a:hover {
@@ -370,12 +329,18 @@
       color: var(--accent);
     }
 
+    .disclaimer {
+      margin-top: 6px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
     /* TABLE */
 
     .table-wrap {
       margin-top: 12px;
-      background: rgba(10, 17, 35, 0.98);
       border-radius: var(--radius);
+      background: rgba(10, 17, 35, 0.97);
       border: 1px solid rgba(31, 41, 55, 0.9);
       box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55);
       overflow: hidden;
@@ -397,10 +362,16 @@
       border: 1px solid var(--border);
       background: rgba(15, 23, 42, 0.96);
       color: var(--text);
-      font-size: 0.85rem;
+      font-size: 0.84rem;
+    }
+
+    .table-scroll {
+      width: 100%;
+      overflow-x: auto;
     }
 
     table {
+      min-width: 640px;
       width: 100%;
       border-collapse: collapse;
       font-size: 0.86rem;
@@ -425,7 +396,7 @@
     }
 
     tr:nth-child(even) {
-      background: rgba(15, 23, 42, 0.7);
+      background: rgba(15, 23, 42, 0.75);
     }
 
     .badge {
@@ -433,7 +404,6 @@
       border-radius: 999px;
       font-size: 0.75rem;
       border: 1px solid rgba(148, 163, 184, 0.4);
-      display: inline-block;
     }
 
     .badge-liberal {
@@ -501,12 +471,6 @@
       color: var(--muted);
     }
 
-    .disclaimer {
-      margin-top: 6px;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
     /* CONTACT */
 
     .contact-grid {
@@ -517,11 +481,11 @@
     }
 
     .contact-panel {
-      background: rgba(10, 17, 35, 0.98);
+      background: rgba(10, 17, 35, 0.97);
       border-radius: var(--radius);
       border: 1px solid rgba(31, 41, 55, 0.9);
-      padding: 16px;
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5);
+      padding: 14px;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55);
       font-size: 0.9rem;
       color: var(--muted);
     }
@@ -547,31 +511,24 @@
 
     footer {
       border-top: 1px solid rgba(31, 41, 55, 0.9);
-      padding: 14px 6vw 22px;
+      padding: 14px 5vw 22px;
       text-align: center;
       font-size: 0.82rem;
       color: var(--muted);
     }
 
-    @media (max-width: 720px) {
+    @media (max-width: 768px) {
       header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 8px;
+        gap: 6px;
       }
       nav {
         flex-wrap: wrap;
       }
       .hero {
         grid-template-columns: minmax(0, 1fr);
-        padding: 22px 16px 18px;
-      }
-      table {
-        font-size: 0.8rem;
-      }
-      th,
-      td {
-        padding: 6px 6px;
+        padding: 18px 14px 16px;
       }
       .contact-grid {
         grid-template-columns: minmax(0, 1fr);
@@ -581,8 +538,8 @@
 </head>
 <body>
   <header>
-    <div class="logo-wrap">
-      <div class="logo-mark">IH</div>
+    <div class="logo">
+      <div class="logo-icon">IH</div>
       <div class="logo-text">ihatecollege<span>.com</span></div>
     </div>
     <nav>
@@ -599,47 +556,45 @@
     <section class="hero">
       <div>
         <h1>I Hate College</h1>
-        <p class="hero-tagline">
+        <p class="hero-sub">
           College is stupid expensive, insanely stressful, and more political than useful.
           ihatecollege.com is the brutally honest dashboard: campus vibes, cost reality,
           and escape routes so you don’t get buried in debt and burnout.
         </p>
 
-        <div class="hero-cta">
-          <a href="#vibes" class="btn btn-primary">Check Campus Vibe Map</a>
-          <a href="#alt" class="btn btn-secondary">See Real Alternatives</a>
+        <div class="hero-buttons">
+          <a href="#vibes" class="btn btn-primary">Check Campus Vibes</a>
+          <a href="#alt" class="btn btn-secondary">See Escape Routes</a>
         </div>
 
         <div class="pill-row">
           <span class="pill">🎓 No brochure fluff</span>
-          <span class="pill">💸 Debt & value reality check</span>
+          <span class="pill">💸 Debt & value awareness</span>
           <span class="pill">🧠 Survive or escape smarter</span>
         </div>
       </div>
 
-      <div class="hero-visual">
-        <div class="hero-strip">
-          <div class="strip-row">
-            <div class="strip-label">
-              <span class="strip-dot.green strip-dot"></span>
-              <span>“Worth the debt?” poll</span>
-            </div>
-            <span class="strip-pill">38% said YES</span>
+      <div class="hero-grid">
+        <div class="hero-card">
+          <div class="hero-card-label">
+            <span class="dot green"></span>
+            <span>“Worth the debt?” polls</span>
           </div>
-          <div class="strip-row">
-            <div class="strip-label">
-              <span class="strip-dot.red strip-dot"></span>
-              <span>Average grad debt</span>
-            </div>
-            <span class="strip-pill">$30k+ in loans</span>
+          <span class="hero-small-pill">~35–40% say yes</span>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-label">
+            <span class="dot.red dot"></span>
+            <span>Average grad debt</span>
           </div>
-          <div class="strip-row">
-            <div class="strip-label">
-              <span class="strip-dot.blue strip-dot"></span>
-              <span>Alt-path students</span>
-            </div>
-            <span class="strip-pill">Bootcamps, trades, AI skills</span>
+          <span class="hero-small-pill">$30k+ loans</span>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-label">
+            <span class="dot blue"></span>
+            <span>Alt paths taking off</span>
           </div>
+          <span class="hero-small-pill">Bootcamps, trades, AI skills</span>
         </div>
       </div>
     </section>
@@ -661,18 +616,21 @@
             <option value="conservative">More conservative</option>
           </select>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th data-sort="name">College</th>
-              <th data-sort="state">State</th>
-              <th data-sort="type">Type</th>
-              <th data-sort="vibeScore">Vibe Score</th>
-              <th data-sort="vibe">Vibe</th>
-            </tr>
-          </thead>
-          <tbody id="collegeTableBody"></tbody>
-        </table>
+
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th data-sort="name">College</th>
+                <th data-sort="state">State</th>
+                <th data-sort="type">Type</th>
+                <th data-sort="vibeScore">Vibe Score</th>
+                <th data-sort="vibe">Vibe</th>
+              </tr>
+            </thead>
+            <tbody id="collegeTableBody"></tbody>
+          </table>
+        </div>
       </div>
 
       <p class="disclaimer">
@@ -745,8 +703,8 @@
       <div class="card-grid">
         <article class="card">
           <h3>Skills-First Online Programs</h3>
-          <p>Short programs that teach real skills: IT, UX, data, digital marketing, project management, AI.</p>
-          <div class="card-tag-row">
+          <p>Short programs that teach real skills: IT, UX, data, marketing, project management, AI.</p>
+          <div class="tag-row">
             <span class="tag green">Job-focused</span>
             <span class="tag blue">Remote friendly</span>
           </div>
@@ -758,8 +716,8 @@
 
         <article class="card">
           <h3>Trades & Apprenticeships</h3>
-          <p>Electrician, HVAC, welding, plumbing, medical tech. Often paid while you learn, less debt, real demand.</p>
-          <div class="card-tag-row">
+          <p>Electrician, HVAC, welding, plumbing, medical tech. Often paid while you learn, with real demand.</p>
+          <div class="tag-row">
             <span class="tag green">Paid while learning</span>
             <span class="tag orange">Hands-on</span>
           </div>
@@ -772,7 +730,7 @@
         <article class="card">
           <h3>Bootcamps & Tech Sprints</h3>
           <p>Coding, cybersecurity, data, UX. Intense, shorter, and focused on job skills instead of gen-ed filler.</p>
-          <div class="card-tag-row">
+          <div class="tag-row">
             <span class="tag blue">Tech skills</span>
             <span class="tag orange">Short & intense</span>
           </div>
@@ -784,7 +742,7 @@
         <article class="card">
           <h3>AI & Creator Hustles</h3>
           <p>Use AI + content to make money while you’re still in school: short-form, niche sites, templates, and tools.</p>
-          <div class="card-tag-row">
+          <div class="tag-row">
             <span class="tag green">Low start-up cost</span>
             <span class="tag blue">Can run from laptop</span>
           </div>
@@ -800,14 +758,14 @@
     <section id="tools">
       <div class="section-header">
         <h2>Study Tools That Don’t Get You Expelled</h2>
-        <p>Smarter tools, not more pain. No plagiarism, no exam leaks – just survival gear.</p>
+        <p>Smarter tools, not more pain. No exam leaks, no plagiarism, just survival gear.</p>
       </div>
 
       <div class="card-grid">
         <article class="card">
           <h3>Fast Formula Sheets</h3>
           <p>One-page hits for math, stats, econ so you’re not buried in textbooks the night before.</p>
-          <div class="card-tag-row">
+          <div class="tag-row">
             <span class="tag orange">Math / stats</span>
           </div>
         </article>
@@ -815,7 +773,7 @@
         <article class="card">
           <h3>Essay & Writing Templates</h3>
           <p>Layouts for essays, discussion posts, and “sorry I missed class” emails so you’re not staring at a blank screen.</p>
-          <div class="card-tag-row">
+          <div class="tag-row">
             <span class="tag blue">Writing help</span>
           </div>
         </article>
@@ -823,7 +781,7 @@
         <article class="card">
           <h3>Planner Dashboards</h3>
           <p>Keep assignments, exams, and bills in one place instead of in your panic dreams.</p>
-          <div class="card-tag-row">
+          <div class="tag-row">
             <span class="tag green">Organization</span>
           </div>
         </article>
@@ -891,47 +849,13 @@
     // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // ----- Rank My College: store + show your ratings this session -----
-    const rankForm = document.getElementById("rankForm");
-    const ratingsOutput = document.getElementById("ratingsOutput");
-    const ratingsList = document.getElementById("ratingsList");
-    const ratings = [];
-
-    if (rankForm) {
-      rankForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const data = {
-          collegeName: document.getElementById("collegeName").value.trim(),
-          hateScore: document.getElementById("hateScore").value,
-          politics: document.getElementById("politics").value,
-          topHates: document.getElementById("topHates").value.trim(),
-          oneGood: document.getElementById("oneGood").value.trim()
-        };
-
-        ratings.push(data);
-
-        if (ratingsOutput && ratingsList) {
-          ratingsOutput.style.display = "block";
-          ratingsList.innerHTML = "";
-          ratings.forEach((r, idx) => {
-            const li = document.createElement("li");
-            li.style.marginBottom = "4px";
-            li.innerHTML =
-              `<strong>${idx + 1}. ${r.collegeName}</strong> – Hate score: ${r.hateScore}/10, vibe: ${r.politics || "n/a"}`;
-            ratingsList.appendChild(li);
-          });
-        }
-
-        rankForm.reset();
-      });
-    }
-
-    // ----- College data for table -----
+    // College data for table
     const colleges = [
       { name: "American University", state: "DC", type: "Private", vibe: "liberal", vibeScore: 82 },
       { name: "University of Vermont", state: "VT", type: "Public", vibe: "liberal", vibeScore: 80 },
       { name: "Oberlin College", state: "OH", type: "Private", vibe: "liberal", vibeScore: 88 },
       { name: "UC Berkeley", state: "CA", type: "Public", vibe: "liberal", vibeScore: 85 },
+      { name: "New York University", state: "NY", type: "Private", vibe: "liberal", vibeScore: 78 },
       { name: "Liberty University", state: "VA", type: "Private", vibe: "conservative", vibeScore: 25 },
       { name: "Grove City College", state: "PA", type: "Private", vibe: "conservative", vibeScore: 28 },
       { name: "Brigham Young University (Provo)", state: "UT", type: "Private", vibe: "conservative", vibeScore: 30 },
@@ -949,13 +873,13 @@
     let sortKey = "name";
     let sortDir = "asc";
 
-    function getVibeLabel(vibe) {
+    function vibeLabel(vibe) {
       if (vibe === "liberal") return "More liberal";
       if (vibe === "conservative") return "More conservative";
       return "Mixed";
     }
 
-    function getVibeClass(vibe) {
+    function vibeClass(vibe) {
       if (vibe === "liberal") return "badge badge-liberal";
       if (vibe === "conservative") return "badge badge-conservative";
       return "badge badge-mixed";
@@ -991,13 +915,13 @@
           <td>${c.state}</td>
           <td>${c.type}</td>
           <td>${c.vibeScore}</td>
-          <td><span class="${getVibeClass(c.vibe)}">${getVibeLabel(c.vibe)}</span></td>
+          <td><span class="${vibeClass(c.vibe)}">${vibeLabel(c.vibe)}</span></td>
         `;
         tableBody.appendChild(tr);
       });
     }
 
-    if (searchInput && vibeFilter && tableBody) {
+    if (tableBody && searchInput && vibeFilter) {
       searchInput.addEventListener("input", renderTable);
       vibeFilter.addEventListener("change", renderTable);
       headers.forEach(h => {
@@ -1015,7 +939,41 @@
       renderTable();
     }
 
-    // ----- Contact form -----
+    // Rank form (client-side only)
+    const rankForm = document.getElementById("rankForm");
+    const ratingsOutput = document.getElementById("ratingsOutput");
+    const ratingsList = document.getElementById("ratingsList");
+    const ratings = [];
+
+    if (rankForm) {
+      rankForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const data = {
+          collegeName: document.getElementById("collegeName").value.trim(),
+          hateScore: document.getElementById("hateScore").value,
+          politics: document.getElementById("politics").value,
+          topHates: document.getElementById("topHates").value.trim(),
+          oneGood: document.getElementById("oneGood").value.trim()
+        };
+        ratings.push(data);
+
+        if (ratingsOutput && ratingsList) {
+          ratingsOutput.style.display = "block";
+          ratingsList.innerHTML = "";
+          ratings.forEach((r, idx) => {
+            const li = document.createElement("li");
+            li.style.marginBottom = "4px";
+            li.innerHTML =
+              `<strong>${idx + 1}. ${r.collegeName}</strong> – Hate score: ${r.hateScore}/10, vibe: ${r.politics || "n/a"}`;
+            ratingsList.appendChild(li);
+          });
+        }
+
+        rankForm.reset();
+      });
+    }
+
+    // Contact form -> mailto: placebetsai@gmail.com
     const contactForm = document.getElementById("contactForm");
     const contactStatus = document.getElementById("contactStatus");
 
@@ -1034,7 +992,6 @@
           "\n\nMessage:\n" + message
         );
 
-        // This opens the user's email client with everything filled in.
         window.location.href = "mailto:" + to + "?subject=" + subject + "&body=" + body;
 
         contactStatus.textContent = "Opening your mail app to send the message…";
@@ -1044,4 +1001,4 @@
     }
   </script>
 </body>
-  </html>
+</html>
