@@ -56,4 +56,33 @@ export default function Navbar() {
         {/* Mobile menu button */}
         <button
           className="inline-flex items-center justify-center rounded-full border border-white/10 bg-slate-900/70 p-2 text-slate-200 md:hidden"
-          onClick={() => setOpen((v) => !v
+          onClick={() => setOpen((v) => !v)}
+          aria-label="Toggle menu"
+        >
+          <span className="sr-only">Menu</span>
+          <div className="space-y-1">
+            <span className="block h-[2px] w-4 rounded-full bg-slate-200" />
+            <span className="block h-[2px] w-3 rounded-full bg-slate-400" />
+          </div>
+        </button>
+      </div>
+
+      {/* Mobile nav panel */}
+      {open && (
+        <div className="border-t border-white/5 bg-slate-950/95 pb-3 pt-2 md:hidden">
+          <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 sm:px-6 lg:px-10">
+            {navItems.map((item) => (
+              <button
+                key={item.href}
+                onClick={() => handleNavClick(item.href)}
+                className="w-full rounded-xl px-3 py-2 text-left text-xs font-medium uppercase tracking-wide text-slate-200 hover:bg-white/5"
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+        </div>
+      )}
+    </header>
+  );
+}
