@@ -1,7 +1,8 @@
-import React from "react";
+    import React from "react";
 import CollegeTable from "../components/CollegeTable";
 import RatingForm from "../components/RatingForm";
 import SectionCard from "../components/SectionCard";
+import RealityCheck from "../components/RealityCheck";
 
 export default function HomePage() {
   return (
@@ -29,11 +30,11 @@ export default function HomePage() {
 
           <div className="mt-6 flex flex-wrap gap-3">
             <a
-              href="#vibes"
+              href="#reality"
               className="inline-flex items-center gap-2 rounded-full bg-slate-900/80 px-4 py-2 text-sm font-semibold text-amber-300 ring-1 ring-amber-400/60 hover:bg-amber-400 hover:text-slate-950 hover:ring-amber-300"
             >
               <span className="h-2 w-2 rounded-full bg-emerald-400" />
-              Check campus vibes
+              Run a loan reality check
             </a>
             <a
               href="#alternatives"
@@ -88,9 +89,7 @@ export default function HomePage() {
             Why this exists
           </h2>
           <ul className="mt-3 space-y-3 text-sm text-slate-300">
-            <li>
-              You&apos;re allowed to hate college and still want a future.
-            </li>
+            <li>You&apos;re allowed to hate college and still want a future.</li>
             <li>
               It&apos;s not &quot;drop out or shut up&quot; – there are plays in
               between.
@@ -105,6 +104,9 @@ export default function HomePage() {
           </p>
         </aside>
       </section>
+
+      {/* NEW: Loan Reality Check */}
+      <RealityCheck />
 
       {/* CAMPUS VIBES TABLE */}
       <CollegeTable />
@@ -210,7 +212,10 @@ export default function HomePage() {
             </ul>
           </SectionCard>
 
-          <SectionCard label="Essays & emails" tags={["Communication", "Templates"]}>
+          <SectionCard
+            label="Essays & emails"
+            tags={["Communication", "Templates"]}
+          >
             <ul className="space-y-1.5">
               <li>Essay skeletons: intro / body / conclusion patterns.</li>
               <li>
