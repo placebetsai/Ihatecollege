@@ -88,7 +88,6 @@ const CHEAT_SHEETS = [
 ];
 
 export default function Home() {
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [campusSearch, setCampusSearch] = useState("");
 
   // rank form
@@ -151,7 +150,6 @@ export default function Home() {
     setCostError("");
   }
 
-  // debt reality calculator
   function handleCostCalculate(e) {
     e.preventDefault();
     const P = parseFloat(costInputs.totalDebt);
@@ -164,20 +162,17 @@ export default function Home() {
       return;
     }
 
-    const r = annualRate / 100 / 12; // monthly rate
+    const r = annualRate / 100 / 12;
 
-    // if payment <= interest, debt never goes down
     if (M <= P * r) {
       setCostError(
-        "That monthly payment is too low. You won’t ever touch principal – bump the number up."
+        "That monthly payment is too low. You won’t ever touch principal – bump it up."
       );
       setCostResult(null);
       return;
     }
 
-    // months to pay off: n = -ln(1 - rP/M)/ln(1+r)
-    const n =
-      -Math.log(1 - (r * P) / M) / Math.log(1 + r);
+    const n = -Math.log(1 - (r * P) / M) / Math.log(1 + r);
 
     const months = Math.round(n);
     const years = months / 12;
@@ -209,85 +204,6 @@ export default function Home() {
       </Head>
 
       <div className="min-h-screen bg-slate-950 text-slate-50">
-        {/* HEADER */}
-        <header className="sticky top-0 z-20 border-b border-white/10 bg-slate-950/85 backdrop-blur">
-          <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-            <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-400 text-sm font-bold text-slate-950">
-                IH
-              </div>
-              <div className="flex flex-col">
-                <span className="text-sm font-semibold tracking-tight">
-                  ihatecollege.com
-                </span>
-                <span className="text-[11px] text-slate-400">
-                  No brochure fluff. Just reality.
-                </span>
-              </div>
-            </div>
-
-            {/* desktop nav */}
-            <nav className="hidden items-center gap-5 text-xs font-medium text-slate-200 md:flex">
-              <a href="#campus-vibes" className="hover:text-amber-300">
-                Campus vibes
-              </a>
-              <a href="#cost" className="hover:text-amber-300">
-                Debt reality
-              </a>
-              <a href="#alternatives" className="hover:text-amber-300">
-                Alternatives
-              </a>
-              <a href="#cheat-sheets" className="hover:text-amber-300">
-                Cheat sheets
-              </a>
-              <a href="#rank" className="hover:text-amber-300">
-                Rank your school
-              </a>
-              <a href="#contact" className="hover:text-amber-300">
-                Contact
-              </a>
-            </nav>
-
-            {/* mobile button */}
-            <button
-              type="button"
-              onClick={() => setMobileOpen((v) => !v)}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 md:hidden"
-            >
-              <span className="sr-only">Toggle menu</span>
-              <div className="space-y-1">
-                <span className="block h-0.5 w-4 bg-slate-100" />
-                <span className="block h-0.5 w-4 bg-slate-100" />
-              </div>
-            </button>
-          </div>
-
-          {mobileOpen && (
-            <div className="border-t border-white/10 bg-slate-950/95 px-4 pb-3 pt-2 text-sm md:hidden">
-              <div className="flex flex-col gap-2">
-                <a href="#campus-vibes" onClick={() => setMobileOpen(false)} className="py-1">
-                  Campus vibes
-                </a>
-                <a href="#cost" onClick={() => setMobileOpen(false)} className="py-1">
-                  Debt reality
-                </a>
-                <a href="#alternatives" onClick={() => setMobileOpen(false)} className="py-1">
-                  Alternatives
-                </a>
-                <a href="#cheat-sheets" onClick={() => setMobileOpen(false)} className="py-1">
-                  Cheat sheets
-                </a>
-                <a href="#rank" onClick={() => setMobileOpen(false)} className="py-1">
-                  Rank your school
-                </a>
-                <a href="#contact" onClick={() => setMobileOpen(false)} className="py-1">
-                  Contact
-                </a>
-              </div>
-            </div>
-          )}
-        </header>
-
         <main className="mx-auto max-w-6xl px-4 pb-16 pt-8">
           {/* HERO */}
           <section className="space-y-5">
@@ -451,7 +367,7 @@ export default function Home() {
                 </button>
 
                 {costError && (
-                  <p className="text-xs font-medium text-rose-300 mt-2">{costError}</p>
+                  <p className="mt-2 text-xs font-medium text-rose-300">{costError}</p>
                 )}
               </form>
             </div>
@@ -505,10 +421,6 @@ export default function Home() {
               <h2 className="text-lg font-semibold tracking-tight">
                 Real alternatives to the 4-year trap
               </h2>
-              <p className="text-xs text-slate-400">
-                Not &quot;drop out and be a failure.&quot; These are paths people are using right
-                now that actually pay bills.
-              </p>
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
@@ -540,10 +452,6 @@ export default function Home() {
                       ))}
                     </ul>
                   </div>
-                  <p className="mt-3 text-[11px] text-slate-400">
-                    Next step: pick one lane and compare 3 programs on cost, time, and starting pay
-                    vs. your current degree plan.
-                  </p>
                 </article>
               ))}
             </div>
@@ -555,10 +463,6 @@ export default function Home() {
               <h2 className="text-lg font-semibold tracking-tight">
                 Cheat sheet vault (legal kind)
               </h2>
-              <p className="text-xs text-slate-400">
-                Not leaked exams – just quick-reference stuff so your brain isn&apos;t cooked by
-                week three.
-              </p>
             </div>
 
             <div className="grid gap-4 md:grid-cols-3">
@@ -604,10 +508,6 @@ export default function Home() {
               <h2 className="text-lg font-semibold tracking-tight">
                 Rank your college like it&apos;s a restaurant
               </h2>
-              <p className="text-xs text-slate-400">
-                Be blunt. Right now it only saves in your browser. Future version powers anonymous
-                rankings and heatmaps.
-              </p>
 
               <form className="space-y-3 text-sm" onSubmit={handleRankSubmit}>
                 <div className="space-y-1">
@@ -681,7 +581,7 @@ export default function Home() {
                 </button>
 
                 {rankSaved && (
-                  <p className="text-xs text-emerald-300 mt-1">
+                  <p className="mt-1 text-xs text-emerald-300">
                     Saved in this browser. Future version will push this into global rankings.
                   </p>
                 )}
@@ -715,8 +615,8 @@ export default function Home() {
               Contact (quietly)
             </h2>
             <p className="text-xs text-slate-400">
-              Got a story, idea, or collab pitch? This doesn&apos;t post anywhere public – it&apos;s
-              just a simple message form for now.
+              Got a story, idea, or collab pitch? Right now this just confirms on-screen – future
+              version can wire it to an actual inbox.
             </p>
 
             <form
@@ -735,7 +635,7 @@ export default function Home() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs text-slate-300">Email (so we can reply)</label>
+                <label className="text-xs text-slate-300">Email</label>
                 <input
                   type="email"
                   name="email"
@@ -764,9 +664,9 @@ export default function Home() {
               </button>
 
               {contactSent && (
-                <p className="text-xs text-emerald-300 mt-1">
-                  Got it. In a real version this would send straight to an inbox instead of just
-                  confirming here.
+                <p className="mt-1 text-xs text-emerald-300">
+                  Got it. In a real version this would send straight to email instead of just
+                  showing this.
                 </p>
               )}
             </form>
@@ -776,14 +676,12 @@ export default function Home() {
           <footer className="mt-10 border-t border-white/10 pt-4 text-[11px] text-slate-500">
             <p>
               This is not financial advice, legal advice, or therapy. It&apos;s the reality check
-              nobody bothered to put on the brochure.
+              nobody put on the brochure.
             </p>
-            <p className="mt-1">
-              © {new Date().getFullYear()} ihatecollege.com
-            </p>
+            <p className="mt-1">© {new Date().getFullYear()} ihatecollege.com</p>
           </footer>
         </main>
       </div>
     </>
   );
-              }
+      }
