@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const navItems = [
   { label: "Campus vibes", href: "#vibes" },
+  { label: "Reality check", href: "#reality" },
   { label: "Alternatives", href: "#alternatives" },
   { label: "Cheat sheets", href: "#cheatsheets" },
   { label: "Rank your school", href: "#rate" },
