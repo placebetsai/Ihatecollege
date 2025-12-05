@@ -1,66 +1,17 @@
 // pages/index.js
 
 import Head from "next/head";
-import Link from "next/link";
 import { useState, useMemo } from "react";
 
 const CAMPUS_VIBES = [
-  {
-    name: "American University",
-    state: "DC",
-    type: "Private",
-    score: 82,
-    vibe: "More liberal",
-  },
-  {
-    name: "University of Vermont",
-    state: "VT",
-    type: "Public",
-    score: 80,
-    vibe: "More liberal",
-  },
-  {
-    name: "Oberlin College",
-    state: "OH",
-    type: "Private",
-    score: 88,
-    vibe: "More liberal",
-  },
-  {
-    name: "UC Berkeley",
-    state: "CA",
-    type: "Public",
-    score: 85,
-    vibe: "More liberal",
-  },
-  {
-    name: "New York University",
-    state: "NY",
-    type: "Private",
-    score: 78,
-    vibe: "More liberal",
-  },
-  {
-    name: "Liberty University",
-    state: "VA",
-    type: "Private",
-    score: 25,
-    vibe: "More conservative",
-  },
-  {
-    name: "Grove City College",
-    state: "PA",
-    type: "Private",
-    score: 28,
-    vibe: "More conservative",
-  },
-  {
-    name: "Brigham Young University (Provo)",
-    state: "UT",
-    type: "Private",
-    score: 30,
-    vibe: "More conservative",
-  },
+  { name: "American University", state: "DC", type: "Private", score: 82, vibe: "More liberal" },
+  { name: "University of Vermont", state: "VT", type: "Public", score: 80, vibe: "More liberal" },
+  { name: "Oberlin College", state: "OH", type: "Private", score: 88, vibe: "More liberal" },
+  { name: "UC Berkeley", state: "CA", type: "Public", score: 85, vibe: "More liberal" },
+  { name: "New York University", state: "NY", type: "Private", score: 78, vibe: "More liberal" },
+  { name: "Liberty University", state: "VA", type: "Private", score: 25, vibe: "More conservative" },
+  { name: "Grove City College", state: "PA", type: "Private", score: 28, vibe: "More conservative" },
+  { name: "Brigham Young University (Provo)", state: "UT", type: "Private", score: 30, vibe: "More conservative" },
 ];
 
 const ALTERNATIVE_CARDS = [
@@ -139,6 +90,8 @@ const CHEAT_SHEETS = [
 export default function Home() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [campusSearch, setCampusSearch] = useState("");
+
+  // rank form
   const [rankForm, setRankForm] = useState({
     college: "",
     score: "",
@@ -147,20 +100,25 @@ export default function Home() {
     goodThing: "",
   });
   const [rankSaved, setRankSaved] = useState(false);
-  const [contactForm, setContactForm] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+
+  // contact
+  const [contactForm, setContactForm] = useState({ name: "", email: "", message: "" });
   const [contactSent, setContactSent] = useState(false);
+
+  // cost calculator
+  const [costInputs, setCostInputs] = useState({
+    totalDebt: "",
+    interestRate: "",
+    monthlyPayment: "",
+  });
+  const [costResult, setCostResult] = useState(null);
+  const [costError, setCostError] = useState("");
 
   const filteredCampuses = useMemo(() => {
     const term = campusSearch.trim().toLowerCase();
     if (!term) return CAMPUS_VIBES;
     return CAMPUS_VIBES.filter((c) =>
-      (c.name + c.state + c.type + c.vibe)
-        .toLowerCase()
-        .includes(term)
+      (c.name + c.state + c.type + c.vibe).toLowerCase().includes(term)
     );
   }, [campusSearch]);
 
@@ -172,7 +130,6 @@ export default function Home() {
 
   function handleRankSubmit(e) {
     e.preventDefault();
-    // Local-only for now. No backend. Just confirmation.
     setRankSaved(true);
   }
 
@@ -184,8 +141,61 @@ export default function Home() {
 
   function handleContactSubmit(e) {
     e.preventDefault();
-    // No backend wired yet. Just show a confirmation.
     setContactSent(true);
+  }
+
+  function handleCostChange(e) {
+    const { name, value } = e.target;
+    setCostInputs((prev) => ({ ...prev, [name]: value }));
+    setCostResult(null);
+    setCostError("");
+  }
+
+  // debt reality calculator
+  function handleCostCalculate(e) {
+    e.preventDefault();
+    const P = parseFloat(costInputs.totalDebt);
+    const annualRate = parseFloat(costInputs.interestRate);
+    const M = parseFloat(costInputs.monthlyPayment);
+
+    if (!P || !annualRate || !M) {
+      setCostError("Fill in all three fields with real numbers.");
+      setCostResult(null);
+      return;
+    }
+
+    const r = annualRate / 100 / 12; // monthly rate
+
+    // if payment <= interest, debt never goes down
+    if (M <= P * r) {
+      setCostError(
+        "That monthly payment is too low. You won’t ever touch principal – bump the number up."
+      );
+      setCostResult(null);
+      return;
+    }
+
+    // months to pay off: n = -ln(1 - rP/M)/ln(1+r)
+    const n =
+      -Math.log(1 - (r * P) / M) / Math.log(1 + r);
+
+    const months = Math.round(n);
+    const years = months / 12;
+    const totalPaid = M * months;
+    const interestPaid = totalPaid - P;
+
+    setCostError("");
+    setCostResult({
+      months,
+      years,
+      totalPaid,
+      interestPaid,
+    });
+  }
+
+  function formatMoney(x) {
+    if (!isFinite(x)) return "-";
+    return x.toLocaleString(undefined, { maximumFractionDigits: 0 });
   }
 
   return (
@@ -194,12 +204,12 @@ export default function Home() {
         <title>I Hate College – No brochure fluff. Just reality.</title>
         <meta
           name="description"
-          content="ihatecollege.com is the dashboard for reality: campus vibes, cost pressure, escape routes, and cheat sheets so you don’t end up buried in loans and burnout."
+          content="ihatecollege.com is the reality dashboard: campus vibes, cost pressure, and escape routes so you don’t end up buried in loans and burnout."
         />
       </Head>
 
       <div className="min-h-screen bg-slate-950 text-slate-50">
-        {/* Top nav */}
+        {/* HEADER */}
         <header className="sticky top-0 z-20 border-b border-white/10 bg-slate-950/85 backdrop-blur">
           <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
             <div className="flex items-center gap-3">
@@ -216,10 +226,13 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Desktop nav */}
+            {/* desktop nav */}
             <nav className="hidden items-center gap-5 text-xs font-medium text-slate-200 md:flex">
               <a href="#campus-vibes" className="hover:text-amber-300">
                 Campus vibes
+              </a>
+              <a href="#cost" className="hover:text-amber-300">
+                Debt reality
               </a>
               <a href="#alternatives" className="hover:text-amber-300">
                 Alternatives
@@ -235,7 +248,7 @@ export default function Home() {
               </a>
             </nav>
 
-            {/* Mobile menu button */}
+            {/* mobile button */}
             <button
               type="button"
               onClick={() => setMobileOpen((v) => !v)}
@@ -249,43 +262,25 @@ export default function Home() {
             </button>
           </div>
 
-          {/* Mobile nav panel */}
           {mobileOpen && (
             <div className="border-t border-white/10 bg-slate-950/95 px-4 pb-3 pt-2 text-sm md:hidden">
               <div className="flex flex-col gap-2">
-                <a
-                  href="#campus-vibes"
-                  onClick={() => setMobileOpen(false)}
-                  className="py-1 text-slate-200 hover:text-amber-300"
-                >
+                <a href="#campus-vibes" onClick={() => setMobileOpen(false)} className="py-1">
                   Campus vibes
                 </a>
-                <a
-                  href="#alternatives"
-                  onClick={() => setMobileOpen(false)}
-                  className="py-1 text-slate-200 hover:text-amber-300"
-                >
+                <a href="#cost" onClick={() => setMobileOpen(false)} className="py-1">
+                  Debt reality
+                </a>
+                <a href="#alternatives" onClick={() => setMobileOpen(false)} className="py-1">
                   Alternatives
                 </a>
-                <a
-                  href="#cheat-sheets"
-                  onClick={() => setMobileOpen(false)}
-                  className="py-1 text-slate-200 hover:text-amber-300"
-                >
+                <a href="#cheat-sheets" onClick={() => setMobileOpen(false)} className="py-1">
                   Cheat sheets
                 </a>
-                <a
-                  href="#rank"
-                  onClick={() => setMobileOpen(false)}
-                  className="py-1 text-slate-200 hover:text-amber-300"
-                >
+                <a href="#rank" onClick={() => setMobileOpen(false)} className="py-1">
                   Rank your school
                 </a>
-                <a
-                  href="#contact"
-                  onClick={() => setMobileOpen(false)}
-                  className="py-1 text-slate-200 hover:text-amber-300"
-                >
+                <a href="#contact" onClick={() => setMobileOpen(false)} className="py-1">
                   Contact
                 </a>
               </div>
@@ -309,10 +304,9 @@ export default function Home() {
                 </span>
               </h1>
               <p className="max-w-2xl text-sm text-slate-300">
-                College is stupid expensive, insanely political, and way more
-                stress than the brochures admit. ihatecollege.com is the
-                dashboard for reality: campus vibes, cost pressure, and actual
-                escape routes so you don&apos;t end up buried in loans and
+                College is stupid expensive, insanely political, and way more stress than the
+                brochures admit. ihatecollege.com is the dashboard for reality: campus vibes, cost
+                pressure, and actual escape routes so you don&apos;t end up buried in loans and
                 burnout.
               </p>
             </div>
@@ -341,9 +335,8 @@ export default function Home() {
                   Campus vibes: liberal, conservative, or just chaos?
                 </h2>
                 <p className="text-xs text-slate-400">
-                  Quick snapshot so you don&apos;t walk in shocked. Based on
-                  public rankings + student chatter. Not official – just a
-                  starting point.
+                  Quick snapshot so you don&apos;t walk in shocked. Based on public rankings +
+                  student chatter. Not official – just a starting point.
                 </p>
               </div>
               <div className="w-full max-w-xs">
@@ -370,22 +363,11 @@ export default function Home() {
                 </thead>
                 <tbody>
                   {filteredCampuses.map((c) => (
-                    <tr
-                      key={c.name}
-                      className="border-t border-white/5 odd:bg-slate-900/40"
-                    >
-                      <td className="px-4 py-2.5 text-slate-100">
-                        {c.name}
-                      </td>
-                      <td className="px-4 py-2.5 text-slate-300">
-                        {c.state}
-                      </td>
-                      <td className="px-4 py-2.5 text-slate-300">
-                        {c.type}
-                      </td>
-                      <td className="px-4 py-2.5 text-slate-100">
-                        {c.score}
-                      </td>
+                    <tr key={c.name} className="border-t border-white/5 odd:bg-slate-900/40">
+                      <td className="px-4 py-2.5 text-slate-100">{c.name}</td>
+                      <td className="px-4 py-2.5 text-slate-300">{c.state}</td>
+                      <td className="px-4 py-2.5 text-slate-300">{c.type}</td>
+                      <td className="px-4 py-2.5 text-slate-100">{c.score}</td>
                       <td className="px-4 py-2.5">
                         <span
                           className={`inline-flex rounded-full px-2.5 py-0.5 text-[11px] ${
@@ -401,16 +383,119 @@ export default function Home() {
                   ))}
                   {filteredCampuses.length === 0 && (
                     <tr>
-                      <td
-                        colSpan={5}
-                        className="px-4 py-4 text-center text-slate-400"
-                      >
+                      <td colSpan={5} className="px-4 py-4 text-center text-slate-400">
                         Nothing found. Try a different name or state.
                       </td>
                     </tr>
                   )}
                 </tbody>
               </table>
+            </div>
+          </section>
+
+          {/* COST / DEBT CALCULATOR */}
+          <section id="cost" className="mt-12 grid gap-6 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
+            <div className="space-y-3 rounded-3xl border border-white/10 bg-slate-900/80 p-4">
+              <h2 className="text-lg font-semibold tracking-tight">
+                Debt reality check – how long are you stuck?
+              </h2>
+              <p className="text-xs text-slate-400">
+                Punch in your total loans, average interest rate, and what you can pay each month.
+                This is the &quot;how many years of my life is this?&quot; calculator.
+              </p>
+
+              <form onSubmit={handleCostCalculate} className="mt-2 space-y-3 text-sm">
+                <div className="space-y-1">
+                  <label className="text-xs text-slate-300">Total student debt ($)</label>
+                  <input
+                    type="number"
+                    name="totalDebt"
+                    value={costInputs.totalDebt}
+                    onChange={handleCostChange}
+                    className="w-full rounded-xl border border-white/15 bg-slate-950/80 px-3 py-2 text-sm text-slate-100"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs text-slate-300">
+                    Average interest rate (% per year)
+                  </label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    name="interestRate"
+                    value={costInputs.interestRate}
+                    onChange={handleCostChange}
+                    className="w-full rounded-xl border border-white/15 bg-slate-950/80 px-3 py-2 text-sm text-slate-100"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs text-slate-300">
+                    What you can realistically pay per month ($)
+                  </label>
+                  <input
+                    type="number"
+                    name="monthlyPayment"
+                    value={costInputs.monthlyPayment}
+                    onChange={handleCostChange}
+                    className="w-full rounded-xl border border-white/15 bg-slate-950/80 px-3 py-2 text-sm text-slate-100"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="mt-1 inline-flex items-center justify-center rounded-full bg-amber-400 px-4 py-2 text-sm font-semibold text-slate-950 shadow-lg shadow-amber-400/25"
+                >
+                  Run the numbers
+                </button>
+
+                {costError && (
+                  <p className="text-xs font-medium text-rose-300 mt-2">{costError}</p>
+                )}
+              </form>
+            </div>
+
+            <div className="space-y-3 rounded-3xl border border-dashed border-white/15 bg-slate-950/40 p-4 text-xs text-slate-300">
+              <h3 className="text-sm font-semibold text-slate-50">Result snapshot</h3>
+              {!costResult && !costError && (
+                <p className="text-slate-400">
+                  Put numbers in on the left and this box will tell you:
+                  <br />
+                  • How many months / years you&apos;re paying
+                  <br />
+                  • Total you&apos;ll hand over
+                  <br />
+                  • How much of that is just interest
+                </p>
+              )}
+
+              {costResult && (
+                <div className="space-y-2">
+                  <p>
+                    <span className="text-slate-400">Time to pay off:</span>{" "}
+                    <span className="font-semibold text-emerald-300">
+                      {costResult.months} months (~{costResult.years.toFixed(1)} years)
+                    </span>
+                  </p>
+                  <p>
+                    <span className="text-slate-400">Total paid over time:</span>{" "}
+                    <span className="font-semibold">
+                      ${formatMoney(costResult.totalPaid)}
+                    </span>
+                  </p>
+                  <p>
+                    <span className="text-slate-400">Of which is pure interest:</span>{" "}
+                    <span className="font-semibold text-amber-300">
+                      ${formatMoney(costResult.interestPaid)}
+                    </span>
+                  </p>
+                  <p className="mt-2 text-slate-400">
+                    Homework: Compare that timeline with doing a cheaper cert, trade, or transfer
+                    and using the income jump to nuke this faster.
+                  </p>
+                </div>
+              )}
             </div>
           </section>
 
@@ -421,9 +506,8 @@ export default function Home() {
                 Real alternatives to the 4-year trap
               </h2>
               <p className="text-xs text-slate-400">
-                It&apos;s not &quot;go to a 4-year or be a failure.&quot; These
-                are paths people are actually using right now. Not fantasy
-                YouTube careers – stuff that can pay real bills.
+                Not &quot;drop out and be a failure.&quot; These are paths people are using right
+                now that actually pay bills.
               </p>
             </div>
 
@@ -443,7 +527,7 @@ export default function Home() {
                           {card.title}
                         </h3>
                       </div>
-                      <p className="max-w-[8rem] text-[11px] text-slate-300 text-right">
+                      <p className="max-w-[8rem] text-[11px] text-right text-slate-300">
                         {card.caption}
                       </p>
                     </div>
@@ -457,8 +541,8 @@ export default function Home() {
                     </ul>
                   </div>
                   <p className="mt-3 text-[11px] text-slate-400">
-                    Homework: pick one lane and compare 3 programs on cost,
-                    time, and starting pay vs. your current degree plan.
+                    Next step: pick one lane and compare 3 programs on cost, time, and starting pay
+                    vs. your current degree plan.
                   </p>
                 </article>
               ))}
@@ -472,8 +556,8 @@ export default function Home() {
                 Cheat sheet vault (legal kind)
               </h2>
               <p className="text-xs text-slate-400">
-                Not leaked exams – fast reference so your brain isn&apos;t
-                cooked by week three. Future version: real downloadable PDFs.
+                Not leaked exams – just quick-reference stuff so your brain isn&apos;t cooked by
+                week three.
               </p>
             </div>
 
@@ -521,19 +605,13 @@ export default function Home() {
                 Rank your college like it&apos;s a restaurant
               </h2>
               <p className="text-xs text-slate-400">
-                Be blunt. Right now it only saves in your browser (no public
-                posting yet). Later this can power anonymous rankings and
-                heatmaps.
+                Be blunt. Right now it only saves in your browser. Future version powers anonymous
+                rankings and heatmaps.
               </p>
 
-              <form
-                className="space-y-3 text-sm"
-                onSubmit={handleRankSubmit}
-              >
+              <form className="space-y-3 text-sm" onSubmit={handleRankSubmit}>
                 <div className="space-y-1">
-                  <label className="text-xs text-slate-300">
-                    College name
-                  </label>
+                  <label className="text-xs text-slate-300">College name</label>
                   <input
                     type="text"
                     name="college"
@@ -559,9 +637,7 @@ export default function Home() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-xs text-slate-300">
-                    Campus politics vibe
-                  </label>
+                  <label className="text-xs text-slate-300">Campus politics vibe</label>
                   <select
                     name="politics"
                     value={rankForm.politics}
@@ -570,17 +646,13 @@ export default function Home() {
                   >
                     <option value="">Select one</option>
                     <option value="More liberal">More liberal</option>
-                    <option value="More conservative">
-                      More conservative
-                    </option>
+                    <option value="More conservative">More conservative</option>
                     <option value="Mixed / chaos">Mixed / chaos</option>
                   </select>
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-xs text-slate-300">
-                    Top 3 things you hate
-                  </label>
+                  <label className="text-xs text-slate-300">Top 3 things you hate</label>
                   <textarea
                     name="hateThings"
                     rows={3}
@@ -591,9 +663,7 @@ export default function Home() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-xs text-slate-300">
-                    One thing they actually do well
-                  </label>
+                  <label className="text-xs text-slate-300">One thing they actually do well</label>
                   <textarea
                     name="goodThing"
                     rows={2}
@@ -611,38 +681,28 @@ export default function Home() {
                 </button>
 
                 {rankSaved && (
-                  <p className="text-xs text-emerald-300">
-                    Saved in this browser. Future version will let you push this
-                    to global rankings.
+                  <p className="text-xs text-emerald-300 mt-1">
+                    Saved in this browser. Future version will push this into global rankings.
                   </p>
                 )}
               </form>
             </div>
 
             <div className="space-y-3 rounded-2xl border border-dashed border-white/15 bg-slate-950/40 p-4 text-xs text-slate-300">
-              <h3 className="text-sm font-semibold text-slate-50">
-                What this will become
-              </h3>
+              <h3 className="text-sm font-semibold text-slate-50">Why this matters</h3>
               <ul className="space-y-2">
                 <li className="flex gap-2">
                   <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-400" />
                   <span>
-                    Anonymous heatmaps of &quot;I hate this place&quot; vs
-                    actual debt + mental load.
+                    Real &quot;I hate this place&quot; scores tell you where people are actually
+                    miserable, not just what the brochure says.
                   </span>
                 </li>
                 <li className="flex gap-2">
                   <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-400" />
                   <span>
-                    Side-by-side comparisons: stay, transfer, trade, or cert –
-                    with real numbers.
-                  </span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-400" />
-                  <span>
-                    Stories from people who actually bailed and didn&apos;t
-                    end up ruined.
+                    Paired with cost + debt numbers, this becomes a stay / transfer / bail
+                    decision tool.
                   </span>
                 </li>
               </ul>
@@ -655,8 +715,8 @@ export default function Home() {
               Contact (quietly)
             </h2>
             <p className="text-xs text-slate-400">
-              Got a story, idea, or collab pitch? This doesn&apos;t post
-              anywhere public – it&apos;s just a simple message form for now.
+              Got a story, idea, or collab pitch? This doesn&apos;t post anywhere public – it&apos;s
+              just a simple message form for now.
             </p>
 
             <form
@@ -664,9 +724,7 @@ export default function Home() {
               onSubmit={handleContactSubmit}
             >
               <div className="space-y-1">
-                <label className="text-xs text-slate-300">
-                  Name (optional)
-                </label>
+                <label className="text-xs text-slate-300">Name (optional)</label>
                 <input
                   type="text"
                   name="name"
@@ -677,9 +735,7 @@ export default function Home() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs text-slate-300">
-                  Email (so we can reply)
-                </label>
+                <label className="text-xs text-slate-300">Email (so we can reply)</label>
                 <input
                   type="email"
                   name="email"
@@ -690,9 +746,7 @@ export default function Home() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs text-slate-300">
-                  Message
-                </label>
+                <label className="text-xs text-slate-300">Message</label>
                 <textarea
                   name="message"
                   rows={4}
@@ -710,9 +764,9 @@ export default function Home() {
               </button>
 
               {contactSent && (
-                <p className="text-xs text-emerald-300">
-                  Got it. In a real version this would send straight to an inbox
-                  instead of just confirming here.
+                <p className="text-xs text-emerald-300 mt-1">
+                  Got it. In a real version this would send straight to an inbox instead of just
+                  confirming here.
                 </p>
               )}
             </form>
@@ -721,13 +775,15 @@ export default function Home() {
           {/* FOOTER */}
           <footer className="mt-10 border-t border-white/10 pt-4 text-[11px] text-slate-500">
             <p>
-              This is not financial advice, legal advice, or therapy. It&apos;s
-              the reality check nobody bothered to put on the brochure.
+              This is not financial advice, legal advice, or therapy. It&apos;s the reality check
+              nobody bothered to put on the brochure.
             </p>
-            <p className="mt-1">© {new Date().getFullYear()} ihatecollege.com</p>
+            <p className="mt-1">
+              © {new Date().getFullYear()} ihatecollege.com
+            </p>
           </footer>
         </main>
       </div>
     </>
   );
-      }
+              }
