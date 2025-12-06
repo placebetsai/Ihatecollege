@@ -141,4 +141,4 @@ export default function LiberalVsConservativePage() {
       </section>
     </>
   );
-                                 }
+}
