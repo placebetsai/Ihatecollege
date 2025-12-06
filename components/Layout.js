@@ -1,45 +1,25 @@
-// components/Layout.js
 import React from "react";
 import Head from "next/head";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
-export default function Layout({
-  title,
-  description,
-  children,
-}) {
+export default function Layout({ title, children }) {
   const pageTitle = title
     ? `${title} | IHateCollege.com`
-    : "IHateCollege.com – No-BS college reality check";
-
-  const pageDescription =
-    description ||
-    "Skip the $200k degree trap. Real alternatives, debt calculators, trade paths, and student stories so you actually get a life, not just loans.";
+    : "IHateCollege.com — Real alternatives to college";
 
   return (
     <>
       <Head>
         <title>{pageTitle}</title>
-        <meta name="description" content={pageDescription} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Skip the debt. Explore high-income careers, trades, tech certifications, apprenticeships, government jobs, and real alternatives to college." />
       </Head>
 
-      <div className="page">
-        <Navbar />
+      <Navbar />
 
-        <main className="page-main">
-          <div className="page-content">{children}</div>
-        </main>
+      <main className="page-container">{children}</main>
 
-        <footer className="site-footer">
-          <div className="site-footer-inner">
-            <span>© {new Date().getFullYear()} IHateCollege.com</span>
-            <span className="footer-tagline">
-              No brochure fluff. Just reality.
-            </span>
-          </div>
-        </footer>
-      </div>
+      <Footer />
     </>
   );
 }
