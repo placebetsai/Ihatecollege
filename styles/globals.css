@@ -489,4 +489,10 @@ main,
   .site-footer {
     padding-inline: 2.5rem;
   }
-   }
+   }/* === Fix stray unstyled nav/links at very top === */
+body > a:first-of-type,
+body > a:first-of-type + br,
+body > a:first-of-type + br + a,
+body > nav:first-of-type {
+  display: none !important;
+}
