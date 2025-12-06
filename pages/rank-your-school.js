@@ -1,26 +1,54 @@
-import Head from "next/head";
-import RankCollege from "../components/RankCollege";
+import { useState } from "react";
+import Layout from "../components/Layout";
 
-export default function RankYourSchoolPage() {
+export default function RankYourSchool() {
+  const [school, setSchool] = useState("");
+  const [rating, setRating] = useState(3);
+  const [list, setList] = useState([]);
+
+  const submit = () => {
+    if (!school) return;
+    const updated = [...list, { school, rating }];
+    setList(updated);
+    setSchool("");
+    setRating(3);
+  };
+
   return (
-    <>
-      <Head>
-        <title>Rank Your School | IHATECOLLEGE.COM</title>
-      </Head>
+    <Layout title="Rank Your School">
+      <h1>Rank Your School</h1>
+      <p>Tell the world how your college ACTUALLY is — good or trash.</p>
 
-      <section className="section">
-        <p className="eyebrow">Rank your school</p>
-        <h1 className="section-title">How honest is your college?</h1>
-        <p className="section-sub">
-          See crowd-sourced scores on debt, outcomes, and campus reality. Then
-          drop your own rating so other students don&apos;t get blindsided.
-        </p>
-      </section>
+      <div className="card">
+        <label>School Name</label>
+        <input
+          className="input"
+          value={school}
+          onChange={(e) => setSchool(e.target.value)}
+        />
 
-      {/* Your existing ranking component */}
-      <section className="section">
-        <RankCollege />
-      </section>
-    </>
+        <label>Rating (1–5)</label>
+        <input
+          className="input"
+          type="number"
+          min="1"
+          max="5"
+          value={rating}
+          onChange={(e) => setRating(e.target.value)}
+        />
+
+        <div className="btn" onClick={submit}>
+          Submit Rating
+        </div>
+      </div>
+
+      <h2>Recent Ratings</h2>
+
+      {list.map((s, i) => (
+        <div key={i} className="card">
+          <strong>{s.school}</strong> — Rated {s.rating}/5
+        </div>
+      ))}
+    </Layout>
   );
 }
