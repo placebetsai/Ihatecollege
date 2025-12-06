@@ -39,8 +39,7 @@ export default function Navbar() {
               key={l.href}
               href={l.href}
               className={
-                "nav-link" +
-                (router.pathname === l.href ? " nav-link-active" : "")
+                "nav-link" + (router.pathname === l.href ? " nav-link-active" : "")
               }
             >
               {l.label}
