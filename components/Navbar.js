@@ -1,14 +1,23 @@
-<nav>
-  <div className="logo">
-    <Link href="/">IHATECOLLEGE<span>.COM</span></Link>
-  </div>
+// components/Navbar.js
+import Link from "next/link";
 
-  <div className="nav-links">
-    <Link href="/">Home</Link>
-    <Link href="/alternatives">Alternatives</Link>
-    <Link href="/calculator">Debt Calculator</Link>
-    <Link href="/cheatsheets">Cheat Sheets</Link>
-    <Link href="/rank">Rank Your School</Link>
-    <Link href="/contact">Contact</Link>
-  </div>
-</nav>
+export default function Navbar() {
+  return (
+    <header className="site-header">
+      <div className="site-header-inner">
+        <Link href="/" className="site-logo">
+          IHATECOLLEGE<span>.COM</span>
+        </Link>
+
+        <nav className="site-nav">
+          <Link href="/">Home</Link>
+          <Link href="/alternatives">Alternatives</Link>
+          <Link href="/debt-calculator">Debt Calculator</Link>
+          <Link href="/cheat-sheets">Cheat Sheets</Link>
+          <Link href="/rank-your-school">Rank Your School</Link>
+          <Link href="/contact">Contact</Link>
+        </nav>
+      </div>
+    </header>
+  );
+}
