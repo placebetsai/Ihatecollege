@@ -1,47 +1,27 @@
-import Navbar from "../components/Navbar";
+import Layout from "../components/Layout";
 
 export default function CivilService() {
-  const federal = [
-    { name: "USAJOBS (Federal Jobs)", url: "https://www.usajobs.gov" },
-    { name: "TSA Hiring", url: "https://jobs.tsa.gov" },
-    { name: "Postal Service", url: "https://www.usps.com/careers" },
-  ];
-
-  const florida = [
-    { name: "State of Florida Jobs", url: "https://jobs.myflorida.com" },
-    { name: "Palm Beach County Jobs", url: "https://www.pbcgov.jobs" },
-    { name: "Miami-Dade County Jobs", url: "https://www.miamidade.gov/jobs" },
-  ];
-
   return (
-    <>
-      <Navbar />
-      <main className="page-main">
-        <h1>Civil Service Careers</h1>
-        <p>Stable jobs, pensions, health insurance, no degree required for many positions.</p>
+    <Layout title="Civil Service">
+      <h1>Civil Service Careers</h1>
 
-        <h2>Federal Jobs</h2>
-        <ul>
-          {federal.map((job) => (
-            <li key={job.name}>
-              <a href={job.url} target="_blank" rel="noreferrer">
-                {job.name}
-              </a>
-            </li>
-          ))}
-        </ul>
+      <p>No degree required. Stable benefits. Pension. Real jobs.</p>
 
-        <h2>Florida Jobs</h2>
-        <ul>
-          {florida.map((job) => (
-            <li key={job.name}>
-              <a href={job.url} target="_blank" rel="noreferrer">
-                {job.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </main>
-    </>
+      <div className="card">
+        <div className="card-title">Federal Jobs</div>
+        USPS • TSA • Customs • DHS • VA<br />
+        <a style={{ color: "#37c8ff" }}>*USAJobs.gov →</a>
+      </div>
+
+      <div className="card">
+        <div className="card-title">State Jobs</div>
+        DOT • DMV • County Clerks • Corrections
+      </div>
+
+      <div className="card">
+        <div className="card-title">City Jobs</div>
+        Firefighter • Police • Dispatch • Sanitation
+      </div>
+    </Layout>
   );
 }
