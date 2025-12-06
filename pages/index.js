@@ -1,284 +1,187 @@
-import React from 'react';
-import Link from 'next/link';
+// pages/index.js
+import React from "react";
+import Layout from "../components/Layout";
 
-export default function Home() {
-  const page = {
-    minHeight: '100vh',
-    background:
-      'radial-gradient(circle at top left, #0f172a 0, #020617 55%, #000 100%)',
-    color: '#f9fafb',
-    fontFamily:
-      'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-    padding: '20px 14px 36px',
-  };
-
-  const shell = {
-    maxWidth: '1100px',
-    margin: '0 auto',
-  };
-
-  const heroCard = {
-    borderRadius: '20px',
-    padding: '22px 18px',
-    marginTop: '12px', // space under the top navbar
-    background:
-      'linear-gradient(145deg, rgba(15,23,42,0.95), rgba(15,23,42,0.85))',
-    boxShadow: '0 24px 60px rgba(0,0,0,0.6)',
-    border: '1px solid rgba(148,163,184,0.35)',
-  };
-
-  const heroKicker = {
-    fontSize: '11px',
-    letterSpacing: '0.22em',
-    textTransform: 'uppercase',
-    color: '#9ca3af',
-    marginBottom: '8px',
-  };
-
-  const heroTitle = {
-    fontSize: '26px',
-    lineHeight: 1.2,
-    fontWeight: 800,
-    marginBottom: '10px',
-  };
-
-  const highlight = { color: '#fbbf24' };
-
-  const heroSubtitle = {
-    fontSize: '13px',
-    color: '#d1d5db',
-    maxWidth: '620px',
-    marginBottom: '16px',
-  };
-
-  const heroButtons = {
-    display: 'flex',
-    flexWrap: 'wrap',
-    flexDirection: 'column',
-    gap: '10px',
-    marginBottom: '22px',
-  };
-
-  const btnPrimary = {
-    textDecoration: 'none',
-    padding: '10px 18px',
-    borderRadius: '999px',
-    background: 'linear-gradient(135deg, #fbbf24, #f97316)',
-    color: '#111827',
-    fontWeight: 700,
-    fontSize: '14px',
-    textAlign: 'center',
-  };
-
-  const btnSecondary = {
-    textDecoration: 'none',
-    padding: '10px 18px',
-    borderRadius: '999px',
-    border: '1px solid rgba(148,163,184,0.6)',
-    color: '#e5e7eb',
-    fontSize: '14px',
-    textAlign: 'center',
-  };
-
-  const statsGrid = {
-    display: 'grid',
-    gap: '10px',
-    marginBottom: '24px',
-  };
-
-  const statRow = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    padding: '10px 12px',
-    borderRadius: '12px',
-    background: 'rgba(15,23,42,0.9)',
-    border: '1px solid rgba(31,41,55,0.9)',
-    fontSize: '13px',
-  };
-
-  const statLabel = { color: '#9ca3af' };
-  const statValue = { fontWeight: 600, color: '#e5e7eb' };
-
-  const sectionTitle = {
-    fontSize: '20px',
-    fontWeight: 700,
-    margin: '24px 0 12px',
-  };
-
-  const altGrid = {
-    display: 'grid',
-    gap: '12px',
-    marginBottom: '22px',
-  };
-
-  const altCard = {
-    borderRadius: '14px',
-    padding: '12px 14px',
-    background: 'rgba(15,23,42,0.9)',
-    border: '1px solid rgba(31,41,55,0.85)',
-    textDecoration: 'none',
-    color: '#e5e7eb',
-    fontSize: '14px',
-  };
-
-  const altTitle = { fontWeight: 600, marginBottom: '4px' };
-  const altMeta = { fontSize: '13px', color: '#9ca3af' };
-
-  const testimonials = {
-    display: 'grid',
-    gap: '12px',
-    marginBottom: '22px',
-  };
-
-  const tCard = {
-    borderRadius: '14px',
-    padding: '12px 14px',
-    background: 'rgba(15,23,42,0.9)',
-    border: '1px solid rgba(31,41,55,0.85)',
-    fontSize: '14px',
-    color: '#e5e7eb',
-  };
-
-  const tAuthor = {
-    marginTop: '6px',
-    fontSize: '13px',
-    color: '#9ca3af',
-  };
-
-  const pathGrid = {
-    display: 'grid',
-    gap: '8px',
-    marginBottom: '14px',
-  };
-
-  const pathLink = {
-    textDecoration: 'none',
-    padding: '10px 14px',
-    borderRadius: '999px',
-    background: 'rgba(15,23,42,0.9)',
-    border: '1px solid rgba(31,41,55,0.9)',
-    fontSize: '14px',
-    color: '#e5e7eb',
-    textAlign: 'center',
-  };
-
-  const footer = {
-    marginTop: '16px',
-    fontSize: '12px',
-    color: '#6b7280',
-    textAlign: 'center',
-  };
-
+export default function HomePage() {
   return (
-    <div style={page}>
-      <div style={shell}>
-        <main style={heroCard}>
-          <div style={heroKicker}>YOU DON&apos;T HAVE TO SIGN YOUR LIFE AWAY</div>
-
-          <h1 style={heroTitle}>
-            College is <span style={highlight}>optional.</span> Debt isn&apos;t.
+    <Layout
+      title="College is optional. Debt isn't."
+      description="See what your degree really costs, compare real alternatives, and hear from students who bailed on the 4-year trap."
+    >
+      <section className="hero">
+        <div className="hero-main-card">
+          <p className="eyebrow">YOU DON'T HAVE TO SIGN YOUR LIFE AWAY</p>
+          <h1 className="hero-title">
+            College is <span className="accent">optional</span>. Debt isn&apos;t.
           </h1>
-
-          <p style={heroSubtitle}>
+          <p className="hero-subtitle">
             Before you lock in $50k+ of loans, compare trades, tech certs,
             bootcamps, and real alternatives. Run the numbers. Hear from
             students. Then decide.
           </p>
 
-          <div style={heroButtons}>
-            <Link href="/Alternatives" style={btnPrimary}>
+          <div className="hero-actions">
+            <a href="/alternatives" className="btn btn-primary">
               Explore alternatives
-            </Link>
-            <Link href="/debt-calculator" style={btnSecondary}>
+            </a>
+            <a href="/debt-calculator" className="btn btn-ghost">
               See what your degree really costs
-            </Link>
+            </a>
           </div>
 
-          <div style={statsGrid}>
-            <div style={statRow}>
-              <span style={statLabel}>Avg 4-year total cost</span>
-              <span style={statValue}>$100k+ with living costs</span>
+          <div className="hero-metrics">
+            <div className="metric">
+              <span className="metric-label">Avg 4-year total cost</span>
+              <span className="metric-value">$100k+ with living costs</span>
             </div>
-            <div style={statRow}>
-              <span style={statLabel}>Time in class</span>
-              <span style={statValue}>4+ years</span>
+            <div className="metric">
+              <span className="metric-label">Time in class</span>
+              <span className="metric-value">4+ years</span>
             </div>
-            <div style={statRow}>
-              <span style={statLabel}>Typical trade/cert path</span>
-              <span style={statValue}>6–24 months</span>
+            <div className="metric">
+              <span className="metric-label">Typical trade/cert path</span>
+              <span className="metric-value">6–24 months</span>
             </div>
-            <div style={statRow}>
-              <span style={statLabel}>Working while you train?</span>
-              <span style={statValue}>Often yes (apprenticeships)</span>
-            </div>
-          </div>
-
-          <h2 style={sectionTitle}>High-income paths that DON&apos;T require a degree</h2>
-          <div style={altGrid}>
-            <Link href="/Alternatives#tech" style={altCard}>
-              <div style={altTitle}>Tech &amp; Cyber</div>
-              <div style={altMeta}>
-                Cybersecurity • Cloud • IT Support • UX/UI Bootcamps
-              </div>
-              <div style={altMeta}>$60k–$150k • 4–12 months</div>
-            </Link>
-
-            <Link href="/Alternatives#trades" style={altCard}>
-              <div style={altTitle}>Skilled Trades</div>
-              <div style={altMeta}>HVAC • Electrician • Welding • CDL</div>
-              <div style={altMeta}>Paid apprenticeships • Job security</div>
-            </Link>
-
-            <Link href="/Alternatives#nodegree" style={altCard}>
-              <div style={altTitle}>No-Degree High-Income</div>
-              <div style={altMeta}>Real estate • Sales • Adjusting • Notary</div>
-              <div style={altMeta}>Skill-based income, no campus</div>
-            </Link>
-          </div>
-
-          <h2 style={sectionTitle}>Real people. Real results.</h2>
-          <div style={testimonials}>
-            <div style={tCard}>
-              <p>
-                “Dropped out of FAU after year 2. Got Security+ and A+. Making
-                $78k at age 20.”
-              </p>
-              <div style={tAuthor}>— Jake, Boca Raton</div>
-            </div>
-            <div style={tCard}>
-              <p>
-                “Went HVAC instead of $80k loans. Cleared $95k with overtime
-                last year.”
-              </p>
-              <div style={tAuthor}>— Marco, Miami</div>
-            </div>
-            <div style={tCard}>
-              <p>
-                “Cloud certs took 5 months. Now making more than my mom who went
-                to college.”
-              </p>
-              <div style={tAuthor}>— Rachel, Orlando</div>
+            <div className="metric">
+              <span className="metric-label">Working while you train?</span>
+              <span className="metric-value">Often yes (apprenticeships)</span>
             </div>
           </div>
+        </div>
 
-          <h2 style={sectionTitle}>Choose your path</h2>
-          <div style={pathGrid}>
-            <Link href="/Alternatives#trades" style={pathLink}>
-              Trades Path
-            </Link>
-            <Link href="/Alternatives#tech" style={pathLink}>
-              Tech Path
-            </Link>
-            <Link href="/Alternatives#nodegree" style={pathLink}>
-              No-Degree High Income
-            </Link>
-          </div>
+        <div className="hero-side">
+          <div className="hero-side-card">
+            <h2 className="hero-side-title">Reality check in 3 paths</h2>
+            <p className="hero-side-text">
+              Compare what happens if you go full college, go alt-path, or go
+              straight to work.
+            </p>
 
-          <div style={footer}>
-            © {new Date().getFullYear()} ihatecollege.com — No brochure fluff.
+            <div className="pill-grid">
+              <a href="/trade-schools" className="pill">
+                <span className="pill-title">Trades & apprenticeships</span>
+                <span className="pill-sub">Hands-on, paid training</span>
+              </a>
+              <a href="/alternatives" className="pill">
+                <span className="pill-title">Tech & bootcamps</span>
+                <span className="pill-sub">Certs, cloud, cyber, UX</span>
+              </a>
+              <a href="/civil-service" className="pill">
+                <span className="pill-title">Gov & civil service</span>
+                <span className="pill-sub">Pensions, stability, benefits</span>
+              </a>
+            </div>
+
+            <div className="hero-mini-links">
+              <a href="/cheat-sheets" className="mini-link">
+                Cheat sheets for picking a path →
+              </a>
+              <a href="/rank-your-school" className="mini-link">
+                Rank your school&apos;s real value →
+              </a>
+            </div>
           </div>
-        </main>
-      </div>
-    </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <header className="section-header">
+          <h2>Real people. Real results.</h2>
+          <p>Not brochure quotes — actual students who dodged the debt trap.</p>
+        </header>
+
+        <div className="card-grid">
+          <article className="card">
+            <p className="card-quote">
+              “Dropped out after year 2. Got Security+ and A+. Making $78k at 20.”
+            </p>
+            <p className="card-meta">– Jake, Boca Raton</p>
+            <div className="card-tag-row">
+              <span className="badge">Tech certs</span>
+              <span className="badge badge-soft">No degree</span>
+            </div>
+          </article>
+
+          <article className="card">
+            <p className="card-quote">
+              “Went HVAC instead of $80k loans. Cleared $95k with overtime last year.”
+            </p>
+            <p className="card-meta">– Marco, Miami</p>
+            <div className="card-tag-row">
+              <span className="badge">Skilled trades</span>
+              <span className="badge badge-soft">Paid training</span>
+            </div>
+          </article>
+
+          <article className="card">
+            <p className="card-quote">
+              “Cloud certs took 5 months. Now making more than my mom who went to college.”
+            </p>
+            <p className="card-meta">– Rachel, Orlando</p>
+            <div className="card-tag-row">
+              <span className="badge">Cloud & cyber</span>
+              <span className="badge badge-soft">Fast track</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section className="section section-split">
+        <div className="section-block">
+          <h2>Tools that slap you with the truth</h2>
+          <p>
+            Run your major, school, and loan amounts through the calculators
+            before you sign. See how long you&apos;ll be paying, and what your
+            other options could earn.
+          </p>
+
+          <div className="link-card-grid">
+            <a href="/debt-calculator" className="link-card">
+              <h3>Debt calculator</h3>
+              <p>Monthly payment, total interest, and years of your life.</p>
+              <span className="mini-link">Open calculator →</span>
+            </a>
+            <a href="/rank-your-school" className="link-card">
+              <h3>Rank your school</h3>
+              <p>Compare cost, outcomes, debt, and politics vs other schools.</p>
+              <span className="mini-link">Rate my campus →</span>
+            </a>
+          </div>
+        </div>
+
+        <div className="section-block">
+          <h2>Signal vs noise</h2>
+          <p>
+            College isn&apos;t “good” or “bad.” It&apos;s math. For some majors
+            it&apos;s worth it. For others it&apos;s a 6-figure donation with no
+            refund. We help you separate flexing on Instagram from actual ROI.
+          </p>
+
+          <ul className="checklist">
+            <li>What you actually keep after rent, taxes, and loans</li>
+            <li>Which majors are basically debt traps</li>
+            <li>How trades, tech certs, and gov jobs stack up</li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="section section-cta">
+        <div className="section-cta-inner">
+          <h2>Before you sign the loans… run the numbers.</h2>
+          <p>
+            Take 10 minutes now so you&apos;re not stuck 10 years from now
+            paying for a campus you don&apos;t even live on anymore.
+          </p>
+          <div className="hero-actions hero-actions-center">
+            <a href="/alternatives" className="btn btn-primary">
+              Show me real alternatives
+            </a>
+            <a href="/contact" className="btn btn-ghost">
+              Got a story? Send it in →
+            </a>
+          </div>
+        </div>
+      </section>
+    </Layout>
   );
-              }
+                }
