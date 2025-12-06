@@ -1,6 +1,7 @@
 /* styles/globals.css */
 
-/* ---- Base ---- */
+/* ---------- BASE ---------- */
+
 html,
 body {
   padding: 0;
@@ -25,17 +26,17 @@ a {
 .page-main {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 90px 16px 40px; /* space for sticky header */
+  padding: 96px 16px 40px; /* room for sticky header */
 }
 
-/* ---- NAVBAR ---- */
+/* ---------- HEADER / NAV ---------- */
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: 1000;
   width: 100%;
-  background: rgba(3, 7, 18, 0.92);
+  background: rgba(3, 7, 18, 0.94);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(148, 163, 184, 0.25);
 }
@@ -47,11 +48,14 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 20px;
 }
 
-/* Logo */
+/* LOGO */
 .site-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-weight: 800;
   font-size: 1.1rem;
   letter-spacing: 0.12em;
@@ -59,11 +63,20 @@ a {
   white-space: nowrap;
 }
 
-.site-logo span {
-  color: #38bdf8; /* .COM in light blue */
+.logo-main {
+  color: #f9fafb;
 }
 
-/* Links row (desktop) */
+.logo-tag {
+  padding: 2px 8px;
+  border-radius: 9999px;
+  border: 1px solid #38bdf8;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: #38bdf8;
+}
+
+/* NAV LINKS */
 .site-nav {
   display: flex;
   flex-wrap: wrap;
@@ -89,14 +102,15 @@ a {
   height: 2px;
   width: 0;
   background: #facc15;
-  transition: width 0.18s ease-out;
+  transition: width 0.16s ease-out;
 }
 
 .site-nav a:hover::after {
   width: 100%;
 }
 
-/* ---- MOBILE ---- */
+/* ---------- MOBILE ---------- */
+
 @media (max-width: 768px) {
   .site-header-inner {
     flex-direction: column;
@@ -111,10 +125,10 @@ a {
   .site-nav {
     width: 100%;
     justify-content: space-between;
-    flex-wrap: wrap;
+    row-gap: 8px;
   }
 
   .page-main {
-    padding-top: 110px; /* little more room on small screens */
+    padding-top: 112px; /* a bit more room under sticky header */
   }
 }
