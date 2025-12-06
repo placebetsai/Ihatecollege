@@ -1,3 +1,4 @@
+// pages/liberal-vs-conservative.js
 import Head from "next/head";
 
 const liberalColleges = [
@@ -33,18 +34,18 @@ export default function LiberalVsConservativePage() {
         <h1 className="section-title">Liberal vs Conservative Colleges</h1>
         <p className="section-sub">
           Some campuses lean hard left. Others lean right. Most are somewhere in
-          the messy middle. This page is a vibe-check starting point, not a
-          perfect scientific ranking.
+          the messy middle. This is a reputation-based vibe check, not a perfect
+          scientific ranking.
         </p>
       </section>
 
-      {/* Two-column list */}
+      {/* Two lists */}
       <section
         className="section"
         style={{
           display: "grid",
           gap: "2rem",
-          gridTemplateColumns: "minmax(0,1fr)",
+          gridTemplateColumns: "minmax(0, 1fr)",
         }}
       >
         {/* Liberal list */}
@@ -57,7 +58,7 @@ export default function LiberalVsConservativePage() {
             border: "1px solid rgba(255,255,255,0.08)",
           }}
         >
-          <h2 style={{ fontSize: "1.3rem", marginBottom: "0.75rem" }}>
+          <h2 style={{ fontSize: "1.25rem", marginBottom: "0.75rem" }}>
             More liberal-leaning campuses
           </h2>
           <p style={{ opacity: 0.8, fontSize: "0.95rem", marginBottom: "1rem" }}>
@@ -69,7 +70,7 @@ export default function LiberalVsConservativePage() {
               <li
                 key={name}
                 style={{
-                  padding: "0.35rem 0.6rem",
+                  padding: "0.4rem 0.7rem",
                   marginBottom: "0.4rem",
                   borderRadius: "999px",
                   background: "rgba(255,255,255,0.04)",
@@ -92,19 +93,19 @@ export default function LiberalVsConservativePage() {
             border: "1px solid rgba(255,255,255,0.08)",
           }}
         >
-          <h2 style={{ fontSize: "1.3rem", marginBottom: "0.75rem" }}>
+          <h2 style={{ fontSize: "1.25rem", marginBottom: "0.75rem" }}>
             More conservative-leaning campuses
           </h2>
           <p style={{ opacity: 0.8, fontSize: "0.95rem", marginBottom: "1rem" }}>
-            More religious / traditional vibes, stricter codes of conduct,
-            strong ROTC or business culture, more openly right-leaning speakers.
+            More religious/traditional, stricter codes of conduct, strong ROTC
+            or business culture, more openly right-leaning speakers.
           </p>
           <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
             {conservativeColleges.map((name) => (
               <li
                 key={name}
                 style={{
-                  padding: "0.35rem 0.6rem",
+                  padding: "0.4rem 0.7rem",
                   marginBottom: "0.4rem",
                   borderRadius: "999px",
                   background: "rgba(255,255,255,0.04)",
@@ -118,26 +119,26 @@ export default function LiberalVsConservativePage() {
         </div>
       </section>
 
-      {/* Disclaimer + future crowd rankings */}
+      {/* Disclaimer / future crowd input */}
       <section className="section" style={{ maxWidth: 780 }}>
         <h2 style={{ fontSize: "1.1rem", marginBottom: "0.75rem" }}>
-          How to use this (and don&apos;t sue us)
+          How to use this (and don&apos;t freak out)
         </h2>
         <ul style={{ paddingLeft: "1.1rem", fontSize: "0.95rem", opacity: 0.9 }}>
           <li style={{ marginBottom: "0.4rem" }}>
-            This is a rough vibe list based on public reputation, not official
-            ratings.
+            Reputation only. Inside every “liberal” school you&apos;ll find
+            conservatives and vice versa.
           </li>
           <li style={{ marginBottom: "0.4rem" }}>
-            Inside every &quot;liberal&quot; school you can still find
-            conservatives, and vice versa.
+            Use this as a starting point, then search news, student paper, and
+            Reddit for receipts.
           </li>
           <li style={{ marginBottom: "0.4rem" }}>
-            Future feature: students will be able to vote on each campus&apos;s
-            political climate 1–10 and leave anonymous notes.
+            Future feature: anonymous student votes on how liberal/conservative
+            each campus actually feels (1–10 scale).
           </li>
         </ul>
       </section>
     </>
   );
-                  }
+                                 }
