@@ -1,50 +1,11 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-
-const navLinks = [
-  { href: '/', label: 'Home' },
-  // NOTE: capital A to match Alternatives.js on disk
-  { href: '/Alternatives', label: 'Alternatives' },
-  { href: '/debt-calculator', label: 'Debt Calculator' },
-  { href: '/cheat-sheets', label: 'Cheat Sheets' },
-  { href: '/rank-your-school', label: 'Rank Your School' },
-  { href: '/contact', label: 'Contact' },
-];
+// components/Layout.js
+import Navbar from "./Navbar";
 
 export default function Layout({ children }) {
-  const router = useRouter();
-
   return (
-    <div className="site-root">
-      <header className="site-header">
-        <div className="site-header-inner">
-          <Link href="/" className="logo">
-            <span className="logo-main">IHATECOLLEGE</span>
-            <span className="logo-dot">.COM</span>
-          </Link>
-
-          <nav className="main-nav">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={
-                  'nav-link ' +
-                  (router.pathname === link.href ? 'nav-link-active' : '')
-                }
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      </header>
-
-      <main className="site-main">{children}</main>
-
-      <footer className="site-footer">
-        <p>© {new Date().getFullYear()} ihatecollege.com — No brochure fluff.</p>
-      </footer>
+    <div className="app-shell">
+      <Navbar />
+      <main className="page-main">{children}</main>
     </div>
   );
 }
