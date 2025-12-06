@@ -1,144 +1,102 @@
 // pages/liberal-vs-conservative.js
-import Head from "next/head";
+import Layout from "../components/Layout";
 
-const liberalColleges = [
+const liberalExamples = [
   "UC Berkeley",
   "NYU",
   "Brown University",
   "Wesleyan University",
   "Oberlin College",
-  "University of Vermont",
-  "Smith / Wellesley / Barnard",
 ];
 
-const conservativeColleges = [
-  "Hillsdale College",
+const conservativeExamples = [
   "Liberty University",
   "Brigham Young University",
   "Texas A&M",
-  "College of the Ozarks",
-  "Grove City College",
-  "Patrick Henry College",
+  "Hillsdale College",
+  "Cedarville University",
 ];
 
 export default function LiberalVsConservativePage() {
   return (
-    <>
-      <Head>
-        <title>Liberal vs Conservative Colleges | IHATECOLLEGE.COM</title>
-      </Head>
-
-      {/* Intro */}
-      <section className="section">
-        <p className="eyebrow">Campus politics</p>
-        <h1 className="section-title">Liberal vs Conservative Colleges</h1>
-        <p className="section-sub">
-          Some campuses lean hard left. Others lean right. Most are somewhere in
-          the messy middle. This is a reputation-based vibe check, not a perfect
-          scientific ranking.
-        </p>
-      </section>
-
-      {/* Two lists */}
-      <section
-        className="section"
-        style={{
-          display: "grid",
-          gap: "2rem",
-          gridTemplateColumns: "minmax(0, 1fr)",
-        }}
-      >
-        {/* Liberal list */}
-        <div
-          style={{
-            background:
-              "radial-gradient(circle at top left, rgba(255,255,255,0.06), transparent 60%)",
-            borderRadius: "18px",
-            padding: "24px 20px",
-            border: "1px solid rgba(255,255,255,0.08)",
-          }}
-        >
-          <h2 style={{ fontSize: "1.25rem", marginBottom: "0.75rem" }}>
-            More liberal-leaning campuses
-          </h2>
-          <p style={{ opacity: 0.8, fontSize: "0.95rem", marginBottom: "1rem" }}>
-            Heavy activist culture, progressive politics, protests, speakers
-            getting shouted down, etc.
+    <Layout title="Liberal vs Conservative Colleges | IHATECOLLEGE">
+      <main className="page-main">
+        <section className="page-section">
+          <h1 className="page-title">Liberal vs Conservative Colleges</h1>
+          <p className="page-intro">
+            Before you sign away four years of your life, know what kind of bubble
+            you’re walking into. Some campuses are super progressive, some lean
+            hard conservative, and most pretend they’re “neutral” while they’re not.
           </p>
-          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-            {liberalColleges.map((name) => (
-              <li
-                key={name}
-                style={{
-                  padding: "0.4rem 0.7rem",
-                  marginBottom: "0.4rem",
-                  borderRadius: "999px",
-                  background: "rgba(255,255,255,0.04)",
-                  fontSize: "0.95rem",
-                }}
-              >
-                {name}
-              </li>
-            ))}
-          </ul>
-        </div>
 
-        {/* Conservative list */}
-        <div
-          style={{
-            background:
-              "radial-gradient(circle at top left, rgba(255,255,255,0.06), transparent 60%)",
-            borderRadius: "18px",
-            padding: "24px 20px",
-            border: "1px solid rgba(255,255,255,0.08)",
-          }}
-        >
-          <h2 style={{ fontSize: "1.25rem", marginBottom: "0.75rem" }}>
-            More conservative-leaning campuses
-          </h2>
-          <p style={{ opacity: 0.8, fontSize: "0.95rem", marginBottom: "1rem" }}>
-            More religious/traditional, stricter codes of conduct, strong ROTC
-            or business culture, more openly right-leaning speakers.
-          </p>
-          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-            {conservativeColleges.map((name) => (
-              <li
-                key={name}
-                style={{
-                  padding: "0.4rem 0.7rem",
-                  marginBottom: "0.4rem",
-                  borderRadius: "999px",
-                  background: "rgba(255,255,255,0.04)",
-                  fontSize: "0.95rem",
-                }}
-              >
-                {name}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+          <div className="page-grid">
+            <div className="info-card">
+              <h2 className="section-title">What makes a campus liberal?</h2>
+              <ul className="info-list">
+                <li>Heavy focus on activism and social-justice causes</li>
+                <li>Most profs lean left; conservative views can feel outnumbered</li>
+                <li>Very open on LGBTQ+, gender, and identity topics</li>
+                <li>Speakers from the right sometimes protested or disinvited</li>
+              </ul>
+              <p className="card-subtitle">Examples often rated as liberal:</p>
+              <ul className="tag-list">
+                {liberalExamples.map((name) => (
+                  <li key={name} className="tag-pill">
+                    {name}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-      {/* Disclaimer / future crowd input */}
-      <section className="section" style={{ maxWidth: 780 }}>
-        <h2 style={{ fontSize: "1.1rem", marginBottom: "0.75rem" }}>
-          How to use this (and don&apos;t freak out)
-        </h2>
-        <ul style={{ paddingLeft: "1.1rem", fontSize: "0.95rem", opacity: 0.9 }}>
-          <li style={{ marginBottom: "0.4rem" }}>
-            Reputation only. Inside every “liberal” school you&apos;ll find
-            conservatives and vice versa.
-          </li>
-          <li style={{ marginBottom: "0.4rem" }}>
-            Use this as a starting point, then search news, student paper, and
-            Reddit for receipts.
-          </li>
-          <li style={{ marginBottom: "0.4rem" }}>
-            Future feature: anonymous student votes on how liberal/conservative
-            each campus actually feels (1–10 scale).
-          </li>
-        </ul>
-      </section>
-    </>
+            <div className="info-card">
+              <h2 className="section-title">What makes a campus conservative?</h2>
+              <ul className="info-list">
+                <li>Religious or “traditional values” baked into campus rules</li>
+                <li>More support for Greek life, ROTC, business, and engineering</li>
+                <li>Speech codes sometimes aimed at “protecting values”</li>
+                <li>Social scene can be rough if you’re left-leaning or non-religious</li>
+              </ul>
+              <p className="card-subtitle">Examples often rated as conservative:</p>
+              <ul className="tag-list">
+                {conservativeExamples.map((name) => (
+                  <li key={name} className="tag-pill">
+                    {name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <hr className="section-divider" />
+
+          <section style={{ marginTop: "2rem" }}>
+            <h2 className="section-title">How to check the vibe before you go</h2>
+            <ul className="info-list">
+              <li>
+                <strong>Google “{`[school name]` + " protests / controversies"}</strong>{" "}
+                – see what students are actually fighting about.
+              </li>
+              <li>
+                <strong>Search TikTok & Reddit</strong> for the school name + “vibe”,
+                “politics”, “campus culture”.
+              </li>
+              <li>
+                <strong>Check student newspapers</strong> and what clubs get budget:
+                College Dems vs College Republicans vs identity clubs, etc.
+              </li>
+              <li>
+                <strong>Look at speech-code rankings</strong> (FIRE.org has reports)
+                to see if the school nukes unpopular opinions.
+              </li>
+            </ul>
+            <p className="page-intro" style={{ marginTop: "0.75rem" }}>
+              Your politics don’t have to match the campus perfectly, but if you’re
+              going to be the only one in the room who thinks like you, you should
+              at least know that before you sign the loan.
+            </p>
+          </section>
+        </section>
+      </main>
+    </Layout>
   );
 }
