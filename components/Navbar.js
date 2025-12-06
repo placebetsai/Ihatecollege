@@ -1,79 +1,48 @@
+// components/Navbar.js
+import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
 
-const LINKS = [
+const links = [
   { href: "/", label: "Home" },
-  { href: "/Alternatives", label: "Alternatives" },            // matches Alternatives.js
-  { href: "/debt-calculator", label: "Debt Calculator" },      // debt-calculator.js
-  { href: "/cheat-sheets", label: "Cheat Sheets" },            // cheat-sheets.js
-  { href: "/rank-your-school", label: "Rank Your School" },    // rank-your-school.js
-  { href: "/rank", label: "Liberal vs Conservative" },         // rank.js
-  { href: "/trade-schools", label: "Trade Schools" },          // trade-schools.js (we create below)
-  { href: "/civil-service", label: "Civil Service" },          // civil-service.js (we create below)
-  { href: "/contact", label: "Contact" },                      // contact.js
+  { href: "/alternatives", label: "Alternatives" },
+  { href: "/debt-calculator", label: "Debt Calculator" },
+  { href: "/cheat-sheets", label: "Cheat Sheets" },
+  { href: "/rank-your-school", label: "Rank Your School" },
+  { href: "/liberal-vs-conservative", label: "Liberal vs Conservative" },
+  { href: "/trade-schools", label: "Trade Schools" },
+  { href: "/civil-service", label: "Civil Service" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
   const router = useRouter();
-  const [open, setOpen] = useState(false);
-
-  const isActive = (href) => {
-    if (href === "/") return router.pathname === "/";
-    return router.pathname === href;
-  };
 
   return (
-    <header className="site-header">
+    <nav className="nav-shell">
       <div className="nav-inner">
-        <div className="logo">
-          <span className="logo-main">IHATECOLLEGE</span>
-          <span className="logo-tag">.COM</span>
+        <div className="nav-logo">
+          <span className="nav-logo-main">IHATECOLLEGE</span>
+          <span className="nav-logo-pill">.COM</span>
         </div>
 
-        {/* Desktop links */}
-        <nav className="nav-links nav-links-desktop">
-          {LINKS.map((link) => (
-            <Link key={link.href} href={link.href} legacyBehavior>
-              <a
-                className={`nav-link ${
-                  isActive(link.href) ? "nav-link-active" : ""
-                }`}
-              >
-                {link.label}
-              </a>
-            </Link>
-          ))}
-        </nav>
+        {/* horizontal scroll on mobile */}
+        <div className="nav-links">
+          {links.map((link) => {
+            const isActive =
+              router.pathname === link.href ||
+              (link.href !== "/" && router.pathname.startsWith(link.href));
 
-        {/* Mobile hamburger */}
-        <button
-          className="nav-toggle"
-          aria-label="Toggle navigation"
-          onClick={() => setOpen((prev) => !prev)}
-        >
-          <span className="nav-toggle-bar" />
-          <span className="nav-toggle-bar" />
-        </button>
+            return (
+              <Link key={link.href} href={link.href} className="nav-link-wrap">
+                <span className={`nav-link ${isActive ? "nav-link-active" : ""}`}>
+                  {link.label}
+                </span>
+              </Link>
+            );
+          })}
+        </div>
       </div>
-
-      {/* Mobile dropdown */}
-      {open && (
-        <nav className="nav-links-mobile">
-          {LINKS.map((link) => (
-            <Link key={link.href} href={link.href} legacyBehavior>
-              <a
-                className={`nav-link-mobile ${
-                  isActive(link.href) ? "nav-link-mobile-active" : ""
-                }`}
-                onClick={() => setOpen(false)}
-              >
-                {link.label}
-              </a>
-            </Link>
-          ))}
-        </nav>
-      )}
-    </header>
+    </nav>
   );
 }
