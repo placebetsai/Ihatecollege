@@ -2,48 +2,53 @@
 import React from "react";
 import Layout from "../components/Layout";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <Layout title="Home">
+    <Layout title="College is optional. Debt isn't.">
       <main className="home-page">
         {/* HERO */}
         <section className="hero-section">
           <div className="hero-card">
-            <p className="hero-kicker">You don&apos;t have to sign your life away</p>
-            <h1 className="hero-title">
-              College is <span className="hero-highlight">optional</span>. Debt isn&apos;t.
-            </h1>
-            <p className="hero-body">
-              Before you sign away $50k–$150k, compare trades, tech careers,
-              apprenticeships, bootcamps, and real alternatives. Run the numbers.
-              Hear from real people. Then decide.
+            <p className="hero-kicker">
+              YOU DON&apos;T HAVE TO SIGN YOUR LIFE AWAY
             </p>
 
-            <div className="hero-actions">
+            <h1 className="hero-title">
+              College is <span className="hero-highlight">optional</span>. Debt
+              isn&apos;t.
+            </h1>
+
+            <p className="hero-body">
+              Before you sign away $50k–$150k, compare trades, tech careers,
+              apprenticeships, bootcamps, and real alternatives. Run the
+              numbers. Hear from real people. Then decide.
+            </p>
+
+            <div className="hero-buttons">
               <a href="/alternatives" className="btn btn-primary">
                 Explore alternatives
               </a>
-              <a href="/debt-calculator" className="btn btn-secondary">
+              <a href="/debt-calculator" className="btn btn-outline">
                 See what your degree really costs
               </a>
             </div>
 
-            <div className="hero-metrics">
+            <div className="metrics-grid">
               <div className="metric-card">
-                <p className="metric-label">Avg 4-year total cost</p>
-                <p className="metric-value">$100k+ with living costs</p>
+                <div className="metric-label">Avg 4-year total cost</div>
+                <div className="metric-value">$100k+ with living costs</div>
               </div>
               <div className="metric-card">
-                <p className="metric-label">Time in class</p>
-                <p className="metric-value">4+ years</p>
+                <div className="metric-label">Time in class</div>
+                <div className="metric-value">4+ years</div>
               </div>
               <div className="metric-card">
-                <p className="metric-label">Typical trade/cert path</p>
-                <p className="metric-value">6–24 months</p>
+                <div className="metric-label">Typical trade/cert path</div>
+                <div className="metric-value">6–24 months</div>
               </div>
               <div className="metric-card">
-                <p className="metric-label">Working while you train?</p>
-                <p className="metric-value">Often yes (apprenticeships)</p>
+                <div className="metric-label">Working while you train?</div>
+                <div className="metric-value">Often yes (apprenticeships)</div>
               </div>
             </div>
           </div>
@@ -55,9 +60,9 @@ export default function Home() {
             High-income paths that DON&apos;T require a degree
           </h2>
 
-          <div className="path-grid">
+          <div className="paths-grid">
             <article className="path-card">
-              <h3 className="path-title">Tech &amp; Cyber</h3>
+              <h3>Tech &amp; Cyber</h3>
               <p className="path-subtitle">
                 Cloud, cybersecurity, IT support, UX/UI.
               </p>
@@ -66,39 +71,33 @@ export default function Home() {
                 <li>CompTIA A+ / Network+ / Security+</li>
                 <li>Cloud certs (AWS, Azure, GCP)</li>
               </ul>
-              <a href="/cheat-sheets" className="path-link">
-                Tech &amp; cyber cheat sheet →
-              </a>
+              <p className="path-link">Tech &amp; cyber cheat sheet →</p>
             </article>
 
             <article className="path-card">
-              <h3 className="path-title">Skilled Trades</h3>
+              <h3>Skilled Trades</h3>
               <p className="path-subtitle">
-                HVAC, electrician, welding, CDL.
+                HVAC, electrician, welding, CDL trucking.
               </p>
               <ul className="path-list">
-                <li>Paid apprenticeships + overtime.</li>
-                <li>Hands-on work, recession-resistant.</li>
-                <li>Welding, electrical, CDL programs.</li>
+                <li>Paid apprenticeships instead of paying tuition.</li>
+                <li>Union benefits, OT, and strong job security.</li>
+                <li>Ability to start your own shop later.</li>
               </ul>
-              <a href="/trade-schools" className="path-link">
-                Trade-school breakdown →
-              </a>
+              <p className="path-link">Trade-school breakdown →</p>
             </article>
 
             <article className="path-card">
-              <h3 className="path-title">No-Degree High Income</h3>
+              <h3>No-Degree High Income</h3>
               <p className="path-subtitle">
-                Sales, real estate, notary, adjusting.
+                Sales, real estate, notary, adjusting, etc.
               </p>
               <ul className="path-list">
                 <li>Skill-based income, not campus-based.</li>
-                <li>Real-estate &amp; mortgage licensing</li>
-                <li>Insurance &amp; public adjusting</li>
+                <li>Real-estate &amp; mortgage licensing.</li>
+                <li>Insurance &amp; public adjusting, notary work.</li>
               </ul>
-              <a href="/civil-service" className="path-link">
-                License-based career paths →
-              </a>
+              <p className="path-link">License-based career paths →</p>
             </article>
           </div>
         </section>
@@ -106,6 +105,7 @@ export default function Home() {
         {/* TESTIMONIALS */}
         <section className="results-section">
           <h2 className="section-title">Real people. Real results.</h2>
+
           <div className="quote-list">
             <figure className="quote-card">
               <blockquote>
@@ -113,22 +113,26 @@ export default function Home() {
               </blockquote>
               <figcaption>— Jake, Boca Raton</figcaption>
             </figure>
+
             <figure className="quote-card">
               <blockquote>
-                “HVAC instead of $80k loans. Made $95k with overtime last year.”
+                “HVAC instead of $80k loans. Made $95k with overtime last
+                year.”
               </blockquote>
               <figcaption>— Marco, Miami</figcaption>
             </figure>
+
             <figure className="quote-card">
               <blockquote>
-                “Cloud certs took 5 months. Now making more than my mom who went to college.”
+                “Cloud certs took 5 months. Now making more than my mom who
+                went to college.”
               </blockquote>
               <figcaption>— Rachel, Orlando</figcaption>
             </figure>
           </div>
         </section>
 
-        {/* CTA PATH BUTTONS */}
+        {/* CHOOSE PATH CTA */}
         <section className="choose-section">
           <h2 className="section-title">Choose your path</h2>
           <p className="section-body">
@@ -140,7 +144,7 @@ export default function Home() {
             <a href="/trade-schools" className="btn btn-pill">
               Trades path
             </a>
-            <a href="/cheat-sheets" className="btn btn-pill">
+            <a href="/alternatives" className="btn btn-pill">
               Tech &amp; certs
             </a>
             <a href="/civil-service" className="btn btn-pill">
@@ -149,6 +153,20 @@ export default function Home() {
           </div>
         </section>
       </main>
+
+      {/* 🔥 MOBILE GAP FIX — ONLY AFFECTS SPACING, NOT DESIGN */}
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          .home-page {
+            padding-top: 4.5rem;
+          }
+
+          /* pull hero up so there isn't a giant black gap */
+          .hero-section {
+            margin-top: 0.5rem !important;
+          }
+        }
+      `}</style>
     </Layout>
   );
           }
