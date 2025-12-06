@@ -1,9 +1,8 @@
 // components/Navbar.js
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
-const links = [
+const navLinks = [
   { href: "/", label: "Home" },
   { href: "/alternatives", label: "Alternatives" },
   { href: "/debt-calculator", label: "Debt Calculator" },
@@ -16,65 +15,58 @@ const links = [
 ];
 
 export default function Navbar() {
-  const router = useRouter();
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  // close mobile menu on route change
-  useEffect(() => {
-    setOpen(false);
-  }, [router.pathname]);
+  const toggle = () => setIsOpen((prev) => !prev);
+  const close = () => setIsOpen(false);
 
   return (
     <header className="site-header">
       <div className="nav-inner">
-        <Link href="/" className="logo-wrap">
-          <span className="logo-text">IHATECOLLEGE</span>
+        <Link href="/" className="site-logo" onClick={close}>
+          <span className="logo-main">IHATECOLLEGE</span>
           <span className="logo-pill">.COM</span>
         </Link>
 
         {/* Desktop nav */}
-        <nav className="nav-links-desktop">
-          {links.map((l) => (
+        <nav className="nav-links desktop-nav">
+          {navLinks.map((link) => (
             <Link
-              key={l.href}
-              href={l.href}
-              className={
-                "nav-link" +
-                (router.pathname === l.href ? " nav-link-active" : "")
-              }
+              key={link.href}
+              href={link.href}
+              className="nav-link"
             >
-              {l.label}
+              {link.label}
             </Link>
           ))}
         </nav>
 
-        {/* Mobile hamburger */}
+        {/* Hamburger button (mobile) */}
         <button
-          className="nav-toggle"
-          onClick={() => setOpen((v) => !v)}
+          type="button"
+          className={`nav-toggle ${isOpen ? "open" : ""}`}
+          onClick={toggle}
           aria-label="Toggle navigation"
         >
-          <span className={open ? "bar bar1 open" : "bar bar1"} />
-          <span className={open ? "bar bar2 open" : "bar bar2"} />
-          <span className={open ? "bar bar3 open" : "bar bar3"} />
+          <span />
+          <span />
+          <span />
         </button>
       </div>
 
-      {/* Mobile slide-out */}
-      <nav className={open ? "nav-links-mobile open" : "nav-links-mobile"}>
-        {links.map((l) => (
+      {/* Mobile menu */}
+      <nav className={`mobile-nav ${isOpen ? "open" : ""}`}>
+        {navLinks.map((link) => (
           <Link
-            key={l.href + "-m"}
-            href={l.href}
-            className={
-              "nav-link-mobile" +
-              (router.pathname === l.href ? " nav-link-mobile-active" : "")
-            }
+            key={link.href}
+            href={link.href}
+            className="mobile-nav-link"
+            onClick={close}
           >
-            {l.label}
+            {link.label}
           </Link>
         ))}
       </nav>
     </header>
   );
-              }
+}
