@@ -1,7 +1,5 @@
-// components/Navbar.js
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 const links = [
   { href: "/", label: "Home" },
@@ -16,80 +14,27 @@ const links = [
 ];
 
 export default function Navbar() {
-  const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Close mobile menu on route change
-  useEffect(() => {
-    setIsOpen(false);
-  }, [router.pathname]);
+  const [open, setOpen] = useState(false);
 
   return (
-    <>
-      <header className={`site-header ${scrolled ? "site-header--scrolled" : ""}`}>
-        <div className="nav-inner">
-          <Link href="/" className="brand">
-            <span className="brand-main">IHATECOLLEGE</span>
-            <span className="brand-dot">.com</span>
-          </Link>
+    <header className="navbar">
+      <div className="nav-inner">
+        <Link href="/" className="nav-logo">
+          IHATECOLLEGE <span className="dotcom">.COM</span>
+        </Link>
 
-          <button
-            className="nav-toggle"
-            aria-label="Toggle navigation"
-            aria-expanded={isOpen}
-            onClick={() => setIsOpen((open) => !open)}
-          >
-            <span className="nav-toggle-bar" />
-            <span className="nav-toggle-bar" />
-            <span className="nav-toggle-bar" />
-          </button>
+        <button className="hamburger" onClick={() => setOpen(!open)}>
+          <span /><span /><span />
+        </button>
 
-          <nav className="nav-desktop">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={
-                  router.pathname === link.href
-                    ? "nav-link nav-link--active"
-                    : "nav-link"
-                }
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      </header>
-
-      {/* Mobile menu overlay */}
-      <div className={`nav-mobile ${isOpen ? "nav-mobile--open" : ""}`}>
-        <div className="nav-mobile-inner">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={
-                router.pathname === link.href
-                  ? "nav-mobile-link nav-mobile-link--active"
-                  : "nav-mobile-link"
-              }
-            >
-              {link.label}
+        <nav className={`nav-links ${open ? "open" : ""}`}>
+          {links.map((l) => (
+            <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className="nav-item">
+              {l.label}
             </Link>
           ))}
-        </div>
+        </nav>
       </div>
-    </>
+    </header>
   );
 }
