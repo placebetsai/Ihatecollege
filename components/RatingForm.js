@@ -1,33 +1,156 @@
+// components/RatingForm.js
 import { useState } from "react";
 
 export default function RatingForm() {
+  const [school, setSchool] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [debtScore, setDebtScore] = useState(5);
+  const [mentalHealthScore, setMentalHealthScore] = useState(5);
+  const [comment, setComment] = useState("");
   const [status, setStatus] = useState("");
 
-  async function submit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const form = new FormData(e.target);
-    const data = Object.fromEntries(form.entries());
+    setStatus("Sending…");
 
-    const res = await fetch("/api/submit-rating", {
-      method: "POST",
-      body: JSON.stringify(data)
-    });
+    try {
+      const res = await fetch("/api/submit-rating", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          school,
+          city,
+          state,
+          debtScore,
+          mentalHealthScore,
+          comment,
+        }),
+      });
 
-    if (res.ok) setStatus("Saved!");
-  }
+      if (!res.ok) throw new Error("Request failed");
+
+      setStatus("✅ Thanks. Your experience is logged.");
+      setSchool("");
+      setCity("");
+      setState("");
+      setDebtScore(5);
+      setMentalHealthScore(5);
+      setComment("");
+    } catch (err) {
+      setStatus("❌ Something broke. Try again in a bit.");
+    }
+  };
 
   return (
-    <div className="card mt-8">
-      <h2 className="text-xl font-bold mb-2">Rank My College</h2>
+    <form
+      onSubmit={handleSubmit}
+      style={{
+        marginTop: "1rem",
+        display: "grid",
+        gap: "0.75rem",
+        maxWidth: 700,
+      }}
+    >
+      <p style={{ fontSize: "0.95rem", opacity: 0.9 }}>
+        Start simple: tell us where you went and how bad the{" "}
+        <strong>debt + mental health tradeoff</strong> really was.
+      </p>
 
-      <form onSubmit={submit} className="flex flex-col gap-3">
-        <input name="college" placeholder="College" className="p-2 bg-gray-900 rounded" required />
-        <input name="hateScore" type="number" min="1" max="10" placeholder="Hate Score" className="p-2 bg-gray-900 rounded" required />
-        <textarea name="rant" placeholder="Your rant..." className="p-2 bg-gray-900 rounded" />
-        <button className="bg-orange-500 text-black font-bold p-2 rounded">Submit</button>
-      </form>
+      <div className="form-row">
+        <label className="form-label">
+          School name
+          <input
+            className="form-input"
+            value={school}
+            onChange={(e) => setSchool(e.target.value)}
+            placeholder="Example: Generic State University"
+            required
+          />
+        </label>
+      </div>
 
-      {status && <p className="mt-2 text-green-400">{status}</p>}
-    </div>
+      <div
+        className="form-row"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "2fr 1fr",
+          gap: "0.75rem",
+        }}
+      >
+        <label className="form-label">
+          City
+          <input
+            className="form-input"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            placeholder="City"
+          />
+        </label>
+        <label className="form-label">
+          State
+          <input
+            className="form-input"
+            value={state}
+            onChange={(e) => setState(e.target.value)}
+            placeholder="FL, TX, CA…"
+          />
+        </label>
+      </div>
+
+      <div
+        className="form-row"
+        style={{ display: "grid", gap: "0.75rem" }}
+      >
+        <label className="form-label">
+          Debt pain (1 = chill, 10 = nightmare)
+          <input
+            type="range"
+            min="1"
+            max="10"
+            value={debtScore}
+            onChange={(e) => setDebtScore(Number(e.target.value))}
+          />
+          <span style={{ fontSize: "0.85rem" }}>
+            Current: {debtScore}/10
+          </span>
+        </label>
+
+        <label className="form-label">
+          Mental-health hit (1 = fine, 10 = meltdown)
+          <input
+            type="range"
+            min="1"
+            max="10"
+            value={mentalHealthScore}
+            onChange={(e) => setMentalHealthScore(Number(e.target.value))}
+          />
+          <span style={{ fontSize: "0.85rem" }}>
+            Current: {mentalHealthScore}/10
+          </span>
+        </label>
+      </div>
+
+      <label className="form-label">
+        What students should know (optional)
+        <textarea
+          className="form-input"
+          rows={4}
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          placeholder="Dorms? Professors? Admin? Any bait-and-switch?"
+        />
+      </label>
+
+      <button className="primary-btn" type="submit">
+        Submit your rank
+      </button>
+
+      {status && (
+        <p style={{ fontSize: "0.85rem", marginTop: "0.25rem" }}>
+          {status}
+        </p>
+      )}
+    </form>
   );
-    }
+        }
