@@ -1,30 +1,31 @@
-import Navbar from "../components/Navbar";
+import Layout from "../components/Layout";
 
 export default function TradeSchools() {
-  const links = [
-    { name: "Lincoln Tech", url: "https://www.lincolntech.edu/" },
-    { name: "Universal Technical Institute", url: "https://www.uti.edu/" },
-    { name: "Northeast Technical Institute", url: "https://www.ntinow.edu/" },
-    { name: "Miami Technical Institute", url: "https://www.mtiinstitute.com/" },
-  ];
-
   return (
-    <>
-      <Navbar />
-      <main className="page-main">
-        <h1>Top Trade Schools</h1>
-        <p>Skip the $80k student loans. These programs lead to real jobs fast.</p>
+    <Layout title="Trade Schools">
+      <h1>Trade Schools</h1>
 
-        <ul>
-          {links.map((t) => (
-            <li key={t.name}>
-              <a href={t.url} target="_blank" rel="noreferrer">
-                {t.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </main>
-    </>
+      <p>Fast. Affordable. Always in demand.</p>
+
+      <div className="card">
+        <div className="card-title">HVAC</div>
+        6–12 months, high overtime, job security.
+      </div>
+
+      <div className="card">
+        <div className="card-title">Welding</div>
+        3–6 months, travel jobs, very high pay.
+      </div>
+
+      <div className="card">
+        <div className="card-title">Electrician</div>
+        4-year apprenticeship, strong long-term career.
+      </div>
+
+      <div className="card">
+        <div className="card-title">CDL (Truck Driving)</div>
+        3 weeks school, $60k–$100k with experience.
+      </div>
+    </Layout>
   );
 }
