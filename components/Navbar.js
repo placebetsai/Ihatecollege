@@ -16,10 +16,10 @@ const links = [
 ];
 
 export default function Navbar() {
-  const router = useRouter();
   const [open, setOpen] = useState(false);
+  const router = useRouter();
 
-  // close mobile menu on route change
+  // Auto-close mobile menu when navigating
   useEffect(() => {
     setOpen(false);
   }, [router.pathname]);
@@ -32,46 +32,48 @@ export default function Navbar() {
           <span className="logo-pill">.COM</span>
         </Link>
 
-        {/* Desktop links */}
+        {/* Desktop Navigation */}
         <nav className="nav-links-desktop">
-          {links.map((l) => (
+          {links.map((link) => (
             <Link
-              key={l.href}
-              href={l.href}
+              key={link.href}
+              href={link.href}
               className={
-                "nav-link" +
-                (router.pathname === l.href ? " nav-link-active" : "")
+                router.pathname === link.href
+                  ? "nav-link nav-link-active"
+                  : "nav-link"
               }
             >
-              {l.label}
+              {link.label}
             </Link>
           ))}
         </nav>
 
-        {/* Mobile hamburger */}
+        {/* Mobile Hamburger */}
         <button
           className="nav-toggle"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle navigation"
+          aria-label="Toggle navigation menu"
+          onClick={() => setOpen(!open)}
         >
-          <span className={open ? "bar bar1 open" : "bar bar1"} />
-          <span className={open ? "bar bar2 open" : "bar bar2"} />
-          <span className={open ? "bar bar3 open" : "bar bar3"} />
+          <span className={open ? "bar bar1 open" : "bar bar1"}></span>
+          <span className={open ? "bar bar2 open" : "bar bar2"}></span>
+          <span className={open ? "bar bar3 open" : "bar bar3"}></span>
         </button>
       </div>
 
-      {/* Mobile slide-out */}
+      {/* MOBILE MENU (fixed version) */}
       <nav className={open ? "nav-links-mobile open" : "nav-links-mobile"}>
-        {links.map((l) => (
+        {links.map((link) => (
           <Link
-            key={l.href + "-m"}
-            href={l.href}
+            key={link.href + "-mobile"}
+            href={link.href}
             className={
-              "nav-link-mobile" +
-              (router.pathname === l.href ? " nav-link-mobile-active" : "")
+              router.pathname === link.href
+                ? "nav-link-mobile nav-link-mobile-active"
+                : "nav-link-mobile"
             }
           >
-            {l.label}
+            {link.label}
           </Link>
         ))}
       </nav>
