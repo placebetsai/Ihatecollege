@@ -462,3 +462,23 @@ label {
   margin-top: 0.5rem;
 }
     }
+/* --- MOBILE TOP-SPACING NUKE --- */
+@media (max-width: 767px) {
+  /* No random margin pushing content down */
+  main,
+  .layout-main,
+  .page-main {
+    margin-top: 0 !important;
+    padding-top: 4rem !important; /* just enough room for the fixed navbar */
+  }
+
+  /* First section on each page should sit right under the navbar */
+  main > section:first-of-type,
+  .layout-main > section:first-of-type,
+  .page-main > section:first-of-type,
+  .hero,
+  .hero-section {
+    margin-top: 0 !important;
+    padding-top: 0.5rem !important;
+  }
+}
