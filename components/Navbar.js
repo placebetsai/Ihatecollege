@@ -23,21 +23,28 @@ export default function Navbar() {
 
   return (
     <>
-      {/* INLINE STYLES (NO CSS FILE NEEDED) */}
       <style jsx>{`
         header {
           position: sticky;
           top: 0;
           z-index: 1000;
-          background: #040710;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          background: #020617;
+          border-bottom: 1px solid rgba(148, 163, 184, 0.3);
         }
 
         nav {
+          max-width: 1120px;
+          margin: 0 auto;
+          padding: 0.75rem 1.25rem;
           display: flex;
-          justify-content: space-between;
           align-items: center;
-          padding: 0.9rem 1rem;
+          justify-content: space-between;
+        }
+
+        .brand {
+          display: flex;
+          flex-direction: column;
+          gap: 0.15rem;
         }
 
         .logo {
@@ -45,17 +52,15 @@ export default function Navbar() {
           letter-spacing: 0.18em;
           font-size: 1rem;
           text-decoration: none;
-          color: white;
-          display: flex;
-          align-items: center;
-          gap: 0.4rem;
+          color: #f9fafb;
         }
 
         .dotcom {
-          font-size: 0.75rem;
-          padding: 2px 7px;
-          border-radius: 20px;
-          border: 1px solid rgba(255, 255, 255, 0.3);
+          font-size: 0.7rem;
+          padding: 2px 8px;
+          border-radius: 999px;
+          border: 1px solid rgba(148, 163, 184, 0.7);
+          color: #e5e7eb;
         }
 
         .links {
@@ -65,19 +70,26 @@ export default function Navbar() {
           margin-top: 0.8rem;
         }
 
-        .open {
+        .links.open {
           display: flex;
         }
 
-        .link {
+        .link,
+        .link:visited {
           text-decoration: none;
-          color: rgba(255, 255, 255, 0.9);
-          font-size: 1rem;
+          color: #e5e7eb;
+          font-size: 0.95rem;
+          font-weight: 500;
         }
 
-        .active {
-          color: #ffd24a;
+        .link:hover {
+          color: #facc15;
+        }
+
+        .link.active {
+          color: #facc15;
           text-decoration: underline;
+          text-underline-offset: 0.25rem;
         }
 
         .hamburger {
@@ -92,38 +104,47 @@ export default function Navbar() {
         .hamburger span {
           width: 24px;
           height: 2px;
-          background: white;
+          border-radius: 999px;
+          background: #f9fafb;
         }
 
         /* Desktop */
         @media (min-width: 768px) {
+          nav {
+            padding: 0.8rem 1.5rem;
+          }
+
           .hamburger {
             display: none;
           }
+
           .links {
-            display: flex !important;
+            display: flex;
             flex-direction: row;
-            margin-top: 0;
+            align-items: center;
             gap: 1.8rem;
+            margin-top: 0;
           }
         }
       `}</style>
 
       <header>
         <nav>
-          {/* LOGO */}
-          <Link href="/" className="logo">
-            IHATECOLLEGE <span className="dotcom">.COM</span>
-          </Link>
+          <div className="brand">
+            <Link href="/" className="logo">
+              IHATECOLLEGE
+            </Link>
+            <span className="dotcom">.COM</span>
+          </div>
 
-          {/* MOBILE MENU BUTTON */}
+          {/* Mobile hamburger */}
           <button className="hamburger" onClick={() => setOpen(!open)}>
             <span></span>
             <span></span>
             <span></span>
           </button>
 
-          {/* NAV LINKS */}
+          {/* Links */}
           <div className={`links ${open ? "open" : ""}`}>
             {links.map((item) => (
               <Link
