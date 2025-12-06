@@ -19,7 +19,6 @@ export default function Navbar() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
-  // close mobile menu on route change
   useEffect(() => {
     setOpen(false);
   }, [router.pathname]);
@@ -32,14 +31,14 @@ export default function Navbar() {
           <span className="logo-pill">.COM</span>
         </Link>
 
-        {/* Desktop nav */}
         <nav className="nav-links-desktop">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
               className={
-                "nav-link" + (router.pathname === l.href ? " nav-link-active" : "")
+                "nav-link" +
+                (router.pathname === l.href ? " nav-link-active" : "")
               }
             >
               {l.label}
@@ -47,10 +46,9 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Mobile hamburger */}
         <button
           className="nav-toggle"
-          onClick={() => setOpen((v) => !v)}
+          onClick={() => setOpen(!open)}
           aria-label="Toggle navigation"
         >
           <span className={open ? "bar bar1 open" : "bar bar1"} />
@@ -59,7 +57,7 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile slide-out */}
+      {/* Mobile menu */}
       <nav className={open ? "nav-links-mobile open" : "nav-links-mobile"}>
         {links.map((l) => (
           <Link
