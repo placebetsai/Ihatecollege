@@ -434,4 +434,31 @@ label {
   .quote-list {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+  /* --- Mobile spacing & typography tweaks --- */
+@media (max-width: 767px) {
+  /* Reduce big empty gap under the fixed navbar */
+  .hero {
+    margin-top: 0;
+  }
+
+  main,
+  .layout-main,
+  .page-main {
+    padding-top: 4.25rem;
+  }
+}
+
+/* Simple list styling for the Alternatives page steps */
+.steps-list {
+  margin: 1.25rem 0 0;
+  padding-left: 1.25rem;
+  list-style: decimal;
+  color: #e5e7eb;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.steps-list li + li {
+  margin-top: 0.5rem;
+}
     }
