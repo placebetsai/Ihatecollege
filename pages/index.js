@@ -1,8 +1,13 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
 
 export default function Home() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <main>
+    <>
+      {/* HEADER */}
       <header className="header">
         <a href="/" className="header-logo">IHATECOLLEGE.COM</a>
 
@@ -18,42 +23,48 @@ export default function Home() {
           <a href="/contact">Contact</a>
         </nav>
 
-        <button className="nav-toggle" id="mobileNavToggle">
+        <button className="nav-toggle" onClick={() => setOpen(!open)}>
           <div className="nav-toggle-circle"></div>
         </button>
       </header>
 
-      <nav className="nav-mobile" id="mobileNavMenu">
-        <a href="/">Home</a>
-        <a href="/alternatives">Alternatives</a>
-        <a href="/debt-calculator">Debt Calculator</a>
-        <a href="/cheat-sheets">Cheat Sheets</a>
-        <a href="/rank-your-school">Rank Your School</a>
-        <a href="/liberal-vs-conservative">Liberal vs Conservative</a>
-        <a href="/trade-schools">Trade Schools</a>
-        <a href="/civil-service">Civil Service</a>
-        <a href="/contact">Contact</a>
-      </nav>
+      {/* MOBILE NAV */}
+      {open && (
+        <nav className="nav-mobile">
+          <a href="/">Home</a>
+          <a href="/alternatives">Alternatives</a>
+          <a href="/debt-calculator">Debt Calculator</a>
+          <a href="/cheat-sheets">Cheat Sheets</a>
+          <a href="/rank-your-school">Rank Your School</a>
+          <a href="/liberal-vs-conservative">Liberal vs Conservative</a>
+          <a href="/trade-schools">Trade Schools</a>
+          <a href="/civil-service">Civil Service</a>
+          <a href="/contact">Contact</a>
+        </nav>
+      )}
 
-      <section className="hero-card">
-        <p className="hero-kicker">YOU DON'T HAVE TO SIGN YOUR LIFE AWAY</p>
+      {/* MAIN CONTENT */}
+      <main>
+        <section className="hero-card">
+          <p className="hero-kicker">YOU DON'T HAVE TO SIGN YOUR LIFE AWAY</p>
 
-        <h1 className="hero-title">
-          College is <span className="hero-highlight">optional.</span><br />
-          Debt isn't.
-        </h1>
+          <h1 className="hero-title">
+            College is <span className="hero-highlight">optional.</span><br />
+            Debt isn't.
+          </h1>
 
-        <p className="hero-body">
-          Before you sign away $50k–$150k, compare trades, tech careers, 
-          apprenticeships, bootcamps, and real alternatives. Run the numbers. 
-          Hear from real people. Then decide.
-        </p>
+          <p className="hero-body">
+            Before you sign away $50k–$150k, compare trades, tech careers, 
+            apprenticeships, bootcamps, and real alternatives. Run the numbers. 
+            Hear from real people. Then decide.
+          </p>
 
-        <div className="hero-actions">
-          <a className="btn btn-primary">Explore alternatives</a>
-          <a className="btn btn-outline">See what your degree really costs</a>
-        </div>
-      </section>
-    </main>
+          <div className="hero-actions">
+            <a className="btn btn-primary">Explore alternatives</a>
+            <a className="btn btn-outline">See what your degree really costs</a>
+          </div>
+        </section>
+      </main>
+    </>
   );
-    }
+        }
