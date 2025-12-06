@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const links = [
+const LINKS = [
   { href: "/", label: "Home" },
   { href: "/alternatives", label: "Alternatives" },
   { href: "/debt-calculator", label: "Debt Calculator" },
@@ -19,23 +19,22 @@ export default function Navbar() {
   const router = useRouter();
 
   return (
-    <nav className="nav-shell">
-      <div className="nav-inner">
-        <div className="nav-logo">
-          <span className="nav-logo-main">IHATECOLLEGE</span>
-          <span className="nav-logo-pill">.COM</span>
+    <nav className="ihc-nav">
+      <div className="ihc-nav-inner">
+        <div className="ihc-logo">
+          <span className="ihc-logo-main">IHATECOLLEGE</span>
+          <span className="ihc-logo-pill">.COM</span>
         </div>
 
-        {/* horizontal scroll on mobile */}
-        <div className="nav-links">
-          {links.map((link) => {
-            const isActive =
+        <div className="ihc-links">
+          {LINKS.map((link) => {
+            const active =
               router.pathname === link.href ||
               (link.href !== "/" && router.pathname.startsWith(link.href));
 
             return (
-              <Link key={link.href} href={link.href} className="nav-link-wrap">
-                <span className={`nav-link ${isActive ? "nav-link-active" : ""}`}>
+              <Link key={link.href} href={link.href} className="ihc-link-wrap">
+                <span className={`ihc-link ${active ? "ihc-link--active" : ""}`}>
                   {link.label}
                 </span>
               </Link>
