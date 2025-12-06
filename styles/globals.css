@@ -272,6 +272,14 @@ footer {
   padding: 2rem;
   color: rgba(255, 255, 255, 0.6);
 }
+/* Fix big empty gap above hero on mobile only */
+@media (max-width: 768px) {
+  /* tighten first section under the nav */
+  main > section:first-of-type {
+    margin-top: 1.25rem !important;
+    padding-top: 0 !important;
+  }
+}
 
 /* ================================
    MOBILE BREAKPOINTS
