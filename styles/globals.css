@@ -1,78 +1,120 @@
-/* ===========================
-   TOP NAVIGATION BAR
-   =========================== */
+/* styles/globals.css */
 
+/* ---- Base ---- */
+html,
 body {
+  padding: 0;
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
+  background: radial-gradient(circle at top left, #111827, #020617);
+  color: #f9fafb;
 }
 
-/* Header wrapper */
-header,
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.page-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 90px 16px 40px; /* space for sticky header */
+}
+
+/* ---- NAVBAR ---- */
+
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 30;
-  background: radial-gradient(circle at top left, #16213f 0%, #050713 55%, #020308 100%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 1000;
+  width: 100%;
+  background: rgba(3, 7, 18, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
 }
 
-/* Inner layout: logo + links */
-header nav {
+.site-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Logo */
+.site-logo {
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.site-logo span {
+  color: #38bdf8; /* .COM in light blue */
+}
+
+/* Links row (desktop) */
+.site-nav {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 18px;
-}
-
-/* First link in the nav = logo (IHATECOLLEGE.COM) */
-header nav a:first-child {
-  margin-right: auto;
-  font-weight: 800;
-  font-size: 1rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-
-/* All nav links */
-header nav a {
-  color: #f4f6ff;
-  text-decoration: none;
+  gap: 16px;
   font-size: 0.9rem;
-  font-weight: 500;
-  opacity: 0.85;
-  padding: 6px 12px;
-  border-radius: 999px;
-  transition:
-    background 0.15s ease,
-    opacity 0.15s ease,
-    transform 0.15s ease;
 }
 
-/* Hover/press effect */
-header nav a:hover {
-  background: rgba(255, 255, 255, 0.06);
-  opacity: 1;
-  transform: translateY(-1px);
+.site-nav a {
+  position: relative;
+  padding-bottom: 2px;
+  color: #e5e7eb;
 }
 
-/* Mobile tweaks */
-@media (max-width: 640px) {
-  header nav {
+.site-nav a:hover {
+  color: #facc15;
+}
+
+.site-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background: #facc15;
+  transition: width 0.18s ease-out;
+}
+
+.site-nav a:hover::after {
+  width: 100%;
+}
+
+/* ---- MOBILE ---- */
+@media (max-width: 768px) {
+  .site-header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .site-logo {
+    font-size: 1rem;
+  }
+
+  .site-nav {
+    width: 100%;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
 
-  header nav a {
-    font-size: 0.8rem;
-    padding: 6px 10px;
-  }
-
-  header nav a:first-child {
-    flex-basis: 100%;
-    margin-right: 0;
-    margin-bottom: 4px;
+  .page-main {
+    padding-top: 110px; /* little more room on small screens */
   }
 }
