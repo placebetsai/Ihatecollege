@@ -4,45 +4,53 @@ import Layout from "../components/Layout";
 export default function HomePage() {
   return (
     <Layout title="College is optional. Debt isn't.">
-      {/* HERO */}
-      <section className="hero">
-        <p className="eyebrow">YOU DON'T HAVE TO SIGN YOUR LIFE AWAY</p>
+      {/* HERO WRAPPER — FIXED MOBILE GAP */}
+      <section
+        className="hero-wrapper"
+        style={{
+          minHeight: "auto",         // kill 100vh on mobile
+          paddingTop: "0.5rem",      // no black gap
+        }}
+      >
+        <div className="hero">
+          <p className="eyebrow">YOU DON'T HAVE TO SIGN YOUR LIFE AWAY</p>
 
-        <h1 className="hero-title">
-          College is <span className="accent">optional</span>. Debt isn&apos;t.
-        </h1>
+          <h1 className="hero-title">
+            College is <span className="accent">optional</span>. Debt isn&apos;t.
+          </h1>
 
-        <p className="hero-subtitle">
-          Before you sign away $50k–$150k, compare trades, tech careers,
-          apprenticeships, bootcamps, and real alternatives. Run the numbers.
-          Hear from real people. Then decide.
-        </p>
+          <p className="hero-subtitle">
+            Before you sign away $50k–$150k, compare trades, tech careers,
+            apprenticeships, bootcamps, and real alternatives. Run the numbers.
+            Hear from real people. Then decide.
+          </p>
 
-        <div className="hero-actions">
-          <a href="/alternatives" className="btn btn-primary">
-            Explore alternatives
-          </a>
-          <a href="/debt-calculator" className="btn btn-outline">
-            See what your degree really costs
-          </a>
-        </div>
-
-        <div className="hero-stats">
-          <div className="stat">
-            <span className="stat-label">Avg 4-year total cost</span>
-            <span className="stat-value">$100k+ with living costs</span>
+          <div className="hero-actions">
+            <a href="/alternatives" className="btn btn-primary">
+              Explore alternatives
+            </a>
+            <a href="/debt-calculator" className="btn btn-outline">
+              See what your degree really costs
+            </a>
           </div>
-          <div className="stat">
-            <span className="stat-label">Time in class</span>
-            <span className="stat-value">4+ years</span>
-          </div>
-          <div className="stat">
-            <span className="stat-label">Typical trade/cert path</span>
-            <span className="stat-value">6–24 months</span>
-          </div>
-          <div className="stat">
-            <span className="stat-label">Working while you train?</span>
-            <span className="stat-value">Often yes (apprenticeships)</span>
+
+          <div className="hero-stats">
+            <div className="stat">
+              <span className="stat-label">Avg 4-year total cost</span>
+              <span className="stat-value">$100k+ with living costs</span>
+            </div>
+            <div className="stat">
+              <span className="stat-label">Time in class</span>
+              <span className="stat-value">4+ years</span>
+            </div>
+            <div className="stat">
+              <span className="stat-label">Typical trade/cert path</span>
+              <span className="stat-value">6–24 months</span>
+            </div>
+            <div className="stat">
+              <span className="stat-label">Working while you train?</span>
+              <span className="stat-value">Often yes (apprenticeships)</span>
+            </div>
           </div>
         </div>
       </section>
@@ -75,9 +83,9 @@ export default function HomePage() {
               and recession-resistant work.
             </p>
             <ul className="path-list">
-              <li>HVAC and electrical apprenticeships</li>
-              <li>Welding and fabrication programs</li>
-              <li>CDL for trucking &amp; logistics</li>
+              <li>HVAC & electrical apprenticeships</li>
+              <li>Welding & fabrication programs</li>
+              <li>CDL for trucking & logistics</li>
             </ul>
             <p className="path-link">Trade-school breakdown →</p>
           </div>
@@ -89,9 +97,9 @@ export default function HomePage() {
               careers with low upfront cost.
             </p>
             <ul className="path-list">
-              <li>Real-estate &amp; mortgage licensing</li>
-              <li>Insurance &amp; public adjusting</li>
-              <li>Notary &amp; loan-signing work</li>
+              <li>Real-estate & mortgage licensing</li>
+              <li>Insurance & public adjusting</li>
+              <li>Notary & loan-signing work</li>
             </ul>
             <p className="path-link">License-based career paths →</p>
           </div>
@@ -127,7 +135,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CHOOSE PATH CTA */}
+      {/* CTA SECTION */}
       <section className="section section-cta">
         <h2 className="section-title">Choose your path</h2>
         <p className="section-subtitle">
