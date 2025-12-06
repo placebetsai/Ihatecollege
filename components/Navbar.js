@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+// components/Navbar.js
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const links = [
   { href: "/", label: "Home" },
@@ -14,27 +16,65 @@ const links = [
 ];
 
 export default function Navbar() {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
 
+  // close mobile menu on route change
+  useEffect(() => {
+    setOpen(false);
+  }, [router.pathname]);
+
   return (
-    <header className="navbar">
+    <header className="site-header">
       <div className="nav-inner">
-        <Link href="/" className="nav-logo">
-          IHATECOLLEGE <span className="dotcom">.COM</span>
+        <Link href="/" className="logo-wrap">
+          <span className="logo-text">IHATECOLLEGE</span>
+          <span className="logo-pill">.COM</span>
         </Link>
 
-        <button className="hamburger" onClick={() => setOpen(!open)}>
-          <span /><span /><span />
-        </button>
-
-        <nav className={`nav-links ${open ? "open" : ""}`}>
+        {/* Desktop nav */}
+        <nav className="nav-links-desktop">
           {links.map((l) => (
-            <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className="nav-item">
+            <Link
+              key={l.href}
+              href={l.href}
+              className={
+                "nav-link" +
+                (router.pathname === l.href ? " nav-link-active" : "")
+              }
+            >
               {l.label}
             </Link>
           ))}
         </nav>
+
+        {/* Mobile hamburger */}
+        <button
+          className="nav-toggle"
+          onClick={() => setOpen((v) => !v)}
+          aria-label="Toggle navigation"
+        >
+          <span className={open ? "bar bar1 open" : "bar bar1"} />
+          <span className={open ? "bar bar2 open" : "bar bar2"} />
+          <span className={open ? "bar bar3 open" : "bar bar3"} />
+        </button>
       </div>
+
+      {/* Mobile slide-out */}
+      <nav className={open ? "nav-links-mobile open" : "nav-links-mobile"}>
+        {links.map((l) => (
+          <Link
+            key={l.href + "-m"}
+            href={l.href}
+            className={
+              "nav-link-mobile" +
+              (router.pathname === l.href ? " nav-link-mobile-active" : "")
+            }
+          >
+            {l.label}
+          </Link>
+        ))}
+      </nav>
     </header>
   );
-}
+              }
