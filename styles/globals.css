@@ -150,7 +150,7 @@ img {
 }
 
 /* ------------------------------------------------------ */
-/* HERO SECTION                                            */
+/* HERO SECTION                                           */
 /* ------------------------------------------------------ */
 
 .hero {
@@ -227,6 +227,10 @@ img {
   margin-bottom: 1.1rem;
 }
 
+.section-cta {
+  text-align: center;
+}
+
 .path-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -297,8 +301,16 @@ img {
 }
 
 /* ------------------------------------------------------ */
-/* CTA BUTTONS (Normal State)                             */
+/* CTA BUTTONS — BASE                                     */
 /* ------------------------------------------------------ */
+
+.cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
 
 .btn-pill {
   border-radius: 999px;
@@ -317,32 +329,9 @@ img {
     inset 0 0 12px rgba(56, 189, 248, 0.22);
 }
 
-/* ==================================================== */
-/* FINAL FIX — CTA PILLS + NAV SPACING (GROK)           */
-/* ==================================================== */
-
-@media (max-width: 768px) {
-  .cta-buttons {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.85rem;
-    padding: 0 1rem;
-  }
-
-  .btn-pill {
-    font-size: 0.89rem !important;
-    padding: 0.78rem 1.35rem !important;
-    min-width: auto;
-    flex: 1;
-    max-width: 280px;
-  }
-
-  .btn-pill[href="/civil-service"] {
-    font-size: 0.84rem !important;
-    line-height: 1.25;
-  }
-}
+/* ------------------------------------------------------ */
+/* DESKTOP TUNE — NAV SPACING                             */
+/* ------------------------------------------------------ */
 
 @media (min-width: 769px) {
   .nav-inner {
@@ -355,10 +344,11 @@ img {
 }
 
 /* ------------------------------------------------------ */
-/* RESPONSIVE NAV                                         */
+/* RESPONSIVE (MOBILE) — NAV + HERO + CTA                 */
 /* ------------------------------------------------------ */
 
 @media (max-width: 768px) {
+  /* NAV */
   .nav-links-desktop {
     display: none;
   }
@@ -381,8 +371,10 @@ img {
     font-size: 0.95rem;
   }
 
+  /* MAIN SPACING */
   .site-main {
     padding-top: 0.75rem;
+    padding-bottom: 3.25rem; /* extra breathing room above footer */
   }
 
   .hero {
@@ -402,10 +394,51 @@ img {
   .quote-list {
     grid-template-columns: 1fr;
   }
+
+  /* CTA — STACK CLEAN, NO JUMBLE */
+  .section-cta {
+    margin-top: 2.2rem;
+    padding-bottom: 2.4rem;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0.85rem;
+    padding: 0 1rem;
+  }
+
+  .btn-pill {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    font-size: 0.95rem;
+    padding: 0.85rem 1.25rem;
+    white-space: normal;
+    line-height: 1.35;
+    text-align: center;
+  }
+
+  .btn-pill[href="/civil-service"] {
+    font-size: 0.9rem;
+  }
 }
+
+/* ------------------------------------------------------ */
+/* EXTRA SMALL SCREENS                                    */
+/* ------------------------------------------------------ */
 
 @media (max-width: 520px) {
   .hero-stats {
     grid-template-columns: 1fr;
+  }
+
+  .site-main {
+    padding-bottom: 3.5rem;
+  }
+
+  .section-cta {
+    padding-bottom: 3rem;
   }
 }
