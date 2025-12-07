@@ -1,18 +1,419 @@
+/* ------------------------------------------------------ */
+/* GLOBAL RESET + BASE                                    */
+/* ------------------------------------------------------ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top, #020617, #020617 40%, #000 100%);
+  color: #e5e7eb;
+}
+
+/* Remove link underlines globally */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ------------------------------------------------------ */
+/* LAYOUT WRAPPER                                         */
+/* ------------------------------------------------------ */
+
+.site-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-main {
+  flex: 1;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 3rem;
+}
+
+.site-footer {
+  border-top: 1px solid rgba(148, 163, 184, 0.35);
+  padding: 1rem 1.5rem 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #9ca3af;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+/* ------------------------------------------------------ */
+/* HEADER / NAV                                           */
+/* ------------------------------------------------------ */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(15, 23, 42, 0.96);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.28);
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1.5rem;
+}
+
+.logo-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.logo-text {
+  letter-spacing: 0.18em;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.logo-pill {
+  font-size: 0.8rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  background: #facc15;
+  color: #111827;
+  font-weight: 700;
+}
+
+/* Desktop nav links */
+.nav-links-desktop {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav-link {
+  font-size: 0.9rem;
+  padding: 0.3rem 0.2rem;
+  color: #e5e7eb;
+  opacity: 0.8;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.nav-link:hover {
+  opacity: 1;
+}
+
+.nav-link-active {
+  color: #facc15;
+  opacity: 1;
+}
+
+/* Mobile toggle (hamburger) */
+.nav-toggle {
+  display: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0.2rem;
+}
+
+.bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  margin: 3px 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Optional animation classes if you want them working */
+.bar1.open {
+  transform: translateY(5px) rotate(45deg);
+}
+.bar2.open {
+  opacity: 0;
+}
+.bar3.open {
+  transform: translateY(-5px) rotate(-45deg);
+}
+
+/* Mobile nav container (global default = hidden) */
+.nav-links-mobile {
+  display: none;
+}
+
+/* ------------------------------------------------------ */
+/* HERO                                                   */
+/* ------------------------------------------------------ */
+
+.hero {
+  margin-top: 1.25rem;
+  padding: 2.25rem 1.8rem 2.25rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: radial-gradient(circle at top left, #0f172a, #020617 55%, #000);
+  box-shadow:
+    0 18px 45px rgba(15, 23, 42, 0.8),
+    0 0 0 1px rgba(15, 23, 42, 0.7);
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9ca3af;
+  margin-bottom: 0.75rem;
+}
+
+.hero-title {
+  font-size: 2.4rem;
+  line-height: 1.1;
+  margin: 0 0 0.9rem;
+}
+
+.accent {
+  color: #facc15;
+}
+
+.hero-subtitle {
+  max-width: 640px;
+  font-size: 0.98rem;
+  color: #d1d5db;
+  margin-bottom: 1.5rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.17s ease, color 0.17s ease, border-color 0.17s ease,
+    transform 0.08s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #facc15, #f97316);
+  color: #111827;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  border-color: rgba(156, 163, 175, 0.8);
+  color: #e5e7eb;
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background: rgba(15, 23, 42, 0.9);
+}
+
+/* Hero stats */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.stat {
+  padding: 0.7rem 0.8rem;
+  border-radius: 0.8rem;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(55, 65, 81, 0.8);
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #9ca3af;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.stat-value {
+  font-size: 0.9rem;
+}
+
+/* ------------------------------------------------------ */
+/* SECTIONS / GRID                                        */
+/* ------------------------------------------------------ */
+
+.section {
+  margin-top: 2.5rem;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  margin-bottom: 1.1rem;
+}
+
+.section-subtitle {
+  max-width: 640px;
+  font-size: 0.98rem;
+  color: #d1d5db;
+  margin-bottom: 1.5rem;
+}
+
+.path-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.path-card {
+  border-radius: 1rem;
+  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid rgba(55, 65, 81, 0.9);
+  padding: 1rem;
+}
+
+.path-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.path-body {
+  font-size: 0.92rem;
+  color: #d1d5db;
+  margin-bottom: 0.7rem;
+}
+
+.path-list {
+  padding-left: 1.1rem;
+  margin: 0 0 0.7rem;
+  font-size: 0.9rem;
+  color: #e5e7eb;
+}
+
+.path-list li {
+  margin-bottom: 0.2rem;
+}
+
+.path-link {
+  font-size: 0.86rem;
+  color: #facc15;
+}
+
+/* Quotes */
+.quote-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.quote-card {
+  margin: 0;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid rgba(55, 65, 81, 0.9);
+  font-size: 0.9rem;
+}
+
+.quote-card blockquote {
+  margin: 0 0 0.6rem;
+}
+
+.quote-card figcaption {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+/* CTA section */
+.section-cta {
+  text-align: center;
+}
+
+.cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.btn-pill {
+  border-radius: 999px;
+  border: 1px solid rgba(156, 163, 175, 0.9);
+  padding: 0.55rem 1.2rem;
+  font-size: 0.9rem;
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.btn-pill:hover {
+  background: rgba(15, 23, 42, 1);
+}
+
+/* ------------------------------------------------------ */
+/* RESPONSIVE — GROK MOBILE NAV FIX + SMALL SCREEN TWEAKS */
+/* ------------------------------------------------------ */
+
+@media (max-width: 900px) {
+  .hero-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .path-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .quote-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
+  /* Hide desktop links */
   .nav-links-desktop {
     display: none;
   }
 
+  /* Show hamburger */
   .nav-toggle {
     display: inline-flex;
   }
 
-  /* Menu hidden by default */
-  .nav-links-mobile {
-    display: none;
-  }
+  /* Menu is hidden by default (global .nav-links-mobile {display:none}) */
+  /* We ONLY style the open state here */
 
-  /* Menu open */
   .nav-links-mobile.open {
     display: flex;
     flex-direction: column;
@@ -33,6 +434,11 @@
     color: #facc15;
   }
 
+  /* Hero spacing on mobile — kill the big black gap */
+  .site-main {
+    padding-top: 0.75rem;
+  }
+
   .hero {
     padding: 1.8rem 1.1rem 1.7rem;
     margin-top: 0.8rem;
@@ -42,6 +448,10 @@
     font-size: 1.8rem;
   }
 
+  .hero-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .path-grid {
     grid-template-columns: 1fr;
   }
@@ -49,8 +459,18 @@
   .quote-list {
     grid-template-columns: 1fr;
   }
+}
+
+@media (max-width: 520px) {
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-inner {
+    padding: 0.75rem 1.1rem;
+  }
 
   .site-main {
-    padding-top: 0.75rem;
+    padding: 0.9rem 1.1rem 2.2rem;
   }
-}
+  }
