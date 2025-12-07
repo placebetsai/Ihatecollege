@@ -119,32 +119,44 @@ img {
   opacity: 1;
 }
 
+/* ✅ HAMBURGER BASE (desktop = hidden) */
 .nav-toggle {
-  display: none;
+  display: none; /* shown only on mobile below */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0.25rem;
+  padding: 0.75rem;
+  width: 48px;
+  height: 48px;
+  z-index: 999;
 }
 
 .bar {
-  width: 22px;
-  height: 2px;
+  display: block;
+  width: 24px;
+  height: 2.5px;
   background: #e5e7eb;
-  margin: 4px 0;
-  transition: 0.25s;
+  border-radius: 999px;
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* X animation */
 .bar1.open {
-  transform: translateY(6px) rotate(45deg);
+  transform: translateY(7.5px) rotate(45deg);
 }
 .bar2.open {
   opacity: 0;
+  transform: scale(0.1);
 }
 .bar3.open {
-  transform: translateY(-6px) rotate(-45deg);
+  transform: translateY(-7.5px) rotate(-45deg);
 }
 
+/* MOBILE MENU CONTAINER (hidden by default) */
 .nav-links-mobile {
   display: none;
 }
@@ -348,27 +360,41 @@ img {
 /* ------------------------------------------------------ */
 
 @media (max-width: 768px) {
-  /* NAV */
+  /* Hide desktop links, show hamburger */
   .nav-links-desktop {
     display: none;
   }
 
   .nav-toggle {
-    display: inline-flex;
+    display: flex; /* ← THIS makes the sandwich show on mobile */
+  }
+
+  /* Mobile menu overlay + blur */
+  .nav-links-mobile {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(3, 7, 18, 0.99);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    padding: 1rem 1.5rem 1.5rem;
+    flex-direction: column;
+    gap: 0.4rem;
   }
 
   .nav-links-mobile.open {
     display: flex;
-    flex-direction: column;
-    padding: 0.75rem 1.25rem 1rem;
-    background: rgba(3, 7, 18, 0.98);
-    border-bottom: 1px solid rgba(148, 163, 184, 0.25);
-    backdrop-filter: blur(12px);
   }
 
   .nav-link-mobile {
     padding: 0.45rem 0;
     font-size: 0.95rem;
+  }
+
+  .nav-link-mobile-active {
+    color: #facc15;
   }
 
   /* MAIN SPACING */
@@ -581,7 +607,7 @@ img {
   margin-top: 0.8rem;
 }
 
-/* Mobile tweaks */
+/* Mobile tweaks for rankings */
 @media (max-width: 768px) {
   .rankings-header {
     flex-direction: column;
@@ -604,4 +630,4 @@ img {
   .rankings-roi-pill {
     margin-left: 0;
   }
-    }
+}
