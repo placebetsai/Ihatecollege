@@ -246,7 +246,7 @@ img {
 }
 
 /* ------------------------------------------------------ */
-/* ✨ HYBRID NEON MODE (C)                                */
+/* ✨ HYBRID NEON MODE (C) — PATHS / QUOTES / STATS       */
 /* ------------------------------------------------------ */
 
 /* FULL GLOW — PATH CARDS */
@@ -297,7 +297,7 @@ img {
 }
 
 /* ------------------------------------------------------ */
-/* CTA BUTTONS — Soft Neon                                */
+/* CTA BUTTONS (Normal State)                             */
 /* ------------------------------------------------------ */
 
 .btn-pill {
@@ -318,43 +318,44 @@ img {
 }
 
 /* ==================================================== */
-/* 1. DESKTOP — Move "Home" away from logo               */
+/* FINAL FIX — CTA PILLS + NAV SPACING (GROK)           */
 /* ==================================================== */
-@media (min-width: 769px) {
-  .nav-links-desktop {
-    margin-left: 4.2rem;
-    gap: 1.8rem;
-  }
-}
 
-/* ==================================================== */
-/* 2. MOBILE — Fix overlapping / bunched CTA pills       */
-/* ==================================================== */
 @media (max-width: 768px) {
   .cta-buttons {
-    flex-direction: column !important;
-    align-items: center;
-    gap: 1.1rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.85rem;
+    padding: 0 1rem;
   }
 
   .btn-pill {
-    width: 88%;
-    max-width: 340px;
-    padding: 1rem 1.8rem;
-    font-size: 0.98rem;
-    white-space: normal;
-    line-height: 1.35;
-    text-align: center;
+    font-size: 0.89rem !important;
+    padding: 0.78rem 1.35rem !important;
+    min-width: auto;
+    flex: 1;
+    max-width: 280px;
   }
 
-  /* Extra fix for long text button */
   .btn-pill[href="/civil-service"] {
-    font-size: 0.92rem;
+    font-size: 0.84rem !important;
+    line-height: 1.25;
+  }
+}
+
+@media (min-width: 769px) {
+  .nav-inner {
+    padding: 0.7rem 2rem;
+  }
+
+  .nav-links-desktop {
+    gap: 2.1rem;
   }
 }
 
 /* ------------------------------------------------------ */
-/* RESPONSIVE NAV + LAYOUT                               */
+/* RESPONSIVE NAV                                         */
 /* ------------------------------------------------------ */
 
 @media (max-width: 768px) {
