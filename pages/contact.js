@@ -5,83 +5,55 @@ export default function ContactPage() {
   return (
     <Layout title="Contact – IHateCollege.com">
       <section className="hero">
-        <p className="eyebrow">QUESTIONS. IDEAS. REAL STORIES.</p>
-        <h1 className="hero-title">Contact us</h1>
-        <p className="hero-subtitle">
-          Got a story about skipping college, landing a trade, or escaping
-          student debt? Want to partner, advertise, or roast your school?
-          Send a message.
+        <p className="eyebrow">QUESTIONS? PARTNERSHIPS? STORIES?</p>
+        <h1 className="hero-title">Get in touch</h1>
+
+        <p className="hero-subtitle" style={{ maxWidth: "620px" }}>
+          Whether you've got a success story, a debt horror story, a partnership
+          idea, or you just want to roast your college — we read every message.
+          We're building the real alternative to the college-industrial complex.
         </p>
 
-        <form
-          className="hero"
-          style={{ marginTop: "1.5rem" }}
-          action="mailto:israeljoffe@gmail.com"
-          method="POST"
-          encType="text/plain"
+        <div
+          style={{
+            marginTop: "2.5rem",
+            padding: "1.8rem",
+            borderRadius: "1.2rem",
+            background: "rgba(15,23,42,0.9)",
+            border: "1px solid rgba(125, 211, 252, 0.45)",
+            boxShadow:
+              "0 0 18px rgba(56,189,248,0.25), inset 0 0 10px rgba(56,189,248,0.15)",
+            maxWidth: "600px",
+          }}
         >
-          <div className="hero-stats" style={{ marginTop: 0 }}>
-            <div className="stat">
-              <label className="stat-label">Your name</label>
-              <input
-                type="text"
-                name="name"
-                required
-                style={{
-                  width: "100%",
-                  marginTop: "0.4rem",
-                  padding: "0.5rem 0.65rem",
-                  borderRadius: "0.5rem",
-                  border: "1px solid rgba(148,163,184,0.7)",
-                  background: "rgba(15,23,42,0.95)",
-                  color: "#e5e7eb",
-                }}
-              />
-            </div>
-            <div className="stat">
-              <label className="stat-label">Your email</label>
-              <input
-                type="email"
-                name="email"
-                required
-                style={{
-                  width: "100%",
-                  marginTop: "0.4rem",
-                  padding: "0.5rem 0.65rem",
-                  borderRadius: "0.5rem",
-                  border: "1px solid rgba(148,163,184,0.7)",
-                  background: "rgba(15,23,42,0.95)",
-                  color: "#e5e7eb",
-                }}
-              />
-            </div>
-          </div>
+          <h2
+            className="section-title"
+            style={{ marginBottom: "0.6rem", fontSize: "1.3rem" }}
+          >
+            Questions or concerns?
+          </h2>
+          <p
+            style={{
+              color: "#cbd5e1",
+              marginBottom: "1.3rem",
+              lineHeight: "1.55",
+            }}
+          >
+            Reach us directly anytime. We actually check this inbox.
+          </p>
 
-          <div style={{ marginTop: "1rem" }}>
-            <label className="stat-label">Message</label>
-            <textarea
-              name="message"
-              rows={4}
-              required
-              style={{
-                width: "100%",
-                marginTop: "0.4rem",
-                padding: "0.7rem 0.8rem",
-                borderRadius: "0.7rem",
-                border: "1px solid rgba(148,163,184,0.7)",
-                background: "rgba(15,23,42,0.95)",
-                color: "#e5e7eb",
-                resize: "vertical",
-              }}
-            />
-          </div>
-
-          <div style={{ marginTop: "1.1rem" }}>
-            <button type="submit" className="btn btn-primary">
-              Send message
-            </button>
-          </div>
-        </form>
+          <a
+            href="mailto:info@ihatecollege.com"
+            className="btn btn-primary"
+            style={{
+              fontSize: "1rem",
+              padding: "0.85rem 1.6rem",
+              display: "inline-block",
+            }}
+          >
+            Email Us — info@ihatecollege.com
+          </a>
+        </div>
       </section>
     </Layout>
   );
