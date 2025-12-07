@@ -120,40 +120,64 @@ img {
 }
 
 /* ------------------------------------------------------ */
-/* ✅ REAL HAMBURGER MENU (FULL FIX)                      */
+/* ✅ REAL HAMBURGER MENU — PERFECT 2025 MOBILE FIX       */
 /* ------------------------------------------------------ */
 
 .nav-toggle {
   display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;                  /* spacing between bars */
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0.25rem;
+  padding: 0.75rem;
+  width: 48px;
+  height: 48px;
+  z-index: 999;
 }
 
-/* Each bar is its OWN line (real hamburger stack) */
 .bar {
-  display: block;               /* <-- THE FIX */
-  width: 22px;
-  height: 2px;
+  display: block;
+  width: 24px;
+  height: 2.5px;
   background: #e5e7eb;
-  margin: 4px 0;
-  transition: 0.25s;
+  border-radius: 999px;
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* X animation */
+/* X animation — smooth */
 .bar1.open {
-  transform: translateY(6px) rotate(45deg);
+  transform: translateY(7.5px) rotate(45deg);
 }
+
 .bar2.open {
   opacity: 0;
-}
-.bar3.open {
-  transform: translateY(-6px) rotate(-45deg);
+  transform: scale(0.1);
 }
 
+.bar3.open {
+  transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* Mobile menu panel (overlay under header) */
 .nav-links-mobile {
   display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(3, 7, 18, 0.99);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+  padding: 1rem 1.5rem 1.5rem;
+}
+
+.nav-links-mobile.open {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 /* ------------------------------------------------------ */
@@ -260,6 +284,7 @@ img {
 /* ✨ HYBRID NEON MODE (C) — PATHS / QUOTES / STATS       */
 /* ------------------------------------------------------ */
 
+/* FULL GLOW — PATH CARDS */
 .path-card {
   border-radius: 1rem;
   padding: 1rem;
@@ -282,20 +307,24 @@ img {
   transform: translateY(-3px);
 }
 
+/* MEDIUM GLOW — QUOTE CARDS */
 .quote-card {
   border-radius: 1rem;
   padding: 1rem;
   background: rgba(15, 23, 42, 0.92);
+
   border: 1px solid rgba(125, 211, 252, 0.55);
   box-shadow:
     0 0 14px rgba(56, 189, 248, 0.25),
     inset 0 0 10px rgba(56, 189, 248, 0.12);
 }
 
+/* MEDIUM GLOW — HERO STATS */
 .stat {
   border-radius: 0.9rem;
   padding: 0.8rem;
   background: rgba(15, 23, 42, 0.92);
+
   border: 1px solid rgba(125, 211, 252, 0.45);
   box-shadow:
     0 0 12px rgba(56, 189, 248, 0.22),
@@ -332,7 +361,7 @@ img {
 }
 
 /* ------------------------------------------------------ */
-/* DESKTOP NAV TUNE                                       */
+/* DESKTOP TUNE — NAV SPACING                             */
 /* ------------------------------------------------------ */
 
 @media (min-width: 769px) {
@@ -346,25 +375,17 @@ img {
 }
 
 /* ------------------------------------------------------ */
-/* MOBILE RESPONSIVE                                      */
+/* RESPONSIVE (MOBILE) — NAV + HERO + CTA                 */
 /* ------------------------------------------------------ */
 
 @media (max-width: 768px) {
+  /* NAV */
   .nav-links-desktop {
     display: none;
   }
 
   .nav-toggle {
-    display: inline-flex;
-  }
-
-  .nav-links-mobile.open {
-    display: flex;
-    flex-direction: column;
-    padding: 0.75rem 1.25rem 1rem;
-    background: rgba(3, 7, 18, 0.98);
-    border-bottom: 1px solid rgba(148, 163, 184, 0.25);
-    backdrop-filter: blur(12px);
+    display: flex;   /* show the hamburger on mobile */
   }
 
   .nav-link-mobile {
@@ -372,9 +393,10 @@ img {
     font-size: 0.95rem;
   }
 
+  /* MAIN SPACING */
   .site-main {
     padding-top: 0.75rem;
-    padding-bottom: 3.25rem;
+    padding-bottom: 3.25rem; /* extra breathing room above footer */
   }
 
   .hero {
@@ -395,6 +417,7 @@ img {
     grid-template-columns: 1fr;
   }
 
+  /* CTA — STACK CLEAN, NO JUMBLE */
   .section-cta {
     margin-top: 2.2rem;
     padding-bottom: 2.4rem;
@@ -403,6 +426,7 @@ img {
   .cta-buttons {
     flex-direction: column;
     align-items: stretch;
+    justify-content: flex-start;
     gap: 0.85rem;
     padding: 0 1rem;
   }
@@ -413,6 +437,7 @@ img {
     margin: 0 auto;
     font-size: 0.95rem;
     padding: 0.85rem 1.25rem;
+    white-space: normal;
     line-height: 1.35;
     text-align: center;
   }
@@ -423,7 +448,7 @@ img {
 }
 
 /* ------------------------------------------------------ */
-/* EXTRA SMALL PHONES                                     */
+/* EXTRA SMALL SCREENS                                    */
 /* ------------------------------------------------------ */
 
 @media (max-width: 520px) {
