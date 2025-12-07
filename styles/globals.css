@@ -385,4 +385,42 @@ img {
   .hero-stats {
     grid-template-columns: 1fr;
   }
+}/* ------------------------------------------------------ */
+/* FINAL MOBILE CTA + FOOTER SPACING FIX                  */
+/* ------------------------------------------------------ */
+
+@media (max-width: 768px) {
+  /* Make CTA section breathe above footer */
+  .section-cta {
+    margin-top: 2.2rem;
+    padding-bottom: 2.5rem;
+  }
+
+  /* Stack CTA buttons vertically on mobile */
+  .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0.8rem;
+  }
+
+  .btn-pill {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    white-space: normal;   /* allow text to wrap */
+    font-size: 0.95rem;
+    padding: 0.8rem 1.2rem;
+  }
+}
+
+/* Extra safety on very small phones */
+@media (max-width: 480px) {
+  .site-main {
+    padding-bottom: 3.5rem;
+  }
+
+  .section-cta {
+    padding-bottom: 3rem;
+  }
 }
