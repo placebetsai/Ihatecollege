@@ -119,65 +119,34 @@ img {
   opacity: 1;
 }
 
-/* ------------------------------------------------------ */
-/* ✅ REAL HAMBURGER MENU — PERFECT 2025 MOBILE FIX       */
-/* ------------------------------------------------------ */
-
 .nav-toggle {
   display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;                  /* spacing between bars */
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0.75rem;
-  width: 48px;
-  height: 48px;
-  z-index: 999;
+  padding: 0.25rem;
 }
 
 .bar {
-  display: block;
-  width: 24px;
-  height: 2.5px;
+  width: 22px;
+  height: 2px;
   background: #e5e7eb;
-  border-radius: 999px;
-  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 4px 0;
+  transition: 0.25s;
 }
 
-/* X animation — smooth */
 .bar1.open {
-  transform: translateY(7.5px) rotate(45deg);
+  transform: translateY(6px) rotate(45deg);
 }
-
 .bar2.open {
   opacity: 0;
-  transform: scale(0.1);
 }
-
 .bar3.open {
-  transform: translateY(-7.5px) rotate(-45deg);
+  transform: translateY(-6px) rotate(-45deg);
 }
 
-/* Mobile menu panel (overlay under header) */
 .nav-links-mobile {
   display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: rgba(3, 7, 18, 0.99);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
-  padding: 1rem 1.5rem 1.5rem;
-}
-
-.nav-links-mobile.open {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
 }
 
 /* ------------------------------------------------------ */
@@ -385,7 +354,16 @@ img {
   }
 
   .nav-toggle {
-    display: flex;   /* show the hamburger on mobile */
+    display: inline-flex;
+  }
+
+  .nav-links-mobile.open {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 1.25rem 1rem;
+    background: rgba(3, 7, 18, 0.98);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    backdrop-filter: blur(12px);
   }
 
   .nav-link-mobile {
@@ -464,3 +442,166 @@ img {
     padding-bottom: 3rem;
   }
 }
+
+/* ------------------------------------------------------ */
+/* COLLEGE RANKINGS – SEARCH + SORT UI                    */
+/* ------------------------------------------------------ */
+
+.rankings-search {
+  margin-top: 1.8rem;
+}
+
+.rankings-search-input {
+  width: 100%;
+  padding: 0.9rem 1.3rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: rgba(15, 23, 42, 0.98);
+  color: #e5e7eb;
+  font-size: 0.98rem;
+  outline: none;
+}
+
+.rankings-search-input::placeholder {
+  color: rgba(148, 163, 184, 0.9);
+}
+
+.rankings-search-caption {
+  margin-top: 0.45rem;
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+.rankings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2.3rem;
+  margin-bottom: 0.8rem;
+}
+
+.rankings-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.rankings-sort-label {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.rankings-select {
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: rgba(15, 23, 42, 0.98);
+  color: #e5e7eb;
+  font-size: 0.85rem;
+}
+
+.rankings-status {
+  margin: 0.75rem 0 1rem;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.rankings-status.error {
+  color: #fecaca;
+}
+
+.rankings-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.rankings-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.rankings-rank {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #facc15;
+}
+
+.rankings-name {
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.rankings-location {
+  font-size: 0.82rem;
+  color: #9ca3af;
+  margin-top: 0.1rem;
+}
+
+.rankings-roi-pill {
+  margin-left: auto;
+  font-size: 0.78rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(125, 211, 252, 0.7);
+  background: rgba(8, 47, 73, 0.8);
+  color: #e0f2fe;
+}
+
+.rankings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem 1.2rem;
+  margin-top: 0.4rem;
+}
+
+.rankings-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.rankings-label {
+  font-size: 0.78rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.rankings-value {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.rankings-link {
+  display: inline-block;
+  margin-top: 0.8rem;
+}
+
+/* Mobile tweaks */
+@media (max-width: 768px) {
+  .rankings-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .rankings-controls {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .rankings-select {
+    width: 100%;
+  }
+
+  .rankings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rankings-roi-pill {
+    margin-left: 0;
+  }
+    }
