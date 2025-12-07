@@ -1,253 +1,215 @@
 // pages/rank-your-school.js
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Layout from "../components/Layout";
 
-export default function RankYourSchoolPage() {
+const SORT_OPTIONS = [
+  { value: "roi", label: "Best ROI (default)" },
+  { value: "earnings", label: "Highest earnings" },
+  { value: "cost", label: "Lowest yearly cost" },
+  { value: "debt", label: "Lowest median debt" },
+  { value: "acceptance", label: "Highest acceptance rate" },
+];
+
+function formatMoney(n) {
+  if (!n && n !== 0) return "N/A";
+  return `$${Math.round(n).toLocaleString()}`;
+}
+
+function formatPercent(p) {
+  if (!p && p !== 0) return "N/A";
+  return `${(p * 100).toFixed(0)}%`;
+}
+
+export default function CollegeRankingsPage() {
+  const [searchInput, setSearchInput] = useState("");
+  const [query, setQuery] = useState("university");
+  const [sortBy, setSortBy] = useState("roi");
   const [schools, setSchools] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [search, setSearch] = useState("");
-  const [page, setPage] = useState(0);
 
   useEffect(() => {
-    let ignore = false;
-
-    async function load() {
+    const fetchData = async () => {
       setLoading(true);
       setError("");
       try {
-        const params = new URLSearchParams({
-          page: String(page),
-          per_page: "40",
-        });
-        if (search.trim()) {
-          params.set("search", search.trim());
-        }
-
-        const res = await fetch(`/api/college-rankings?${params.toString()}`);
-        if (!res.ok) {
-          throw new Error("Failed to load rankings");
-        }
+        const res = await fetch(
+          `/api/college-rankings?search=${encodeURIComponent(query)}`
+        );
+        if (!res.ok) throw new Error("API error");
         const data = await res.json();
-        if (!ignore) {
-          setSchools(data.schools || []);
-        }
-      } catch (err) {
-        if (!ignore) {
-          setError("Could not load live rankings. Try again in a bit.");
-        }
-      } finally {
-        if (!ignore) setLoading(false);
-      }
-    }
 
-    load();
-    return () => {
-      ignore = true;
+        const rows = (data.results || []).map((row) => {
+          const earnings = row["latest.earnings.10_yrs_after_entry.median"];
+          const tuition = row["latest.cost.tuition.in_state"];
+          const debt = row["latest.aid.median_debt.completers.overall"];
+          const roiScore = earnings && tuition ? earnings / tuition : null;
+
+          return {
+            id: row.id,
+            name: row["school.name"],
+            city: row["school.city"],
+            state: row["school.state"],
+            earnings,
+            tuition,
+            debt,
+            acceptance: row["latest.admissions.admission_rate.overall"],
+            roiScore,
+          };
+        });
+
+        setSchools(rows);
+      } catch (e) {
+        console.error(e);
+        setError("Could not load schools. Try again.");
+      } finally {
+        setLoading(false);
+      }
     };
-  }, [search, page]);
+
+    fetchData();
+  }, [query]);
+
+  const sortedSchools = useMemo(() => {
+    const list = [...schools];
+    list.sort((a, b) => {
+      switch (sortBy) {
+        case "earnings":
+          return (b.earnings || 0) - (a.earnings || 0);
+        case "cost":
+          return (a.tuition || Infinity) - (b.tuition || Infinity);
+        case "debt":
+          return (a.debt || Infinity) - (b.debt || Infinity);
+        case "acceptance":
+          return (b.acceptance || 0) - (a.acceptance || 0);
+        case "roi":
+        default:
+          return (b.roiScore || 0) - (a.roiScore || 0);
+      }
+    });
+    return list;
+  }, [schools, sortBy]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (searchInput.trim()) setQuery(searchInput.trim());
+  };
 
   return (
-    <Layout title="College Rankings – Earnings vs Debt (Real Data)">
+    <Layout title="Rank Your School – Real ROI 2025">
       <section className="hero">
-        <p className="eyebrow">REAL DATA. NO BROCHURE BULLSHIT.</p>
-        <h1 className="hero-title">
-          College Rankings Based on <span className="accent">Actual Outcomes</span>
-        </h1>
-
+        <p className="eyebrow">REAL DATA. NO MARKETING.</p>
+        <h1 className="hero-title">College Rankings by Actual ROI</h1>
         <p className="hero-subtitle">
-          Rankings powered by the U.S. Department of Education&apos;s College Scorecard:
-          earnings 10 years after entry, typical debt, total cost, and acceptance rate.
-          Not vibes. Not marketing. Just numbers.
+          Earnings vs cost vs debt. Powered by U.S. Dept of Education. Updated 2025.
         </p>
 
-        <div
-          style={{
-            marginTop: "1.75rem",
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "0.9rem",
-            alignItems: "center",
-          }}
-        >
+        <form onSubmit={handleSubmit} style={{ marginTop: "2rem" }}>
           <input
             type="text"
-            placeholder="Search by school name (e.g. Florida, MIT, Miami)..."
-            value={search}
-            onChange={(e) => {
-              setPage(0);
-              setSearch(e.target.value);
-            }}
+            placeholder="Search any school, state, or city..."
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
             style={{
-              flex: "1 1 260px",
-              minWidth: "0",
-              padding: "0.7rem 0.9rem",
+              width: "100%",
+              maxWidth: "560px",
+              padding: "0.95rem 1.4rem",
               borderRadius: "999px",
               border: "1px solid rgba(148,163,184,0.7)",
-              background: "rgba(15,23,42,0.95)",
+              background: "rgba(15,23,42,0.98)",
               color: "#e5e7eb",
-              fontSize: "0.95rem",
+              fontSize: "1rem",
             }}
           />
-
-          <span style={{ fontSize: "0.8rem", color: "#9ca3af" }}>
-            Data source: U.S. Dept of Education – College Scorecard
-          </span>
-        </div>
+        </form>
       </section>
 
       <section className="section">
-        <h2 className="section-title">Top schools by earnings vs cost</h2>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+            gap: "1rem",
+          }}
+        >
+          <h2 className="section-title">
+            Results {schools.length > 0 && `(${schools.length})`}
+          </h2>
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="rankings-select"
+          >
+            {SORT_OPTIONS.map((o) => (
+              <option key={o.value} value={o.value}>
+                {o.label}
+              </option>
+            ))}
+          </select>
+        </div>
 
-        {loading && (
-          <p style={{ color: "#9ca3af", fontSize: "0.9rem" }}>
-            Crunching the numbers…
-          </p>
-        )}
+        {loading && <p>Loading real numbers…</p>}
+        {error && <p style={{ color: "#fca5a5" }}>{error}</p>}
 
-        {error && !loading && (
-          <p style={{ color: "#fca5a5", fontSize: "0.9rem" }}>{error}</p>
-        )}
-
-        {!loading && !error && schools.length === 0 && (
-          <p style={{ color: "#9ca3af", fontSize: "0.9rem" }}>
-            No results found. Try a different name or clear the search.
-          </p>
-        )}
-
-        <div className="path-grid" style={{ marginTop: "1rem" }}>
-          {schools.map((s, idx) => (
-            <div key={s.id} className="path-card">
+        <div className="path-grid">
+          {sortedSchools.map((s, i) => (
+            <div key={s.id || i} className="path-card">
               <div
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
-                  alignItems: "flex-start",
-                  gap: "0.5rem",
+                  alignItems: "center",
                 }}
               >
-                <div>
-                  <h3 style={{ marginBottom: "0.1rem" }}>
-                    #{idx + 1 + page * 40} {s.name}
-                  </h3>
-                  <p
-                    style={{
-                      color: "#9ca3af",
-                      fontSize: "0.8rem",
-                      margin: 0,
-                    }}
-                  >
-                    {s.city}, {s.state}{" "}
-                    {s.size ? `· ${s.size.toLocaleString()} students` : ""}
-                  </p>
-                </div>
-                {typeof s.roiScore === "number" && (
+                <h3>
+                  #{i + 1} {s.name}
+                </h3>
+                {s.roiScore && (
                   <span
                     style={{
-                      fontSize: "0.7rem",
-                      padding: "0.2rem 0.5rem",
+                      fontSize: "0.8rem",
+                      padding: "0.3rem 0.7rem",
                       borderRadius: "999px",
-                      border: "1px solid rgba(125,211,252,0.6)",
-                      background: "rgba(15,23,42,0.9)",
-                      color: "#bae6fd",
-                      whiteSpace: "nowrap",
+                      background: "rgba(34,211,238,0.2)",
+                      color: "#22d3ee",
                     }}
                   >
-                    ROI score: {s.roiScore.toFixed(2)}
+                    ROI {(s.roiScore).toFixed(1)}x
                   </span>
                 )}
               </div>
+              <p style={{ fontSize: "0.9rem", color: "#9ca3af" }}>
+                {s.city}, {s.state}
+              </p>
 
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-                  gap: "0.5rem",
-                  marginTop: "0.8rem",
-                  fontSize: "0.82rem",
-                }}
-              >
-                <Stat label="Total cost / year" value={
-                  s.cost ? `$${s.cost.toLocaleString()}` : "N/A"
-                } />
-                <Stat label="Median debt" value={
-                  s.debt ? `$${s.debt.toLocaleString()}` : "N/A"
-                } />
-                <Stat label="Earnings after 10 yrs" value={
-                  s.earnings ? `$${s.earnings.toLocaleString()}` : "N/A"
-                } />
-                <Stat label="Acceptance rate" value={
-                  typeof s.admitRate === "number"
-                    ? `${(s.admitRate * 100).toFixed(1)}%`
-                    : "N/A"
-                } />
+              <div className="rankings-grid">
+                <div>
+                  <span className="rankings-label">Yearly cost</span>
+                  <br />
+                  {formatMoney(s.tuition)}
+                </div>
+                <div>
+                  <span className="rankings-label">Median debt</span>
+                  <br />
+                  {formatMoney(s.debt)}
+                </div>
+                <div>
+                  <span className="rankings-label">Earnings 10yr</span>
+                  <br />
+                  {formatMoney(s.earnings)}
+                </div>
+                <div>
+                  <span className="rankings-label">Acceptance</span>
+                  <br />
+                  {formatPercent(s.acceptance)}
+                </div>
               </div>
-
-              {s.url && (
-                <a
-                  href={
-                    s.url.startsWith("http")
-                      ? s.url
-                      : `https://${s.url.replace(/^\/+/, "")}`
-                  }
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="path-link"
-                  style={{ marginTop: "0.7rem", display: "inline-block" }}
-                >
-                  Visit school site →
-                </a>
-              )}
             </div>
           ))}
-        </div>
-
-        {/* Simple pagination controls (optional) */}
-        <div
-          style={{
-            marginTop: "1.5rem",
-            display: "flex",
-            gap: "0.75rem",
-            alignItems: "center",
-          }}
-        >
-          <button
-            className="btn btn-outline"
-            disabled={page === 0}
-            onClick={() => setPage((p) => Math.max(0, p - 1))}
-            style={{ opacity: page === 0 ? 0.5 : 1 }}
-          >
-            ← Previous
-          </button>
-          <button
-            className="btn btn-outline"
-            onClick={() => setPage((p) => p + 1)}
-          >
-            Next →
-          </button>
-          <span style={{ fontSize: "0.75rem", color: "#9ca3af" }}>
-            Page {page + 1}
-          </span>
         </div>
       </section>
     </Layout>
   );
 }
-
-function Stat({ label, value }) {
-  return (
-    <div>
-      <div
-        style={{
-          fontSize: "0.7rem",
-          color: "#9ca3af",
-          textTransform: "uppercase",
-          letterSpacing: "0.08em",
-        }}
-      >
-        {label}
-      </div>
-      <div style={{ color: "#e5e7eb", marginTop: "0.1rem" }}>{value}</div>
-    </div>
-  );
-                    }
