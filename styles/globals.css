@@ -317,8 +317,44 @@ img {
     inset 0 0 12px rgba(56, 189, 248, 0.22);
 }
 
+/* ==================================================== */
+/* 1. DESKTOP — Move "Home" away from logo               */
+/* ==================================================== */
+@media (min-width: 769px) {
+  .nav-links-desktop {
+    margin-left: 4.2rem;
+    gap: 1.8rem;
+  }
+}
+
+/* ==================================================== */
+/* 2. MOBILE — Fix overlapping / bunched CTA pills       */
+/* ==================================================== */
+@media (max-width: 768px) {
+  .cta-buttons {
+    flex-direction: column !important;
+    align-items: center;
+    gap: 1.1rem;
+  }
+
+  .btn-pill {
+    width: 88%;
+    max-width: 340px;
+    padding: 1rem 1.8rem;
+    font-size: 0.98rem;
+    white-space: normal;
+    line-height: 1.35;
+    text-align: center;
+  }
+
+  /* Extra fix for long text button */
+  .btn-pill[href="/civil-service"] {
+    font-size: 0.92rem;
+  }
+}
+
 /* ------------------------------------------------------ */
-/* RESPONSIVE + MOBILE CTA FIX                            */
+/* RESPONSIVE NAV + LAYOUT                               */
 /* ------------------------------------------------------ */
 
 @media (max-width: 768px) {
@@ -365,62 +401,10 @@ img {
   .quote-list {
     grid-template-columns: 1fr;
   }
-
-  /* CTA MOBILE FIX */
-  .cta-buttons {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.75rem;
-  }
-
-  .btn-pill {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-    white-space: normal;
-  }
 }
 
 @media (max-width: 520px) {
   .hero-stats {
     grid-template-columns: 1fr;
-  }
-}/* ------------------------------------------------------ */
-/* FINAL MOBILE CTA + FOOTER SPACING FIX                  */
-/* ------------------------------------------------------ */
-
-@media (max-width: 768px) {
-  /* Make CTA section breathe above footer */
-  .section-cta {
-    margin-top: 2.2rem;
-    padding-bottom: 2.5rem;
-  }
-
-  /* Stack CTA buttons vertically on mobile */
-  .cta-buttons {
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: 0.8rem;
-  }
-
-  .btn-pill {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-    white-space: normal;   /* allow text to wrap */
-    font-size: 0.95rem;
-    padding: 0.8rem 1.2rem;
-  }
-}
-
-/* Extra safety on very small phones */
-@media (max-width: 480px) {
-  .site-main {
-    padding-bottom: 3.5rem;
-  }
-
-  .section-cta {
-    padding-bottom: 3rem;
   }
 }
