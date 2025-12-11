@@ -36,16 +36,16 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-800">
       <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
         
-        {/* LOGO REPLACEMENT: SEXY TEXT + PILL */}
-        <Link href="/" className="flex-shrink-0 mr-0 lg:mr-16 flex items-center gap-1 group">
+        {/* NEW LOGO: Sexy Bold Text + Tylenol Bubble .COM */}
+        <Link href="/" className="flex-shrink-0 mr-0 lg:mr-16 flex items-center gap-1.5 group">
           
-          {/* BOLD TEXT */}
-          <span className="text-xl md:text-2xl font-black tracking-widest text-white italic group-hover:text-slate-200 transition-colors">
+          {/* THE TEXT: Ultra bold, italic, tight tracking for that 'logo' feel */}
+          <span className="text-xl md:text-2xl font-black italic tracking-tighter text-white group-hover:text-slate-200 transition-colors">
             IHATECOLLEGE
           </span>
           
-          {/* THE "TYLENOL" BUBBLE */}
-          <span className="px-2 py-0.5 rounded-full bg-yellow-400 text-slate-950 text-[10px] md:text-xs font-extrabold tracking-tighter shadow-[0_0_10px_rgba(250,204,21,0.6)]">
+          {/* THE BUBBLE: Yellow pill, bold text, slight glow */}
+          <span className="px-2 py-0.5 rounded-full bg-yellow-400 text-slate-950 text-[10px] md:text-xs font-extrabold tracking-tight shadow-[0_0_12px_rgba(250,204,21,0.5)]">
             .COM
           </span>
         </Link>
