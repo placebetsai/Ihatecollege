@@ -3,27 +3,53 @@
 @tailwind utilities;
 
 /* Base theme */
-html, body { padding: 0; margin: 0; }
-body {
+html, body {
+  padding: 0;
+  margin: 0;
   background: radial-gradient(circle at 20% -10%, #0b1224, #020617 40%, #000 100%);
   color: #e5e7eb;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
-img { max-width: 100%; display: block; }
 
-/* Neon glow helper for cards */
-.glow-card {
-  position: relative;
-  border-radius: 1.25rem;
-  background: rgba(15, 23, 42, 0.92);
-  border: 1px solid rgba(56, 189, 248, 0.35);
-  box-shadow:
-    0 0 0.5rem rgba(56, 189, 248, 0.25),
-    0 0 2rem rgba(56, 189, 248, 0.15);
+img {
+  max-width: 100%;
+  display: block;
 }
+
+/* Glow card universal */
+.glow-card {
+  @apply relative rounded-2xl bg-slate-900/90 border border-cyan-400/30 p-8 transition-all duration-300;
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.18);
+}
+
 .glow-card:hover {
   border-color: rgba(56, 189, 248, 0.7);
-  box-shadow:
-    0 0 0.6rem rgba(56, 189, 248, 0.35),
-    0 0 2.4rem rgba(56, 189, 248, 0.25);
+  box-shadow: 0 0 22px rgba(56, 189, 248, 0.35);
+}
+
+/* HERO universal style */
+.hero-wrapper {
+  @apply text-center max-w-4xl mx-auto px-4;
+}
+
+.hero-eyebrow {
+  @apply inline-block mb-5 px-4 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-cyan-300 text-xs font-bold tracking-wide uppercase;
+}
+
+.hero-title {
+  @apply text-4xl md:text-6xl font-extrabold text-white mb-4 leading-tight;
+}
+
+.hero-subtitle {
+  @apply text-slate-300 text-lg md:text-xl leading-relaxed mb-8;
+}
+
+/* Section wrapper */
+.page-section {
+  @apply max-w-6xl mx-auto px-4 py-16;
+}
+
+/* Path grid */
+.path-grid {
+  @apply grid md:grid-cols-3 gap-8;
 }
