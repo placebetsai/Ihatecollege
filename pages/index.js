@@ -1,160 +1,106 @@
 // pages/index.js
 import Layout from "../components/Layout";
+import SEO from "../components/SEO";
+import DecisionWizard from "../components/DecisionWizard";
+import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <Layout title="College is optional. Debt isn't.">
-      {/* HERO WRAPPER — FIXED MOBILE GAP */}
-      <section
-        className="hero-wrapper"
-        style={{
-          minHeight: "auto",         // kill 100vh on mobile
-          paddingTop: "0.5rem",      // no black gap
-        }}
-      >
-        <div className="hero">
-          <p className="eyebrow">YOU DON'T HAVE TO SIGN YOUR LIFE AWAY</p>
+    <Layout>
+      <SEO 
+        title="College is Optional. Debt is Not. | IHateCollege.com"
+        description="The brutal truth about student debt and the high-income alternatives they don't teach you in high school."
+      />
 
-          <h1 className="hero-title">
-            College is <span className="accent">optional</span>. Debt isn&apos;t.
+      {/* HERO SECTION */}
+      <section className="relative pt-12 pb-20 md:pt-24 md:pb-32 overflow-hidden">
+        <div className="container mx-auto px-4 text-center">
+          
+          <div className="inline-block mb-6 px-4 py-1 rounded-full bg-slate-800 border border-slate-700 text-cyan-400 text-xs md:text-sm font-bold tracking-wide uppercase">
+             You don't have to sign your life away
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">
+            College is <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Optional.</span><br />
+            Debt is <span className="text-red-500">Not.</span>
           </h1>
-
-          <p className="hero-subtitle">
-            Before you sign away $50k–$150k, compare trades, tech careers,
-            apprenticeships, bootcamps, and real alternatives. Run the numbers.
-            Hear from real people. Then decide.
+          
+          <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Before you sign for $50k–$150k in loans, run the numbers. 
+            Compare trades, tech careers, apprenticeships, and real alternatives.
           </p>
-
-          <div className="hero-actions">
-            <a href="/alternatives" className="btn btn-primary">
-              Explore alternatives
-            </a>
-            <a href="/debt-calculator" className="btn btn-outline">
-              See what your degree really costs
-            </a>
+          
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Link href="/rank-your-school" className="px-8 py-4 bg-white text-slate-900 font-bold rounded-full hover:bg-slate-200 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+              Search School Debt
+            </Link>
+            <Link href="/debt-calculator" className="px-8 py-4 border border-slate-600 text-white font-bold rounded-full hover:bg-slate-800 transition-colors">
+              Calculate Cost
+            </Link>
           </div>
 
-          <div className="hero-stats">
-            <div className="stat">
-              <span className="stat-label">Avg 4-year total cost</span>
-              <span className="stat-value">$100k+ with living costs</span>
-            </div>
-            <div className="stat">
-              <span className="stat-label">Time in class</span>
-              <span className="stat-value">4+ years</span>
-            </div>
-            <div className="stat">
-              <span className="stat-label">Typical trade/cert path</span>
-              <span className="stat-value">6–24 months</span>
-            </div>
-            <div className="stat">
-              <span className="stat-label">Working while you train?</span>
-              <span className="stat-value">Often yes (apprenticeships)</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* HIGH-INCOME PATHS */}
-      <section className="section">
-        <h2 className="section-title">
-          High-income paths that DON&apos;T require a degree
-        </h2>
-
-        <div className="path-grid">
-          <div className="path-card">
-            <h3>Tech &amp; Cyber</h3>
-            <p className="path-body">
-              Cloud, cybersecurity, IT support, UX/UI. Remote-friendly, high
-              demand, stackable certs.
-            </p>
-            <ul className="path-list">
-              <li>Google IT Support / Cyber</li>
-              <li>CompTIA A+ / Network+ / Security+</li>
-              <li>Cloud certs (AWS, Azure, GCP)</li>
-            </ul>
-            <p className="path-link">Tech &amp; cyber cheat sheet →</p>
-          </div>
-
-          <div className="path-card">
-            <h3>Skilled Trades</h3>
-            <p className="path-body">
-              HVAC, electrician, welding, CDL. Paid apprenticeships, overtime,
-              and recession-resistant work.
-            </p>
-            <ul className="path-list">
-              <li>HVAC & electrical apprenticeships</li>
-              <li>Welding & fabrication programs</li>
-              <li>CDL for trucking & logistics</li>
-            </ul>
-            <p className="path-link">Trade-school breakdown →</p>
-          </div>
-
-          <div className="path-card">
-            <h3>No-Degree High Income</h3>
-            <p className="path-body">
-              Sales, real estate, notary, adjusting, and other license-based
-              careers with low upfront cost.
-            </p>
-            <ul className="path-list">
-              <li>Real-estate & mortgage licensing</li>
-              <li>Insurance & public adjusting</li>
-              <li>Notary & loan-signing work</li>
-            </ul>
-            <p className="path-link">License-based career paths →</p>
+          {/* HERO STATS */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 border-t border-slate-800 pt-8">
+             <div className="p-4">
+                <div className="text-2xl font-bold text-white">$37k+</div>
+                <div className="text-xs text-slate-500 uppercase">Avg Student Debt</div>
+             </div>
+             <div className="p-4">
+                <div className="text-2xl font-bold text-white">4 Years</div>
+                <div className="text-xs text-slate-500 uppercase">Time in Class</div>
+             </div>
+             <div className="p-4">
+                <div className="text-2xl font-bold text-cyan-400">6 Mos</div>
+                <div className="text-xs text-slate-500 uppercase">Typical Cert Path</div>
+             </div>
+             <div className="p-4">
+                <div className="text-2xl font-bold text-green-400">Paid</div>
+                <div className="text-xs text-slate-500 uppercase">Apprenticeships</div>
+             </div>
           </div>
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className="section">
-        <h2 className="section-title">Real people. Real results.</h2>
-
-        <div className="quote-list">
-          <figure className="quote-card">
-            <blockquote>
-              “Dropped out after year 2. Got Security+. Making $78k at 20.”
-            </blockquote>
-            <figcaption>— Jake, Boca Raton</figcaption>
-          </figure>
-
-          <figure className="quote-card">
-            <blockquote>
-              “HVAC instead of $80k loans. Made $95k with overtime last year.”
-            </blockquote>
-            <figcaption>— Marco, Miami</figcaption>
-          </figure>
-
-          <figure className="quote-card">
-            <blockquote>
-              “Cloud certs took 5 months. Now making more than my mom who went
-              to college.”
-            </blockquote>
-            <figcaption>— Rachel, Orlando</figcaption>
-          </figure>
+      {/* WIZARD SECTION */}
+      <section className="py-16 bg-slate-950 border-y border-slate-900">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-white">Should you go to college?</h2>
+            <p className="text-slate-400 mt-2">Take the 30-second logic check. No email required.</p>
+          </div>
+          <DecisionWizard />
         </div>
       </section>
 
-      {/* CTA SECTION */}
-      <section className="section section-cta">
-        <h2 className="section-title">Choose your path</h2>
-        <p className="section-subtitle">
-          You don&apos;t need a $100k campus and a dorm to make real money. Pick
-          a path and start building skills that actually pay.
-        </p>
+      {/* HIGH INCOME PATHS */}
+      <section className="py-24 bg-slate-900/50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-white mb-12 text-center">High-Income Paths (No Degree)</h2>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Tech */}
+            <div className="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 transition-all">
+              <h3 className="text-xl font-bold text-white mb-3">Tech & Cyber</h3>
+              <p className="text-slate-400 mb-6 text-sm">Cloud, cybersecurity, IT support. Remote-friendly, high demand.</p>
+              <Link href="/cheat-sheets" className="text-cyan-400 font-bold text-sm hover:underline">View Tech Cheat Sheet →</Link>
+            </div>
 
-        <div className="cta-buttons">
-          <a href="/trade-schools" className="btn btn-pill">
-            Trades path
-          </a>
-          <a href="/alternatives" className="btn btn-pill">
-            Tech &amp; certs
-          </a>
-          <a href="/civil-service" className="btn btn-pill">
-            Civil service &amp; gov jobs
-          </a>
+            {/* Trades */}
+            <div className="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-orange-500/50 transition-all">
+              <h3 className="text-xl font-bold text-white mb-3">Skilled Trades</h3>
+              <p className="text-slate-400 mb-6 text-sm">HVAC, electrician, welding, CDL. Paid apprenticeships.</p>
+              <Link href="/trade-schools" className="text-orange-400 font-bold text-sm hover:underline">Trade School Breakdown →</Link>
+            </div>
+
+            {/* Civil Service */}
+            <div className="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-green-500/50 transition-all">
+              <h3 className="text-xl font-bold text-white mb-3">Gov & Civil Service</h3>
+              <p className="text-slate-400 mb-6 text-sm">Federal, state, and city jobs. Pensions + Benefits.</p>
+              <Link href="/civil-service" className="text-green-400 font-bold text-sm hover:underline">Civil Service Guide →</Link>
+            </div>
+          </div>
         </div>
       </section>
     </Layout>
   );
-                }
+}
