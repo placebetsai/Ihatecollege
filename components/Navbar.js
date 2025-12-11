@@ -28,6 +28,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
+  // Close mobile menu when a link is clicked
   useEffect(() => {
     setOpen(false);
   }, [router.pathname]);
@@ -36,21 +37,17 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-800">
       <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
         
-        {/* NEW LOGO: Sexy Bold Text + Tylenol Bubble .COM */}
-        <Link href="/" className="flex-shrink-0 mr-0 lg:mr-16 flex items-center gap-1.5 group">
-          
-          {/* THE TEXT: Ultra bold, italic, tight tracking for that 'logo' feel */}
+        {/* LOGO: Visible on ALL screens */}
+        <Link href="/" className="flex-shrink-0 flex items-center gap-1 group z-50">
           <span className="text-xl md:text-2xl font-black italic tracking-tighter text-white group-hover:text-slate-200 transition-colors">
             IHATECOLLEGE
           </span>
-          
-          {/* THE BUBBLE: Yellow pill, bold text, slight glow */}
-          <span className="px-2 py-0.5 rounded-full bg-yellow-400 text-slate-950 text-[10px] md:text-xs font-extrabold tracking-tight shadow-[0_0_12px_rgba(250,204,21,0.5)]">
+          <span className="px-2 py-0.5 rounded-full bg-yellow-400 text-slate-950 text-[10px] md:text-xs font-extrabold tracking-tight shadow-[0_0_12px_rgba(250,204,21,0.6)]">
             .COM
           </span>
         </Link>
 
-        {/* DESKTOP NAV */}
+        {/* DESKTOP NAV: Hidden on mobile, Flex on Large screens */}
         <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
           {links.map((link) => (
             <Link
@@ -65,9 +62,9 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* MOBILE HAMBURGER */}
+        {/* MOBILE HAMBURGER: Visible on Mobile, Hidden on Large screens */}
         <button
-          className="lg:hidden p-2 text-slate-200 hover:text-white"
+          className="lg:hidden p-2 text-slate-200 hover:text-white z-50"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -79,17 +76,18 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* MOBILE MENU */}
+      {/* MOBILE MENU OVERLAY: Only shows when 'open' is true */}
       <nav 
-        className={`lg:hidden absolute top-20 left-0 w-full bg-slate-950 border-b border-slate-800 flex flex-col overflow-hidden transition-all duration-300 ease-in-out ${
-          open ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+        className={`lg:hidden fixed top-0 left-0 w-full h-screen bg-slate-950 flex flex-col items-center justify-center gap-8 transition-all duration-300 ease-in-out ${
+          open ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
         }`}
+        style={{ zIndex: 40 }}
       >
         {links.map((link) => (
           <Link
             key={link.href + "mobile"}
             href={link.href}
-            className={`p-4 border-b border-slate-800/50 text-center font-bold text-lg ${
+            className={`text-2xl font-bold ${
               router.pathname === link.href ? "text-yellow-400" : "text-slate-300"
             }`}
           >
