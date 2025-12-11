@@ -1,3 +1,4 @@
+// pages/index.js
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 import DecisionWizard from "../components/DecisionWizard";
@@ -11,7 +12,7 @@ export default function HomePage() {
         description="The brutal truth about student debt and the high-income alternatives they don't teach you in high school."
       />
 
-      {/* HERO SECTION - USING YOUR ORIGINAL CLASSES */}
+      {/* HERO SECTION - Original CSS Classes Restored */}
       <section className="hero-wrapper" style={{ minHeight: "auto", paddingTop: "0.5rem" }}>
         <div className="hero">
           <p className="eyebrow">YOU DON'T HAVE TO SIGN YOUR LIFE AWAY</p>
@@ -56,18 +57,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* NEW: DECISION WIZARD SECTION */}
-      <section className="section" style={{ background: "rgba(15,23,42,0.6)", borderTop: "1px solid rgba(255,255,255,0.1)", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-        <div style={{ maxWidth: "800px", margin: "0 auto", padding: "2rem 0" }}>
-          <h2 className="section-title" style={{ textAlign: "center" }}>Should you go to college?</h2>
-          <p className="section-subtitle" style={{ textAlign: "center", marginBottom: "2rem" }}>
-            Take the 30-second logic check. No email required.
-          </p>
-          <DecisionWizard />
+      {/* DECISION WIZARD - Kept because it helps retention */}
+      <section className="section" style={{ borderTop: "1px solid rgba(255,255,255,0.05)", background: "rgba(0,0,0,0.2)" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+           <h2 className="section-title" style={{ textAlign: "center", marginBottom: "0.5rem" }}>Should you go to college?</h2>
+           <p className="section-subtitle" style={{ textAlign: "center", marginBottom: "2rem" }}>Take the 30-second logic check.</p>
+           <DecisionWizard />
         </div>
       </section>
 
-      {/* HIGH-INCOME PATHS - YOUR ORIGINAL GRID */}
+      {/* HIGH-INCOME PATHS - Original Grid Restored */}
       <section className="section">
         <h2 className="section-title">
           High-income paths that DON&apos;T require a degree
@@ -124,7 +123,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA SECTION */}
+      {/* CTA SECTION - Original Styling */}
       <section className="section section-cta">
         <h2 className="section-title">Choose your path</h2>
         <p className="section-subtitle">
