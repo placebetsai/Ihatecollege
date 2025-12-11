@@ -18,60 +18,59 @@ export default function Layout({ children }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
-      {/* HEADER */}
-      <header className="fixed top-0 inset-x-0 z-50 bg-slate-950/95 border-b border-slate-800 backdrop-blur">
-        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-
-          {/* LOGO */}
-          <Link href="/" className="flex items-center gap-3 flex-shrink-0">
-            <img src="/icon.png" alt="Logo" className="h-8 w-8" />
-
-            <span className="text-lg font-extrabold tracking-[0.25em] uppercase whitespace-nowrap">
-              IHATECOLLEGE
-            </span>
-
-            <span className="px-3 py-1 rounded-full border border-indigo-400/70 text-xs font-semibold bg-slate-900/60">
-              .COM
+    <div className="min-h-screen bg-slate-950 text-slate-100">
+      {/* TOP NAVBAR */}
+      <header className="fixed top-0 inset-x-0 z-40 bg-slate-950/90 border-b border-slate-800 backdrop-blur">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
+          {/* Logo left */}
+          <Link href="/" className="flex items-center gap-2">
+            <img
+              src="/logo-header.png"
+              alt="IHateCollege.com logo"
+              className="h-8 w-auto"
+            />
+            <span className="hidden sm:inline text-sm font-semibold tracking-wide text-slate-100">
+              IHATECOLLEGE.COM
             </span>
           </Link>
 
-          {/* DESKTOP NAV */}
-          <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
+          {/* Desktop nav */}
+          <nav className="hidden lg:flex items-center gap-6 text-xs font-medium">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-slate-300 hover:text-white transition whitespace-nowrap"
+                className="text-slate-300 hover:text-white transition-colors"
               >
                 {link.label}
               </Link>
             ))}
           </nav>
 
-          {/* MOBILE BUTTON */}
+          {/* Mobile hamburger */}
           <button
-            className="lg:hidden p-2 text-slate-200"
-            onClick={() => setOpen(!open)}
+            className="lg:hidden inline-flex items-center justify-center p-2 rounded-md border border-slate-700 text-slate-200 hover:bg-slate-800"
+            onClick={() => setOpen((prev) => !prev)}
+            aria-label="Toggle main menu"
           >
             <div className="space-y-1">
-              <span className="block w-6 h-0.5 bg-white" />
-              <span className="block w-6 h-0.5 bg-white" />
-              <span className="block w-6 h-0.5 bg-white" />
+              <span className="block h-0.5 w-5 bg-slate-200" />
+              <span className="block h-0.5 w-5 bg-slate-200" />
+              <span className="block h-0.5 w-5 bg-slate-200" />
             </div>
           </button>
         </div>
 
-        {/* MOBILE NAV */}
+        {/* Mobile dropdown */}
         {open && (
-          <div className="lg:hidden bg-slate-950 border-t border-slate-800">
-            <nav className="grid grid-cols-2 gap-2 px-4 py-4 text-sm">
+          <div className="lg:hidden border-t border-slate-800 bg-slate-950">
+            <nav className="max-w-7xl mx-auto px-4 py-3 grid grid-cols-2 gap-2 text-sm">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  onClick={() => setOpen(false)}
                   className="py-2 text-slate-200 hover:text-white"
+                  onClick={() => setOpen(false)}
                 >
                   {link.label}
                 </Link>
@@ -81,8 +80,8 @@ export default function Layout({ children }) {
         )}
       </header>
 
-      {/* CONTENT */}
-      <main className="pt-20 flex-1">{children}</main>
+      {/* PAGE CONTENT */}
+      <main className="pt-20 pb-12">{children}</main>
 
       {/* FOOTER */}
       <footer className="border-t border-slate-800 py-6 text-center text-xs text-slate-500">
@@ -90,4 +89,4 @@ export default function Layout({ children }) {
       </footer>
     </div>
   );
-          }
+}
