@@ -1,13 +1,16 @@
+// components/SEO.js
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-const SITE_URL = "https://ihatecollege.com";
+const SITE_URL = "https://ihatecollege.com"; // make sure this is your live domain
+
+// Default image for social cards (Twitter, iMessage, FB, etc.)
+const DEFAULT_OG_IMAGE = `${SITE_URL}/social-card.png`;
 
 export default function SEO({
   title = "IHateCollege.com | Escape Debt, Build Wealth",
   description = "The no-BS guide to skipping the degree trap. Compare trade schools, certifications, and high-income paths that don't require $100k in loans.",
-  // YOUR NEW SOCIAL CARD
-  image = `${SITE_URL}/social-card.jpg`, 
+  image = DEFAULT_OG_IMAGE,
 }) {
   const router = useRouter();
   const path = router.asPath === "/" ? "" : router.asPath;
@@ -28,15 +31,16 @@ export default function SEO({
 
   return (
     <Head>
+      {/* Basic SEO */}
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={canonicalUrl} />
 
-      {/* YOUR NEW ICON */}
+      {/* Favicon / Icon */}
       <link rel="icon" href="/icon.png" />
       <link rel="apple-touch-icon" href="/icon.png" />
 
-      {/* Social Meta Tags */}
+      {/* Open Graph (Facebook/LinkedIn) */}
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="IHateCollege" />
       <meta property="og:title" content={title} />
@@ -44,15 +48,17 @@ export default function SEO({
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:image" content={image} />
 
+      {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
 
+      {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
     </Head>
   );
-}
+                                 }
