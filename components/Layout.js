@@ -21,35 +21,41 @@ export default function Layout({ children }) {
     <div className="min-h-screen bg-slate-950 text-slate-100">
       {/* TOP NAVBAR */}
       <header className="fixed top-0 inset-x-0 z-40 bg-slate-950/90 border-b border-slate-800 backdrop-blur">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-          {/* Logo left – back to simple icon + text */}
-          <Link href="/" className="flex items-center gap-2">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center h-16">
+          {/* Logo + text (always visible, even on mobile) */}
+          <Link
+            href="/"
+            className="flex items-center gap-2 flex-shrink-0"
+          >
             <img
               src="/icon.png"
               alt="IHateCollege.com"
               className="h-8 w-8 rounded-md object-contain"
             />
-            <span className="hidden sm:inline text-sm font-semibold tracking-wide text-slate-100">
+            <span className="text-xs sm:text-sm font-semibold tracking-wide text-slate-100 whitespace-nowrap">
               IHATECOLLEGE.COM
             </span>
           </Link>
 
-          {/* Desktop nav */}
+          {/* spacer pushes nav to the right */}
+          <div className="flex-1" />
+
+          {/* Desktop nav (md and up) */}
           <nav className="hidden md:flex items-center gap-6 text-xs font-medium">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-slate-300 hover:text-white transition-colors"
+                className="text-slate-300 hover:text-white transition-colors whitespace-nowrap"
               >
                 {link.label}
               </Link>
             ))}
           </nav>
 
-          {/* Mobile hamburger */}
+          {/* Mobile hamburger (only below md) */}
           <button
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-md border border-slate-700 text-slate-200 hover:bg-slate-800"
+            className="md:hidden inline-flex items-center justify-center p-2 rounded-md border border-slate-700 text-slate-200 hover:bg-slate-800 ml-3"
             onClick={() => setOpen((prev) => !prev)}
             aria-label="Toggle main menu"
           >
@@ -89,4 +95,4 @@ export default function Layout({ children }) {
       </footer>
     </div>
   );
-}
+                }
