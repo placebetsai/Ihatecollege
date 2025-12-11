@@ -2,30 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-/* --- BASE THEME --- */
+/* Base Setup */
 html, body {
   padding: 0;
   margin: 0;
-  background: #020617; /* Hard black/blue */
+  background: radial-gradient(circle at top, #020617, #020617 40%, #000 100%);
   color: #e5e7eb;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 img { max-width: 100%; display: block; }
 
-/* --- HOMEPAGE HERO ANIMATION --- */
+/* Patriotic Glow Animation (for homepage hero) */
 @keyframes patriotic-glow {
   0% { border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 0 18px rgba(56, 189, 248, 0.15); }
   50% { border-color: rgba(248, 113, 113, 0.4); box-shadow: 0 0 18px rgba(248, 113, 113, 0.15); }
   100% { border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 0 18px rgba(56, 189, 248, 0.15); }
 }
 
+/* Hero Section (with animation) */
 .hero {
   margin-top: 2rem;
   padding: 2.25rem 1.8rem;
   border-radius: 1.25rem;
   background: radial-gradient(circle at top left, #0f172a, #020617 55%, #000);
   border: 1px solid rgba(125, 211, 252, 0.25);
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.18);
   text-align: center;
   animation: patriotic-glow 6s infinite ease-in-out;
 }
@@ -34,66 +36,28 @@ img { max-width: 100%; display: block; }
 .eyebrow { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: #9ca3af; margin-bottom: 0.7rem; }
 .hero-subtitle { color: #d1d5db; font-size: 1rem; margin: 0 auto 1.5rem; max-width: 640px; }
 
-/* --- GLOBAL LAYOUTS --- */
+/* Grid Layout */
 .section { margin-top: 3rem; }
 .section-title { font-size: 1.5rem; margin-bottom: 1.2rem; font-weight: 700; text-align: center; }
+.path-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 
-.path-grid {
-  display: grid !important;
-  gap: 1.5rem !important;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+/* RESTORED GENERIC CARD CLASSES (critical for inner pages like Trade Schools, Cheat Sheets) */
+.glow-card, .path-card {
+  border-radius: 1rem;
+  padding: 1.25rem;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 0 0.5rem rgba(56, 189, 248, 0.25);
+  transition: all 0.25s ease;
 }
 
-/* --- THE CARD FIX (Using !important to force them to show up) --- */
-.glow-card,
-.path-card {
-  display: flex !important;
-  flex-direction: column !important;
-  border-radius: 1rem !important;
-  padding: 1.5rem !important;
-  background-color: rgba(15, 23, 42, 0.95) !important; /* Solid Dark Blue */
-  border: 1px solid rgba(56, 189, 248, 0.4) !important; /* Bright Blue Border */
-  box-shadow: 0 0 15px rgba(56, 189, 248, 0.15) !important;
-  margin-bottom: 1rem !important;
-  height: 100% !important;
-}
-
-.glow-card:hover,
-.path-card:hover {
+.glow-card:hover, .path-card:hover {
+  border-color: rgba(56, 189, 248, 0.7);
+  box-shadow: 0 0 0.6rem rgba(56, 189, 248, 0.35), 0 0 2.4rem rgba(56, 189, 248, 0.25);
   transform: translateY(-3px);
-  border-color: #38bdf8 !important; /* Cyan */
-  box-shadow: 0 0 25px rgba(56, 189, 248, 0.3) !important;
 }
 
-/* --- CARD CONTENT --- */
-.path-card h3, .glow-card h3 {
-  font-size: 1.25rem !important;
-  font-weight: 800 !important;
-  margin-bottom: 0.75rem !important;
-  color: #fff !important;
-}
-
-.path-card p, .glow-card p {
-  color: #cbd5e1 !important;
-  font-size: 0.95rem !important;
-  line-height: 1.5 !important;
-  margin-bottom: 1rem !important;
-}
-
-.path-card ul, .glow-card ul {
-  margin-bottom: 1.5rem !important;
-  padding-left: 1.25rem !important;
-  color: #cbd5e1 !important;
-  list-style-type: disc !important;
-}
-
-.path-link {
-  margin-top: auto !important;
-  color: #38bdf8 !important;
-  font-weight: 700 !important;
-  text-decoration: none !important;
-}
-
-.path-link:hover {
-  text-decoration: underline !important;
-}
+.path-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+.path-card p { color: #d1d5db; }
+.path-link { color: #38bdf8; font-weight: 600; margin-top: 0.5rem; }
+.path-link:hover { text-decoration: underline; }
