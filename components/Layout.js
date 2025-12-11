@@ -19,66 +19,64 @@ export default function Layout({ children }) {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
-      {/* TOP NAVBAR */}
-      <header className="fixed top-0 inset-x-0 z-40 bg-slate-950/90 border-b border-slate-800 backdrop-blur">
-        <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
-          {/* LEFT: ICON + TEXT + .COM */}
+      {/* HEADER */}
+      <header className="fixed top-0 inset-x-0 z-50 bg-slate-950/95 border-b border-slate-800 backdrop-blur">
+        <div className="mx-auto max-w-6xl px-4 h-16 flex items-center justify-between">
+          
+          {/* LOGO + TEXT */}
           <Link href="/" className="flex items-center gap-3 flex-shrink-0">
-            {/* small round icon */}
             <img
               src="/icon.png"
-              alt="IHateCollege logo"
+              alt="Logo"
               className="h-8 w-8 object-contain"
             />
 
-            {/* IHATECOLLEGE + .COM pill */}
             <div className="flex items-center gap-2">
-              <span className="text-lg font-extrabold tracking-[0.35em] uppercase text-slate-100">
+              <span className="text-lg font-extrabold tracking-[0.35em] uppercase">
                 IHATECOLLEGE
               </span>
-              <span className="px-3 py-1 rounded-full border border-indigo-400/80 text-xs font-semibold tracking-wide text-slate-100 bg-slate-900/70">
+              <span className="px-3 py-1 rounded-full border border-indigo-400/80 text-xs font-semibold tracking-wide bg-slate-900/60">
                 .COM
               </span>
             </div>
           </Link>
 
           {/* DESKTOP NAV */}
-          <nav className="hidden md:flex items-center gap-6 text-xs font-medium ml-8">
+          <nav className="hidden md:flex items-center gap-6 text-sm font-medium ml-8">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-slate-300 hover:text-white transition-colors whitespace-nowrap"
+                className="text-slate-300 hover:text-white whitespace-nowrap transition"
               >
                 {link.label}
               </Link>
             ))}
           </nav>
 
-          {/* MOBILE HAMBURGER */}
+          {/* MOBILE MENU BUTTON */}
           <button
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-md border border-slate-700 text-slate-200 hover:bg-slate-800"
-            onClick={() => setOpen((prev) => !prev)}
-            aria-label="Toggle main menu"
+            className="md:hidden p-2 text-slate-200"
+            onClick={() => setOpen(!open)}
           >
             <div className="space-y-1">
-              <span className="block h-0.5 w-6 bg-slate-200" />
-              <span className="block h-0.5 w-6 bg-slate-200" />
-              <span className="block h-0.5 w-6 bg-slate-200" />
+              <span className="block w-6 h-0.5 bg-white" />
+              <span className="block w-6 h-0.5 bg-white" />
+              <span className="block w-6 h-0.5 bg-white" />
             </div>
           </button>
         </div>
 
-        {/* MOBILE MENU */}
+        {/* MOBILE NAV */}
         {open && (
-          <div className="md:hidden border-t border-slate-800 bg-slate-950">
-            <nav className="max-w-6xl mx-auto px-4 py-3 grid grid-cols-2 gap-2 text-sm">
+          <div className="md:hidden bg-slate-950 border-t border-slate-800">
+            <nav className="grid grid-cols-2 gap-2 px-4 py-4 text-sm">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="py-2 text-slate-200 hover:text-white"
                   onClick={() => setOpen(false)}
+                  className="py-2 text-slate-200 hover:text-white"
                 >
                   {link.label}
                 </Link>
@@ -89,7 +87,7 @@ export default function Layout({ children }) {
       </header>
 
       {/* PAGE CONTENT */}
-      <main className="flex-1 pt-20 pb-12">
+      <main className="pt-20 flex-1">
         {children}
       </main>
 
@@ -99,4 +97,4 @@ export default function Layout({ children }) {
       </footer>
     </div>
   );
-}
+                }
