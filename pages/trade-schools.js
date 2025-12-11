@@ -6,77 +6,85 @@ export default function TradeSchools() {
   return (
     <Layout>
       <SEO
-        title="Trade Schools & Apprenticeships | IHateCollege.com"
-        description="Electrician, HVAC, welding, lineman, and CDL — real career paths with paid apprenticeships and no debt."
+        title="Trade Schools Near You | IHateCollege.com"
+        description="HVAC, electrical, welding, CDL, plumbing, and more. These careers pay $70k–$150k+ without a degree."
       />
 
       {/* HERO */}
       <section className="page-section text-center">
-        <p className="hero-eyebrow">EARN WHILE YOU LEARN</p>
-
+        <p className="hero-eyebrow">BUILD A SKILL. BUILD A LIFE.</p>
         <h1 className="hero-title">
-          Trade Schools & <span className="text-orange-300">Paid Apprenticeships</span>
+          Trade Schools & Apprenticeships{" "}
+          <span className="text-orange-400">That Pay Off Fast</span>
         </h1>
-
         <p className="hero-subtitle max-w-2xl mx-auto">
-          Trades will never die. They pay well, hire fast, and don’t require $80k
-          loans. You learn a skill — they pay you for it.
+          Real hands-on jobs that pay insanely well — and don’t require 4 years
+          of debt and dorm rooms.
         </p>
       </section>
 
       {/* GRID */}
-      <section className="page-section">
-        <div className="path-grid">
+      <section className="page-section max-w-6xl mx-auto px-4">
+        <div className="grid md:grid-cols-3 gap-8">
+
           {/* HVAC */}
-          <div className="glow-card p-6">
-            <h3 className="text-xl font-bold mb-2">HVAC / Refrigeration</h3>
-            <p className="text-slate-300 mb-4">
-              Year-round demand. Overtime king.
+          <div className="glow-card p-8">
+            <h3 className="text-xl font-bold mb-3">HVAC / Refrigeration</h3>
+            <p className="text-slate-300 text-sm mb-6">
+              Recession-proof, overtime-heavy, elite job security.
             </p>
-            <ul className="list-disc ml-5 text-slate-300 text-sm space-y-1 mb-4">
-              <li>$70k–$110k by year 2</li>
-              <li>Paid apprenticeships available</li>
-              <li>Commercial HVAC = big money</li>
+            <ul className="text-slate-300 space-y-2 text-sm mb-6">
+              <li>✓ $70k–$200k+</li>
+              <li>✓ Paid apprenticeships</li>
+              <li>✓ Install, repair, maintain systems</li>
             </ul>
+            <a
+              href="https://www.apprenticeship.gov/"
+              target="_blank"
+              className="text-orange-300 text-sm font-bold hover:underline"
+            >
+              Find HVAC Apprenticeships →
+            </a>
           </div>
 
           {/* ELECTRICIAN */}
-          <div className="glow-card p-6">
-            <h3 className="text-xl font-bold mb-2">Electrician</h3>
-            <p className="text-slate-300 mb-4">
-              One of the highest-paying blue-collar fields.
+          <div className="glow-card p-8">
+            <h3 className="text-xl font-bold mb-3">Electrician</h3>
+            <p className="text-slate-300 text-sm mb-6">
+              Union protection + high-income early in your career.
             </p>
-            <ul className="list-disc ml-5 text-slate-300 text-sm space-y-1 mb-4">
-              <li>Union + non-union options</li>
-              <li>$80k–$140k with OT</li>
-              <li>Low schooling cost</li>
+            <ul className="text-slate-300 space-y-2 text-sm mb-6">
+              <li>✓ $60k–$140k+</li>
+              <li>✓ Strong union benefits</li>
+              <li>✓ Upgrade to Master Electrician</li>
             </ul>
+            <a
+              href="https://www.ibew.org/"
+              target="_blank"
+              className="text-orange-300 text-sm font-bold hover:underline"
+            >
+              Electrician Training →
+            </a>
           </div>
 
           {/* WELDING */}
-          <div className="glow-card p-6">
-            <h3 className="text-xl font-bold mb-2">Welding / Fabrication</h3>
-            <p className="text-slate-300 mb-4">
-              The pay depends on your specialty — underwater = crazy money.
+          <div className="glow-card p-8">
+            <h3 className="text-xl font-bold mb-3">Welding & Fabrication</h3>
+            <p className="text-slate-300 text-sm mb-6">
+              High skill = high pay. Endless industry demand.
             </p>
-            <ul className="list-disc ml-5 text-slate-300 text-sm space-y-1 mb-4">
-              <li>Structural / pipeline</li>
-              <li>$50k–$120k depending on region</li>
-              <li>Short training timeline</li>
+            <ul className="text-slate-300 space-y-2 text-sm mb-6">
+              <li>✓ $70k–$180k+</li>
+              <li>✓ MIG, TIG, Pipe welding</li>
+              <li>✓ Travel welders earn top dollar</li>
             </ul>
-          </div>
-
-          {/* CDL */}
-          <div className="glow-card p-6">
-            <h3 className="text-xl font-bold mb-2">CDL Trucking</h3>
-            <p className="text-slate-300 mb-4">
-              Fastest path to high income with no degree.
-            </p>
-            <ul className="list-disc ml-5 text-slate-300 text-sm space-y-1 mb-4">
-              <li>Many schools cost $0 (company-paid)</li>
-              <li>$70k–$100k first year</li>
-              <li>Owner-operator: $150k–$250k+</li>
-            </ul>
+            <a
+              href="https://www.aws.org/certification"
+              target="_blank"
+              className="text-orange-300 text-sm font-bold hover:underline"
+            >
+              Welding Certification →
+            </a>
           </div>
         </div>
       </section>
@@ -84,20 +92,15 @@ export default function TradeSchools() {
       {/* CTA */}
       <section className="page-section text-center">
         <h2 className="text-2xl font-bold mb-3">
-          Want personalized recommendations?
+          Want help choosing the right trade?
         </h2>
-        <p className="text-slate-400 max-w-lg mx-auto mb-6">
-          Tell us your age, city, and goals — we’ll match you to real schools or
-          apprenticeships you can start now.
-        </p>
-
         <a
           href="/contact"
-          className="px-6 py-3 rounded-full bg-orange-400 text-black font-bold hover:bg-orange-300"
+          className="px-6 py-3 bg-orange-400 text-black rounded-full font-bold hover:bg-orange-300 transition"
         >
-          Find Your Best Path →
+          Ask for guidance →
         </a>
       </section>
     </Layout>
   );
-        }
+}
