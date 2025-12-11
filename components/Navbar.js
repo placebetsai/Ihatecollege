@@ -27,29 +27,30 @@ export default function Navbar() {
     <header className="site-header">
       <div className="nav-inner" style={{ display: 'flex', alignItems: 'center' }}>
         
-        {/* LOGO FIX: Taller container + Hard margin right */}
+        {/* LOGO FIX: Added mixBlendMode to hide the black box */}
         <Link 
           href="/" 
           className="logo-wrap" 
           style={{ 
             display: 'flex', 
             alignItems: 'center', 
-            height: '80px',       // Forces the bar to be taller
-            marginRight: '50px',  // Hard gap. Home button cannot cross this.
-            flexShrink: 0         // Prevents logo from getting squashed
+            height: '80px',       
+            marginRight: '50px',  
+            flexShrink: 0         
           }}
         >
           <Image 
-            src="/logo-header.png"  // Make sure this matches your file
+            src="/logo-header.png"  
             alt="IHATECOLLEGE.COM"
-            width={350}             // Requesting a wide render
-            height={80}             // Matching container height
+            width={350}             
+            height={80}             
             priority 
             style={{ 
-              height: '100%',       // Fills the 80px container
-              width: 'auto',        // Lets width expand naturally
-              objectFit: 'contain', // Keeps it sharp
-              maxHeight: 'none'     // Removes any CSS limits
+              height: '100%',       
+              width: 'auto',        
+              objectFit: 'contain', 
+              maxHeight: 'none',
+              mixBlendMode: 'screen' // <--- THIS REMOVES THE BLACK BOX
             }} 
           />
         </Link>
