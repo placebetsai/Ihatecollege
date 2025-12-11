@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image"; // Import the Image component
+import Image from "next/image"; 
 import { useRouter } from "next/router";
 
 const links = [
@@ -27,15 +27,15 @@ export default function Navbar() {
   return (
     <header className="site-header">
       <div className="nav-inner">
-        {/* LOGO - REPLACED TEXT WITH YOUR IMAGE */}
+        {/* LOGO - Swapped to the correct file ending in 374 */}
         <Link href="/" className="logo-wrap" style={{ display: 'flex', alignItems: 'center' }}>
           <Image 
-            src="/1765407974747.jpg" // Your social card image
+            src="/1765407955374.jpg" 
             alt="IHATECOLLEGE.COM Logo"
-            width={180} // Adjusted width for desktop
-            height={50} // Adjusted height to maintain aspect ratio
-            priority // Loads it immediately
-            style={{ objectFit: 'contain' }} // Ensures it doesn't get stretched
+            width={180} 
+            height={50} 
+            priority 
+            style={{ objectFit: 'contain' }} 
           />
         </Link>
 
