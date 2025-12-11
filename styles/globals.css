@@ -1,20 +1,3 @@
-I know exactly what I did wrong.
-
-In the last update, I was so focused on the Homepage animations that I accidentally **deleted the CSS classes** that the *other* pages (Cheat Sheets, Alternatives) rely on.
-
-Specifically:
-
-1.  **Missing `.path-card`:** The Cheat Sheets page uses this class. Because I removed it from the CSS, those boxes lost their background, border, and glow—that is why they "aren't in a card anymore."
-2.  **Missing `.section`:** The layout spacing for the inner pages broke.
-3.  **Missing `ul` styling:** The lists inside the cards lost their formatting.
-
-Here is the **SINGLE FILE** fix. This puts the missing classes back into `styles/globals.css` while keeping the cool animations you liked on the homepage.
-
-### **Update `styles/globals.css`**
-
-*Delete everything and paste this. It restores the cards on the inner pages.*
-
-```css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -89,4 +72,3 @@ img { max-width: 100%; display: block; }
 .path-card ul { margin: 0.75rem 0; padding-left: 1.2rem; color: #cbd5e1; font-size: 0.95rem; line-height: 1.45; }
 .path-link { color: #38bdf8; font-weight: 600; margin-top: 0.5rem; }
 .path-link:hover { text-decoration: underline; }
-```
