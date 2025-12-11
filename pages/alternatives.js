@@ -1,154 +1,143 @@
 // pages/alternatives.js
 import Layout from "../components/Layout";
+import SEO from "../components/SEO";
 
 export default function AlternativesPage() {
   return (
-    <Layout title="Real Alternatives to a 4-Year Degree">
+    <Layout>
+      <SEO
+        title="Real Alternatives to a 4-Year Degree"
+        description="Skip the dorms and debt. Explore real career alternatives that pay well without a traditional degree."
+      />
+
       {/* HERO */}
-      <section className="hero">
-        <p className="eyebrow">YOU HAVE OPTIONS</p>
-        <h1 className="hero-title">Real alternatives to the 4-year degree</h1>
-        <p className="hero-subtitle">
-          You don&apos;t have to live on campus, take random electives, and borrow
-          $80k+ to get a solid career. Here are paths people actually use to make
-          real money without a traditional degree.
+      <section className="page-section text-center">
+        <p className="hero-eyebrow">YOU HAVE OPTIONS</p>
+
+        <h1 className="hero-title">
+          Real alternatives to the{" "}
+          <span className="text-yellow-300">4-year degree</span>
+        </h1>
+
+        <p className="hero-subtitle max-w-2xl mx-auto">
+          You don’t have to borrow $80k+ to get a real career. These are paths
+          people actually use to make strong income without a traditional
+          degree.
         </p>
       </section>
 
-      {/* PATH CARDS */}
-      <section className="section">
-        <h2 className="section-title">Pick a lane that fits your life</h2>
+      {/* GRID */}
+      <section className="page-section">
+        <h2 className="text-3xl font-bold text-white mb-10 text-center">
+          Pick a lane that fits your life
+        </h2>
 
         <div className="path-grid">
-          {/* Tech & Cyber */}
-          <div className="path-card">
-            <h3>Tech &amp; Cyber</h3>
-            <p className="path-body">
-              For people who like computers, problem-solving, and remote work.
-              Stack certs instead of debt and get into IT, cloud, or cybersecurity.
+          {/* TECH */}
+          <div className="glow-card">
+            <h3 className="text-xl font-bold mb-2">Tech & Cyber</h3>
+
+            <p className="text-slate-300 mb-4">
+              Remote work, high pay, and zero degree needed. Just certs.
             </p>
-            <ul className="path-list">
-              <li>
-                Google Career Certificates (IT Support, Cyber, Data Analytics)
-              </li>
+
+            <ul className="list-disc ml-5 text-sm space-y-1 text-slate-300 mb-4">
+              <li>Google Certificates (IT, Cyber, Data)</li>
               <li>CompTIA A+, Network+, Security+</li>
-              <li>Cloud certs (AWS, Azure, GCP)</li>
+              <li>Cloud Certs (AWS, Azure)</li>
             </ul>
-            <p className="path-link">
-              <a
-                href="https://grow.google/certificates/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Google Career Certificates →
-              </a>
-            </p>
-            <p className="path-link">
-              <a
-                href="https://www.comptia.org/certifications"
-                target="_blank"
-                rel="noreferrer"
-              >
-                CompTIA certification paths →
-              </a>
-            </p>
+
+            <a
+              href="https://grow.google/certificates/"
+              target="_blank"
+              className="text-cyan-300 hover:underline font-semibold"
+            >
+              Google Career Certificates →
+            </a>
           </div>
 
-          {/* Skilled trades */}
-          <div className="path-card">
-            <h3>Skilled trades</h3>
-            <p className="path-body">
-              For people who like working with their hands and want overtime,
-              job security, and recession-proof skills.
+          {/* TRADES */}
+          <div className="glow-card">
+            <h3 className="text-xl font-bold mb-2">Skilled Trades</h3>
+
+            <p className="text-slate-300 mb-4">
+              High job security + big overtime. Earn while you learn.
             </p>
-            <ul className="path-list">
-              <li>HVAC &amp; refrigeration</li>
-              <li>Electrician &amp; lineman</li>
-              <li>Welding &amp; fabrication</li>
-              <li>CDL / truck driving</li>
+
+            <ul className="list-disc ml-5 text-sm space-y-1 text-slate-300 mb-4">
+              <li>HVAC & refrigeration</li>
+              <li>Electrician / Lineman</li>
+              <li>Welding / Fabrication</li>
+              <li>CDL / Trucking</li>
             </ul>
-            <p className="path-link">
-              <a
-                href="https://www.apprenticeship.gov/apprenticeship-job-finder"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Find paid apprenticeships near you →
-              </a>
-            </p>
-            <p className="path-link">
-              <a
-                href="/trade-schools"
-              >
-                Trade school breakdown →
-              </a>
-            </p>
+
+            <a
+              href="https://www.apprenticeship.gov/apprenticeship-job-finder"
+              target="_blank"
+              className="text-cyan-300 hover:underline font-semibold"
+            >
+              Find paid apprenticeships →
+            </a>
           </div>
 
-          {/* No-degree high income */}
-          <div className="path-card">
-            <h3>No-degree high income</h3>
-            <p className="path-body">
-              For people who like talking to people, selling, or running their
-              own thing. License &gt; dorm.
+          {/* SALES */}
+          <div className="glow-card">
+            <h3 className="text-xl font-bold mb-2">
+              No-Degree High Income Paths
+            </h3>
+
+            <p className="text-slate-300 mb-4">
+              If you’re good with people, this is the highest upside.
             </p>
-            <ul className="path-list">
-              <li>Real-estate agent or loan officer</li>
-              <li>Insurance &amp; public adjusting</li>
-              <li>Notary &amp; loan-signing work</li>
-              <li>High-ticket sales &amp; commission roles</li>
+
+            <ul className="list-disc ml-5 text-sm space-y-1 text-slate-300 mb-4">
+              <li>Real Estate</li>
+              <li>Insurance / Public Adjusting</li>
+              <li>Notary / Loan Signing</li>
+              <li>High-ticket Sales</li>
             </ul>
-            <p className="path-link">
-              <a
-                href="https://www.nar.realtor/education"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Real-estate licensing info →
-              </a>
-            </p>
+
+            <a
+              href="https://www.nar.realtor/education"
+              target="_blank"
+              className="text-cyan-300 hover:underline font-semibold"
+            >
+              Real Estate Licensing →
+            </a>
           </div>
         </div>
       </section>
 
-      {/* HOW TO PICK A PATH */}
-      <section className="section">
-        <h2 className="section-title">How to pick a path in 3 steps</h2>
-        <ol className="path-list">
-          <li>
-            <strong>Reality-check your numbers.</strong> Use the Debt Calculator
-            page to see what your “dream” degree actually costs monthly.
-          </li>
-          <li>
-            <strong>Match your lifestyle.</strong> Need money fast? Look at
-            trades or sales. Want remote work? Lean into tech &amp; cyber.
-          </li>
-          <li>
-            <strong>Commit to a 6–12 month sprint.</strong> Treat your cert,
-            license, or apprenticeship like a full-time mission. No half-assing.
-          </li>
-        </ol>
-      </section>
+      {/* CTA */}
+      <section className="page-section text-center">
+        <h2 className="text-2xl font-bold mb-4">Next move:</h2>
 
-      {/* NEXT MOVES */}
-      <section className="section section-cta">
-        <h2 className="section-title">Next move: pick one thing to explore</h2>
-        <p className="section-subtitle">
-          Don&apos;t &quot;research&quot; forever. Click one thing and find an
-          apprenticeship or program you could actually start this month.
+        <p className="text-slate-400 max-w-xl mx-auto mb-6">
+          Don’t spend 3 months “researching.” Pick one thing you could start
+          THIS month.
         </p>
-        <div className="cta-buttons">
-          <a href="/trade-schools" className="btn btn-pill">
+
+        <div className="flex flex-wrap justify-center gap-4">
+          <a
+            href="/trade-schools"
+            className="px-6 py-3 rounded-full border border-cyan-400/40 text-cyan-200 hover:bg-slate-800"
+          >
             Explore trade schools
           </a>
-          <a href="/cheat-sheets" className="btn btn-pill">
-            See cheat sheets
+          <a
+            href="/cheat-sheets"
+            className="px-6 py-3 rounded-full border border-cyan-400/40 text-cyan-200 hover:bg-slate-800"
+          >
+            View cheat sheets
           </a>
-          <a href="/debt-calculator" className="btn btn-pill">
-            Run the debt calculator
+          <a
+            href="/debt-calculator"
+            className="px-6 py-3 rounded-full border border-cyan-400/40 text-cyan-200 hover:bg-slate-800"
+          >
+            Run debt calculator
           </a>
         </div>
       </section>
     </Layout>
   );
-            }
+}
