@@ -19,52 +19,45 @@ export default function Layout({ children }) {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
-
       {/* HEADER */}
-      <header className="fixed top-0 inset-x-0 z-50 bg-slate-950/95 backdrop-blur border-b border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+      <header className="fixed top-0 inset-x-0 z-50 bg-slate-950/95 border-b border-slate-800 backdrop-blur">
+        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
 
-          {/* LOGO + TEXT */}
+          {/* LOGO */}
           <Link href="/" className="flex items-center gap-3 flex-shrink-0">
-            <img
-              src="/icon.png"
-              alt="Logo"
-              className="h-10 w-10 object-contain"
-            />
+            <img src="/icon.png" alt="Logo" className="h-8 w-8" />
 
-            <div className="flex items-center gap-2">
-              <span className="text-xl font-extrabold tracking-[0.35em] uppercase">
-                IHATECOLLEGE
-              </span>
+            <span className="text-lg font-extrabold tracking-[0.25em] uppercase whitespace-nowrap">
+              IHATECOLLEGE
+            </span>
 
-              <span className="px-4 py-1 rounded-full border border-indigo-400/70 bg-slate-900/60 text-xs font-bold tracking-wide">
-                .COM
-              </span>
-            </div>
+            <span className="px-3 py-1 rounded-full border border-indigo-400/70 text-xs font-semibold bg-slate-900/60">
+              .COM
+            </span>
           </Link>
 
           {/* DESKTOP NAV */}
-          <nav className="hidden lg:flex items-center gap-8 text-sm font-medium ml-12">
+          <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-slate-300 hover:text-white whitespace-nowrap transition"
+                className="text-slate-300 hover:text-white transition whitespace-nowrap"
               >
                 {link.label}
               </Link>
             ))}
           </nav>
 
-          {/* MOBILE MENU BUTTON */}
+          {/* MOBILE BUTTON */}
           <button
             className="lg:hidden p-2 text-slate-200"
             onClick={() => setOpen(!open)}
           >
             <div className="space-y-1">
-              <span className="block w-7 h-0.5 bg-white" />
-              <span className="block w-7 h-0.5 bg-white" />
-              <span className="block w-7 h-0.5 bg-white" />
+              <span className="block w-6 h-0.5 bg-white" />
+              <span className="block w-6 h-0.5 bg-white" />
+              <span className="block w-6 h-0.5 bg-white" />
             </div>
           </button>
         </div>
@@ -78,7 +71,7 @@ export default function Layout({ children }) {
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="py-2 text-slate-200 hover:text-white transition"
+                  className="py-2 text-slate-200 hover:text-white"
                 >
                   {link.label}
                 </Link>
@@ -88,8 +81,8 @@ export default function Layout({ children }) {
         )}
       </header>
 
-      {/* PAGE CONTENT */}
-      <main className="pt-24 flex-1">{children}</main>
+      {/* CONTENT */}
+      <main className="pt-20 flex-1">{children}</main>
 
       {/* FOOTER */}
       <footer className="border-t border-slate-800 py-6 text-center text-xs text-slate-500">
@@ -97,4 +90,4 @@ export default function Layout({ children }) {
       </footer>
     </div>
   );
-}
+          }
