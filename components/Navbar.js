@@ -26,18 +26,33 @@ export default function Navbar() {
   return (
     <header className="site-header">
       <div className="nav-inner">
-        {/* LINKED TO YOUR NEW LOGO FILE */}
-        <Link href="/" className="logo-wrap" style={{ display: 'flex', alignItems: 'center', height: '60px' }}>
+        {/* LOGO SECTION */}
+        <Link 
+          href="/" 
+          className="logo-wrap" 
+          style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            // THIS IS THE FIX: Hard margin pushes "Home" away
+            marginRight: '40px' 
+          }}
+        >
           <Image 
             src="/logo-header.png" 
             alt="IHATECOLLEGE.COM"
-            width={240} 
-            height={60} 
+            width={300} 
+            height={80} 
             priority 
-            style={{ width: 'auto', height: '100%', objectFit: 'contain' }} 
+            style={{ 
+              // THIS IS THE FIX: Forces it to be tall and wide
+              height: '55px', 
+              width: 'auto', 
+              maxWidth: 'none' // Prevents it from getting squashed
+            }} 
           />
         </Link>
 
+        {/* DESKTOP NAV */}
         <nav className="nav-links-desktop">
           {links.map((link) => (
             <Link
@@ -50,6 +65,7 @@ export default function Navbar() {
           ))}
         </nav>
 
+        {/* MOBILE HAMBURGER */}
         <button
           className="nav-toggle"
           aria-label="Toggle navigation menu"
