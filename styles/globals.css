@@ -30,10 +30,10 @@ img { max-width: 100%; display: block; }
   animation: patriotic-glow 6s infinite ease-in-out;
 }
 
+/* This restores the cards on the OTHER pages (Alternatives, Cheat Sheets) */
 .path-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 
-/* Card Animations */
-.glow-card {
+.glow-card, .path-card {
   border-radius: 1rem;
   padding: 1.25rem;
   background: rgba(15, 23, 42, 0.92);
@@ -42,16 +42,14 @@ img { max-width: 100%; display: block; }
   transition: all 0.3s ease;
 }
 
-.glow-card:hover {
+.glow-card:hover, .path-card:hover {
   transform: translateY(-3px);
   border-color: rgba(56, 189, 248, 0.8);
   box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
 }
 
-/* Specific Card Colors */
-.path-grid > div:nth-child(1):hover { border-color: #facc15; box-shadow: 0 0 20px rgba(250, 204, 21, 0.4); } /* Tech = Yellow */
-.path-grid > div:nth-child(2):hover { border-color: #f472b6; box-shadow: 0 0 20px rgba(244, 114, 182, 0.4); } /* Trades = Pink */
-.path-grid > div:nth-child(3):hover { border-color: #4ade80; box-shadow: 0 0 20px rgba(74, 222, 128, 0.4); } /* Gov = Green */
-
+/* Helper Classes */
+.path-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+.path-card p { color: #d1d5db; }
 .path-link { color: #38bdf8; font-weight: 600; margin-top: 0.5rem; }
 .path-link:hover { text-decoration: underline; }
