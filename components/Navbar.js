@@ -36,7 +36,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-800">
       <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
         
-        {/* LOGO: Sexy Bold Text + Bubble .COM (NO IMAGE) */}
+        {/* LOGO: Sexy Bold Text + Bubble .COM */}
         <Link href="/" className="flex-shrink-0 flex items-center gap-1 group z-50 mr-4 lg:mr-8">
           <span className="text-xl md:text-2xl font-black italic tracking-tighter text-white group-hover:text-slate-200 transition-colors">
             IHATECOLLEGE
