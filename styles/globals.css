@@ -2,10 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* GLOBAL RESET */
-*, *::before, *::after { box-sizing: border-box; }
-
-html, body {
+/* Base dark theme + font */
+html,
+body {
   padding: 0;
   margin: 0;
   background: radial-gradient(circle at top, #020617, #020617 40%, #000 100%);
@@ -13,67 +12,35 @@ html, body {
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
 }
 
-a { color: inherit; text-decoration: none; }
-img { max-width: 100%; display: block; }
-
-/* HERO */
-.hero {
-  margin-top: 1.5rem;
-  padding: 2.25rem 1.8rem;
-  border-radius: 1.25rem;
-  background: radial-gradient(circle at top left, #0f172a, #020617 55%, #000);
-  border: 1px solid rgba(125, 211, 252, 0.25);
-  box-shadow: 0 0 18px rgba(56, 189, 248, 0.18);
+/* Images behave nicely */
+img {
+  max-width: 100%;
+  display: block;
 }
 
-.eyebrow {
-  font-size: 0.78rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #9ca3af;
-  margin-bottom: 0.7rem;
-}
-
-.hero-title {
-  font-size: 2.4rem;
-  font-weight: 800;
-  line-height: 1.15;
-  margin-bottom: 1rem;
-}
-
-.accent { color: #facc15; }
-
-.hero-subtitle {
-  max-width: 640px;
-  color: #d1d5db;
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-/* CARDS */
-.path-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-}
-
-.path-card {
+/* === GLOW CARDS === */
+.card-glow {
+  position: relative;
   border-radius: 1rem;
-  padding: 1rem;
-  background: rgba(15, 23, 42, 0.92);
-  border: 1px solid rgba(125, 211, 252, 0.45);
-  transition: 0.2s;
+  overflow: hidden;
 }
 
-.path-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(56, 189, 248, 0.8);
+.card-glow::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #38bdf8, #818cf8);
+  filter: blur(18px);
+  opacity: 0.25;
+  transition: opacity 0.25s ease;
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .path-grid { grid-template-columns: 1fr; }
+.card-glow:hover::before {
+  opacity: 0.6;
 }
