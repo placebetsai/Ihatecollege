@@ -1,17 +1,26 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image"; 
+import Image from "next/image";
 import { useRouter } from "next/router";
 
 const links = [
   { href: "/", label: "Home" },
   { href: "/alternatives", label: "Alternatives" },
-  { href: "/debt-calculator", label: "Debt Calculator" },
-  { href: "/cheat-sheets", label: "Cheat Sheets" },
-  { href: "/rank-your-school", label: "Rank School" },
-  { href: "/liberal-vs-conservative", label: "Campus Vibes" },
-  { href: "/trade-schools", label: "Trades" },
-  { href: "/civil-service", label: "Gov Jobs" },
+  { href: "/debt-calculator", label: <>Debt<br />Calculator</> },
+  { href: "/cheat-sheets", label: <>Cheat<br />Sheets</> },
+  { href: "/rank-your-school", label: <>Rank<br />School</> },
+  {
+    href: "/liberal-vs-conservative",
+    label: (
+      <span style={{ display: 'block', lineHeight: '0.9' }}>
+        Conservative<br />
+        <span style={{ fontSize: '0.75em', opacity: 0.7, display: 'block', margin: '2px 0' }}>or</span>
+        Liberal
+      </span>
+    )
+  },
+  { href: "/trade-schools", label: <>Trade<br />School</> },
+  { href: "/civil-service", label: <>Gov<br />Jobs</> },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -25,39 +34,31 @@ export default function Navbar() {
 
   return (
     <header className="site-header">
-      <div className="nav-inner" style={{ display: 'flex', alignItems: 'center' }}>
-        
-        {/* LOGO FIX: Added mixBlendMode to hide the black box */}
-        <Link 
-          href="/" 
-          className="logo-wrap" 
-          style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            height: '80px',       
-            marginRight: '50px',  
-            flexShrink: 0         
-          }}
+      <div className="nav-inner">
+
+        {/* LOGO */}
+        <Link
+          href="/"
+          className="logo-wrap"
         >
-          <Image 
-            src="/logo-header.png"  
+          <Image
+            src="/logo-header.png"
             alt="IHATECOLLEGE.COM"
-            width={350}             
-            height={80}             
-            priority 
-            style={{ 
-              height: '100%',       
-              width: 'auto',        
-              objectFit: 'contain', 
-              maxHeight: 'none',
-              mixBlendMode: 'screen' // <--- THIS REMOVES THE BLACK BOX
-            }} 
+            width={280}
+            height={70}
+            priority
+            style={{
+              height: '100%',
+              width: 'auto',
+              objectFit: 'contain',
+              mixBlendMode: 'multiply' // <--- THIS FIXES THE WHITE BOX
+            }}
           />
         </Link>
 
         {/* DESKTOP NAV */}
-        <nav className="nav-links-desktop" style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-          {links.map((link) => (
+        <nav className="nav-links-desktop">
+          {links.map((link, index) => (
             <Link
               key={link.href}
               href={link.href}
@@ -80,6 +81,7 @@ export default function Navbar() {
         </button>
       </div>
 
+      {/* MOBILE MENU DROPDOWN */}
       <nav className={open ? "nav-links-mobile open" : "nav-links-mobile"}>
         {links.map((link) => (
           <Link
