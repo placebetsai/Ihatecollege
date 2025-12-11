@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 
@@ -6,18 +6,16 @@ export default function RankYourSchool() {
   const [query, setQuery] = useState("");
   const [schools, setSchools] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [hasSearched, setHasSearched] = useState(false);
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    if (!query.trim()) return;
+  // Auto-search on load so the page isn't empty
+  useEffect(() => {
+    fetchSchools("University");
+  }, []);
 
+  const fetchSchools = async (searchTerm) => {
     setLoading(true);
-    setHasSearched(true);
-    setSchools([]); // Clear old results
-
     try {
-      const res = await fetch(`/api/college-rankings?search=${encodeURIComponent(query)}`);
+      const res = await fetch(`/api/college-rankings?search=${encodeURIComponent(searchTerm)}`);
       const data = await res.json();
       setSchools(data.results || []);
     } catch (error) {
@@ -27,10 +25,16 @@ export default function RankYourSchool() {
     }
   };
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (!query.trim()) return;
+    fetchSchools(query);
+  };
+
   return (
     <Layout>
       <SEO 
-        title="Rank Your School | Real Debt & Earnings Data" 
+        title="Rank Your College | Real Debt & Earnings Data" 
         description="Search the government database to see the real cost, debt, and earnings for any college in America."
       />
       
@@ -42,29 +46,50 @@ export default function RankYourSchool() {
           </p>
 
           <form onSubmit={handleSearch} className="rankings-search">
-            <div style={{ display: "flex", gap: "10px" }}>
+            <div style={{ 
+              display: "flex", 
+              gap: "10px", 
+              background: "#0f172a", 
+              padding: "8px", 
+              borderRadius: "999px",
+              border: "1px solid #334155",
+              boxShadow: "0 0 15px rgba(0,0,0,0.5)"
+            }}>
               <input
                 type="text"
-                className="rankings-search-input"
-                placeholder="Enter college name (e.g. Florida State)"
+                placeholder="Enter college name..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
+                style={{
+                  flex: 1,
+                  background: "transparent",
+                  border: "none",
+                  color: "white",
+                  padding: "1rem",
+                  fontSize: "1rem",
+                  outline: "none"
+                }}
               />
-              <button type="submit" className="btn btn-primary" style={{ padding: "0 2rem" }}>
+              <button 
+                type="submit" 
+                className="btn btn-primary" 
+                style={{ 
+                  padding: "0 2.5rem",
+                  borderRadius: "999px",
+                  fontWeight: "bold",
+                  cursor: "pointer",
+                  border: "none"
+                }}
+              >
                 {loading ? "..." : "Search"}
               </button>
             </div>
           </form>
 
-          {/* RESULTS AREA */}
+          {/* LIVE LIST RESULTS */}
           <div style={{ marginTop: "3rem", textAlign: "left" }}>
+            {loading && <p style={{ color: "#22d3ee", textAlign: "center" }}>Loading real government data...</p>}
             
-            {loading && <p style={{ color: "#22d3ee", textAlign: "center" }}>Searching government database...</p>}
-            
-            {!loading && hasSearched && schools.length === 0 && (
-              <p style={{ color: "#9ca3af", textAlign: "center" }}>No schools found. Try a different name.</p>
-            )}
-
             <div style={{ display: "grid", gap: "1rem" }}>
               {schools.map((school) => (
                 <div key={school.id} className="path-card" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
