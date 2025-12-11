@@ -1,4 +1,3 @@
-// components/Navbar.js
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -33,7 +32,8 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="nav-links-desktop">
+        {/* Added marginLeft: "auto" to push links to the right side */}
+        <nav className="nav-links-desktop" style={{ marginLeft: "auto" }}>
           {links.map((link) => (
             <Link
               key={link.href}
@@ -61,7 +61,7 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* MOBILE MENU (fixed version) */}
+      {/* MOBILE MENU */}
       <nav className={open ? "nav-links-mobile open" : "nav-links-mobile"}>
         {links.map((link) => (
           <Link
