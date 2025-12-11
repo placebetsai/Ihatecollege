@@ -12,11 +12,11 @@ const links = [
   {
     href: "/liberal-vs-conservative",
     label: (
-      <span style={{ display: 'block', lineHeight: '0.9' }}>
-        Conservative<br />
-        <span style={{ fontSize: '0.75em', opacity: 0.7, display: 'block', margin: '2px 0' }}>or</span>
-        Liberal
-      </span>
+      <div style={{ display: 'flex', flexDirection: 'column', lineHeight: '1', alignItems: 'center' }}>
+        <span>Liberal</span>
+        <span style={{ fontSize: '0.7em', opacity: 0.6, margin: '2px 0' }}>or</span>
+        <span>Conservative</span>
+      </div>
     )
   },
   { href: "/trade-schools", label: <>Trade<br />School</> },
@@ -34,35 +34,51 @@ export default function Navbar() {
 
   return (
     <header className="site-header">
-      <div className="nav-inner">
+      <div className="nav-inner" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 
-        {/* LOGO */}
+        {/* LOGO FIX */}
         <Link
           href="/"
           className="logo-wrap"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            height: '70px',
+            marginRight: '20px',
+            flexShrink: 0
+          }}
         >
           <Image
             src="/logo-header.png"
             alt="IHATECOLLEGE.COM"
-            width={280}
-            height={70}
+            width={320}
+            height={80}
             priority
             style={{
               height: '100%',
               width: 'auto',
               objectFit: 'contain',
-              mixBlendMode: 'multiply' // <--- THIS FIXES THE WHITE BOX
+              // THIS IS THE FIX: 'screen' makes the BLACK background transparent
+              mixBlendMode: 'screen' 
             }}
           />
         </Link>
 
         {/* DESKTOP NAV */}
-        <nav className="nav-links-desktop">
+        <nav className="nav-links-desktop" style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
           {links.map((link, index) => (
             <Link
               key={link.href}
               href={link.href}
               className={router.pathname === link.href ? "nav-link nav-link-active" : "nav-link"}
+              style={{
+                textAlign: 'center',
+                fontSize: '0.85rem',
+                fontWeight: '500',
+                display: 'flex',
+                alignItems: 'center',
+                height: '100%'
+              }}
             >
               {link.label}
             </Link>
@@ -81,7 +97,7 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* MOBILE MENU DROPDOWN */}
+      {/* MOBILE MENU */}
       <nav className={open ? "nav-links-mobile open" : "nav-links-mobile"}>
         {links.map((link) => (
           <Link
@@ -89,7 +105,8 @@ export default function Navbar() {
             href={link.href}
             className={router.pathname === link.href ? "nav-link-mobile nav-link-mobile-active" : "nav-link-mobile"}
           >
-            {link.label}
+            {/* Flatten complex labels for mobile view if needed, or keep generic */}
+            {typeof link.label === 'string' ? link.label : (link.href === '/liberal-vs-conservative' ? 'Liberal vs Conservative' : 'Link')}
           </Link>
         ))}
       </nav>
