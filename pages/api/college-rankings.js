@@ -1,18 +1,16 @@
-// pages/api/college-rankings.js
 export default async function handler(req, res) {
+  // Uses the key from your environment variables
   const API_KEY = process.env.COLLEGE_SCORECARD_API_KEY;
 
   if (!API_KEY) {
-    // We log this so you can check Vercel logs if it fails
-    console.error("API Key missing"); 
     return res.status(500).json({ error: "Server config error: Key missing" });
   }
 
-  const { search = "" } = req.query;
+  // Default to "University" so the list isn't empty on load
+  const { search = "University" } = req.query;
   const page = 0;
-  const perPage = 20;
+  const perPage = 25;
 
-  // We request these specific fields from the gov API
   const fields = [
     "id",
     "school.name",
@@ -23,7 +21,6 @@ export default async function handler(req, res) {
     "latest.earnings.10_yrs_after_entry.median"
   ].join(",");
 
-  // Construct the real URL
   const url = `https://api.data.gov/ed/collegescorecard/v1/schools?api_key=${API_KEY}&school.name=${encodeURIComponent(search)}&per_page=${perPage}&page=${page}&fields=${fields}`;
 
   try {
@@ -31,7 +28,6 @@ export default async function handler(req, res) {
     if (!resp.ok) throw new Error(`Gov API error: ${resp.status}`);
     const data = await resp.json();
 
-    // Map the ugly government data keys to clean ones for your frontend
     const results = (data.results || []).map((item) => ({
       id: item.id,
       name: item["school.name"],
