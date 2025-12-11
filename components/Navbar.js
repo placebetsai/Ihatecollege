@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image"; // Import the Image component
 import { useRouter } from "next/router";
 
 const links = [
@@ -7,10 +8,10 @@ const links = [
   { href: "/alternatives", label: "Alternatives" },
   { href: "/debt-calculator", label: "Debt Calculator" },
   { href: "/cheat-sheets", label: "Cheat Sheets" },
-  { href: "/rank-your-school", label: "Rank Your School" },
-  { href: "/liberal-vs-conservative", label: "Liberal vs Conservative" },
-  { href: "/trade-schools", label: "Trade Schools" },
-  { href: "/civil-service", label: "Civil Service" },
+  { href: "/rank-your-school", label: "Rank School" },
+  { href: "/liberal-vs-conservative", label: "Campus Vibes" },
+  { href: "/trade-schools", label: "Trades" },
+  { href: "/civil-service", label: "Gov Jobs" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -26,14 +27,20 @@ export default function Navbar() {
   return (
     <header className="site-header">
       <div className="nav-inner">
-        <Link href="/" className="logo-wrap">
-          <span className="logo-text">IHATECOLLEGE</span>
-          <span className="logo-pill">.COM</span>
+        {/* LOGO - REPLACED TEXT WITH YOUR IMAGE */}
+        <Link href="/" className="logo-wrap" style={{ display: 'flex', alignItems: 'center' }}>
+          <Image 
+            src="/1765407974747.jpg" // Your social card image
+            alt="IHATECOLLEGE.COM Logo"
+            width={180} // Adjusted width for desktop
+            height={50} // Adjusted height to maintain aspect ratio
+            priority // Loads it immediately
+            style={{ objectFit: 'contain' }} // Ensures it doesn't get stretched
+          />
         </Link>
 
-        {/* Desktop Navigation */}
-        {/* Added marginLeft: "auto" to push links to the right side */}
-        <nav className="nav-links-desktop" style={{ marginLeft: "auto" }}>
+        {/* DESKTOP NAV */}
+        <nav className="nav-links-desktop">
           {links.map((link) => (
             <Link
               key={link.href}
@@ -49,7 +56,7 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Mobile Hamburger */}
+        {/* MOBILE HAMBURGER */}
         <button
           className="nav-toggle"
           aria-label="Toggle navigation menu"
@@ -61,7 +68,7 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* MOBILE MENU */}
+      {/* MOBILE MENU DROPDOWN */}
       <nav className={open ? "nav-links-mobile open" : "nav-links-mobile"}>
         {links.map((link) => (
           <Link

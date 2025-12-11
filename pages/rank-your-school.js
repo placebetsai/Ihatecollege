@@ -4,70 +4,92 @@ import SEO from "../components/SEO";
 
 export default function RankYourSchool() {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
+  const [schools, setSchools] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [searched, setSearched] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    if (!query) return;
+    if (!query.trim()) return;
+
     setLoading(true);
-    setSearched(true);
-    
-    // In a real app, this fetches from your API. 
-    // We'll simulate a fetch for now to prevent crashes.
+    setHasSearched(true);
+    setSchools([]); // Clear old results
+
     try {
-      const res = await fetch(`/api/college-rankings?search=${query}`);
+      const res = await fetch(`/api/college-rankings?search=${encodeURIComponent(query)}`);
       const data = await res.json();
-      setResults(data.results || []);
-    } catch (err) {
-      console.error(err);
+      setSchools(data.results || []);
+    } catch (error) {
+      console.error("Search failed:", error);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
     <Layout>
-      <SEO title="Rank Your School | Real Student Reviews" />
-      <section className="pt-20 pb-20 min-h-screen">
-        <div className="container mx-auto px-4 text-center max-w-3xl">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Is your school a scam?
-          </h1>
-          <p className="text-slate-400 mb-8">
-            Search 3,000+ colleges to see real costs, debt numbers, and student ratings.
+      <SEO 
+        title="Rank Your School | Real Debt & Earnings Data" 
+        description="Search the government database to see the real cost, debt, and earnings for any college in America."
+      />
+      
+      <section className="site-main">
+        <div style={{ maxWidth: "800px", margin: "0 auto", textAlign: "center", paddingTop: "2rem" }}>
+          <h1 className="hero-title">Is your school a <span className="accent">scam?</span></h1>
+          <p className="hero-subtitle" style={{ margin: "0 auto 2rem" }}>
+            Search the official government database. See the real cost, average debt, and alumni earnings.
           </p>
 
-          <form onSubmit={handleSearch} className="flex gap-2 mb-12">
-            <input 
-              type="text" 
-              placeholder="Search by school name (e.g. Ohio State)" 
-              className="flex-1 p-4 rounded-full bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-cyan-500"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-            <button type="submit" className="bg-cyan-500 hover:bg-cyan-600 text-white font-bold px-8 py-4 rounded-full">
-              Search
-            </button>
+          <form onSubmit={handleSearch} className="rankings-search">
+            <div style={{ display: "flex", gap: "10px" }}>
+              <input
+                type="text"
+                className="rankings-search-input"
+                placeholder="Enter college name (e.g. Florida State)"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+              <button type="submit" className="btn btn-primary" style={{ padding: "0 2rem" }}>
+                {loading ? "..." : "Search"}
+              </button>
+            </div>
           </form>
 
-          {loading && <div className="text-cyan-400">Searching database...</div>}
+          {/* RESULTS AREA */}
+          <div style={{ marginTop: "3rem", textAlign: "left" }}>
+            
+            {loading && <p style={{ color: "#22d3ee", textAlign: "center" }}>Searching government database...</p>}
+            
+            {!loading && hasSearched && schools.length === 0 && (
+              <p style={{ color: "#9ca3af", textAlign: "center" }}>No schools found. Try a different name.</p>
+            )}
 
-          {!loading && searched && results.length === 0 && (
-            <div className="text-slate-500">No results found. Try a different name.</div>
-          )}
-
-          <div className="space-y-4 text-left">
-            {results.map((school) => (
-              <div key={school.id} className="bg-slate-900 p-6 rounded-2xl border border-slate-800">
-                <h3 className="text-xl font-bold text-white">{school.name}</h3>
-                <div className="flex gap-4 text-sm text-slate-400 mt-2">
-                  <span>📍 {school.city}, {school.state}</span>
-                  <span>💰 Avg Cost: {school.cost}</span>
-                  <span className="text-red-400">📉 Debt: {school.debt}</span>
+            <div style={{ display: "grid", gap: "1rem" }}>
+              {schools.map((school) => (
+                <div key={school.id} className="path-card" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
+                  <div>
+                    <h3 style={{ margin: 0, color: "white", fontSize: "1.2rem" }}>{school.name}</h3>
+                    <p style={{ margin: 0, color: "#9ca3af", fontSize: "0.9rem" }}>{school.city}, {school.state}</p>
+                  </div>
+                  
+                  <div style={{ display: "flex", gap: "2rem", textAlign: "right" }}>
+                    <div>
+                      <div style={{ fontSize: "0.8rem", color: "#9ca3af", textTransform: "uppercase" }}>Avg Cost</div>
+                      <div style={{ fontWeight: "bold", color: "#e5e7eb" }}>{school.cost}</div>
+                    </div>
+                    <div>
+                      <div style={{ fontSize: "0.8rem", color: "#9ca3af", textTransform: "uppercase" }}>Avg Debt</div>
+                      <div style={{ fontWeight: "bold", color: "#f87171" }}>{school.debt}</div>
+                    </div>
+                    <div>
+                      <div style={{ fontSize: "0.8rem", color: "#9ca3af", textTransform: "uppercase" }}>Earnings</div>
+                      <div style={{ fontWeight: "bold", color: "#4ade80" }}>{school.earnings}</div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
