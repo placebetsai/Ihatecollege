@@ -12,107 +12,67 @@ export default function HomePage() {
         description="The brutal truth about student debt and the high-income alternatives they don't teach you in high school. Trade schools, tech certs, and sales careers."
       />
 
-      {/* HERO CARD SECTION */}
-      <section className="pt-24 pb-16 px-4">
-        <div className="max-w-6xl mx-auto grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,1.4fr)] items-start">
-          {/* Left: main hero card */}
-          <div className="bg-slate-950/90 border border-slate-800/80 rounded-3xl p-8 md:p-10 shadow-[0_0_40px_rgba(15,23,42,0.9)]">
-            <p className="text-[11px] tracking-[0.25em] uppercase text-slate-400 mb-4">
-              YOU DON&apos;T HAVE TO SIGN YOUR LIFE AWAY
-            </p>
+      {/* HERO SECTION */}
+      <section className="relative pt-10 pb-20 md:pt-20 md:pb-32 overflow-hidden">
+        <div className="container mx-auto px-4 text-center">
+          <p className="inline-block mb-6 px-4 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-cyan-400 text-xs md:text-sm font-bold tracking-wide uppercase">
+            You don&apos;t have to sign your life away
+          </p>
 
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4 leading-tight">
-              College is{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400">
-                optional.
-              </span>{" "}
-              Debt isn&apos;t.
-            </h1>
+          <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight leading-tight">
+            College is{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+              Optional.
+            </span>
+            <br />
+            Debt is <span className="text-red-500">Not.</span>
+          </h1>
 
-            <p className="text-sm md:text-base text-slate-300 max-w-xl mb-6 leading-relaxed">
-              Before you sign away $50k–$150k, compare trades, tech careers,
-              apprenticeships, and real alternatives. Run the numbers. Hear
-              from real people. Then decide.
-            </p>
+          <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Before you sign for $50k–$150k in loans, run the numbers. Compare
+            trades, tech careers, apprenticeships, and real alternatives.
+          </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 mb-6">
-              <Link
-                href="/alternatives"
-                className="inline-flex justify-center items-center px-6 py-3 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 text-slate-900 font-semibold text-sm shadow-lg shadow-orange-500/30 hover:brightness-110 transition"
-              >
-                Explore alternatives
-              </Link>
-              <Link
-                href="/debt-calculator"
-                className="inline-flex justify-center items-center px-6 py-3 rounded-full border border-slate-600 text-slate-100 text-sm font-semibold hover:bg-slate-900/70 transition"
-              >
-                See what your degree really costs
-              </Link>
-            </div>
-
-            {/* quick bullets */}
-            <div className="space-y-1.5 text-xs md:text-sm text-slate-400">
-              <p>
-                <span className="font-semibold text-slate-200">
-                  Avg 4-year total cost:
-                </span>{" "}
-                $100k+ with living costs
-              </p>
-              <p>
-                <span className="font-semibold text-slate-200">
-                  Time in class:
-                </span>{" "}
-                4+ years
-              </p>
-              <p>
-                <span className="font-semibold text-slate-200">
-                  Typical trade/cert path:
-                </span>{" "}
-                6–24 months
-              </p>
-              <p>
-                <span className="font-semibold text-slate-200">
-                  Working while you train?
-                </span>{" "}
-                Often yes (apprenticeships).
-              </p>
-            </div>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Link
+              href="/alternatives"
+              className="px-8 py-4 bg-white text-slate-900 font-bold rounded-full hover:bg-slate-200 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+            >
+              Explore Alternatives
+            </Link>
+            <Link
+              href="/debt-calculator"
+              className="px-8 py-4 border border-slate-600 text-white font-bold rounded-full hover:bg-slate-800 transition-colors"
+            >
+              See the Real Cost
+            </Link>
           </div>
 
-          {/* Right: small stat cards on desktop, stacked on mobile */}
-          <div className="space-y-4">
-            <div className="rounded-2xl border border-slate-800 bg-slate-950/80 p-4">
-              <p className="text-xs font-semibold tracking-[0.2em] text-slate-400 uppercase mb-2">
-                What they don&apos;t tell you
-              </p>
-              <p className="text-sm text-slate-300">
-                Tuition is up{" "}
-                <span className="font-semibold text-yellow-400">180%</span> in 20
-                years. Wages? Basically flat.
-              </p>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-2xl border border-slate-800 bg-slate-950/80 p-4">
-                <div className="text-lg font-bold text-white">$37k+</div>
-                <div className="text-[11px] uppercase text-slate-500 mt-1">
-                  Avg student debt
-                </div>
-              </div>
-              <div className="rounded-2xl border border-slate-800 bg-slate-950/80 p-4">
-                <div className="text-lg font-bold text-cyan-400">6–24 mo</div>
-                <div className="text-[11px] uppercase text-slate-500 mt-1">
-                  Typical cert / trade path
-                </div>
+          {/* HERO STATS */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 border-t border-slate-800 pt-8">
+            <div className="p-4">
+              <div className="text-2xl font-bold text-white">$37k+</div>
+              <div className="text-xs text-slate-500 uppercase">
+                Avg Student Debt
               </div>
             </div>
-            <div className="rounded-2xl border border-slate-800 bg-slate-950/80 p-4">
-              <p className="text-xs text-slate-400 mb-1 uppercase tracking-[0.2em]">
-                Real options
-              </p>
-              <p className="text-sm text-slate-300">
-                Tech, trades, sales, civil service. Paths people actually use to
-                make real money without a traditional degree.
-              </p>
+            <div className="p-4">
+              <div className="text-2xl font-bold text-white">4 Years</div>
+              <div className="text-xs text-slate-500 uppercase">
+                Time in Class
+              </div>
+            </div>
+            <div className="p-4">
+              <div className="text-2xl font-bold text-cyan-400">6 Mos</div>
+              <div className="text-xs text-slate-500 uppercase">
+                Typical Cert Path
+              </div>
+            </div>
+            <div className="p-4">
+              <div className="text-2xl font-bold text-green-400">Paid</div>
+              <div className="text-xs text-slate-500 uppercase">
+                Apprenticeships
+              </div>
             </div>
           </div>
         </div>
@@ -120,12 +80,12 @@ export default function HomePage() {
 
       {/* WIZARD SECTION */}
       <section className="py-16 bg-slate-950 border-y border-slate-900">
-        <div className="max-w-4xl mx-auto px-4">
+        <div className="container mx-auto px-4">
           <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-white">
+            <h2 className="text-3xl font-bold text-white">
               Should you go to college?
             </h2>
-            <p className="text-slate-400 mt-2 text-sm md:text-base">
+            <p className="text-slate-400 mt-2">
               Take the 30-second logic check. No email required.
             </p>
           </div>
@@ -134,72 +94,103 @@ export default function HomePage() {
       </section>
 
       {/* HIGH INCOME PATHS */}
-      <section className="py-20 bg-slate-900/40">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-8 text-center">
-            High-income paths that DON&apos;T require a degree
+      <section className="py-24 bg-slate-900/50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-white mb-12 text-center">
+            High-Income Paths (No Degree)
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-8">
             {/* Tech */}
-            <div className="group relative p-6 rounded-2xl bg-slate-950 border border-slate-800 hover:border-cyan-500/60 transition-all hover:-translate-y-1">
-              <h3 className="text-lg font-bold text-white mb-2">Tech &amp; Cyber</h3>
-              <p className="text-slate-400 mb-4 text-sm leading-relaxed">
+            <div className="card-glow group relative p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 transition-all hover:-translate-y-1">
+              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <svg
+                  className="w-24 h-24 text-cyan-400"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H9v-2h6v2zm-3-7l-2.5-2.5L12 6l2.5 2.5L12 11z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">
+                Tech &amp; Cyber
+              </h3>
+              <p className="text-slate-400 mb-6 text-sm leading-relaxed">
                 Cloud, cybersecurity, IT support. Remote-friendly, high demand.
-                Stack certs instead of debt.
+                You can stack certs instead of debt.
               </p>
-              <ul className="space-y-1.5 mb-4 text-xs text-slate-300">
-                <li>• Google IT / Cyber Career Certificates</li>
-                <li>• CompTIA A+, Network+, Security+</li>
-                <li>• AWS / Azure cloud certs</li>
+              <ul className="space-y-2 mb-6 text-sm text-slate-300">
+                <li>✓ Google IT Support / Cyber</li>
+                <li>✓ CompTIA A+ / Security+</li>
+                <li>✓ AWS / Azure Cloud</li>
               </ul>
               <Link
                 href="/cheat-sheets"
-                className="text-cyan-400 text-xs font-semibold hover:underline"
+                className="text-cyan-400 font-bold text-sm hover:underline"
               >
-                View tech cheat sheet →
+                View Tech Cheat Sheet →
               </Link>
             </div>
 
             {/* Trades */}
-            <div className="group relative p-6 rounded-2xl bg-slate-950 border border-slate-800 hover:border-orange-500/60 transition-all hover:-translate-y-1">
-              <h3 className="text-lg font-bold text-white mb-2">Skilled trades</h3>
-              <p className="text-slate-400 mb-4 text-sm leading-relaxed">
-                HVAC, electrician, welding, CDL. Paid apprenticeships mean you
-                earn while you learn.
+            <div className="card-glow group relative p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-orange-500/50 transition-all hover:-translate-y-1">
+              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <svg
+                  className="w-24 h-24 text-orange-400"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">
+                Skilled Trades
+              </h3>
+              <p className="text-slate-400 mb-6 text-sm leading-relaxed">
+                HVAC, electrician, welding, CDL. Paid apprenticeships means you
+                earn while you learn. Recession resistant.
               </p>
-              <ul className="space-y-1.5 mb-4 text-xs text-slate-300">
-                <li>• Paid apprenticeships &amp; unions</li>
-                <li>• Overtime &amp; recession-resistant</li>
-                <li>• Real income in 1–2 years</li>
+              <ul className="space-y-2 mb-6 text-sm text-slate-300">
+                <li>✓ Paid Apprenticeships</li>
+                <li>✓ Union Protection</li>
+                <li>✓ Overtime Potential</li>
               </ul>
               <Link
                 href="/trade-schools"
-                className="text-orange-400 text-xs font-semibold hover:underline"
+                className="text-orange-400 font-bold text-sm hover:underline"
               >
-                Trade school breakdown →
+                Trade School Breakdown →
               </Link>
             </div>
 
             {/* Civil Service */}
-            <div className="group relative p-6 rounded-2xl bg-slate-950 border border-slate-800 hover:border-green-500/60 transition-all hover:-translate-y-1">
-              <h3 className="text-lg font-bold text-white mb-2">
-                Gov &amp; civil service
+            <div className="card-glow group relative p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-green-500/50 transition-all hover:-translate-y-1">
+              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <svg
+                  className="w-24 h-24 text-green-400"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">
+                Gov &amp; Civil Service
               </h3>
-              <p className="text-slate-400 mb-4 text-sm leading-relaxed">
-                Federal, state, and city jobs. Many don&apos;t require degrees—just
-                exams and persistence.
+              <p className="text-slate-400 mb-6 text-sm leading-relaxed">
+                Federal, state, and city jobs. Many don&apos;t require degrees,
+                just exams. Pensions + benefits.
               </p>
-              <ul className="space-y-1.5 mb-4 text-xs text-slate-300">
-                <li>• USPS, logistics, corrections</li>
-                <li>• Fire, police, EMS</li>
-                <li>• TSA, CBP, other agencies</li>
+              <ul className="space-y-2 mb-6 text-sm text-slate-300">
+                <li>✓ USPS &amp; Logistics</li>
+                <li>✓ Fire &amp; Police</li>
+                <li>✓ TSA / Border Control</li>
               </ul>
               <Link
                 href="/civil-service"
-                className="text-green-400 text-xs font-semibold hover:underline"
+                className="text-green-400 font-bold text-sm hover:underline"
               >
-                Civil service guide →
+                Civil Service Guide →
               </Link>
             </div>
           </div>
@@ -207,37 +198,37 @@ export default function HomePage() {
       </section>
 
       {/* CTA SECTION */}
-      <section className="py-16 text-center">
-        <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
-            Choose your path instead of your debt
+      <section className="py-20 text-center">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-white mb-4">
+            Choose your path
           </h2>
-          <p className="text-slate-400 mb-6 text-sm md:text-base">
-            You don&apos;t need a $100k dorm and random electives to make real money.
+          <p className="text-slate-400 mb-8 max-w-lg mx-auto">
+            You don&apos;t need a $100k campus and a dorm to make real money.
             Pick a path and start building skills that actually pay.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/trade-schools"
-              className="border border-slate-600 px-6 py-2 rounded-full hover:bg-slate-900 text-sm"
+              className="border border-slate-600 px-6 py-2 rounded-full hover:bg-slate-800"
             >
               Trades path
             </Link>
             <Link
               href="/alternatives"
-              className="border border-slate-600 px-6 py-2 rounded-full hover:bg-slate-900 text-sm"
+              className="border border-slate-600 px-6 py-2 rounded-full hover:bg-slate-800"
             >
               Tech &amp; certs
             </Link>
             <Link
               href="/contact"
-              className="border border-slate-600 px-6 py-2 rounded-full hover:bg-slate-900 text-sm"
+              className="border border-slate-600 px-6 py-2 rounded-full hover:bg-slate-800"
             >
-              Contact us
+              Contact Us
             </Link>
           </div>
         </div>
       </section>
     </Layout>
   );
-              }
+                }
