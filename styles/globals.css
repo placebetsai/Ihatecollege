@@ -1,72 +1,62 @@
-/* TAILWIND ENGINE */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ===================================== */
+/* FULL GLOBAL RESTORE - INNER PAGE THEME */
+/* ===================================== */
 
-/* GLOBAL THEME */
-html, body {
-  padding: 0;
-  margin: 0;
-  background: radial-gradient(circle at 25% -10%, #0b1224, #020617 40%, #000 100%);
-  color: #e5e7eb;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-
-img {
-  max-width: 100%;
-  display: block;
-}
-
-/* ------------------------------ */
-/* HERO SECTION RESTORE           */
-/* ------------------------------ */
-
+/* Hero Variants for Inner Pages */
 .hero {
-  margin-top: 2rem;
-  padding: 2.5rem 1.8rem;
+  margin: 2rem auto;
+  padding: 2.25rem 1.8rem;
   border-radius: 1.25rem;
   background: radial-gradient(circle at top left, #0f172a, #020617 55%, #000);
   border: 1px solid rgba(125, 211, 252, 0.25);
   box-shadow: 0 0 18px rgba(56, 189, 248, 0.18);
   text-align: center;
-}
-
-.hero-title {
-  font-size: 2.4rem;
-  line-height: 1.15;
-  margin-bottom: 1rem;
-  font-weight: 800;
-}
-
-.hero-subtitle {
-  font-size: 1.05rem;
-  color: #d1d5db;
-  margin-top: 0.75rem;
+  max-width: 900px;
 }
 
 .eyebrow {
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #9ca3af;
   margin-bottom: 0.7rem;
 }
 
-/* ------------------------------ */
-/* GRID RESTORE                   */
-/* ------------------------------ */
+.hero-title {
+  font-size: 2.1rem;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+  font-weight: 800;
+}
 
+.hero-subtitle {
+  max-width: 700px;
+  margin: 0 auto;
+  color: #d1d5db;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+/* Page Section Blocks */
 .section {
-  margin-top: 2.8rem;
+  margin-top: 2.5rem;
 }
 
 .section-title {
   font-size: 1.6rem;
-  margin-bottom: 1.2rem;
-  text-align: center;
   font-weight: 700;
+  margin-bottom: 1.1rem;
+  text-align: center;
 }
 
+.section-subtitle {
+  font-size: 1rem;
+  color: #cbd5e1;
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+/* 3-Column Grid */
 .path-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -79,54 +69,54 @@ img {
   }
 }
 
-/* ------------------------------ */
-/* CARD RESTORE                   */
-/* ------------------------------ */
-
+/* Cards Used on ALL Inner Pages */
 .path-card {
   border-radius: 1.25rem;
-  padding: 1.4rem;
+  padding: 1.25rem;
   background: rgba(15, 23, 42, 0.92);
   border: 1px solid rgba(125, 211, 252, 0.35);
-  transition: 0.2s ease;
+  transition: 0.25s;
 }
 
 .path-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(56, 189, 248, 0.85);
+  border-color: rgba(56, 189, 248, 0.75);
   box-shadow: 0 0 22px rgba(56, 189, 248, 0.4);
 }
 
 .path-card h3 {
-  font-size: 1.2rem;
-  margin-bottom: 0.6rem;
+  font-size: 1.25rem;
   font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 
-.path-card ul {
-  margin: 0.75rem 0;
+.path-card p {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  margin-bottom: 0.75rem;
+}
+
+.path-list {
+  margin: 0.75rem 0 1rem;
   padding-left: 1.1rem;
   line-height: 1.45;
-  color: #cbd5e1;
-  font-size: 0.95rem;
+  color: #d1d5db;
 }
 
 .path-link a {
-  color: #38bdf8;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 600;
+  color: #38bdf8;
 }
 
 .path-link a:hover {
   text-decoration: underline;
 }
 
-/* ------------------------------ */
-/* CTA SECTIONS RESTORE           */
-/* ------------------------------ */
-
+/* CTA Sections */
 .section-cta {
-  margin-top: 3rem;
+  margin-top: 2.5rem;
+  padding: 1.5rem 0;
   text-align: center;
 }
 
@@ -137,38 +127,17 @@ img {
   flex-wrap: wrap;
 }
 
-.btn {
+.btn-primary {
   padding: 0.55rem 1.2rem;
   border-radius: 999px;
   font-weight: 600;
-  border: 1px solid rgba(148, 163, 184, 0.7);
-}
-
-.btn-primary {
   background: linear-gradient(135deg, #facc15, #f97316);
   color: #111;
 }
 
 .btn-pill {
-  padding: 0.65rem 1.4rem;
   border-radius: 999px;
+  padding: 0.65rem 1.4rem;
   border: 1px solid rgba(125, 211, 252, 0.65);
   background: rgba(15, 23, 42, 0.8);
-}
-
-/* ------------------------------ */
-/* GLOW CARD (HOME PAGE)          */
-/* ------------------------------ */
-
-.glow-card {
-  border-radius: 1.25rem;
-  background: rgba(15, 23, 42, 0.92);
-  border: 1px solid rgba(56, 189, 248, 0.35);
-  box-shadow: 0 0 0.5rem rgba(56, 189, 248, 0.25), 0 0 2rem rgba(56, 189, 248, 0.15);
-  transition: 0.25s ease;
-}
-
-.glow-card:hover {
-  border-color: rgba(56, 189, 248, 0.7);
-  box-shadow: 0 0 0.6rem rgba(56, 189, 248, 0.35), 0 0 2.4rem rgba(56, 189, 248, 0.25);
 }
