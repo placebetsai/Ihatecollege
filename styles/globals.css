@@ -13,14 +13,14 @@ html, body {
 
 img { max-width: 100%; display: block; }
 
-/* Patriotic Glow Animation (for homepage hero) */
+/* Patriotic Glow Animation (Homepage Hero Only) */
 @keyframes patriotic-glow {
   0% { border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 0 18px rgba(56, 189, 248, 0.15); }
   50% { border-color: rgba(248, 113, 113, 0.4); box-shadow: 0 0 18px rgba(248, 113, 113, 0.15); }
   100% { border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 0 18px rgba(56, 189, 248, 0.15); }
 }
 
-/* Hero Section (with animation) */
+/* Hero Section (with Animation) */
 .hero {
   margin-top: 2rem;
   padding: 2.25rem 1.8rem;
@@ -41,7 +41,7 @@ img { max-width: 100%; display: block; }
 .section-title { font-size: 1.5rem; margin-bottom: 1.2rem; font-weight: 700; text-align: center; }
 .path-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 
-/* RESTORED GENERIC CARD CLASSES (critical for inner pages like Trade Schools, Cheat Sheets) */
+/* RESTORED BOXES FOR INNER PAGES (glow-card and path-card — this is what Gemini deleted) */
 .glow-card, .path-card {
   border-radius: 1rem;
   padding: 1.25rem;
@@ -49,6 +49,7 @@ img { max-width: 100%; display: block; }
   border: 1px solid rgba(56, 189, 248, 0.35);
   box-shadow: 0 0 0.5rem rgba(56, 189, 248, 0.25);
   transition: all 0.25s ease;
+  margin-bottom: 1rem; /* Adds space between cards */
 }
 
 .glow-card:hover, .path-card:hover {
@@ -57,7 +58,12 @@ img { max-width: 100%; display: block; }
   transform: translateY(-3px);
 }
 
-.path-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
-.path-card p { color: #d1d5db; }
+.path-card h3, .glow-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+.path-card p, .glow-card p { color: #d1d5db; }
 .path-link { color: #38bdf8; font-weight: 600; margin-top: 0.5rem; }
 .path-link:hover { text-decoration: underline; }
+
+/* Extra for inner page grids (e.g., civil-service, alternatives) */
+.job-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+.college-card { @apply glow-card; } /* Applies glow to liberal-vs-conservative cards */
+.rank-result { @apply glow-card p-4; } /* Applies to rank-your-school results */
