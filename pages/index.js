@@ -12,7 +12,7 @@ export default function HomePage() {
       />
 
       {/* HERO SECTION */}
-      <section className="site-main" style={{ paddingBottom: '1rem' }}>
+      <section className="hero-wrapper" style={{ paddingTop: "1rem" }}>
         <div className="hero">
           <p className="eyebrow">YOU DON'T HAVE TO SIGN YOUR LIFE AWAY</p>
 
@@ -23,7 +23,7 @@ export default function HomePage() {
           <p className="hero-subtitle">
             Before you sign away $50k–$150k, compare trades, tech careers, 
             apprenticeships, and real alternatives. Run the numbers. 
-            Hear from real people. Then decide.
+            Then decide.
           </p>
 
           <div className="hero-actions">
@@ -37,94 +37,75 @@ export default function HomePage() {
 
           <div className="hero-stats">
             <div className="stat">
-              <span className="eyebrow" style={{ marginBottom: '0.2rem' }}>Avg 4-year cost</span>
-              <div style={{ fontWeight: '700', fontSize: '1.1rem' }}>$100k+</div>
+              <span className="eyebrow" style={{marginBottom:'5px'}}>Avg 4-year Cost</span>
+              <span className="stat-value">$100k+</span>
             </div>
             <div className="stat">
-              <span className="eyebrow" style={{ marginBottom: '0.2rem' }}>Time in class</span>
-              <div style={{ fontWeight: '700', fontSize: '1.1rem' }}>4+ years</div>
+              <span className="eyebrow" style={{marginBottom:'5px'}}>Time in Class</span>
+              <span className="stat-value">4+ years</span>
             </div>
             <div className="stat">
-              <span className="eyebrow" style={{ marginBottom: '0.2rem' }}>Trade/Cert Path</span>
-              <div style={{ fontWeight: '700', fontSize: '1.1rem', color: '#22d3ee' }}>6–24 mos</div>
+              <span className="eyebrow" style={{marginBottom:'5px'}}>Trade/Cert Path</span>
+              <span className="stat-value" style={{color:'#22d3ee'}}>6–24 mos</span>
             </div>
             <div className="stat">
-              <span className="eyebrow" style={{ marginBottom: '0.2rem' }}>Paid Training?</span>
-              <div style={{ fontWeight: '700', fontSize: '1.1rem', color: '#4ade80' }}>Yes (Apprentice)</div>
+              <span className="eyebrow" style={{marginBottom:'5px'}}>Paid Training?</span>
+              <span className="stat-value" style={{color:'#4ade80'}}>Yes (Apprentice)</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* DECISION WIZARD */}
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 1.5rem 3rem' }}>
-        <h2 className="section-title" style={{ textAlign: 'center' }}>Should you go to college?</h2>
-        <p style={{ textAlign: 'center', color: '#9ca3af', marginBottom: '2rem' }}>
-          Take the 30-second logic check.
-        </p>
-        <DecisionWizard />
-      </div>
+      <section className="section" style={{ background: "rgba(0,0,0,0.3)", padding: "2rem 0", borderRadius: "1rem" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto", padding: "0 1rem" }}>
+          <h2 className="section-title" style={{ textAlign: "center" }}>Should you go to college?</h2>
+          <p className="section-subtitle" style={{ textAlign: "center", marginBottom: "2rem" }}>
+            Take the 30-second logic check. No email required.
+          </p>
+          <DecisionWizard />
+        </div>
+      </section>
 
       {/* HIGH INCOME PATHS */}
-      <div className="site-main" style={{ paddingTop: 0 }}>
-        <h2 className="section-title">
-          High-income paths (No Degree)
-        </h2>
+      <section className="section">
+        <h2 className="section-title">High-income paths (No Degree)</h2>
 
         <div className="path-grid">
-          {/* Tech */}
           <div className="path-card">
-            <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '0.5rem', color: '#fff' }}>Tech &amp; Cyber</h3>
-            <p style={{ color: '#d1d5db', marginBottom: '1rem', fontSize: '0.95rem' }}>
-              Cloud, cybersecurity, IT support. Remote-friendly, high demand.
-            </p>
-            <Link href="/cheat-sheets" style={{ color: '#22d3ee', fontWeight: '600', fontSize: '0.9rem' }}>
-              View Cheat Sheets →
-            </Link>
+            <h3>Tech &amp; Cyber</h3>
+            <p className="path-body">Cloud, cybersecurity, IT support. Remote-friendly, high demand, stackable certs.</p>
+            <ul className="path-list">
+              <li>Google IT Support / Cyber</li>
+              <li>CompTIA A+ / Security+</li>
+              <li>Cloud certs (AWS, Azure)</li>
+            </ul>
+            <p className="path-link"><Link href="/cheat-sheets">Tech &amp; cyber cheat sheet →</Link></p>
           </div>
 
-          {/* Trades */}
           <div className="path-card">
-            <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '0.5rem', color: '#fff' }}>Skilled Trades</h3>
-            <p style={{ color: '#d1d5db', marginBottom: '1rem', fontSize: '0.95rem' }}>
-              HVAC, electrician, welding, CDL. Paid apprenticeships, overtime.
-            </p>
-            <Link href="/trade-schools" style={{ color: '#facc15', fontWeight: '600', fontSize: '0.9rem' }}>
-              Trade School Breakdown →
-            </Link>
+            <h3>Skilled Trades</h3>
+            <p className="path-body">HVAC, electrician, welding, CDL. Paid apprenticeships, overtime, recession-resistant.</p>
+            <ul className="path-list">
+              <li>HVAC & electrical apprenticeships</li>
+              <li>Welding & fabrication</li>
+              <li>CDL for trucking & logistics</li>
+            </ul>
+            <p className="path-link"><Link href="/trade-schools">Trade-school breakdown →</Link></p>
           </div>
 
-          {/* Gov */}
           <div className="path-card">
-            <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '0.5rem', color: '#fff' }}>Civil Service</h3>
-            <p style={{ color: '#d1d5db', marginBottom: '1rem', fontSize: '0.95rem' }}>
-              Federal, state, and city jobs. Pensions + Benefits.
-            </p>
-            <Link href="/civil-service" style={{ color: '#4ade80', fontWeight: '600', fontSize: '0.9rem' }}>
-              Gov Job Guide →
-            </Link>
+            <h3>Gov & Civil Service</h3>
+            <p className="path-body">Federal, state, and city jobs. Many don't require degrees, just exams. Pensions + Benefits.</p>
+            <ul className="path-list">
+              <li>USPS & Logistics</li>
+              <li>Fire & Police</li>
+              <li>TSA / Border Control</li>
+            </ul>
+            <p className="path-link"><Link href="/civil-service">Civil Service Guide →</Link></p>
           </div>
         </div>
-
-        {/* CTA */}
-        <div className="section-cta" style={{ marginTop: '4rem' }}>
-          <h2 className="section-title">Choose your path</h2>
-          <p className="hero-subtitle" style={{ margin: '0 auto 1.5rem' }}>
-            You don't need a $100k campus and a dorm to make real money.
-          </p>
-          <div className="cta-buttons">
-            <Link href="/trade-schools" className="btn btn-pill">
-              Trades path
-            </Link>
-            <Link href="/alternatives" className="btn btn-pill">
-              Tech &amp; certs
-            </Link>
-            <Link href="/contact" className="btn btn-pill">
-              Contact Us
-            </Link>
-          </div>
-        </div>
-      </div>
+      </section>
     </Layout>
   );
 }
