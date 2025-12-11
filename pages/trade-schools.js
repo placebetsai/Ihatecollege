@@ -1,106 +1,102 @@
-// pages/trade-schools.js
 import Layout from "../components/Layout";
-import SEO from "../components/SEO";
 
-export default function TradeSchools() {
+export default function TradeSchoolsPage() {
   return (
-    <Layout>
-      <SEO
-        title="Trade Schools Near You | IHateCollege.com"
-        description="HVAC, electrical, welding, CDL, plumbing, and more. These careers pay $70k–$150k+ without a degree."
-      />
-
+    <Layout title="Trade Schools – Programs That Actually Pay Off">
+      
       {/* HERO */}
-      <section className="page-section text-center">
-        <p className="hero-eyebrow">BUILD A SKILL. BUILD A LIFE.</p>
-        <h1 className="hero-title">
-          Trade Schools & Apprenticeships{" "}
-          <span className="text-orange-400">That Pay Off Fast</span>
-        </h1>
-        <p className="hero-subtitle max-w-2xl mx-auto">
-          Real hands-on jobs that pay insanely well — and don’t require 4 years
-          of debt and dorm rooms.
+      <section className="hero">
+        <p className="eyebrow">NO SUITE. NO DORM. JUST SKILLS.</p>
+        <h1 className="hero-title">Trade schools that actually pay off</h1>
+        <p className="hero-subtitle">
+          Most programs take 3–18 months. Many are paid apprenticeships. These
+          paths can hit $70k–$150k+ without a four-year degree.
         </p>
       </section>
 
-      {/* GRID */}
-      <section className="page-section max-w-6xl mx-auto px-4">
-        <div className="grid md:grid-cols-3 gap-8">
+      {/* GLOW CARD GRID */}
+      <section className="section">
+        <div className="path-grid">
 
           {/* HVAC */}
-          <div className="glow-card p-8">
-            <h3 className="text-xl font-bold mb-3">HVAC / Refrigeration</h3>
-            <p className="text-slate-300 text-sm mb-6">
-              Recession-proof, overtime-heavy, elite job security.
+          <div className="glow-card">
+            <h3>HVAC / Refrigeration</h3>
+            <p>
+              Climate systems, refrigeration, and commercial HVAC. Always needed,
+              everywhere. Big overtime potential.
             </p>
-            <ul className="text-slate-300 space-y-2 text-sm mb-6">
-              <li>✓ $70k–$200k+</li>
-              <li>✓ Paid apprenticeships</li>
-              <li>✓ Install, repair, maintain systems</li>
+            <ul>
+              <li>6–12 month programs</li>
+              <li>Residential + commercial work</li>
+              <li>Can specialize in refrigeration for higher pay</li>
             </ul>
             <a
-              href="https://www.apprenticeship.gov/"
+              className="path-link"
+              href="https://www.apprenticeship.gov/apprenticeship-job-finder"
               target="_blank"
-              className="text-orange-300 text-sm font-bold hover:underline"
+              rel="noreferrer"
             >
-              Find HVAC Apprenticeships →
-            </a>
-          </div>
-
-          {/* ELECTRICIAN */}
-          <div className="glow-card p-8">
-            <h3 className="text-xl font-bold mb-3">Electrician</h3>
-            <p className="text-slate-300 text-sm mb-6">
-              Union protection + high-income early in your career.
-            </p>
-            <ul className="text-slate-300 space-y-2 text-sm mb-6">
-              <li>✓ $60k–$140k+</li>
-              <li>✓ Strong union benefits</li>
-              <li>✓ Upgrade to Master Electrician</li>
-            </ul>
-            <a
-              href="https://www.ibew.org/"
-              target="_blank"
-              className="text-orange-300 text-sm font-bold hover:underline"
-            >
-              Electrician Training →
+              Find HVAC apprenticeships →
             </a>
           </div>
 
           {/* WELDING */}
-          <div className="glow-card p-8">
-            <h3 className="text-xl font-bold mb-3">Welding & Fabrication</h3>
-            <p className="text-slate-300 text-sm mb-6">
-              High skill = high pay. Endless industry demand.
+          <div className="glow-card">
+            <h3>Welding & Fabrication</h3>
+            <p>
+              Structural welding, pipe welding, and fabrication. Travel contracts
+              and specialty welders can hit serious money.
             </p>
-            <ul className="text-slate-300 space-y-2 text-sm mb-6">
-              <li>✓ $70k–$180k+</li>
-              <li>✓ MIG, TIG, Pipe welding</li>
-              <li>✓ Travel welders earn top dollar</li>
+            <ul>
+              <li>3–9 month welding schools</li>
+              <li>Pipeline, shipyards, heavy industry</li>
+              <li>Cert-based, not degree-based</li>
             </ul>
             <a
-              href="https://www.aws.org/certification"
+              className="path-link"
+              href="https://www.weldingschool.com/"
               target="_blank"
-              className="text-orange-300 text-sm font-bold hover:underline"
+              rel="noreferrer"
             >
-              Welding Certification →
+              Welding trade school guide →
             </a>
           </div>
+
+          {/* ELECTRICIAN */}
+          <div className="glow-card">
+            <h3>Electrician (apprenticeship)</h3>
+            <p>
+              Become a licensed journeyman through a paid apprenticeship. Strong
+              long-term income and benefits.
+            </p>
+            <ul>
+              <li>4–5 year paid apprenticeship model</li>
+              <li>Union + non-union options</li>
+              <li>National demand is exploding 2025–2030</li>
+            </ul>
+            <a
+              className="path-link"
+              href="https://www.electricianschooledu.org/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Electrician schools →
+            </a>
+          </div>
+
         </div>
       </section>
 
       {/* CTA */}
-      <section className="page-section text-center">
-        <h2 className="text-2xl font-bold mb-3">
-          Want help choosing the right trade?
-        </h2>
-        <a
-          href="/contact"
-          className="px-6 py-3 bg-orange-400 text-black rounded-full font-bold hover:bg-orange-300 transition"
-        >
-          Ask for guidance →
-        </a>
+      <section className="section section-cta">
+        <h2 className="section-title">Not sure which program fits your life?</h2>
+        <p className="section-subtitle">
+          Choose what matters most — income, lifestyle, timeline — and we’ll
+          show the smartest path.
+        </p>
+        <a href="/contact" className="btn btn-primary">Ask which trade is best</a>
       </section>
+
     </Layout>
   );
 }
