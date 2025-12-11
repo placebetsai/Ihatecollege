@@ -1,140 +1,103 @@
 // pages/trade-schools.js
 import Layout from "../components/Layout";
+import SEO from "../components/SEO";
 
 export default function TradeSchools() {
   return (
-    <Layout title="Trade Schools 2025 – Fast. Affordable. In Demand.">
-      <section className="hero">
-        <p className="eyebrow">NO SUITE. NO DORM. JUST SKILLS.</p>
-        <h1 className="hero-title">Trade schools that actually pay off</h1>
-        <p className="hero-subtitle">
-          Most programs are 3–18 months. Many are paid apprenticeships. These
-          paths can hit $70k–$150k+ without a four-year degree.
+    <Layout>
+      <SEO
+        title="Trade Schools & Apprenticeships | IHateCollege.com"
+        description="Electrician, HVAC, welding, lineman, and CDL — real career paths with paid apprenticeships and no debt."
+      />
+
+      {/* HERO */}
+      <section className="page-section text-center">
+        <p className="hero-eyebrow">EARN WHILE YOU LEARN</p>
+
+        <h1 className="hero-title">
+          Trade Schools & <span className="text-orange-300">Paid Apprenticeships</span>
+        </h1>
+
+        <p className="hero-subtitle max-w-2xl mx-auto">
+          Trades will never die. They pay well, hire fast, and don’t require $80k
+          loans. You learn a skill — they pay you for it.
         </p>
       </section>
 
-      <section className="section">
+      {/* GRID */}
+      <section className="page-section">
         <div className="path-grid">
           {/* HVAC */}
-          <div className="path-card">
-            <h3>HVAC / Refrigeration</h3>
-            <p className="path-body">
-              Climate systems, refrigeration, and commercial HVAC. Always
-              needed, everywhere. Big overtime potential.
+          <div className="glow-card p-6">
+            <h3 className="text-xl font-bold mb-2">HVAC / Refrigeration</h3>
+            <p className="text-slate-300 mb-4">
+              Year-round demand. Overtime king.
             </p>
-            <ul className="path-list">
-              <li>6–12 month programs</li>
-              <li>Residential + commercial work</li>
-              <li>Can specialize in refrigeration for higher pay</li>
+            <ul className="list-disc ml-5 text-slate-300 text-sm space-y-1 mb-4">
+              <li>$70k–$110k by year 2</li>
+              <li>Paid apprenticeships available</li>
+              <li>Commercial HVAC = big money</li>
             </ul>
-            <p className="path-link">
-              <a
-                href="https://www.careeronestop.org/FindTraining/Types/apprenticeships.aspx"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Find HVAC apprenticeships →
-              </a>
-            </p>
           </div>
 
-          {/* Welding */}
-          <div className="path-card">
-            <h3>Welding &amp; fabrication</h3>
-            <p className="path-body">
-              Structural welding, pipe welding, and fabrication. Travel
-              contracts and specialty welders can hit serious money.
+          {/* ELECTRICIAN */}
+          <div className="glow-card p-6">
+            <h3 className="text-xl font-bold mb-2">Electrician</h3>
+            <p className="text-slate-300 mb-4">
+              One of the highest-paying blue-collar fields.
             </p>
-            <ul className="path-list">
-              <li>3–9 month welding schools</li>
-              <li>Pipeline, shipyards, heavy industry</li>
-              <li>Cert-based, not degree-based</li>
-            </ul>
-            <p className="path-link">
-              <a
-                href="https://www.trade-schools.net/trades/welding"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Welding trade school guide →
-              </a>
-            </p>
-          </div>
-
-          {/* Electrician */}
-          <div className="path-card">
-            <h3>Electrician (apprenticeship)</h3>
-            <p className="path-body">
-              Become a licensed journeyman through a paid apprenticeship. Strong
-              long-term income and benefits.
-            </p>
-            <ul className="path-list">
-              <li>4–5 year paid apprenticeship model</li>
+            <ul className="list-disc ml-5 text-slate-300 text-sm space-y-1 mb-4">
               <li>Union + non-union options</li>
-              <li>Residential, commercial, industrial work</li>
+              <li>$80k–$140k with OT</li>
+              <li>Low schooling cost</li>
             </ul>
-            <p className="path-link">
-              <a
-                href="https://www.apprenticeship.gov/apprenticeship-job-finder"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Search electrician apprenticeships →
-              </a>
+          </div>
+
+          {/* WELDING */}
+          <div className="glow-card p-6">
+            <h3 className="text-xl font-bold mb-2">Welding / Fabrication</h3>
+            <p className="text-slate-300 mb-4">
+              The pay depends on your specialty — underwater = crazy money.
             </p>
+            <ul className="list-disc ml-5 text-slate-300 text-sm space-y-1 mb-4">
+              <li>Structural / pipeline</li>
+              <li>$50k–$120k depending on region</li>
+              <li>Short training timeline</li>
+            </ul>
           </div>
 
           {/* CDL */}
-          <div className="path-card">
-            <h3>CDL / Truck driving</h3>
-            <p className="path-body">
-              Short training, quick path to full-time work. Local, regional, and
-              over-the-road options.
+          <div className="glow-card p-6">
+            <h3 className="text-xl font-bold mb-2">CDL Trucking</h3>
+            <p className="text-slate-300 mb-4">
+              Fastest path to high income with no degree.
             </p>
-            <ul className="path-list">
-              <li>3–8 week CDL schools</li>
-              <li>Company-paid training available</li>
-              <li>Local home-daily or travel heavy</li>
+            <ul className="list-disc ml-5 text-slate-300 text-sm space-y-1 mb-4">
+              <li>Many schools cost $0 (company-paid)</li>
+              <li>$70k–$100k first year</li>
+              <li>Owner-operator: $150k–$250k+</li>
             </ul>
-            <p className="path-link">
-              <a
-                href="https://www.careerschoolnow.org/truck-driving"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Compare CDL schools →
-              </a>
-            </p>
           </div>
         </div>
       </section>
 
-      {/* LOCAL START CTA */}
-      <section className="section section-cta">
-        <h2 className="section-title">Find programs near you</h2>
-        <p className="section-subtitle">
-          Start with local technical colleges and apprenticeship programs. Many
-          are designed to be finished within a year.
+      {/* CTA */}
+      <section className="page-section text-center">
+        <h2 className="text-2xl font-bold mb-3">
+          Want personalized recommendations?
+        </h2>
+        <p className="text-slate-400 max-w-lg mx-auto mb-6">
+          Tell us your age, city, and goals — we’ll match you to real schools or
+          apprenticeships you can start now.
         </p>
-        <div className="cta-buttons">
-          <a
-            href="https://www.careeronestop.org/FindTraining/Types/apprenticeships.aspx"
-            target="_blank"
-            rel="noreferrer"
-            className="btn btn-pill"
-          >
-            Apprenticeship finder →
-          </a>
-          <a
-            href="https://www.careerschoolnow.org/trade-schools"
-            target="_blank"
-            rel="noreferrer"
-            className="btn btn-pill"
-          >
-            Trade school search →
-          </a>
-        </div>
+
+        <a
+          href="/contact"
+          className="px-6 py-3 rounded-full bg-orange-400 text-black font-bold hover:bg-orange-300"
+        >
+          Find Your Best Path →
+        </a>
       </section>
     </Layout>
   );
-            }
+        }
