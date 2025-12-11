@@ -25,35 +25,37 @@ export default function Navbar() {
 
   return (
     <header className="site-header">
-      <div className="nav-inner">
-        {/* LOGO SECTION */}
+      <div className="nav-inner" style={{ display: 'flex', alignItems: 'center' }}>
+        
+        {/* LOGO FIX: Taller container + Hard margin right */}
         <Link 
           href="/" 
           className="logo-wrap" 
           style={{ 
             display: 'flex', 
             alignItems: 'center', 
-            // THIS IS THE FIX: Hard margin pushes "Home" away
-            marginRight: '40px' 
+            height: '80px',       // Forces the bar to be taller
+            marginRight: '50px',  // Hard gap. Home button cannot cross this.
+            flexShrink: 0         // Prevents logo from getting squashed
           }}
         >
           <Image 
-            src="/logo-header.png" 
+            src="/logo-header.png"  // Make sure this matches your file
             alt="IHATECOLLEGE.COM"
-            width={300} 
-            height={80} 
+            width={350}             // Requesting a wide render
+            height={80}             // Matching container height
             priority 
             style={{ 
-              // THIS IS THE FIX: Forces it to be tall and wide
-              height: '55px', 
-              width: 'auto', 
-              maxWidth: 'none' // Prevents it from getting squashed
+              height: '100%',       // Fills the 80px container
+              width: 'auto',        // Lets width expand naturally
+              objectFit: 'contain', // Keeps it sharp
+              maxHeight: 'none'     // Removes any CSS limits
             }} 
           />
         </Link>
 
         {/* DESKTOP NAV */}
-        <nav className="nav-links-desktop">
+        <nav className="nav-links-desktop" style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
           {links.map((link) => (
             <Link
               key={link.href}
