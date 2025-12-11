@@ -1,12 +1,13 @@
+/* TAILWIND ENGINE */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Base theme */
+/* GLOBAL THEME */
 html, body {
   padding: 0;
   margin: 0;
-  background: radial-gradient(circle at 20% -10%, #0b1224, #020617 40%, #000 100%);
+  background: radial-gradient(circle at 25% -10%, #0b1224, #020617 40%, #000 100%);
   color: #e5e7eb;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
@@ -16,40 +17,158 @@ img {
   display: block;
 }
 
-/* Glow card universal */
-.glow-card {
-  @apply relative rounded-2xl bg-slate-900/90 border border-cyan-400/30 p-8 transition-all duration-300;
+/* ------------------------------ */
+/* HERO SECTION RESTORE           */
+/* ------------------------------ */
+
+.hero {
+  margin-top: 2rem;
+  padding: 2.5rem 1.8rem;
+  border-radius: 1.25rem;
+  background: radial-gradient(circle at top left, #0f172a, #020617 55%, #000);
+  border: 1px solid rgba(125, 211, 252, 0.25);
   box-shadow: 0 0 18px rgba(56, 189, 248, 0.18);
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 2.4rem;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  font-size: 1.05rem;
+  color: #d1d5db;
+  margin-top: 0.75rem;
+}
+
+.eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9ca3af;
+  margin-bottom: 0.7rem;
+}
+
+/* ------------------------------ */
+/* GRID RESTORE                   */
+/* ------------------------------ */
+
+.section {
+  margin-top: 2.8rem;
+}
+
+.section-title {
+  font-size: 1.6rem;
+  margin-bottom: 1.2rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.path-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .path-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ------------------------------ */
+/* CARD RESTORE                   */
+/* ------------------------------ */
+
+.path-card {
+  border-radius: 1.25rem;
+  padding: 1.4rem;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(125, 211, 252, 0.35);
+  transition: 0.2s ease;
+}
+
+.path-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(56, 189, 248, 0.85);
+  box-shadow: 0 0 22px rgba(56, 189, 248, 0.4);
+}
+
+.path-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.6rem;
+  font-weight: 700;
+}
+
+.path-card ul {
+  margin: 0.75rem 0;
+  padding-left: 1.1rem;
+  line-height: 1.45;
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
+
+.path-link a {
+  color: #38bdf8;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.path-link a:hover {
+  text-decoration: underline;
+}
+
+/* ------------------------------ */
+/* CTA SECTIONS RESTORE           */
+/* ------------------------------ */
+
+.section-cta {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.55rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 600;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #facc15, #f97316);
+  color: #111;
+}
+
+.btn-pill {
+  padding: 0.65rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(125, 211, 252, 0.65);
+  background: rgba(15, 23, 42, 0.8);
+}
+
+/* ------------------------------ */
+/* GLOW CARD (HOME PAGE)          */
+/* ------------------------------ */
+
+.glow-card {
+  border-radius: 1.25rem;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 0 0.5rem rgba(56, 189, 248, 0.25), 0 0 2rem rgba(56, 189, 248, 0.15);
+  transition: 0.25s ease;
 }
 
 .glow-card:hover {
   border-color: rgba(56, 189, 248, 0.7);
-  box-shadow: 0 0 22px rgba(56, 189, 248, 0.35);
-}
-
-/* HERO universal style */
-.hero-wrapper {
-  @apply text-center max-w-4xl mx-auto px-4;
-}
-
-.hero-eyebrow {
-  @apply inline-block mb-5 px-4 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-cyan-300 text-xs font-bold tracking-wide uppercase;
-}
-
-.hero-title {
-  @apply text-4xl md:text-6xl font-extrabold text-white mb-4 leading-tight;
-}
-
-.hero-subtitle {
-  @apply text-slate-300 text-lg md:text-xl leading-relaxed mb-8;
-}
-
-/* Section wrapper */
-.page-section {
-  @apply max-w-6xl mx-auto px-4 py-16;
-}
-
-/* Path grid */
-.path-grid {
-  @apply grid md:grid-cols-3 gap-8;
+  box-shadow: 0 0 0.6rem rgba(56, 189, 248, 0.35), 0 0 2.4rem rgba(56, 189, 248, 0.25);
 }
