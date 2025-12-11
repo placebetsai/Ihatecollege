@@ -2,32 +2,16 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-const SITE_URL = "https://ihatecollege.com"; // make sure this is your live domain
-
-// Default image for social cards (Twitter, iMessage, FB, etc.)
-const DEFAULT_OG_IMAGE = `${SITE_URL}/social-card.png`;
+const SITE_URL = "https://ihatecollege.com";
 
 export default function SEO({
   title = "IHateCollege.com | Escape Debt, Build Wealth",
-  description = "The no-BS guide to skipping the degree trap. Compare trade schools, certifications, and high-income paths that don't require $100k in loans.",
-  image = DEFAULT_OG_IMAGE,
+  description = "Real alternatives to college: trade schools, certifications, apprenticeships, and high-income paths that don't require $100k in loans.",
+  image = `${SITE_URL}/social-card.png`, // social-card.png in /public
 }) {
   const router = useRouter();
-  const path = router.asPath === "/" ? "" : router.asPath;
-  const canonicalUrl = `${SITE_URL}${path}`;
-
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "IHateCollege",
-    url: SITE_URL,
-    description,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${SITE_URL}/search?q={search_term_string}`,
-      "query-input": "required name=search_term_string",
-    },
-  };
+  const canonicalUrl =
+    SITE_URL + (router.asPath === "/" ? "" : router.asPath);
 
   return (
     <Head>
@@ -40,7 +24,7 @@ export default function SEO({
       <link rel="icon" href="/icon.png" />
       <link rel="apple-touch-icon" href="/icon.png" />
 
-      {/* Open Graph (Facebook/LinkedIn) */}
+      {/* Open Graph */}
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="IHateCollege" />
       <meta property="og:title" content={title} />
@@ -53,12 +37,6 @@ export default function SEO({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
-
-      {/* JSON-LD Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </Head>
   );
-                                 }
+    }
