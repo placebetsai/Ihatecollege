@@ -6,21 +6,21 @@ import { useRouter } from "next/router";
 const links = [
   { href: "/", label: "Home" },
   { href: "/alternatives", label: "Alternatives" },
-  { href: "/debt-calculator", label: <>Debt<br />Calculator</> },
-  { href: "/cheat-sheets", label: <>Cheat<br />Sheets</> },
-  { href: "/rank-your-school", label: <>Rank<br />School</> },
+  { href: "/debt-calculator", label: <div style={{textAlign: 'center', lineHeight: '1.2'}}>Debt<br/>Calculator</div> },
+  { href: "/cheat-sheets", label: <div style={{textAlign: 'center', lineHeight: '1.2'}}>Cheat<br/>Sheets</div> },
+  { href: "/rank-your-school", label: <div style={{textAlign: 'center', lineHeight: '1.2'}}>Rank<br/>School</div> },
   {
     href: "/liberal-vs-conservative",
     label: (
       <div style={{ display: 'flex', flexDirection: 'column', lineHeight: '1', alignItems: 'center' }}>
-        <span>Liberal</span>
-        <span style={{ fontSize: '0.7em', opacity: 0.6, margin: '2px 0' }}>or</span>
         <span>Conservative</span>
+        <span style={{ fontSize: '0.7em', opacity: 0.6, margin: '2px 0' }}>or</span>
+        <span>Liberal</span>
       </div>
     )
   },
-  { href: "/trade-schools", label: <>Trade<br />School</> },
-  { href: "/civil-service", label: <>Gov<br />Jobs</> },
+  { href: "/trade-schools", label: <div style={{textAlign: 'center', lineHeight: '1.2'}}>Trade<br/>School</div> },
+  { href: "/civil-service", label: <div style={{textAlign: 'center', lineHeight: '1.2'}}>Gov<br/>Jobs</div> },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -49,7 +49,7 @@ export default function Navbar() {
           }}
         >
           <Image
-            src="/logo-header.png"
+            src="/logo-header.png" // Ensure your black background logo is named this
             alt="IHATECOLLEGE.COM"
             width={320}
             height={80}
@@ -58,7 +58,7 @@ export default function Navbar() {
               height: '100%',
               width: 'auto',
               objectFit: 'contain',
-              // THIS IS THE FIX: 'screen' makes the BLACK background transparent
+              // KEY FIX: 'screen' makes the BLACK background transparent
               mixBlendMode: 'screen' 
             }}
           />
@@ -72,7 +72,6 @@ export default function Navbar() {
               href={link.href}
               className={router.pathname === link.href ? "nav-link nav-link-active" : "nav-link"}
               style={{
-                textAlign: 'center',
                 fontSize: '0.85rem',
                 fontWeight: '500',
                 display: 'flex',
@@ -105,8 +104,12 @@ export default function Navbar() {
             href={link.href}
             className={router.pathname === link.href ? "nav-link-mobile nav-link-mobile-active" : "nav-link-mobile"}
           >
-            {/* Flatten complex labels for mobile view if needed, or keep generic */}
-            {typeof link.label === 'string' ? link.label : (link.href === '/liberal-vs-conservative' ? 'Liberal vs Conservative' : 'Link')}
+            {/* Simplify labels for mobile to avoid messy stacking */}
+            {link.href === '/liberal-vs-conservative' ? 'Conservative or Liberal' : 
+             link.href === '/trade-schools' ? 'Trade Schools' :
+             'textContent' in link.label ? link.label.textContent : 
+             // Fallback for simple React elements
+             typeof link.label === 'string' ? link.label : 'Link'}
           </Link>
         ))}
       </nav>
