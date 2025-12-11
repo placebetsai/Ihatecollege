@@ -34,17 +34,17 @@ export default function Navbar() {
   }, [router.pathname]);
 
   return (
-    <header className="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-slate-800">
+    <header className="sticky top-0 z-50 bg-slate-950 border-b border-slate-800">
       <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
         
-        {/* LOGO - Huge right margin for desktop to prevent overlap */}
-        <Link href="/" className="flex-shrink-0 mr-8 lg:mr-20 h-full flex items-center">
+        {/* LOGO */}
+        <Link href="/" className="flex-shrink-0 mr-12 lg:mr-20 h-full flex items-center">
           <div className="relative w-64 h-16">
             <Image
-              src="/logo-header.png" // Correct file name
+              src="/logo-header.png" 
               alt="IHATECOLLEGE.COM"
               fill
-              className="object-contain object-left mix-blend-screen" // This makes the black background transparent
+              className="object-contain object-left"
               priority
             />
           </div>
@@ -81,7 +81,7 @@ export default function Navbar() {
 
       {/* MOBILE MENU */}
       {open && (
-        <nav className="lg:hidden absolute top-20 left-0 w-full bg-slate-950 border-b border-slate-800 flex flex-col">
+        <nav className="lg:hidden absolute top-20 left-0 w-full bg-slate-950 border-b border-slate-800 flex flex-col z-50">
           {links.map((link) => (
             <Link
               key={link.href}
