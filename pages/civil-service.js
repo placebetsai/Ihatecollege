@@ -1,99 +1,100 @@
 // pages/civil-service.js
 import Layout from "../components/Layout";
+import SEO from "../components/SEO";
 
 export default function CivilService() {
   return (
-    <Layout title="Civil Service & Government Jobs – No Degree Paths">
-      <section className="hero">
-        <p className="eyebrow">BENEFITS. PENSION. REAL JOB SECURITY.</p>
-        <h1 className="hero-title">Government jobs that don&apos;t require a degree</h1>
-        <p className="hero-subtitle">
-          Federal, state, and city jobs that hire based on tests, experience, or
-          training — not a bachelor&apos;s degree.
+    <Layout>
+      <SEO
+        title="Gov Jobs & Civil Service Careers | IHateCollege.com"
+        description="Federal, state, and city jobs that don't require college degrees. USPS, TSA, Fire, Police, Border Patrol, and more."
+      />
+
+      {/* HERO */}
+      <section className="page-section text-center">
+        <p className="hero-eyebrow">BENEFITS. PENSIONS. SECURITY.</p>
+
+        <h1 className="hero-title">
+          Government & Civil Service <span className="text-green-300">Career Paths</span>
+        </h1>
+
+        <p className="hero-subtitle max-w-2xl mx-auto">
+          These jobs don’t require degrees, pay well, provide benefits, and offer
+          insane long-term security. Perfect for stability seekers.
         </p>
       </section>
 
-      <section className="section">
+      {/* GRID */}
+      <section className="page-section">
         <div className="path-grid">
-          {/* Federal jobs */}
-          <div className="path-card">
-            <h3>Federal jobs (USAJobs.gov)</h3>
-            <p className="path-body">
-              Entry-level federal roles in agencies like USPS, TSA, Customs,
-              Homeland Security, and VA. Many list “high school diploma or
-              equivalent” as the education requirement.
+          {/* USPS */}
+          <div className="glow-card p-6">
+            <h3 className="text-xl font-bold mb-2">USPS: United States Postal Service</h3>
+            <p className="text-slate-300 mb-4">
+              Excellent benefits + simple entry process.
             </p>
-            <ul className="path-list">
-              <li>Clerical &amp; admin staff</li>
-              <li>Border &amp; transportation security</li>
-              <li>Veterans support, call centers, tech support</li>
+            <ul className="list-disc ml-5 text-slate-300 text-sm space-y-1">
+              <li>$45k–$75k starting</li>
+              <li>Pension + overtime</li>
+              <li>No degree required</li>
             </ul>
-            <p className="path-link">
-              <a
-                href="https://www.usajobs.gov"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Search USAJobs (no degree filter) →
-              </a>
-            </p>
           </div>
 
-          {/* Postal worker */}
-          <div className="path-card">
-            <h3>USPS &amp; delivery</h3>
-            <p className="path-body">
-              Mail carriers, clerks, and processing roles with strong benefits,
-              OT, and internal promotion paths.
+          {/* TSA */}
+          <div className="glow-card p-6">
+            <h3 className="text-xl font-bold mb-2">TSA / Homeland Security</h3>
+            <p className="text-slate-300 mb-4">
+              Federal benefits + promotion potential.
             </p>
-            <ul className="path-list">
-              <li>Starting hourly pay + OT</li>
-              <li>Health, retirement, and union protection</li>
-              <li>Clear promotion ladders</li>
+            <ul className="list-disc ml-5 text-slate-300 text-sm space-y-1">
+              <li>$40k–$68k starting</li>
+              <li>Strong hiring demand</li>
+              <li>Airport-based stability</li>
             </ul>
-            <p className="path-link">
-              <a
-                href="https://about.usps.com/careers/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                USPS careers →
-              </a>
-            </p>
           </div>
 
-          {/* City & state */}
-          <div className="path-card">
-            <h3>City &amp; county jobs</h3>
-            <p className="path-body">
-              Firefighting, police, 911 dispatch, sanitation, transit, public
-              works, parks, and more. Often test-based instead of degree-based.
+          {/* FIRE */}
+          <div className="glow-card p-6">
+            <h3 className="text-xl font-bold mb-2">Fire & Rescue</h3>
+            <p className="text-slate-300 mb-4">
+              Physical, meaningful, and VERY well compensated.
             </p>
-            <ul className="path-list">
-              <li>Firefighter and EMT</li>
-              <li>Police and corrections</li>
-              <li>Transit operators &amp; maintenance</li>
+            <ul className="list-disc ml-5 text-slate-300 text-sm space-y-1">
+              <li>$55k–$95k depending on city</li>
+              <li>Massive overtime potential</li>
+              <li>Pension + union protection</li>
             </ul>
-            <p className="path-link">
-              Search: <strong>&quot;[your city] civil service jobs&quot;</strong>{" "}
-              on Google to find your local listing.
-            </p>
           </div>
 
-          {/* Why this path */}
-          <div className="path-card">
-            <h3>Why this path hits different</h3>
-            <ul className="path-list">
-              <li>Benefits from day one</li>
-              <li>Pension or retirement plan</li>
-              <li>Overtime + union protection</li>
-              <li>Transfer options across locations</li>
-            </ul>
-            <p className="path-link">
-              <a href="/debt-calculator">Compare gov job pay vs student loans →</a>
+          {/* POLICE */}
+          <div className="glow-card p-6">
+            <h3 className="text-xl font-bold mb-2">Police & Sheriff Departments</h3>
+            <p className="text-slate-300 mb-4">
+              High pay + structured promotions.
             </p>
+            <ul className="list-disc ml-5 text-slate-300 text-sm space-y-1">
+              <li>$55k–$120k depending on region</li>
+              <li>Retirement after 20–25 years</li>
+              <li>No college required in most states</li>
+            </ul>
           </div>
         </div>
+      </section>
+
+      {/* CTA */}
+      <section className="page-section text-center">
+        <h2 className="text-2xl font-bold mb-4">How to apply?</h2>
+        <p className="text-slate-400 max-w-md mx-auto mb-6">
+          Tell us where you live — we’ll point you to the exact hiring portals
+          for your city/state.
+        </p>
+
+        <a
+          href="/contact"
+          className="px-6 py-3 rounded-full bg-green-400 text-black font-bold hover:bg-green-300"
+        >
+          Find Local Openings →
+        </a>
       </section>
     </Layout>
   );
