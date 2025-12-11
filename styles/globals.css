@@ -16,15 +16,35 @@ img {
   display: block;
 }
 
-/* Custom Neon Classes needed for your Homepage */
+/* --- ANIMATIONS --- */
+/* This makes the Hero glow shift between Blue and Red */
+@keyframes patriotic-glow {
+  0% { 
+    border-color: rgba(56, 189, 248, 0.4); 
+    box-shadow: 0 0 18px rgba(56, 189, 248, 0.15); 
+  } /* Blue */
+  50% { 
+    border-color: rgba(248, 113, 113, 0.4); 
+    box-shadow: 0 0 18px rgba(248, 113, 113, 0.15); 
+  } /* Red */
+  100% { 
+    border-color: rgba(56, 189, 248, 0.4); 
+    box-shadow: 0 0 18px rgba(56, 189, 248, 0.15); 
+  } /* Blue */
+}
+
+/* --- CUSTOM CLASSES --- */
+
 .hero {
   margin-top: 2rem;
   padding: 2.25rem 1.8rem;
   border-radius: 1.25rem;
   background: radial-gradient(circle at top left, #0f172a, #020617 55%, #000);
   border: 1px solid rgba(125, 211, 252, 0.25);
-  box-shadow: 0 0 18px rgba(56, 189, 248, 0.18);
   text-align: center;
+  
+  /* Apply the animation */
+  animation: patriotic-glow 6s infinite ease-in-out;
 }
 
 .hero-title {
@@ -49,25 +69,49 @@ img {
   max-width: 640px;
 }
 
+/* Grid Layout */
 .path-grid {
   display: grid;
   gap: 1.25rem;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
+/* Base Card Style */
 .glow-card, .path-card {
   border-radius: 1rem;
   padding: 1.25rem;
   background: rgba(15, 23, 42, 0.92);
-  border: 1px solid rgba(56, 189, 248, 0.35);
-  box-shadow: 0 0 0.5rem rgba(56, 189, 248, 0.25);
-  transition: all 0.25s ease;
+  border: 1px solid rgba(56, 189, 248, 0.35); /* Default Blue */
+  box-shadow: 0 0 0.5rem rgba(56, 189, 248, 0.15);
+  transition: all 0.3s ease;
 }
 
+/* --- DYNAMIC HOVER COLORS --- */
+
+/* Default hover (Blue) */
 .glow-card:hover, .path-card:hover {
-  border-color: rgba(56, 189, 248, 0.7);
-  box-shadow: 0 0 0.6rem rgba(56, 189, 248, 0.35), 0 0 2.4rem rgba(56, 189, 248, 0.25);
   transform: translateY(-3px);
+  border-color: rgba(56, 189, 248, 0.8);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+}
+
+/* Make specific cards glow different colors on hover using nth-child */
+/* 1st Card: Yellow (Warning/Construction) */
+.path-card:nth-child(1):hover {
+  border-color: #facc15; 
+  box-shadow: 0 0 20px rgba(250, 204, 21, 0.4);
+}
+
+/* 2nd Card: Neon Pink (Vibe) */
+.path-card:nth-child(2):hover {
+  border-color: #f472b6; 
+  box-shadow: 0 0 20px rgba(244, 114, 182, 0.4);
+}
+
+/* 3rd Card: Green (Money) */
+.path-card:nth-child(3):hover {
+  border-color: #4ade80; 
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.4);
 }
 
 .path-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
