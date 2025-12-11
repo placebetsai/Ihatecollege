@@ -1,4 +1,3 @@
-// components/SEO.js
 import Head from "next/head";
 import { useRouter } from "next/router";
 
@@ -7,8 +6,8 @@ const SITE_URL = "https://ihatecollege.com";
 export default function SEO({
   title = "IHateCollege.com | Escape Debt, Build Wealth",
   description = "The no-BS guide to skipping the degree trap. Compare trade schools, certifications, and high-income paths that don't require $100k in loans.",
-  // SOCIAL CARD = The one with "IHATECOLLEGE" text (...5374.jpg)
-  image = `${SITE_URL}/1765407955374.jpg`, 
+  // YOUR NEW SOCIAL CARD
+  image = `${SITE_URL}/social-card.jpg`, 
 }) {
   const router = useRouter();
   const path = router.asPath === "/" ? "" : router.asPath;
@@ -33,9 +32,9 @@ export default function SEO({
       <meta name="description" content={description} />
       <link rel="canonical" href={canonicalUrl} />
 
-      {/* ICON = The one with the Hat (...4747.jpg) */}
-      <link rel="icon" href="/1765407974747.jpg" />
-      <link rel="apple-touch-icon" href="/1765407974747.jpg" />
+      {/* YOUR NEW ICON */}
+      <link rel="icon" href="/icon.png" />
+      <link rel="apple-touch-icon" href="/icon.png" />
 
       {/* Social Meta Tags */}
       <meta property="og:type" content="website" />

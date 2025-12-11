@@ -19,7 +19,6 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
-  // Auto-close mobile menu when navigating
   useEffect(() => {
     setOpen(false);
   }, [router.pathname]);
@@ -27,36 +26,30 @@ export default function Navbar() {
   return (
     <header className="site-header">
       <div className="nav-inner">
-        {/* LOGO - Swapped to the correct file ending in 374 */}
-        <Link href="/" className="logo-wrap" style={{ display: 'flex', alignItems: 'center' }}>
+        {/* LINKED TO YOUR NEW LOGO FILE */}
+        <Link href="/" className="logo-wrap" style={{ display: 'flex', alignItems: 'center', height: '60px' }}>
           <Image 
-            src="/1765407955374.jpg" 
-            alt="IHATECOLLEGE.COM Logo"
-            width={180} 
-            height={50} 
+            src="/logo-header.png" 
+            alt="IHATECOLLEGE.COM"
+            width={240} 
+            height={60} 
             priority 
-            style={{ objectFit: 'contain' }} 
+            style={{ width: 'auto', height: '100%', objectFit: 'contain' }} 
           />
         </Link>
 
-        {/* DESKTOP NAV */}
         <nav className="nav-links-desktop">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={
-                router.pathname === link.href
-                  ? "nav-link nav-link-active"
-                  : "nav-link"
-              }
+              className={router.pathname === link.href ? "nav-link nav-link-active" : "nav-link"}
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        {/* MOBILE HAMBURGER */}
         <button
           className="nav-toggle"
           aria-label="Toggle navigation menu"
@@ -68,17 +61,12 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* MOBILE MENU DROPDOWN */}
       <nav className={open ? "nav-links-mobile open" : "nav-links-mobile"}>
         {links.map((link) => (
           <Link
             key={link.href + "-mobile"}
             href={link.href}
-            className={
-              router.pathname === link.href
-                ? "nav-link-mobile nav-link-mobile-active"
-                : "nav-link-mobile"
-            }
+            className={router.pathname === link.href ? "nav-link-mobile nav-link-mobile-active" : "nav-link-mobile"}
           >
             {link.label}
           </Link>
