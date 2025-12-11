@@ -28,7 +28,6 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
-  // Close mobile menu when a link is clicked
   useEffect(() => {
     setOpen(false);
   }, [router.pathname]);
@@ -37,8 +36,8 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-800">
       <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
         
-        {/* LOGO: Visible on ALL screens */}
-        <Link href="/" className="flex-shrink-0 flex items-center gap-1 group z-50">
+        {/* LOGO: Sexy Bold Text + Bubble .COM (NO IMAGE) */}
+        <Link href="/" className="flex-shrink-0 flex items-center gap-1 group z-50 mr-4 lg:mr-8">
           <span className="text-xl md:text-2xl font-black italic tracking-tighter text-white group-hover:text-slate-200 transition-colors">
             IHATECOLLEGE
           </span>
@@ -47,7 +46,7 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* DESKTOP NAV: Hidden on mobile, Flex on Large screens */}
+        {/* DESKTOP NAV */}
         <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
           {links.map((link) => (
             <Link
@@ -62,7 +61,7 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* MOBILE HAMBURGER: Visible on Mobile, Hidden on Large screens */}
+        {/* MOBILE HAMBURGER */}
         <button
           className="lg:hidden p-2 text-slate-200 hover:text-white z-50"
           onClick={() => setOpen(!open)}
@@ -76,7 +75,7 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* MOBILE MENU OVERLAY: Only shows when 'open' is true */}
+      {/* MOBILE MENU OVERLAY */}
       <nav 
         className={`lg:hidden fixed top-0 left-0 w-full h-screen bg-slate-950 flex flex-col items-center justify-center gap-8 transition-all duration-300 ease-in-out ${
           open ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
