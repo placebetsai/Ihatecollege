@@ -1,132 +1,76 @@
-// pages/index.js
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
-import DecisionWizard from "../components/DecisionWizard";
 import Link from "next/link";
+import DecisionWizard from "../components/DecisionWizard"; 
 
 export default function HomePage() {
   return (
     <Layout>
-      <SEO
-        title="College is Optional. Debt is Not. | IHateCollege.com"
-        description="Skip the debt trap. Compare trades, tech certs, apprenticeships, and high-income paths that actually pay."
-      />
+      <SEO />
 
-      {/* HERO */}
-      <section className="relative pt-10 pb-20 md:pt-20 md:pb-28">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <p className="inline-block mb-6 px-4 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-cyan-300 text-xs md:text-sm font-bold tracking-wide uppercase">
-            You don't have to sign your life away
-          </p>
+      <div className="max-w-5xl mx-auto px-4 pt-6 pb-12 space-y-6">
 
-          <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight leading-tight">
-            College is{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
-              Optional.
-            </span>
-            <br />
-            Debt is <span className="text-red-500">Not.</span>
+        {/* BOX 1: MAIN HERO CARD (Animates Red/White/Blue via .hero class) */}
+        <section className="hero">
+          <p className="eyebrow text-slate-400 mb-4">YOU DON'T HAVE TO SIGN YOUR LIFE AWAY</p>
+
+          <h1 className="text-4xl md:text-6xl font-black tracking-tight text-white mb-6 leading-tight">
+            College is <span className="text-sky-400">Optional</span>.<br />
+            Debt is <span className="text-red-500">Not</span>.
           </h1>
 
-          <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Before you borrow $50k–$150k, run the numbers. Compare trades, tech
-            careers, apprenticeships, and real alternatives.
+          <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-8 leading-relaxed">
+            Before you borrow <span className="text-white font-bold">$50k–$150k</span>, run the numbers.
+            Compare trades, tech careers, apprenticeships, and real alternatives.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link
-              href="/alternatives"
-              className="px-8 py-4 bg-white text-slate-900 font-bold rounded-full hover:bg-slate-200 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.25)]"
-            >
+            <Link href="/alternatives" className="px-8 py-4 rounded-full bg-white text-slate-900 font-bold text-lg hover:bg-sky-50 transition-colors">
               Explore Alternatives
             </Link>
-            <Link
-              href="/debt-calculator"
-              className="px-8 py-4 border border-slate-600 text-white font-bold rounded-full hover:bg-slate-800 transition-colors"
-            >
+            <Link href="/debt-calculator" className="px-8 py-4 rounded-full border border-slate-600 text-white font-bold text-lg hover:border-white transition-colors">
               See the Real Cost
             </Link>
           </div>
+        </section>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 border-t border-slate-800 pt-8">
-            <div><div className="text-2xl font-bold text-white">$37k+</div><div className="text-xs text-slate-500 uppercase">Avg Student Debt</div></div>
-            <div><div className="text-2xl font-bold text-white">4 Years</div><div className="text-xs text-slate-500 uppercase">Time in Class</div></div>
-            <div><div className="text-2xl font-bold text-cyan-400">6–12 Mos</div><div className="text-xs text-slate-500 uppercase">Typical Cert Path</div></div>
-            <div><div className="text-2xl font-bold text-green-400">Paid</div><div className="text-xs text-slate-500 uppercase">Apprenticeships</div></div>
+        {/* STATS ROW (Split into 2 Boxes) */}
+        <div className="grid md:grid-cols-2 gap-4">
+
+          {/* BOX 2: THE "TRAP" (College Stats) - Red Glow */}
+          <div className="p-6 rounded-2xl bg-slate-900/80 border border-red-500/30 shadow-[0_0_15px_rgba(239,68,68,0.15)] flex flex-col justify-center items-center text-center gap-4">
+            <div>
+              <div className="text-3xl md:text-4xl font-black text-red-400">$37k+</div>
+              <div className="text-xs uppercase tracking-widest text-slate-500 font-bold">Avg Student Debt</div>
+            </div>
+            <div className="w-12 h-px bg-slate-800"></div>
+            <div>
+              <div className="text-3xl md:text-4xl font-black text-white">4 Years</div>
+              <div className="text-xs uppercase tracking-widest text-slate-500 font-bold">Time in Class</div>
+            </div>
           </div>
+
+          {/* BOX 3: THE "ESCAPE" (Alt Stats) - Green Glow */}
+          <div className="p-6 rounded-2xl bg-slate-900/80 border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.15)] flex flex-col justify-center items-center text-center gap-4">
+            <div>
+              <div className="text-3xl md:text-4xl font-black text-emerald-400">6–12 Mos</div>
+              <div className="text-xs uppercase tracking-widest text-slate-500 font-bold">Typical Cert Path</div>
+            </div>
+            <div className="w-12 h-px bg-slate-800"></div>
+            <div>
+              <div className="text-3xl md:text-4xl font-black text-white">Paid</div>
+              <div className="text-xs uppercase tracking-widest text-slate-500 font-bold">Apprenticeships</div>
+            </div>
+          </div>
+
         </div>
-      </section>
 
-      {/* WIZARD */}
-      <section className="py-16 bg-slate-950/70 border-y border-slate-900">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-white">Should you go to college?</h2>
-            <p className="text-slate-400 mt-2">Take the 30-second logic check. No email required.</p>
-          </div>
+        {/* DECISION WIZARD */}
+        <div className="mt-8">
           <DecisionWizard />
         </div>
-      </section>
 
-      {/* GLOW CARDS */}
-      <section className="py-24">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-white mb-12 text-center">
-            High-Income Paths (No Degree)
-          </h2>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Tech */}
-            <div className="glow-card p-8">
-              <h3 className="text-xl font-bold text-white mb-3">Tech & Cyber</h3>
-              <p className="text-slate-300 mb-6 text-sm leading-relaxed">
-                Cloud, cybersecurity, IT support. Remote-friendly, high demand. Stack certs instead of debt.
-              </p>
-              <ul className="space-y-2 mb-6 text-sm text-slate-300">
-                <li>✓ Google IT / Cyber</li>
-                <li>✓ CompTIA A+ / Security+</li>
-                <li>✓ AWS / Azure Cloud</li>
-              </ul>
-              <Link href="/cheat-sheets" className="text-cyan-300 font-bold text-sm hover:underline">
-                View Tech Cheat Sheet →
-              </Link>
-            </div>
-
-            {/* Trades */}
-            <div className="glow-card p-8">
-              <h3 className="text-xl font-bold text-white mb-3">Skilled Trades</h3>
-              <p className="text-slate-300 mb-6 text-sm leading-relaxed">
-                HVAC, electrician, welding, CDL. Paid apprenticeships mean you earn while you learn.
-              </p>
-              <ul className="space-y-2 mb-6 text-sm text-slate-300">
-                <li>✓ Paid Apprenticeships</li>
-                <li>✓ Union Protection</li>
-                <li>✓ Overtime Potential</li>
-              </ul>
-              <Link href="/trade-schools" className="text-orange-300 font-bold text-sm hover:underline">
-                Trade School Breakdown →
-              </Link>
-            </div>
-
-            {/* Civil Service */}
-            <div className="glow-card p-8">
-              <h3 className="text-xl font-bold text-white mb-3">Gov & Civil Service</h3>
-              <p className="text-slate-300 mb-6 text-sm leading-relaxed">
-                Federal, state, and city jobs. Many don’t require degrees, just exams. Pensions + benefits.
-              </p>
-              <ul className="space-y-2 mb-6 text-sm text-slate-300">
-                <li>✓ USPS & Logistics</li>
-                <li>✓ Fire & Police</li>
-                <li>✓ TSA / Border Control</li>
-              </ul>
-              <Link href="/civil-service" className="text-green-300 font-bold text-sm hover:underline">
-                Civil Service Guide →
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      </div>
     </Layout>
   );
-            }
+}
