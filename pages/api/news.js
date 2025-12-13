@@ -1,25 +1,71 @@
-import Parser from "rss-parser";
+// pages/api/news.js
+// Dependency-free RSS fetch + lightweight parsing.
+// Skips any feed that fails. Returns headlines if ANY feed works.
 
-const parser = new Parser({
-  timeout: 8000,
-});
-
-// HARD NO UNION — JOBS + ECONOMY ONLY
 const FEEDS = [
-  // JOBS / ECON DATA (PRIMARY)
-  { url: "https://www.bls.gov/feed/empsit.rss", source: "BLS Jobs Report", weight: 3 },
-  { url: "https://www.bls.gov/feed/jolts.rss", source: "BLS JOLTS", weight: 2 },
-  { url: "https://www.dol.gov/rss/releases.xml", source: "U.S. Dept. of Labor", weight: 2 },
+  // Jobs + economy focused
+  { url: "https://www.bls.gov/feed/empsit.rss", source: "BLS Jobs Report" },
+  { url: "https://www.bls.gov/feed/jolts.rss", source: "BLS JOLTS" },
+  { url: "https://www.dol.gov/rss/releases.xml", source: "U.S. Dept. of Labor" },
 
-  // BACKUP ECON / LABOR MARKET NEWS
-  { url: "https://www.cnbc.com/id/10001147/device/rss/rss.html", source: "CNBC Economy", weight: 1 },
-  { url: "https://www.marketwatch.com/rss/topstories", source: "MarketWatch", weight: 1 },
-  { url: "https://feeds.a.dj.com/rss/RSSMarketsMain.xml", source: "WSJ Markets", weight: 1 },
+  // Backups (if govt feeds hiccup)
+  { url: "https://www.marketwatch.com/rss/topstories", source: "MarketWatch" },
+  { url: "https://www.cnbc.com/id/10001147/device/rss/rss.html", source: "CNBC" },
 ];
 
 const TOTAL_ITEMS = 30;
-const CACHE_TTL = 10 * 60 * 1000; // 10 min
+
+// In-memory cache (works on warm Vercel invocations)
 let CACHE = { ts: 0, items: [] };
+const CACHE_TTL_MS = 10 * 60 * 1000;
+
+function stripCdata(s = "") {
+  return s.replace("<![CDATA[", "").replace("]]>", "").trim();
+}
+
+function decodeEntities(s = "") {
+  return s
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">");
+}
+
+function pickFirst(matchArr) {
+  return matchArr && matchArr[1] ? matchArr[1].trim() : "";
+}
+
+// Very lightweight RSS item extraction (good enough for headlines)
+function parseRss(xmlText, source) {
+  const items = [];
+
+  // Split by <item> ... </item>
+  const rawItems = xmlText.split(/<\/item>/i);
+
+  for (const chunk of rawItems) {
+    if (!/<item>/i.test(chunk)) continue;
+
+    const title = decodeEntities(stripCdata(pickFirst(chunk.match(/<title>([\s\S]*?)<\/title>/i))));
+    let link = decodeEntities(stripCdata(pickFirst(chunk.match(/<link>([\s\S]*?)<\/link>/i))));
+
+    // Some feeds use <guid> as link
+    if (!link) {
+      link = decodeEntities(stripCdata(pickFirst(chunk.match(/<guid[^>]*>([\s\S]*?)<\/guid>/i))));
+    }
+
+    const pubDate = stripCdata(pickFirst(chunk.match(/<pubDate>([\s\S]*?)<\/pubDate>/i))) ||
+                    stripCdata(pickFirst(chunk.match(/<dc:date>([\s\S]*?)<\/dc:date>/i))) ||
+                    stripCdata(pickFirst(chunk.match(/<updated>([\s\S]*?)<\/updated>/i)));
+
+    if (!title || !link) continue;
+
+    items.push({ title, link, pubDate, source });
+    if (items.length >= 50) break; // don’t overwork
+  }
+
+  return items;
+}
 
 function parseDate(d) {
   const t = Date.parse(d || "");
@@ -41,7 +87,7 @@ export default async function handler(req, res) {
     const now = Date.now();
     const noCache = req.query?.nocache === "1";
 
-    if (!noCache && CACHE.items.length && now - CACHE.ts < CACHE_TTL) {
+    if (!noCache && CACHE.items.length && now - CACHE.ts < CACHE_TTL_MS) {
       res.setHeader("Cache-Control", "s-maxage=600, stale-while-revalidate=3600");
       return res.status(200).json({ items: CACHE.items });
     }
@@ -49,29 +95,30 @@ export default async function handler(req, res) {
     const results = await Promise.allSettled(
       FEEDS.map(async (f) => {
         try {
-          const feed = await parser.parseURL(f.url);
-          return (feed.items || []).map((it) => ({
-            title: (it.title || "").trim(),
-            link: (it.link || "").trim(),
-            pubDate: it.isoDate || it.pubDate || "",
-            source: f.source,
-            weight: f.weight,
-          }));
+          const r = await fetch(f.url, {
+            headers: {
+              "user-agent": "Mozilla/5.0 (NewsTickerBot)",
+              "accept": "application/rss+xml, application/xml;q=0.9, */*;q=0.8",
+            },
+          });
+          if (!r.ok) return [];
+          const xml = await r.text();
+          return parseRss(xml, f.source);
         } catch {
-          return []; // 🔥 silently skip broken feed
+          return [];
         }
       })
     );
 
-    let items = results
-      .flatMap((r) => (r.status === "fulfilled" ? r.value : []))
-      .filter((i) => i.title && i.link);
+    let all = results.flatMap((r) => (r.status === "fulfilled" ? r.value : []));
+    all = dedupe(all).sort((a, b) => parseDate(b.pubDate) - parseDate(a.pubDate));
 
-    if (!items.length) {
+    if (!all.length) {
+      // Don’t spam “unavailable” — just return a gentle placeholder item
       return res.status(200).json({
         items: [
           {
-            title: "Latest jobs and economic updates loading…",
+            title: "Loading the latest jobs + economy headlines…",
             link: "#",
             source: "System",
           },
@@ -79,23 +126,16 @@ export default async function handler(req, res) {
       });
     }
 
-    items = dedupe(items).sort(
-      (a, b) =>
-        b.weight - a.weight || parseDate(b.pubDate) - parseDate(a.pubDate)
-    );
-
-    const finalItems = items.slice(0, TOTAL_ITEMS);
-
+    const finalItems = all.slice(0, TOTAL_ITEMS);
     CACHE = { ts: now, items: finalItems };
 
     res.setHeader("Cache-Control", "s-maxage=600, stale-while-revalidate=3600");
     return res.status(200).json({ items: finalItems });
   } catch {
-    // Absolute last-resort fallback (should be rare)
     return res.status(200).json({
       items: [
         {
-          title: "Jobs & economy headlines updating…",
+          title: "Loading the latest jobs + economy headlines…",
           link: "#",
           source: "System",
         },
