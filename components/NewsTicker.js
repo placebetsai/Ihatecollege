@@ -11,7 +11,7 @@ export default function NewsTicker() {
   useEffect(() => {
     let alive = true;
 
-    fetch("/api/news")
+    fetch(`/api/jobsnews?nocache=1`)
       .then((r) => r.json())
       .then((d) => {
         if (!alive) return;
@@ -31,7 +31,7 @@ export default function NewsTicker() {
       ? [{ title: "News feed temporarily unavailable — check back soon.", link: "#", source: "" }]
       : [{ title: "Loading latest jobs + economy updates…", link: "#", source: "" }];
 
-  // Ensure enough repeated content so mobile never scrolls into blank gaps
+  // Ensure loop always long enough (mobile Safari fix)
   useEffect(() => {
     function computeCopies() {
       const viewport = viewportRef.current;
@@ -40,11 +40,7 @@ export default function NewsTicker() {
 
       const viewportW = viewport.clientWidth || 0;
       const singleW = measure.scrollWidth || 0;
-
-      if (!viewportW || !singleW) {
-        setCopies(2);
-        return;
-      }
+      if (!viewportW || !singleW) return setCopies(2);
 
       const needed = Math.ceil((viewportW * 2) / singleW) + 1;
       setCopies(Math.max(2, needed));
@@ -65,17 +61,21 @@ export default function NewsTicker() {
   }, [base, copies]);
 
   return (
-    <div className="tickerShell" aria-label="Latest news ticker">
-      {/* Mobile-only capsule */}
+    <div className="tickerShell">
+      {/* Mobile capsule */}
       <div className="mobileHeader">
         <span className="tickerCapsule">News Update</span>
       </div>
 
-      {/* Desktop: inline label + feed */}
+      {/* Desktop inline */}
       <div className="desktopRow">
         <div className="tickerLabel">News Update:</div>
 
         <div className="tickerViewport" ref={viewportRef}>
+          {/* Gradient fades */}
+          <div className="fadeLeft" />
+          <div className="fadeRight" />
+
           {/* Hidden measurer */}
           <div className="tickerMeasure" ref={measureRef} aria-hidden="true">
             {base.map((it, idx) => (
@@ -107,8 +107,8 @@ export default function NewsTicker() {
       <style jsx>{`
         .tickerShell {
           width: 100%;
-          border: 1px solid rgba(255, 255, 255, 0.14);
-          background: rgba(0, 0, 0, 0.55);
+          border: 1px solid rgba(255,255,255,0.14);
+          background: rgba(0,0,0,0.55);
           backdrop-filter: blur(10px);
           border-radius: 14px;
           overflow: hidden;
@@ -116,21 +116,16 @@ export default function NewsTicker() {
 
         .mobileHeader {
           display: none;
-          padding: 10px 12px 0 12px;
+          padding: 10px 12px 0;
         }
 
         .tickerCapsule {
-          display: inline-flex;
-          align-items: center;
           padding: 6px 10px;
           border-radius: 999px;
           font-weight: 900;
-          letter-spacing: 0.25px;
           font-size: 12px;
-          line-height: 1;
           color: #111827;
           background: #f59e0b;
-          box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
         }
 
         .desktopRow {
@@ -143,44 +138,65 @@ export default function NewsTicker() {
 
         .tickerLabel {
           font-weight: 900;
-          white-space: nowrap;
-          letter-spacing: 0.2px;
           color: #f59e0b;
+          white-space: nowrap;
         }
 
         .tickerViewport {
           position: relative;
-          overflow: hidden;
           flex: 1;
-          min-width: 0;
+          overflow: hidden;
+        }
+
+        /* Gradient fades */
+        .fadeLeft,
+        .fadeRight {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 40px;
+          z-index: 3;
+          pointer-events: none;
+        }
+
+        .fadeLeft {
+          left: 0;
+          background: linear-gradient(
+            to right,
+            rgba(0,0,0,0.85),
+            rgba(0,0,0,0)
+          );
+        }
+
+        .fadeRight {
+          right: 0;
+          background: linear-gradient(
+            to left,
+            rgba(0,0,0,0.85),
+            rgba(0,0,0,0)
+          );
         }
 
         .tickerMeasure {
           position: absolute;
           visibility: hidden;
           white-space: nowrap;
-          pointer-events: none;
           height: 0;
           overflow: hidden;
         }
 
-        .tickerMeasureItem {
-          font-weight: 700;
-        }
-
         .tickerTrack {
           display: inline-flex;
-          align-items: center;
           white-space: nowrap;
           will-change: transform;
 
-          transform: translate3d(0, 0, 0);
-          -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0,0,0);
+          -webkit-transform: translate3d(0,0,0);
           backface-visibility: hidden;
           -webkit-backface-visibility: hidden;
 
-          animation: scroll 55s linear infinite; /* faster */
-          -webkit-animation: scroll 55s linear infinite;
+          animation: scroll 70s linear infinite;
+          -webkit-animation: scroll 70s linear infinite;
         }
 
         .tickerShell:hover .tickerTrack {
@@ -188,18 +204,16 @@ export default function NewsTicker() {
         }
 
         .tickerItem {
-          display: inline-flex;
-          align-items: center;
-          text-decoration: none;
           color: #e5e7eb;
-          opacity: 0.95;
+          text-decoration: none;
           font-weight: 650;
+          opacity: 0.95;
         }
 
         .tickerItem:hover {
-          opacity: 1;
-          text-decoration: underline;
           color: #fde68a;
+          text-decoration: underline;
+          opacity: 1;
         }
 
         .tickerTitle {
@@ -207,59 +221,30 @@ export default function NewsTicker() {
         }
 
         .tickerSource {
-          font-weight: 700;
           opacity: 0.8;
+          font-weight: 700;
         }
 
         .tickerDot {
-          opacity: 0.9;
           padding: 0 10px;
           color: #9ca3af;
         }
 
         @keyframes scroll {
-          from {
-            transform: translate3d(0, 0, 0);
-          }
-          to {
-            transform: translate3d(-50%, 0, 0);
-          }
+          from { transform: translate3d(0,0,0); }
+          to { transform: translate3d(-50%,0,0); }
         }
 
         @-webkit-keyframes scroll {
-          from {
-            -webkit-transform: translate3d(0, 0, 0);
-          }
-          to {
-            -webkit-transform: translate3d(-50%, 0, 0);
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .tickerTrack {
-            animation: none;
-            -webkit-animation: none;
-          }
+          from { -webkit-transform: translate3d(0,0,0); }
+          to { -webkit-transform: translate3d(-50%,0,0); }
         }
 
         @media (max-width: 640px) {
-          .mobileHeader {
-            display: flex;
-          }
-
-          .desktopRow {
-            align-items: flex-start;
-            gap: 0;
-            padding: 8px 12px 12px 12px;
-          }
-
-          .tickerLabel {
-            display: none;
-          }
-
-          .tickerViewport {
-            width: 100%;
-          }
+          .mobileHeader { display: flex; }
+          .tickerLabel { display: none; }
+          .desktopRow { padding: 8px 12px 12px; }
+          .fadeLeft, .fadeRight { width: 28px; }
         }
       `}</style>
     </div>
