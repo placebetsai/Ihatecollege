@@ -23,45 +23,76 @@ function stripCdata(s = "") {
   return s.replace("<![CDATA[", "").replace("]]>", "").trim();
 }
 
+function pickFirst(matchArr) {
+  return matchArr && matchArr[1] ? matchArr[1].trim() : "";
+}
+
+// ✅ Decode named + numeric HTML entities (kills &amp; forever)
 function decodeEntities(s = "") {
-  return s
+  let t = String(s);
+
+  t = t
     .replace(/&amp;/g, "&")
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'")
+    .replace(/&apos;/g, "'")
     .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">");
-}
+    .replace(/&gt;/g, ">")
+    .replace(/&nbsp;/g, " ");
 
-function pickFirst(matchArr) {
-  return matchArr && matchArr[1] ? matchArr[1].trim() : "";
+  // decimal numeric entities
+  t = t.replace(/&#(\d+);/g, (_, code) => {
+    try {
+      return String.fromCodePoint(parseInt(code, 10));
+    } catch {
+      return _;
+    }
+  });
+
+  // hex numeric entities
+  t = t.replace(/&#x([0-9a-fA-F]+);/g, (_, hex) => {
+    try {
+      return String.fromCodePoint(parseInt(hex, 16));
+    } catch {
+      return _;
+    }
+  });
+
+  return t;
 }
 
 // Very lightweight RSS item extraction (good enough for headlines)
 function parseRss(xmlText, source) {
   const items = [];
-
-  // Split by <item> ... </item>
   const rawItems = xmlText.split(/<\/item>/i);
 
   for (const chunk of rawItems) {
     if (!/<item>/i.test(chunk)) continue;
 
-    const title = decodeEntities(stripCdata(pickFirst(chunk.match(/<title>([\s\S]*?)<\/title>/i))));
-    let link = decodeEntities(stripCdata(pickFirst(chunk.match(/<link>([\s\S]*?)<\/link>/i))));
+    const titleRaw = pickFirst(chunk.match(/<title>([\s\S]*?)<\/title>/i));
+    const linkRaw = pickFirst(chunk.match(/<link>([\s\S]*?)<\/link>/i));
+    const guidRaw = pickFirst(chunk.match(/<guid[^>]*>([\s\S]*?)<\/guid>/i));
 
-    // Some feeds use <guid> as link
-    if (!link) {
-      link = decodeEntities(stripCdata(pickFirst(chunk.match(/<guid[^>]*>([\s\S]*?)<\/guid>/i))));
-    }
+    const title = decodeEntities(stripCdata(titleRaw));
+    let link = decodeEntities(stripCdata(linkRaw));
 
-    const pubDate = stripCdata(pickFirst(chunk.match(/<pubDate>([\s\S]*?)<\/pubDate>/i))) ||
-                    stripCdata(pickFirst(chunk.match(/<dc:date>([\s\S]*?)<\/dc:date>/i))) ||
-                    stripCdata(pickFirst(chunk.match(/<updated>([\s\S]*?)<\/updated>/i)));
+    if (!link) link = decodeEntities(stripCdata(guidRaw));
+
+    const pubDate =
+      stripCdata(pickFirst(chunk.match(/<pubDate>([\s\S]*?)<\/pubDate>/i))) ||
+      stripCdata(pickFirst(chunk.match(/<dc:date>([\s\S]*?)<\/dc:date>/i))) ||
+      stripCdata(pickFirst(chunk.match(/<updated>([\s\S]*?)<\/updated>/i)));
 
     if (!title || !link) continue;
 
-    items.push({ title, link, pubDate, source });
-    if (items.length >= 50) break; // don’t overwork
+    items.push({
+      title,
+      link,
+      pubDate,
+      source: decodeEntities(source),
+    });
+
+    if (items.length >= 50) break;
   }
 
   return items;
@@ -98,7 +129,7 @@ export default async function handler(req, res) {
           const r = await fetch(f.url, {
             headers: {
               "user-agent": "Mozilla/5.0 (NewsTickerBot)",
-              "accept": "application/rss+xml, application/xml;q=0.9, */*;q=0.8",
+              accept: "application/rss+xml, application/xml;q=0.9, */*;q=0.8",
             },
           });
           if (!r.ok) return [];
@@ -113,24 +144,22 @@ export default async function handler(req, res) {
     let all = results.flatMap((r) => (r.status === "fulfilled" ? r.value : []));
     all = dedupe(all).sort((a, b) => parseDate(b.pubDate) - parseDate(a.pubDate));
 
-    if (!all.length) {
-      // Don’t spam “unavailable” — just return a gentle placeholder item
-      return res.status(200).json({
-        items: [
-          {
-            title: "Loading the latest jobs + economy headlines…",
-            link: "#",
-            source: "System",
-          },
-        ],
-      });
-    }
-
     const finalItems = all.slice(0, TOTAL_ITEMS);
-    CACHE = { ts: now, items: finalItems };
+
+    CACHE = { ts: now, items: finalItems.length ? finalItems : CACHE.items };
 
     res.setHeader("Cache-Control", "s-maxage=600, stale-while-revalidate=3600");
-    return res.status(200).json({ items: finalItems });
+    return res.status(200).json({
+      items: finalItems.length
+        ? finalItems
+        : [
+            {
+              title: "Loading the latest jobs + economy headlines…",
+              link: "#",
+              source: "System",
+            },
+          ],
+    });
   } catch {
     return res.status(200).json({
       items: [
@@ -142,4 +171,4 @@ export default async function handler(req, res) {
       ],
     });
   }
-}
+  }
