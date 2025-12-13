@@ -1,28 +1,25 @@
 import Parser from "rss-parser";
 
-const parser = new Parser();
+const parser = new Parser({
+  timeout: 8000,
+});
 
-// -------- SETTINGS --------
-const TOTAL_ITEMS = 30;
-const UNION_PERCENT = 0.03; // 3%
-const JOBS_PERCENT = 0.70;  // 70%
-
-const MAX_UNION = Math.max(1, Math.round(TOTAL_ITEMS * UNION_PERCENT)); // ~1
-const MAX_JOBS = Math.round(TOTAL_ITEMS * JOBS_PERCENT);               // ~21
-const MAX_ECON = TOTAL_ITEMS - MAX_UNION - MAX_JOBS;                   // ~8
-
-// -------- FEEDS --------
+// HARD NO UNION — JOBS + ECONOMY ONLY
 const FEEDS = [
-  // JOBS + ECON (NON-UNION)
-  { url: "https://www.bls.gov/feed/empsit.rss", source: "BLS Jobs Report", type: "jobs" },
-  { url: "https://www.bls.gov/feed/jolts.rss", source: "BLS JOLTS", type: "jobs" },
-  { url: "https://www.dol.gov/rss/releases.xml", source: "Dept. of Labor", type: "jobs" },
+  // JOBS / ECON DATA (PRIMARY)
+  { url: "https://www.bls.gov/feed/empsit.rss", source: "BLS Jobs Report", weight: 3 },
+  { url: "https://www.bls.gov/feed/jolts.rss", source: "BLS JOLTS", weight: 2 },
+  { url: "https://www.dol.gov/rss/releases.xml", source: "U.S. Dept. of Labor", weight: 2 },
 
-  // UNION (HARD CAPPED)
-  { url: "https://www.bls.gov/feed/union2.rss", source: "BLS Union", type: "union" },
-  { url: "https://www.nlrb.gov/rss/rssPressReleases.xml", source: "NLRB", type: "union" },
-  { url: "https://partners.aflcio.org/node/3029/rss/0", source: "AFL-CIO", type: "union" },
+  // BACKUP ECON / LABOR MARKET NEWS
+  { url: "https://www.cnbc.com/id/10001147/device/rss/rss.html", source: "CNBC Economy", weight: 1 },
+  { url: "https://www.marketwatch.com/rss/topstories", source: "MarketWatch", weight: 1 },
+  { url: "https://feeds.a.dj.com/rss/RSSMarketsMain.xml", source: "WSJ Markets", weight: 1 },
 ];
+
+const TOTAL_ITEMS = 30;
+const CACHE_TTL = 10 * 60 * 1000; // 10 min
+let CACHE = { ts: 0, items: [] };
 
 function parseDate(d) {
   const t = Date.parse(d || "");
@@ -32,88 +29,73 @@ function parseDate(d) {
 function dedupe(items) {
   const seen = new Set();
   return items.filter((i) => {
-    const key = `${i.link}||${i.title}`;
-    if (seen.has(key)) return false;
-    seen.add(key);
+    const k = `${i.title}||${i.link}`;
+    if (seen.has(k)) return false;
+    seen.add(k);
     return true;
   });
 }
 
-function newestFirst(items) {
-  return items.sort((a, b) => parseDate(b.pubDate) - parseDate(a.pubDate));
-}
-
-function roundRobinBySource(items, limit) {
-  const groups = {};
-  for (const it of items) {
-    if (!groups[it.source]) groups[it.source] = [];
-    groups[it.source].push(it);
-  }
-
-  Object.values(groups).forEach(newestFirst);
-
-  const out = [];
-  const sources = Object.keys(groups);
-
-  while (out.length < limit) {
-    let progressed = false;
-    for (const s of sources) {
-      if (out.length >= limit) break;
-      if (groups[s].length) {
-        out.push(groups[s].shift());
-        progressed = true;
-      }
-    }
-    if (!progressed) break;
-  }
-
-  return out;
-}
-
 export default async function handler(req, res) {
   try {
+    const now = Date.now();
+    const noCache = req.query?.nocache === "1";
+
+    if (!noCache && CACHE.items.length && now - CACHE.ts < CACHE_TTL) {
+      res.setHeader("Cache-Control", "s-maxage=600, stale-while-revalidate=3600");
+      return res.status(200).json({ items: CACHE.items });
+    }
+
     const results = await Promise.allSettled(
       FEEDS.map(async (f) => {
-        const feed = await parser.parseURL(f.url);
-        return (feed.items || []).map((it) => ({
-          title: (it.title || "").trim(),
-          link: (it.link || "").trim(),
-          pubDate: it.isoDate || it.pubDate || "",
-          source: f.source,
-          type: f.type,
-        }));
+        try {
+          const feed = await parser.parseURL(f.url);
+          return (feed.items || []).map((it) => ({
+            title: (it.title || "").trim(),
+            link: (it.link || "").trim(),
+            pubDate: it.isoDate || it.pubDate || "",
+            source: f.source,
+            weight: f.weight,
+          }));
+        } catch {
+          return []; // 🔥 silently skip broken feed
+        }
       })
     );
 
-    const all = dedupe(
-      results
-        .flatMap((r) => (r.status === "fulfilled" ? r.value : []))
-        .filter((i) => i.title && i.link)
+    let items = results
+      .flatMap((r) => (r.status === "fulfilled" ? r.value : []))
+      .filter((i) => i.title && i.link);
+
+    if (!items.length) {
+      return res.status(200).json({
+        items: [
+          {
+            title: "Latest jobs and economic updates loading…",
+            link: "#",
+            source: "System",
+          },
+        ],
+      });
+    }
+
+    items = dedupe(items).sort(
+      (a, b) =>
+        b.weight - a.weight || parseDate(b.pubDate) - parseDate(a.pubDate)
     );
 
-    const unionAll = newestFirst(all.filter((i) => i.type === "union"));
-    const jobsAll = newestFirst(all.filter((i) => i.type === "jobs"));
+    const finalItems = items.slice(0, TOTAL_ITEMS);
 
-    // Pick union (hard limited)
-    const unionPicked = unionAll.slice(0, MAX_UNION);
+    CACHE = { ts: now, items: finalItems };
 
-    // Pick jobs (70%) round-robin so one source doesn’t spam
-    const jobsPicked = roundRobinBySource(jobsAll, MAX_JOBS);
-
-    // Econ/labor filler (27%) = more non-union from same jobs feeds (still BLS/DOL)
-    const remainingJobs = jobsAll.filter((j) => !jobsPicked.some((p) => p.link === j.link));
-    const econPicked = remainingJobs.slice(0, MAX_ECON);
-
-    // Final order: Jobs -> Econ -> Union (union last, rare)
-    const finalItems = [...jobsPicked, ...econPicked, ...unionPicked].slice(0, TOTAL_ITEMS);
-
-    res.setHeader("Cache-Control", "s-maxage=900, stale-while-revalidate=3600");
-    res.status(200).json({ items: finalItems });
-  } catch (e) {
-    res.status(200).json({
+    res.setHeader("Cache-Control", "s-maxage=600, stale-while-revalidate=3600");
+    return res.status(200).json({ items: finalItems });
+  } catch {
+    // Absolute last-resort fallback (should be rare)
+    return res.status(200).json({
       items: [
         {
-          title: "News feed temporarily unavailable — check back soon.",
+          title: "Jobs & economy headlines updating…",
           link: "#",
           source: "System",
         },
