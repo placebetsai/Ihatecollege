@@ -2,7 +2,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 export default function NewsTicker() {
   const [items, setItems] = useState([]);
-  const [failed, setFailed] = useState(false);
 
   const viewportRef = useRef(null);
   const measureRef = useRef(null);
@@ -11,13 +10,18 @@ export default function NewsTicker() {
   useEffect(() => {
     let alive = true;
 
-    fetch(`/api/jobsnews?nocache=1`)
+    fetch(`/api/news?nocache=1`, { cache: "no-store" })
       .then((r) => r.json())
       .then((d) => {
         if (!alive) return;
         setItems(Array.isArray(d?.items) ? d.items : []);
       })
-      .catch(() => alive && setFailed(true));
+      .catch(() => {
+        if (!alive) return;
+        setItems([
+          { title: "Loading the latest jobs + economy headlines…", link: "#", source: "System" },
+        ]);
+      });
 
     return () => {
       alive = false;
@@ -27,11 +31,8 @@ export default function NewsTicker() {
   const base =
     items.length > 0
       ? items
-      : failed
-      ? [{ title: "News feed temporarily unavailable — check back soon.", link: "#", source: "" }]
-      : [{ title: "Loading latest jobs + economy updates…", link: "#", source: "" }];
+      : [{ title: "Loading the latest jobs + economy headlines…", link: "#", source: "System" }];
 
-  // Ensure loop always long enough (mobile Safari fix)
   useEffect(() => {
     function computeCopies() {
       const viewport = viewportRef.current;
@@ -61,13 +62,13 @@ export default function NewsTicker() {
   }, [base, copies]);
 
   return (
-    <div className="tickerShell">
-      {/* Mobile capsule */}
+    <div className="tickerShell" aria-label="Latest news ticker">
+      {/* Mobile-only capsule */}
       <div className="mobileHeader">
         <span className="tickerCapsule">News Update</span>
       </div>
 
-      {/* Desktop inline */}
+      {/* Desktop: inline label + feed */}
       <div className="desktopRow">
         <div className="tickerLabel">News Update:</div>
 
@@ -79,7 +80,7 @@ export default function NewsTicker() {
           {/* Hidden measurer */}
           <div className="tickerMeasure" ref={measureRef} aria-hidden="true">
             {base.map((it, idx) => (
-              <span key={idx} className="tickerMeasureItem">
+              <span key={idx}>
                 {it.title}
                 {it.source ? ` — ${it.source}` : ""} •{" "}
               </span>
@@ -107,8 +108,8 @@ export default function NewsTicker() {
       <style jsx>{`
         .tickerShell {
           width: 100%;
-          border: 1px solid rgba(255,255,255,0.14);
-          background: rgba(0,0,0,0.55);
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          background: rgba(0, 0, 0, 0.55);
           backdrop-filter: blur(10px);
           border-radius: 14px;
           overflow: hidden;
@@ -120,10 +121,13 @@ export default function NewsTicker() {
         }
 
         .tickerCapsule {
+          display: inline-flex;
+          align-items: center;
           padding: 6px 10px;
           border-radius: 999px;
           font-weight: 900;
           font-size: 12px;
+          line-height: 1;
           color: #111827;
           background: #f59e0b;
         }
@@ -140,15 +144,16 @@ export default function NewsTicker() {
           font-weight: 900;
           color: #f59e0b;
           white-space: nowrap;
+          letter-spacing: 0.2px;
         }
 
         .tickerViewport {
           position: relative;
           flex: 1;
           overflow: hidden;
+          min-width: 0;
         }
 
-        /* Gradient fades */
         .fadeLeft,
         .fadeRight {
           position: absolute;
@@ -161,20 +166,12 @@ export default function NewsTicker() {
 
         .fadeLeft {
           left: 0;
-          background: linear-gradient(
-            to right,
-            rgba(0,0,0,0.85),
-            rgba(0,0,0,0)
-          );
+          background: linear-gradient(to right, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0));
         }
 
         .fadeRight {
           right: 0;
-          background: linear-gradient(
-            to left,
-            rgba(0,0,0,0.85),
-            rgba(0,0,0,0)
-          );
+          background: linear-gradient(to left, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0));
         }
 
         .tickerMeasure {
@@ -187,11 +184,12 @@ export default function NewsTicker() {
 
         .tickerTrack {
           display: inline-flex;
+          align-items: center;
           white-space: nowrap;
           will-change: transform;
 
-          transform: translate3d(0,0,0);
-          -webkit-transform: translate3d(0,0,0);
+          transform: translate3d(0, 0, 0);
+          -webkit-transform: translate3d(0, 0, 0);
           backface-visibility: hidden;
           -webkit-backface-visibility: hidden;
 
@@ -206,8 +204,8 @@ export default function NewsTicker() {
         .tickerItem {
           color: #e5e7eb;
           text-decoration: none;
-          font-weight: 650;
           opacity: 0.95;
+          font-weight: 650;
         }
 
         .tickerItem:hover {
@@ -231,13 +229,13 @@ export default function NewsTicker() {
         }
 
         @keyframes scroll {
-          from { transform: translate3d(0,0,0); }
-          to { transform: translate3d(-50%,0,0); }
+          from { transform: translate3d(0, 0, 0); }
+          to { transform: translate3d(-50%, 0, 0); }
         }
 
         @-webkit-keyframes scroll {
-          from { -webkit-transform: translate3d(0,0,0); }
-          to { -webkit-transform: translate3d(-50%,0,0); }
+          from { -webkit-transform: translate3d(0, 0, 0); }
+          to { -webkit-transform: translate3d(-50%, 0, 0); }
         }
 
         @media (max-width: 640px) {
