@@ -1,11 +1,25 @@
 import { useEffect, useMemo, useState } from "react";
 
+function decodeEntities(s = "") {
+  return String(s)
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&apos;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&#8217;/g, "’")
+    .replace(/&#8220;/g, "“")
+    .replace(/&#8221;/g, "”")
+    .replace(/&#8211;/g, "–")
+    .replace(/&#8212;/g, "—");
+}
+
 export default function NewsTicker() {
   const [items, setItems] = useState([]);
   const [ready, setReady] = useState(false);
   const [runKey, setRunKey] = useState(0);
 
-  // Mobile tap-to-pause (optional but helps iOS jank perception)
   const [pausedMobile, setPausedMobile] = useState(false);
 
   useEffect(() => {
@@ -19,10 +33,9 @@ export default function NewsTicker() {
         if (!alive) return;
 
         const list = Array.isArray(data?.items) ? data.items : [];
-        // Keep it reasonable so the DOM isn’t huge (less jank)
         setItems(list.slice(0, 18));
 
-        // Safari: force a clean animation restart after DOM paints
+        // Safari: restart animation after DOM paint
         setReady(false);
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
@@ -39,9 +52,7 @@ export default function NewsTicker() {
     }
 
     load();
-    // Refresh every 30 minutes (lightweight)
     const t = setInterval(load, 30 * 60 * 1000);
-
     return () => {
       alive = false;
       clearInterval(t);
@@ -53,7 +64,7 @@ export default function NewsTicker() {
 
   return (
     <div className="tickerRoot" aria-label="Jobs + economy headlines">
-      {/* DESKTOP: inline label + feed */}
+      {/* DESKTOP */}
       <div className="desktopRow">
         <span className="label">News Update:</span>
 
@@ -64,50 +75,58 @@ export default function NewsTicker() {
             <div key={runKey} className={`track ${ready ? "run desktopSpeed" : ""}`}>
               {/* Content A */}
               <div className="content">
-                {contentItems.map((it, i) => (
-                  <a
-                    key={`${it.link}-${i}`}
-                    href={it.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="item"
-                    title={it.title}
-                  >
-                    <span className="dot">•</span>
-                    <span className="text">
-                      {it.title}
-                      {it.source ? ` — ${it.source}` : ""}
-                    </span>
-                  </a>
-                ))}
+                {contentItems.map((it, i) => {
+                  const title = decodeEntities(it.title);
+                  const source = decodeEntities(it.source);
+                  return (
+                    <a
+                      key={`${it.link}-${i}`}
+                      href={it.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="item"
+                      title={title}
+                    >
+                      <span className="dot">•</span>
+                      <span className="text">
+                        {title}
+                        {source ? ` — ${source}` : ""}
+                      </span>
+                    </a>
+                  );
+                })}
               </div>
 
               {/* Content B (duplicate) */}
               <div className="content" aria-hidden="true">
-                {contentItems.map((it, i) => (
-                  <a
-                    key={`${it.link}-dup-${i}`}
-                    href={it.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="item"
-                    tabIndex={-1}
-                    title={it.title}
-                  >
-                    <span className="dot">•</span>
-                    <span className="text">
-                      {it.title}
-                      {it.source ? ` — ${it.source}` : ""}
-                    </span>
-                  </a>
-                ))}
+                {contentItems.map((it, i) => {
+                  const title = decodeEntities(it.title);
+                  const source = decodeEntities(it.source);
+                  return (
+                    <a
+                      key={`${it.link}-dup-${i}`}
+                      href={it.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="item"
+                      tabIndex={-1}
+                      title={title}
+                    >
+                      <span className="dot">•</span>
+                      <span className="text">
+                        {title}
+                        {source ? ` — ${source}` : ""}
+                      </span>
+                    </a>
+                  );
+                })}
               </div>
             </div>
           )}
         </div>
       </div>
 
-      {/* MOBILE: capsule above-left + feed below */}
+      {/* MOBILE */}
       <div className="mobileRow">
         <div className="mobileHeader">
           <span className="tickerCapsule">News Update</span>
@@ -128,44 +147,52 @@ export default function NewsTicker() {
               className={`track ${ready ? "run mobileSpeed" : ""} ${pausedMobile ? "paused" : ""}`}
             >
               <div className="content">
-                {contentItems.map((it, i) => (
-                  <a
-                    key={`${it.link}-m-${i}`}
-                    href={it.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="item"
-                    title={it.title}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <span className="dot">•</span>
-                    <span className="text">
-                      {it.title}
-                      {it.source ? ` — ${it.source}` : ""}
-                    </span>
-                  </a>
-                ))}
+                {contentItems.map((it, i) => {
+                  const title = decodeEntities(it.title);
+                  const source = decodeEntities(it.source);
+                  return (
+                    <a
+                      key={`${it.link}-m-${i}`}
+                      href={it.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="item"
+                      title={title}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <span className="dot">•</span>
+                      <span className="text">
+                        {title}
+                        {source ? ` — ${source}` : ""}
+                      </span>
+                    </a>
+                  );
+                })}
               </div>
 
               <div className="content" aria-hidden="true">
-                {contentItems.map((it, i) => (
-                  <a
-                    key={`${it.link}-m-dup-${i}`}
-                    href={it.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="item"
-                    tabIndex={-1}
-                    title={it.title}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <span className="dot">•</span>
-                    <span className="text">
-                      {it.title}
-                      {it.source ? ` — ${it.source}` : ""}
-                    </span>
-                  </a>
-                ))}
+                {contentItems.map((it, i) => {
+                  const title = decodeEntities(it.title);
+                  const source = decodeEntities(it.source);
+                  return (
+                    <a
+                      key={`${it.link}-m-dup-${i}`}
+                      href={it.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="item"
+                      tabIndex={-1}
+                      title={title}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <span className="dot">•</span>
+                      <span className="text">
+                        {title}
+                        {source ? ` — ${source}` : ""}
+                      </span>
+                    </a>
+                  );
+                })}
               </div>
             </div>
           )}
@@ -186,7 +213,6 @@ export default function NewsTicker() {
           -webkit-transform: translateZ(0);
         }
 
-        /* Desktop row */
         .desktopRow {
           display: flex;
           align-items: center;
@@ -196,15 +222,13 @@ export default function NewsTicker() {
         }
 
         .label {
-          flex: 0 0 auto;
           font-weight: 900;
           font-size: 13px;
           letter-spacing: 0.06em;
-          color: #ffb000; /* amber */
+          color: #ffb000;
           white-space: nowrap;
         }
 
-        /* Mobile row */
         .mobileRow {
           display: none;
           padding: 10px 12px 12px;
@@ -238,7 +262,6 @@ export default function NewsTicker() {
           text-transform: uppercase;
         }
 
-        /* Viewport + gradient fades */
         .viewport {
           flex: 1 1 auto;
           overflow: hidden;
@@ -278,12 +301,10 @@ export default function NewsTicker() {
           white-space: nowrap;
         }
 
-        /* Track = two identical content blocks */
         .track {
           display: inline-flex;
           width: max-content;
           white-space: nowrap;
-
           transform: translate3d(0, 0, 0);
           -webkit-transform: translate3d(0, 0, 0);
           will-change: transform;
@@ -298,10 +319,10 @@ export default function NewsTicker() {
           white-space: nowrap;
         }
 
-        /* Speeds */
+        /* Slower desktop */
         .run.desktopSpeed {
-          animation: move 90s linear infinite;
-          -webkit-animation: move 90s linear infinite;
+          animation: move 110s linear infinite;
+          -webkit-animation: move 110s linear infinite;
         }
 
         .run.mobileSpeed {
@@ -309,19 +330,16 @@ export default function NewsTicker() {
           -webkit-animation: move 60s linear infinite;
         }
 
-        /* Pause on hover (desktop) */
         .desktopRow .viewport:hover .run.desktopSpeed {
           animation-play-state: paused;
           -webkit-animation-play-state: paused;
         }
 
-        /* Tap pause (mobile) */
         .paused {
           animation-play-state: paused !important;
           -webkit-animation-play-state: paused !important;
         }
 
-        /* Items: avoid CSS gap inside animation (Safari jank) */
         .item {
           display: inline-flex;
           align-items: center;
@@ -354,7 +372,6 @@ export default function NewsTicker() {
           display: inline-block;
         }
 
-        /* Safari-safe keyframes */
         @-webkit-keyframes move {
           0% { -webkit-transform: translate3d(0, 0, 0); }
           100% { -webkit-transform: translate3d(-50%, 0, 0); }
