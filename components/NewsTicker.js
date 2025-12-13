@@ -43,7 +43,7 @@ export default function NewsTicker() {
           },
         ];
 
-  // Make sure we have enough repeated content so mobile never scrolls into blank space
+  // Mobile/Safari fix: ensure enough repeated content to avoid blank gaps
   useEffect(() => {
     function computeCopies() {
       const viewport = viewportRef.current;
@@ -58,7 +58,6 @@ export default function NewsTicker() {
         return;
       }
 
-      // Ensure at least ~2x viewport width of content so the loop never shows blank space
       const needed = Math.ceil((viewportW * 2) / singleW) + 1;
       setCopies(Math.max(2, needed));
     }
@@ -80,13 +79,15 @@ export default function NewsTicker() {
 
   return (
     <div className="tickerShell" aria-label="Latest news ticker">
-      {/* Capsule label ABOVE the feed, left aligned */}
-      <div className="tickerHeader">
+      {/* Mobile-only capsule */}
+      <div className="mobileHeader">
         <span className="tickerCapsule">News Update</span>
       </div>
 
-      {/* Feed row */}
-      <div className="tickerRow">
+      {/* Desktop inline label + feed */}
+      <div className="desktopRow">
+        <div className="tickerLabel">News Update:</div>
+
         <div className="tickerViewport" ref={viewportRef}>
           {/* Hidden measurer: one copy only */}
           <div className="tickerMeasure" ref={measureRef} aria-hidden="true">
@@ -117,7 +118,7 @@ export default function NewsTicker() {
       </div>
 
       <style jsx>{`
-        /* OUTER CONTAINER */
+        /* Outer container */
         .tickerShell {
           width: 100%;
           border: 1px solid rgba(255, 255, 255, 0.14);
@@ -127,38 +128,47 @@ export default function NewsTicker() {
           overflow: hidden;
         }
 
-        /* CAPSULE HEADER (ABOVE FEED) */
-        .tickerHeader {
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
+        /* Mobile capsule header (hidden on desktop) */
+        .mobileHeader {
+          display: none;
           padding: 10px 12px 0 12px;
         }
 
         .tickerCapsule {
           display: inline-flex;
           align-items: center;
-          gap: 8px;
           padding: 6px 10px;
           border-radius: 999px;
           font-weight: 900;
           letter-spacing: 0.25px;
           font-size: 12px;
           line-height: 1;
-          color: #111827; /* near-black text inside pill */
+          color: #111827;
           background: #f59e0b; /* amber-500 */
           box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
         }
 
-        /* FEED ROW */
-        .tickerRow {
-          padding: 8px 12px 10px 12px;
+        /* Desktop row: inline label + feed */
+        .desktopRow {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 10px 14px;
+          overflow: hidden;
+        }
+
+        .tickerLabel {
+          font-weight: 900;
+          white-space: nowrap;
+          letter-spacing: 0.2px;
+          color: #f59e0b; /* amber-500 */
         }
 
         .tickerViewport {
           position: relative;
           overflow: hidden;
-          width: 100%;
+          flex: 1;
+          min-width: 0;
         }
 
         /* Hidden measurer */
@@ -187,7 +197,7 @@ export default function NewsTicker() {
           backface-visibility: hidden;
           -webkit-backface-visibility: hidden;
 
-          animation: scroll 70s linear infinite; /* slow */
+          animation: scroll 70s linear infinite;
           -webkit-animation: scroll 70s linear infinite;
         }
 
@@ -248,6 +258,28 @@ export default function NewsTicker() {
           .tickerTrack {
             animation: none;
             -webkit-animation: none;
+          }
+        }
+
+        /* MOBILE: capsule above-left, feed uses full width (more room) */
+        @media (max-width: 640px) {
+          .mobileHeader {
+            display: flex;
+          }
+
+          .desktopRow {
+            align-items: flex-start;
+            gap: 0;
+            padding: 8px 12px 12px 12px;
+          }
+
+          /* Hide inline desktop label on mobile */
+          .tickerLabel {
+            display: none;
+          }
+
+          .tickerViewport {
+            width: 100%;
           }
         }
       `}</style>
