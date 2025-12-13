@@ -82,7 +82,7 @@ export default function NewsTicker() {
           align-items: center;
           white-space: nowrap;
           will-change: transform;
-          animation: scroll 42s linear infinite; /* not too fast */
+          animation: scroll 70s linear infinite; /* not too fast */
         }
 
         .tickerWrap:hover .tickerTrack {
