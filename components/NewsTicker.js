@@ -63,17 +63,15 @@ export default function NewsTicker() {
       setCopies(Math.max(2, needed));
     }
 
-    // compute after paint
     const t = setTimeout(computeCopies, 0);
-
     window.addEventListener("resize", computeCopies);
+
     return () => {
       clearTimeout(t);
       window.removeEventListener("resize", computeCopies);
     };
   }, [base]);
 
-  // Build repeated content
   const loop = useMemo(() => {
     const out = [];
     for (let i = 0; i < copies; i++) out.push(...base);
@@ -126,10 +124,12 @@ export default function NewsTicker() {
           overflow: hidden;
         }
 
+        /* AMBER label */
         .tickerLabel {
           font-weight: 900;
           white-space: nowrap;
           letter-spacing: 0.2px;
+          color: #f59e0b; /* amber-500 */
         }
 
         .tickerViewport {
@@ -159,7 +159,7 @@ export default function NewsTicker() {
           white-space: nowrap;
           will-change: transform;
 
-          /* Safari stability: keep it on the GPU and don’t drop the layer */
+          /* Safari stability */
           transform: translate3d(0, 0, 0);
           -webkit-transform: translate3d(0, 0, 0);
           backface-visibility: hidden;
@@ -173,17 +173,19 @@ export default function NewsTicker() {
           animation-play-state: paused;
         }
 
+        /* Link color */
         .tickerItem {
           display: inline-flex;
           align-items: center;
           text-decoration: none;
-          color: inherit;
+          color: #e5e7eb; /* slate-200 */
           opacity: 0.95;
         }
 
         .tickerItem:hover {
           opacity: 1;
           text-decoration: underline;
+          color: #fde68a; /* amber-200 */
         }
 
         .tickerTitle {
@@ -195,12 +197,13 @@ export default function NewsTicker() {
           opacity: 0.8;
         }
 
+        /* Divider dot color */
         .tickerDot {
-          opacity: 0.7;
+          opacity: 0.9;
           padding: 0 10px;
+          color: #9ca3af; /* gray-400 */
         }
 
-        /* Use translate3d (Safari-friendly) */
         @keyframes scroll {
           from {
             transform: translate3d(0, 0, 0);
