@@ -1,18 +1,35 @@
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 
 function decodeEntities(s = "") {
-  return String(s)
+  let t = String(s);
+
+  t = t
     .replace(/&amp;/g, "&")
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'")
     .replace(/&apos;/g, "'")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
-    .replace(/&#8217;/g, "’")
-    .replace(/&#8220;/g, "“")
-    .replace(/&#8221;/g, "”")
-    .replace(/&#8211;/g, "–")
-    .replace(/&#8212;/g, "—");
+    .replace(/&nbsp;/g, " ");
+
+  t = t.replace(/&#(\d+);/g, (_, code) => {
+    try {
+      return String.fromCodePoint(parseInt(code, 10));
+    } catch {
+      return _;
+    }
+  });
+
+  t = t.replace(/&#x([0-9a-fA-F]+);/g, (_, hex) => {
+    try {
+      return String.fromCodePoint(parseInt(hex, 16));
+    } catch {
+      return _;
+    }
+  });
+
+  return t;
 }
 
 export default function NewsTicker() {
@@ -63,143 +80,154 @@ export default function NewsTicker() {
   const hasItems = contentItems.length > 0;
 
   return (
-    <div className="tickerRoot" aria-label="Jobs + economy headlines">
-      {/* DESKTOP */}
-      <div className="desktopRow">
-        <span className="label">News Update:</span>
+    <div className="tickerWrap" aria-label="Jobs + economy headlines">
+      <div className="tickerRoot">
+        {/* DESKTOP */}
+        <div className="desktopRow">
+          <span className="label">News Update:</span>
 
-        <div className="viewport">
-          {!hasItems ? (
-            <div className="idle">Loading jobs + economy headlines…</div>
-          ) : (
-            <div key={runKey} className={`track ${ready ? "run desktopSpeed" : ""}`}>
-              {/* Content A */}
-              <div className="content">
-                {contentItems.map((it, i) => {
-                  const title = decodeEntities(it.title);
-                  const source = decodeEntities(it.source);
-                  return (
-                    <a
-                      key={`${it.link}-${i}`}
-                      href={it.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="item"
-                      title={title}
-                    >
-                      <span className="dot">•</span>
-                      <span className="text">
-                        {title}
-                        {source ? ` — ${source}` : ""}
-                      </span>
-                    </a>
-                  );
-                })}
-              </div>
+          <div className="viewport">
+            {!hasItems ? (
+              <div className="idle">Loading jobs + economy headlines…</div>
+            ) : (
+              <div key={runKey} className={`track ${ready ? "run desktopSpeed" : ""}`}>
+                <div className="content">
+                  {contentItems.map((it, i) => {
+                    const title = decodeEntities(it.title);
+                    const source = decodeEntities(it.source);
+                    return (
+                      <a
+                        key={`${it.link}-${i}`}
+                        href={it.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="item"
+                        title={title}
+                      >
+                        <span className="dot">•</span>
+                        <span className="text">
+                          {title}
+                          {source ? ` — ${source}` : ""}
+                        </span>
+                      </a>
+                    );
+                  })}
+                </div>
 
-              {/* Content B (duplicate) */}
-              <div className="content" aria-hidden="true">
-                {contentItems.map((it, i) => {
-                  const title = decodeEntities(it.title);
-                  const source = decodeEntities(it.source);
-                  return (
-                    <a
-                      key={`${it.link}-dup-${i}`}
-                      href={it.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="item"
-                      tabIndex={-1}
-                      title={title}
-                    >
-                      <span className="dot">•</span>
-                      <span className="text">
-                        {title}
-                        {source ? ` — ${source}` : ""}
-                      </span>
-                    </a>
-                  );
-                })}
+                <div className="content" aria-hidden="true">
+                  {contentItems.map((it, i) => {
+                    const title = decodeEntities(it.title);
+                    const source = decodeEntities(it.source);
+                    return (
+                      <a
+                        key={`${it.link}-dup-${i}`}
+                        href={it.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="item"
+                        tabIndex={-1}
+                        title={title}
+                      >
+                        <span className="dot">•</span>
+                        <span className="text">
+                          {title}
+                          {source ? ` — ${source}` : ""}
+                        </span>
+                      </a>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
+        </div>
+
+        {/* MOBILE */}
+        <div className="mobileRow">
+          <div className="mobileHeader">
+            <span className="tickerCapsule">News Update</span>
+            <span className="tapHint">{pausedMobile ? "Paused" : "Tap to pause"}</span>
+          </div>
+
+          <div
+            className="viewport"
+            role="button"
+            aria-label="Tap to open"
+            onClick={() => setPausedMobile((p) => !p)}
+          >
+            {!hasItems ? (
+              <div className="idle">Loading jobs + economy headlines…</div>
+            ) : (
+              <div
+                key={`m-${runKey}`}
+                className={`track ${ready ? "run mobileSpeed" : ""} ${pausedMobile ? "paused" : ""}`}
+              >
+                <div className="content">
+                  {contentItems.map((it, i) => {
+                    const title = decodeEntities(it.title);
+                    const source = decodeEntities(it.source);
+                    return (
+                      <a
+                        key={`${it.link}-m-${i}`}
+                        href={it.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="item"
+                        title={title}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <span className="dot">•</span>
+                        <span className="text">
+                          {title}
+                          {source ? ` — ${source}` : ""}
+                        </span>
+                      </a>
+                    );
+                  })}
+                </div>
+
+                <div className="content" aria-hidden="true">
+                  {contentItems.map((it, i) => {
+                    const title = decodeEntities(it.title);
+                    const source = decodeEntities(it.source);
+                    return (
+                      <a
+                        key={`${it.link}-m-dup-${i}`}
+                        href={it.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="item"
+                        tabIndex={-1}
+                        title={title}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <span className="dot">•</span>
+                        <span className="text">
+                          {title}
+                          {source ? ` — ${source}` : ""}
+                        </span>
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* MOBILE */}
-      <div className="mobileRow">
-        <div className="mobileHeader">
-          <span className="tickerCapsule">News Update</span>
-          <span className="tapHint">{pausedMobile ? "Paused" : "Tap to pause"}</span>
-        </div>
-
-        <div
-          className="viewport"
-          role="button"
-          aria-label="Tap to pause or resume headlines"
-          onClick={() => setPausedMobile((p) => !p)}
-        >
-          {!hasItems ? (
-            <div className="idle">Loading jobs + economy headlines…</div>
-          ) : (
-            <div
-              key={`m-${runKey}`}
-              className={`track ${ready ? "run mobileSpeed" : ""} ${pausedMobile ? "paused" : ""}`}
-            >
-              <div className="content">
-                {contentItems.map((it, i) => {
-                  const title = decodeEntities(it.title);
-                  const source = decodeEntities(it.source);
-                  return (
-                    <a
-                      key={`${it.link}-m-${i}`}
-                      href={it.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="item"
-                      title={title}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <span className="dot">•</span>
-                      <span className="text">
-                        {title}
-                        {source ? ` — ${source}` : ""}
-                      </span>
-                    </a>
-                  );
-                })}
-              </div>
-
-              <div className="content" aria-hidden="true">
-                {contentItems.map((it, i) => {
-                  const title = decodeEntities(it.title);
-                  const source = decodeEntities(it.source);
-                  return (
-                    <a
-                      key={`${it.link}-m-dup-${i}`}
-                      href={it.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="item"
-                      tabIndex={-1}
-                      title={title}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <span className="dot">•</span>
-                      <span className="text">
-                        {title}
-                        {source ? ` — ${source}` : ""}
-                      </span>
-                    </a>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-        </div>
+      {/* ✅ NEW: Link under ticker */}
+      <div className="belowLinkRow">
+        <Link href="/news" className="belowLink">
+          Tap here for latest news →
+        </Link>
       </div>
 
       <style jsx>{`
+        .tickerWrap {
+          width: 100%;
+        }
+
         .tickerRoot {
           width: 100%;
           background: rgba(0, 0, 0, 0.55);
@@ -211,6 +239,31 @@ export default function NewsTicker() {
           z-index: 5;
           transform: translateZ(0);
           -webkit-transform: translateZ(0);
+        }
+
+        .belowLinkRow {
+          display: flex;
+          justify-content: flex-end;
+          padding: 6px 4px 0 4px;
+        }
+
+        .belowLink {
+          font-weight: 900;
+          font-size: 12px;
+          letter-spacing: 0.02em;
+          color: rgba(255, 255, 255, 0.78);
+          text-decoration: none;
+          padding: 6px 10px;
+          border-radius: 999px;
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          background: rgba(0, 0, 0, 0.25);
+          backdrop-filter: blur(8px);
+        }
+
+        .belowLink:hover {
+          color: #111827;
+          background: #ffb000;
+          border-color: rgba(255, 176, 0, 0.8);
         }
 
         .desktopRow {
@@ -319,7 +372,6 @@ export default function NewsTicker() {
           white-space: nowrap;
         }
 
-        /* Slower desktop */
         .run.desktopSpeed {
           animation: move 110s linear infinite;
           -webkit-animation: move 110s linear infinite;
@@ -390,8 +442,9 @@ export default function NewsTicker() {
           .text { max-width: 85vw; }
           .viewport::before,
           .viewport::after { width: 34px; }
+          .belowLinkRow { justify-content: flex-start; }
         }
       `}</style>
     </div>
   );
-}
+                                    }
