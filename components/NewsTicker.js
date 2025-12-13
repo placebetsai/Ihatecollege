@@ -1,8 +1,12 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 export default function NewsTicker() {
   const [items, setItems] = useState([]);
   const [failed, setFailed] = useState(false);
+
+  const viewportRef = useRef(null);
+  const measureRef = useRef(null);
+  const [copies, setCopies] = useState(2);
 
   useEffect(() => {
     let alive = true;
@@ -24,16 +28,73 @@ export default function NewsTicker() {
     items.length > 0
       ? items
       : failed
-      ? [{ title: "News feed temporarily unavailable — check back soon.", link: "#", source: "" }]
-      : [{ title: "Loading latest jobs + unions + labor updates…", link: "#", source: "" }];
+      ? [
+          {
+            title: "News feed temporarily unavailable — check back soon.",
+            link: "#",
+            source: "",
+          },
+        ]
+      : [
+          {
+            title: "Loading latest jobs + unions + labor updates…",
+            link: "#",
+            source: "",
+          },
+        ];
 
-  const loop = useMemo(() => [...base, ...base], [base]);
+  // Make sure we have enough repeated content so mobile never scrolls into blank space
+  useEffect(() => {
+    function computeCopies() {
+      const viewport = viewportRef.current;
+      const measure = measureRef.current;
+      if (!viewport || !measure) return;
+
+      const viewportW = viewport.clientWidth || 0;
+      const singleW = measure.scrollWidth || 0;
+
+      if (!viewportW || !singleW) {
+        setCopies(2);
+        return;
+      }
+
+      // Ensure at least ~2x viewport width of content so the loop never shows blank space
+      const needed = Math.ceil((viewportW * 2) / singleW) + 1;
+      setCopies(Math.max(2, needed));
+    }
+
+    // compute after paint
+    const t = setTimeout(computeCopies, 0);
+
+    window.addEventListener("resize", computeCopies);
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener("resize", computeCopies);
+    };
+  }, [base]);
+
+  // Build repeated content
+  const loop = useMemo(() => {
+    const out = [];
+    for (let i = 0; i < copies; i++) out.push(...base);
+    return out;
+  }, [base, copies]);
 
   return (
     <div className="tickerWrap" aria-label="Latest news ticker">
       <div className="tickerLabel">News Update:</div>
 
-      <div className="tickerViewport">
+      <div className="tickerViewport" ref={viewportRef}>
+        {/* Hidden measurer: one copy only */}
+        <div className="tickerMeasure" ref={measureRef} aria-hidden="true">
+          {base.map((it, idx) => (
+            <span key={idx} className="tickerMeasureItem">
+              {it.title}
+              {it.source ? ` — ${it.source}` : ""} •{" "}
+            </span>
+          ))}
+        </div>
+
         <div className="tickerTrack">
           {loop.map((it, idx) => (
             <a
@@ -72,9 +133,24 @@ export default function NewsTicker() {
         }
 
         .tickerViewport {
+          position: relative;
           overflow: hidden;
           flex: 1;
           min-width: 0;
+        }
+
+        /* Hidden measurer */
+        .tickerMeasure {
+          position: absolute;
+          visibility: hidden;
+          white-space: nowrap;
+          pointer-events: none;
+          height: 0;
+          overflow: hidden;
+        }
+
+        .tickerMeasureItem {
+          font-weight: 700;
         }
 
         .tickerTrack {
@@ -82,7 +158,15 @@ export default function NewsTicker() {
           align-items: center;
           white-space: nowrap;
           will-change: transform;
-          animation: scroll 70s linear infinite; /* not too fast */
+
+          /* Safari stability: keep it on the GPU and don’t drop the layer */
+          transform: translate3d(0, 0, 0);
+          -webkit-transform: translate3d(0, 0, 0);
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+
+          animation: scroll 70s linear infinite; /* slow */
+          -webkit-animation: scroll 70s linear infinite;
         }
 
         .tickerWrap:hover .tickerTrack {
@@ -116,18 +200,29 @@ export default function NewsTicker() {
           padding: 0 10px;
         }
 
+        /* Use translate3d (Safari-friendly) */
         @keyframes scroll {
           from {
-            transform: translateX(0);
+            transform: translate3d(0, 0, 0);
           }
           to {
-            transform: translateX(-50%);
+            transform: translate3d(-50%, 0, 0);
+          }
+        }
+
+        @-webkit-keyframes scroll {
+          from {
+            -webkit-transform: translate3d(0, 0, 0);
+          }
+          to {
+            -webkit-transform: translate3d(-50%, 0, 0);
           }
         }
 
         @media (prefers-reduced-motion: reduce) {
           .tickerTrack {
             animation: none;
+            -webkit-animation: none;
           }
         }
       `}</style>
