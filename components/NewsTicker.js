@@ -28,22 +28,10 @@ export default function NewsTicker() {
     items.length > 0
       ? items
       : failed
-      ? [
-          {
-            title: "News feed temporarily unavailable — check back soon.",
-            link: "#",
-            source: "",
-          },
-        ]
-      : [
-          {
-            title: "Loading latest jobs + economy updates…",
-            link: "#",
-            source: "",
-          },
-        ];
+      ? [{ title: "News feed temporarily unavailable — check back soon.", link: "#", source: "" }]
+      : [{ title: "Loading latest jobs + economy updates…", link: "#", source: "" }];
 
-  // Mobile/Safari fix: ensure enough repeated content to avoid blank gaps
+  // Ensure enough repeated content so mobile never scrolls into blank gaps
   useEffect(() => {
     function computeCopies() {
       const viewport = viewportRef.current;
@@ -64,7 +52,6 @@ export default function NewsTicker() {
 
     const t = setTimeout(computeCopies, 0);
     window.addEventListener("resize", computeCopies);
-
     return () => {
       clearTimeout(t);
       window.removeEventListener("resize", computeCopies);
@@ -84,12 +71,12 @@ export default function NewsTicker() {
         <span className="tickerCapsule">News Update</span>
       </div>
 
-      {/* Desktop inline label + feed */}
+      {/* Desktop: inline label + feed */}
       <div className="desktopRow">
         <div className="tickerLabel">News Update:</div>
 
         <div className="tickerViewport" ref={viewportRef}>
-          {/* Hidden measurer: one copy only */}
+          {/* Hidden measurer */}
           <div className="tickerMeasure" ref={measureRef} aria-hidden="true">
             {base.map((it, idx) => (
               <span key={idx} className="tickerMeasureItem">
@@ -118,7 +105,6 @@ export default function NewsTicker() {
       </div>
 
       <style jsx>{`
-        /* Outer container */
         .tickerShell {
           width: 100%;
           border: 1px solid rgba(255, 255, 255, 0.14);
@@ -128,7 +114,6 @@ export default function NewsTicker() {
           overflow: hidden;
         }
 
-        /* Mobile capsule header (hidden on desktop) */
         .mobileHeader {
           display: none;
           padding: 10px 12px 0 12px;
@@ -144,11 +129,10 @@ export default function NewsTicker() {
           font-size: 12px;
           line-height: 1;
           color: #111827;
-          background: #f59e0b; /* amber-500 */
+          background: #f59e0b;
           box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
         }
 
-        /* Desktop row: inline label + feed */
         .desktopRow {
           display: flex;
           align-items: center;
@@ -161,7 +145,7 @@ export default function NewsTicker() {
           font-weight: 900;
           white-space: nowrap;
           letter-spacing: 0.2px;
-          color: #f59e0b; /* amber-500 */
+          color: #f59e0b;
         }
 
         .tickerViewport {
@@ -171,7 +155,6 @@ export default function NewsTicker() {
           min-width: 0;
         }
 
-        /* Hidden measurer */
         .tickerMeasure {
           position: absolute;
           visibility: hidden;
@@ -191,17 +174,15 @@ export default function NewsTicker() {
           white-space: nowrap;
           will-change: transform;
 
-          /* Safari stability */
           transform: translate3d(0, 0, 0);
           -webkit-transform: translate3d(0, 0, 0);
           backface-visibility: hidden;
           -webkit-backface-visibility: hidden;
 
-          animation: scroll 70s linear infinite;
-          -webkit-animation: scroll 70s linear infinite;
+          animation: scroll 55s linear infinite; /* faster */
+          -webkit-animation: scroll 55s linear infinite;
         }
 
-        /* Pause on hover (desktop) */
         .tickerShell:hover .tickerTrack {
           animation-play-state: paused;
         }
@@ -210,7 +191,7 @@ export default function NewsTicker() {
           display: inline-flex;
           align-items: center;
           text-decoration: none;
-          color: #e5e7eb; /* slate-200 */
+          color: #e5e7eb;
           opacity: 0.95;
           font-weight: 650;
         }
@@ -218,7 +199,7 @@ export default function NewsTicker() {
         .tickerItem:hover {
           opacity: 1;
           text-decoration: underline;
-          color: #fde68a; /* amber-200 */
+          color: #fde68a;
         }
 
         .tickerTitle {
@@ -233,7 +214,7 @@ export default function NewsTicker() {
         .tickerDot {
           opacity: 0.9;
           padding: 0 10px;
-          color: #9ca3af; /* gray-400 */
+          color: #9ca3af;
         }
 
         @keyframes scroll {
@@ -261,7 +242,6 @@ export default function NewsTicker() {
           }
         }
 
-        /* MOBILE: capsule above-left, feed uses full width (more room) */
         @media (max-width: 640px) {
           .mobileHeader {
             display: flex;
@@ -273,7 +253,6 @@ export default function NewsTicker() {
             padding: 8px 12px 12px 12px;
           }
 
-          /* Hide inline desktop label on mobile */
           .tickerLabel {
             display: none;
           }
