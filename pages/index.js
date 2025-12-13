@@ -1,7 +1,8 @@
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 import Link from "next/link";
-import DecisionWizard from "../components/DecisionWizard"; 
+import DecisionWizard from "../components/DecisionWizard";
+import NewsTicker from "../components/NewsTicker";
 
 export default function HomePage() {
   return (
@@ -9,6 +10,11 @@ export default function HomePage() {
       <SEO />
 
       <div className="max-w-6xl mx-auto px-4 pt-6 pb-16 space-y-12">
+
+        {/* --- NEWS TICKER (ABOVE HERO) --- */}
+        <div className="w-full">
+          <NewsTicker />
+        </div>
 
         {/* --- SECTION 1: HERO & STATS --- */}
         <div className="space-y-6">
