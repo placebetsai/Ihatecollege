@@ -1,123 +1,220 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export default function NewsTicker() {
   const [items, setItems] = useState([]);
+  const [ready, setReady] = useState(false);
+  const [runKey, setRunKey] = useState(0);
 
-  const viewportRef = useRef(null);
-  const measureRef = useRef(null);
-  const [copies, setCopies] = useState(2);
+  // Mobile tap-to-pause (optional but helps iOS jank perception)
+  const [pausedMobile, setPausedMobile] = useState(false);
 
   useEffect(() => {
     let alive = true;
 
-    fetch(`/api/news?nocache=1`, { cache: "no-store" })
-      .then((r) => r.json())
-      .then((d) => {
+    async function load() {
+      try {
+        const res = await fetch("/api/news?nocache=1", { cache: "no-store" });
+        if (!res.ok) throw new Error("bad response");
+        const data = await res.json();
         if (!alive) return;
-        setItems(Array.isArray(d?.items) ? d.items : []);
-      })
-      .catch(() => {
+
+        const list = Array.isArray(data?.items) ? data.items : [];
+        // Keep it reasonable so the DOM isn’t huge (less jank)
+        setItems(list.slice(0, 18));
+
+        // Safari: force a clean animation restart after DOM paints
+        setReady(false);
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            if (!alive) return;
+            setRunKey((k) => k + 1);
+            setReady(true);
+          });
+        });
+      } catch {
         if (!alive) return;
-        setItems([
-          { title: "Loading the latest jobs + economy headlines…", link: "#", source: "System" },
-        ]);
-      });
+        setItems([]);
+        setReady(false);
+      }
+    }
+
+    load();
+    // Refresh every 30 minutes (lightweight)
+    const t = setInterval(load, 30 * 60 * 1000);
 
     return () => {
       alive = false;
+      clearInterval(t);
     };
   }, []);
 
-  const base =
-    items.length > 0
-      ? items
-      : [{ title: "Loading the latest jobs + economy headlines…", link: "#", source: "System" }];
-
-  useEffect(() => {
-    function computeCopies() {
-      const viewport = viewportRef.current;
-      const measure = measureRef.current;
-      if (!viewport || !measure) return;
-
-      const viewportW = viewport.clientWidth || 0;
-      const singleW = measure.scrollWidth || 0;
-      if (!viewportW || !singleW) return setCopies(2);
-
-      const needed = Math.ceil((viewportW * 2) / singleW) + 1;
-      setCopies(Math.max(2, needed));
-    }
-
-    const t = setTimeout(computeCopies, 0);
-    window.addEventListener("resize", computeCopies);
-    return () => {
-      clearTimeout(t);
-      window.removeEventListener("resize", computeCopies);
-    };
-  }, [base]);
-
-  const loop = useMemo(() => {
-    const out = [];
-    for (let i = 0; i < copies; i++) out.push(...base);
-    return out;
-  }, [base, copies]);
+  const contentItems = useMemo(() => items.slice(0, 18), [items]);
+  const hasItems = contentItems.length > 0;
 
   return (
-    <div className="tickerShell" aria-label="Latest news ticker">
-      {/* Mobile-only capsule */}
-      <div className="mobileHeader">
-        <span className="tickerCapsule">News Update</span>
+    <div className="tickerRoot" aria-label="Jobs + economy headlines">
+      {/* DESKTOP: inline label + feed */}
+      <div className="desktopRow">
+        <span className="label">News Update:</span>
+
+        <div className="viewport">
+          {!hasItems ? (
+            <div className="idle">Loading jobs + economy headlines…</div>
+          ) : (
+            <div key={runKey} className={`track ${ready ? "run desktopSpeed" : ""}`}>
+              {/* Content A */}
+              <div className="content">
+                {contentItems.map((it, i) => (
+                  <a
+                    key={`${it.link}-${i}`}
+                    href={it.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="item"
+                    title={it.title}
+                  >
+                    <span className="dot">•</span>
+                    <span className="text">
+                      {it.title}
+                      {it.source ? ` — ${it.source}` : ""}
+                    </span>
+                  </a>
+                ))}
+              </div>
+
+              {/* Content B (duplicate) */}
+              <div className="content" aria-hidden="true">
+                {contentItems.map((it, i) => (
+                  <a
+                    key={`${it.link}-dup-${i}`}
+                    href={it.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="item"
+                    tabIndex={-1}
+                    title={it.title}
+                  >
+                    <span className="dot">•</span>
+                    <span className="text">
+                      {it.title}
+                      {it.source ? ` — ${it.source}` : ""}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* Desktop: inline label + feed */}
-      <div className="desktopRow">
-        <div className="tickerLabel">News Update:</div>
+      {/* MOBILE: capsule above-left + feed below */}
+      <div className="mobileRow">
+        <div className="mobileHeader">
+          <span className="tickerCapsule">News Update</span>
+          <span className="tapHint">{pausedMobile ? "Paused" : "Tap to pause"}</span>
+        </div>
 
-        <div className="tickerViewport" ref={viewportRef}>
-          {/* Gradient fades */}
-          <div className="fadeLeft" />
-          <div className="fadeRight" />
+        <div
+          className="viewport"
+          role="button"
+          aria-label="Tap to pause or resume headlines"
+          onClick={() => setPausedMobile((p) => !p)}
+        >
+          {!hasItems ? (
+            <div className="idle">Loading jobs + economy headlines…</div>
+          ) : (
+            <div
+              key={`m-${runKey}`}
+              className={`track ${ready ? "run mobileSpeed" : ""} ${pausedMobile ? "paused" : ""}`}
+            >
+              <div className="content">
+                {contentItems.map((it, i) => (
+                  <a
+                    key={`${it.link}-m-${i}`}
+                    href={it.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="item"
+                    title={it.title}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <span className="dot">•</span>
+                    <span className="text">
+                      {it.title}
+                      {it.source ? ` — ${it.source}` : ""}
+                    </span>
+                  </a>
+                ))}
+              </div>
 
-          {/* Hidden measurer */}
-          <div className="tickerMeasure" ref={measureRef} aria-hidden="true">
-            {base.map((it, idx) => (
-              <span key={idx}>
-                {it.title}
-                {it.source ? ` — ${it.source}` : ""} •{" "}
-              </span>
-            ))}
-          </div>
-
-          <div className="tickerTrack">
-            {loop.map((it, idx) => (
-              <a
-                key={idx}
-                className="tickerItem"
-                href={it.link}
-                target={it.link === "#" ? undefined : "_blank"}
-                rel={it.link === "#" ? undefined : "noreferrer"}
-              >
-                <span className="tickerTitle">{it.title}</span>
-                {it.source ? <span className="tickerSource"> — {it.source}</span> : null}
-                <span className="tickerDot"> • </span>
-              </a>
-            ))}
-          </div>
+              <div className="content" aria-hidden="true">
+                {contentItems.map((it, i) => (
+                  <a
+                    key={`${it.link}-m-dup-${i}`}
+                    href={it.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="item"
+                    tabIndex={-1}
+                    title={it.title}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <span className="dot">•</span>
+                    <span className="text">
+                      {it.title}
+                      {it.source ? ` — ${it.source}` : ""}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
       <style jsx>{`
-        .tickerShell {
+        .tickerRoot {
           width: 100%;
-          border: 1px solid rgba(255, 255, 255, 0.14);
           background: rgba(0, 0, 0, 0.55);
-          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.14);
           border-radius: 14px;
+          backdrop-filter: blur(10px);
           overflow: hidden;
+          position: relative;
+          z-index: 5;
+          transform: translateZ(0);
+          -webkit-transform: translateZ(0);
+        }
+
+        /* Desktop row */
+        .desktopRow {
+          display: flex;
+          align-items: center;
+          height: 44px;
+          padding: 0 14px;
+          gap: 12px;
+        }
+
+        .label {
+          flex: 0 0 auto;
+          font-weight: 900;
+          font-size: 13px;
+          letter-spacing: 0.06em;
+          color: #ffb000; /* amber */
+          white-space: nowrap;
+        }
+
+        /* Mobile row */
+        .mobileRow {
+          display: none;
+          padding: 10px 12px 12px;
         }
 
         .mobileHeader {
-          display: none;
-          padding: 10px 12px 0;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 6px;
         }
 
         .tickerCapsule {
@@ -129,120 +226,153 @@ export default function NewsTicker() {
           font-size: 12px;
           line-height: 1;
           color: #111827;
-          background: #f59e0b;
+          background: #ffb000;
         }
 
-        .desktopRow {
+        .tapHint {
+          margin-left: auto;
+          font-size: 11px;
+          font-weight: 800;
+          color: rgba(255, 255, 255, 0.55);
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+        }
+
+        /* Viewport + gradient fades */
+        .viewport {
+          flex: 1 1 auto;
+          overflow: hidden;
+          height: 44px;
           display: flex;
           align-items: center;
-          gap: 12px;
-          padding: 10px 14px;
-          overflow: hidden;
-        }
-
-        .tickerLabel {
-          font-weight: 900;
-          color: #f59e0b;
-          white-space: nowrap;
-          letter-spacing: 0.2px;
-        }
-
-        .tickerViewport {
           position: relative;
-          flex: 1;
-          overflow: hidden;
-          min-width: 0;
+          transform: translateZ(0);
+          -webkit-transform: translateZ(0);
         }
 
-        .fadeLeft,
-        .fadeRight {
+        .viewport::before,
+        .viewport::after {
+          content: "";
           position: absolute;
           top: 0;
           bottom: 0;
-          width: 40px;
-          z-index: 3;
+          width: 44px;
           pointer-events: none;
+          z-index: 3;
         }
 
-        .fadeLeft {
+        .viewport::before {
           left: 0;
-          background: linear-gradient(to right, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0));
+          background: linear-gradient(to right, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0));
         }
 
-        .fadeRight {
+        .viewport::after {
           right: 0;
-          background: linear-gradient(to left, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0));
+          background: linear-gradient(to left, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0));
         }
 
-        .tickerMeasure {
-          position: absolute;
-          visibility: hidden;
+        .idle {
+          color: rgba(255, 255, 255, 0.6);
+          font-weight: 800;
+          font-size: 14px;
           white-space: nowrap;
-          height: 0;
-          overflow: hidden;
         }
 
-        .tickerTrack {
+        /* Track = two identical content blocks */
+        .track {
           display: inline-flex;
-          align-items: center;
+          width: max-content;
           white-space: nowrap;
-          will-change: transform;
 
           transform: translate3d(0, 0, 0);
           -webkit-transform: translate3d(0, 0, 0);
+          will-change: transform;
           backface-visibility: hidden;
           -webkit-backface-visibility: hidden;
-
-          animation: scroll 70s linear infinite;
-          -webkit-animation: scroll 70s linear infinite;
         }
 
-        .tickerShell:hover .tickerTrack {
+        .content {
+          display: inline-flex;
+          width: max-content;
+          align-items: center;
+          white-space: nowrap;
+        }
+
+        /* Speeds */
+        .run.desktopSpeed {
+          animation: move 90s linear infinite;
+          -webkit-animation: move 90s linear infinite;
+        }
+
+        .run.mobileSpeed {
+          animation: move 60s linear infinite;
+          -webkit-animation: move 60s linear infinite;
+        }
+
+        /* Pause on hover (desktop) */
+        .desktopRow .viewport:hover .run.desktopSpeed {
           animation-play-state: paused;
+          -webkit-animation-play-state: paused;
         }
 
-        .tickerItem {
-          color: #e5e7eb;
+        /* Tap pause (mobile) */
+        .paused {
+          animation-play-state: paused !important;
+          -webkit-animation-play-state: paused !important;
+        }
+
+        /* Items: avoid CSS gap inside animation (Safari jank) */
+        .item {
+          display: inline-flex;
+          align-items: center;
+          font-weight: 850;
+          font-size: 14px;
+          color: rgba(255, 255, 255, 0.95);
           text-decoration: none;
-          opacity: 0.95;
-          font-weight: 650;
+          margin-right: 26px;
+          line-height: 1.15;
+          white-space: nowrap;
+          transform: translateZ(0);
+          -webkit-transform: translateZ(0);
         }
 
-        .tickerItem:hover {
-          color: #fde68a;
-          text-decoration: underline;
-          opacity: 1;
+        .item:hover {
+          color: #ffb000;
         }
 
-        .tickerTitle {
-          font-weight: 800;
+        .dot {
+          color: #ffb000;
+          margin-right: 10px;
+          flex: 0 0 auto;
         }
 
-        .tickerSource {
-          opacity: 0.8;
-          font-weight: 700;
+        .text {
+          max-width: 70vw;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          display: inline-block;
         }
 
-        .tickerDot {
-          padding: 0 10px;
-          color: #9ca3af;
+        /* Safari-safe keyframes */
+        @-webkit-keyframes move {
+          0% { -webkit-transform: translate3d(0, 0, 0); }
+          100% { -webkit-transform: translate3d(-50%, 0, 0); }
         }
 
-        @keyframes scroll {
-          from { transform: translate3d(0, 0, 0); }
-          to { transform: translate3d(-50%, 0, 0); }
+        @keyframes move {
+          0% { transform: translate3d(0, 0, 0); }
+          100% { transform: translate3d(-50%, 0, 0); }
         }
 
-        @-webkit-keyframes scroll {
-          from { -webkit-transform: translate3d(0, 0, 0); }
-          to { -webkit-transform: translate3d(-50%, 0, 0); }
-        }
-
-        @media (max-width: 640px) {
-          .mobileHeader { display: flex; }
-          .tickerLabel { display: none; }
-          .desktopRow { padding: 8px 12px 12px; }
-          .fadeLeft, .fadeRight { width: 28px; }
+        @media (max-width: 768px) {
+          .desktopRow { display: none; }
+          .mobileRow { display: block; }
+          .viewport { height: 36px; }
+          .item { font-size: 16px; }
+          .text { max-width: 85vw; }
+          .viewport::before,
+          .viewport::after { width: 34px; }
         }
       `}</style>
     </div>
