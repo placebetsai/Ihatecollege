@@ -37,7 +37,7 @@ export default function NewsTicker() {
         ]
       : [
           {
-            title: "Loading latest jobs + unions + labor updates…",
+            title: "Loading latest jobs + economy updates…",
             link: "#",
             source: "",
           },
@@ -79,64 +79,86 @@ export default function NewsTicker() {
   }, [base, copies]);
 
   return (
-    <div className="tickerWrap" aria-label="Latest news ticker">
-      <div className="tickerLabel">News Update:</div>
+    <div className="tickerShell" aria-label="Latest news ticker">
+      {/* Capsule label ABOVE the feed, left aligned */}
+      <div className="tickerHeader">
+        <span className="tickerCapsule">News Update</span>
+      </div>
 
-      <div className="tickerViewport" ref={viewportRef}>
-        {/* Hidden measurer: one copy only */}
-        <div className="tickerMeasure" ref={measureRef} aria-hidden="true">
-          {base.map((it, idx) => (
-            <span key={idx} className="tickerMeasureItem">
-              {it.title}
-              {it.source ? ` — ${it.source}` : ""} •{" "}
-            </span>
-          ))}
-        </div>
+      {/* Feed row */}
+      <div className="tickerRow">
+        <div className="tickerViewport" ref={viewportRef}>
+          {/* Hidden measurer: one copy only */}
+          <div className="tickerMeasure" ref={measureRef} aria-hidden="true">
+            {base.map((it, idx) => (
+              <span key={idx} className="tickerMeasureItem">
+                {it.title}
+                {it.source ? ` — ${it.source}` : ""} •{" "}
+              </span>
+            ))}
+          </div>
 
-        <div className="tickerTrack">
-          {loop.map((it, idx) => (
-            <a
-              key={idx}
-              className="tickerItem"
-              href={it.link}
-              target={it.link === "#" ? undefined : "_blank"}
-              rel={it.link === "#" ? undefined : "noreferrer"}
-            >
-              <span className="tickerTitle">{it.title}</span>
-              {it.source ? <span className="tickerSource"> — {it.source}</span> : null}
-              <span className="tickerDot"> • </span>
-            </a>
-          ))}
+          <div className="tickerTrack">
+            {loop.map((it, idx) => (
+              <a
+                key={idx}
+                className="tickerItem"
+                href={it.link}
+                target={it.link === "#" ? undefined : "_blank"}
+                rel={it.link === "#" ? undefined : "noreferrer"}
+              >
+                <span className="tickerTitle">{it.title}</span>
+                {it.source ? <span className="tickerSource"> — {it.source}</span> : null}
+                <span className="tickerDot"> • </span>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 
       <style jsx>{`
-        .tickerWrap {
+        /* OUTER CONTAINER */
+        .tickerShell {
           width: 100%;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          padding: 10px 14px;
           border: 1px solid rgba(255, 255, 255, 0.14);
           background: rgba(0, 0, 0, 0.55);
           backdrop-filter: blur(10px);
-          border-radius: 12px;
+          border-radius: 14px;
           overflow: hidden;
         }
 
-        /* AMBER label */
-        .tickerLabel {
+        /* CAPSULE HEADER (ABOVE FEED) */
+        .tickerHeader {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          padding: 10px 12px 0 12px;
+        }
+
+        .tickerCapsule {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 6px 10px;
+          border-radius: 999px;
           font-weight: 900;
-          white-space: nowrap;
-          letter-spacing: 0.2px;
-          color: #f59e0b; /* amber-500 */
+          letter-spacing: 0.25px;
+          font-size: 12px;
+          line-height: 1;
+          color: #111827; /* near-black text inside pill */
+          background: #f59e0b; /* amber-500 */
+          box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+        }
+
+        /* FEED ROW */
+        .tickerRow {
+          padding: 8px 12px 10px 12px;
         }
 
         .tickerViewport {
           position: relative;
           overflow: hidden;
-          flex: 1;
-          min-width: 0;
+          width: 100%;
         }
 
         /* Hidden measurer */
@@ -169,17 +191,18 @@ export default function NewsTicker() {
           -webkit-animation: scroll 70s linear infinite;
         }
 
-        .tickerWrap:hover .tickerTrack {
+        /* Pause on hover (desktop) */
+        .tickerShell:hover .tickerTrack {
           animation-play-state: paused;
         }
 
-        /* Link color */
         .tickerItem {
           display: inline-flex;
           align-items: center;
           text-decoration: none;
           color: #e5e7eb; /* slate-200 */
           opacity: 0.95;
+          font-weight: 650;
         }
 
         .tickerItem:hover {
@@ -197,7 +220,6 @@ export default function NewsTicker() {
           opacity: 0.8;
         }
 
-        /* Divider dot color */
         .tickerDot {
           opacity: 0.9;
           padding: 0 10px;
