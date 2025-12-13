@@ -3,12 +3,12 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 
 const SITE_URL = "https://ihatecollege.com";
-const SOCIAL_IMAGE = `${SITE_URL}/social-card.png`;
+const DEFAULT_IMAGE = `${SITE_URL}/og-image.png`;  // Upload your red no-cap logo resized to 1200x630 in /public
 
 export default function SEO({
-  title = "IHateCollege.com | Escape Debt, Build Wealth",
-  description = "Real alternatives to college: trade schools, certifications, apprenticeships, and high-income paths with no debt.",
-  image = SOCIAL_IMAGE,
+  title = "IHateCollege.com - Skip Debt, Stack Cash 2025",
+  description = "College is optional. Debt isn't. Real alternatives: trades, certs, gigs without loans.",
+  image = DEFAULT_IMAGE,
 }) {
   const router = useRouter();
   const canonical = `${SITE_URL}${router.asPath === "/" ? "" : router.asPath}`;
@@ -17,6 +17,7 @@ export default function SEO({
     <Head>
       <title>{title}</title>
       <meta name="description" content={description} />
+      <meta name="keywords" content="skip college, trade schools 2025, debt free careers, google certs, alternatives to degree, ihatecollege" />  // Added for SEO boost
       <link rel="canonical" href={canonical} />
 
       <link rel="icon" href="/icon.png" />
@@ -27,9 +28,27 @@ export default function SEO({
       <meta property="og:image" content={image} />
       <meta property="og:url" content={canonical} />
       <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="IHateCollege.com" />
+      <meta property="og:locale" content="en_US" />
 
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />  // Fixed: Missing before, causes blank previews
+      <meta name="twitter:description" content={description} />  // Fixed: Essential for X cards
       <meta name="twitter:image" content={image} />
+      <meta name="twitter:site" content="@yourXhandle" />  // Add your X handle if you have one, e.g., @placebetsai
+
+      {/* Schema for rich snippets - boosts SEO */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "IHateCollege.com",
+        "url": SITE_URL,
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": `${SITE_URL}/rank-your-school?q={search_term_string}`,
+          "query-input": "required name=search_term_string"
+        }
+      }) }} />
     </Head>
   );
 }
