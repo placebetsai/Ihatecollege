@@ -5,7 +5,7 @@ export default function ContactSection() {
     const name = form.contactName.value.trim() || "(not given)";
     const email = form.contactEmail.value.trim();
     const message = form.contactMessage.value.trim();
-    const to = "placebetsai@gmail.com";
+    const to = "info@ihatecollege.com";
     const subject = encodeURIComponent("ihatecollege.com contact");
     const body = encodeURIComponent(
       "Name: " + name +
