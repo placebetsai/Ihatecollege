@@ -1,5 +1,5 @@
 // pages/sitemap.xml.js
-export const config = { runtime: "edge" };
+export const config = { runtime: "experimental-edge" };
 
 const COLLEGE_SLUGS = [
   "harvard-university","mit","stanford-university","yale-university",

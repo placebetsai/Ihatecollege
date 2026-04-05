@@ -1,5 +1,5 @@
 // pages/college/[slug].js
-export const config = { runtime: "edge" };
+export const config = { runtime: "experimental-edge" };
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
