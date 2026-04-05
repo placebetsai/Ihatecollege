@@ -1,9 +1,12 @@
 // pages/college/[slug].js
+export const config = { runtime: "edge" };
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Layout from "../../components/Layout";
 import SEO from "../../components/SEO";
 import AdUnit from "../../components/AdUnit";
+import collegesData from "../../data/colleges.json";
 
 // Same dataset as college-rankings.js
 const ALL_SCHOOLS = [
@@ -97,41 +100,16 @@ function toSlug(name) {
 
 function loadCollegesJson() {
   try {
-    const fs = require("fs");
-    const path = require("path");
-    const file = path.join(process.cwd(), "data", "colleges.json");
-    if (!fs.existsSync(file)) return [];
-    const data = JSON.parse(fs.readFileSync(file, "utf8"));
-    return data.colleges || [];
+    return collegesData.colleges || [];
   } catch {
     return [];
   }
 }
 
-export async function getStaticPaths() {
-  const slugSet = new Set();
-  const paths = [];
-
-  // Pre-generate only the 50 hardcoded schools at build time.
-  // The remaining 6000+ colleges use fallback: 'blocking' — generated on first visit
-  // and cached permanently. This cuts build time from 30min → <2min.
-  for (const s of ALL_SCHOOLS) {
-    const slug = toSlug(s.name);
-    if (!slugSet.has(slug)) {
-      slugSet.add(slug);
-      paths.push({ params: { slug } });
-    }
-  }
-
-  return { paths, fallback: "blocking" };
-}
-
-export async function getStaticProps({ params }) {
-  // Hardcoded schools have more detail (rank, etc.)
+export async function getServerSideProps({ params }) {
   const hardcoded = ALL_SCHOOLS.find((s) => toSlug(s.name) === params.slug);
   if (hardcoded) return { props: { school: hardcoded } };
 
-  // Fall back to pre-built college scorecard data
   const jsonColleges = loadCollegesJson();
   const fromJson = jsonColleges.find((c) => c.slug === params.slug);
   if (fromJson) return { props: { school: fromJson } };
