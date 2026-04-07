@@ -15,7 +15,7 @@ function CollegeDataSearch() {
   const fetchSchools = async (term) => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/college-rankings?search=${encodeURIComponent(term)}`);
+      const res = await fetch(`/api/search-colleges?q=${encodeURIComponent(term)}`);
       const data = await res.json();
       setSchools(data.results || []);
     } catch {
