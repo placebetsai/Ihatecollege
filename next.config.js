@@ -20,6 +20,8 @@ const nextConfig = {
   async redirects() {
     return [
       { source: "/rank", destination: "/rank-your-school", permanent: true },
+      { source: "/is-college-worth-it-2026", destination: "/is-college-worth-it-2025", permanent: true },
+      { source: "/trade-school-vs-college-salary-2026", destination: "/trade-school-vs-college-salary-2025", permanent: true },
     ];
   },
 };
