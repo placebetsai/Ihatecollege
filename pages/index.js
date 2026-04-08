@@ -242,9 +242,39 @@ const ARTICLE_IMAGES = {
   "wind-turbine-technician-salary":             "photo-1466611653911-95081537e5b7",
 };
 
+// Fallback images — each article without a mapping gets a unique image based on its slug hash
+const FALLBACK_IMAGES = [
+  "photo-1434030216411-0b793f4b617e",
+  "photo-1517245386807-bb43f82c33c4",
+  "photo-1562774053-701939374585",
+  "photo-1571260899304-425eee4c7efc",
+  "photo-1427504494785-3a9ca7044f45",
+  "photo-1513258496099-48168024aec0",
+  "photo-1516321497487-e288fb19713f",
+  "photo-1560472355-536de3962603",
+  "photo-1529070538774-1f9c3a5c3d8e",
+  "photo-1454165804606-c3d57bc86b40",
+  "photo-1507003211169-0a1dd7228f2d",
+  "photo-1532619187608-e5375cab36aa",
+  "photo-1542744173-8e7e53415bb0",
+  "photo-1522202176988-66273c2fd55f",
+  "photo-1523050854058-d7db78c0af08",
+  "photo-1515378791036-0648a3ef77b2",
+  "photo-1450101499163-c8848c66ca85",
+  "photo-1456513080510-7bf3a84b82f8",
+  "photo-1501504905252-473c47e087f8",
+  "photo-1434030216411-0b793f4b617e",
+];
+
 function getArticleImage(slug = "") {
-  const id = ARTICLE_IMAGES[slug] || "photo-1523240795612-9a054b0db644";
-  return `https://images.unsplash.com/${id}?w=800&h=450&fit=crop&auto=format`;
+  if (ARTICLE_IMAGES[slug]) {
+    return `https://images.unsplash.com/${ARTICLE_IMAGES[slug]}?w=800&h=450&fit=crop&auto=format`;
+  }
+  // Hash slug to pick a unique fallback — no two articles get the same image
+  let hash = 0;
+  for (let i = 0; i < slug.length; i++) hash = ((hash << 5) - hash + slug.charCodeAt(i)) | 0;
+  const idx = Math.abs(hash) % FALLBACK_IMAGES.length;
+  return `https://images.unsplash.com/${FALLBACK_IMAGES[idx]}?w=800&h=450&fit=crop&auto=format`;
 }
 
 function getArticleCategory(slug = "", keyword = "") {
