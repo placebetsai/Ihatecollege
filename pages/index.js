@@ -219,10 +219,10 @@ const ARTICLE_IMAGES = {
   "highest-paying-trade-jobs-2025":             "photo-1504307651254-35680f356dfd",
   "how-to-become-an-electrician-without-college": "photo-1621905252507-b35492cc74b4",
   "how-to-make-money-without-a-degree":         "photo-1515378791036-0648a3ef77b2",
-  "hvac-technician-salary-2025":                "photo-1609220136736-443140cfeaa6",
-  "i-hate-college":                             "photo-1541339907198-a93c85da3c8e",
+  "hvac-technician-salary-2025":                "photo-1504328345606-18bbc8c9d7d1",
+  "i-hate-college":                             "photo-1517694712202-14dd9538aa97",
   "i-hate-college-so-much":                     "photo-1580582932707-520aed937b7b",
-  "ironworker-apprenticeship":                  "photo-1590599145008-b2c79c4ce28c",
+  "ironworker-apprenticeship":                  "photo-1504307651254-35680f356dfd",
   "is-college-worth-it-2025":                   "photo-1523240795612-9a054b0db644",
   "lineman-apprenticeship-salary":              "photo-1473341304170-971dccb5ac1e",
   "millwright-trade-school-salary":             "photo-1581091226825-a6a2a5aee158",
@@ -236,14 +236,14 @@ const ARTICLE_IMAGES = {
   "solar-panel-installer-salary-2025":          "photo-1509391366360-2e959784a276",
   "student-loan-debt-crisis-2025":              "photo-1579621970563-ebec7560ff3e",
   "trade-school-salary-vs-college-2025":        "photo-1565688534245-05d6b5be184a",
-  "union-vs-non-union-trade-jobs":              "photo-1520863864565-c2ebcff09d5b",
+  "union-vs-non-union-trade-jobs":              "photo-1556761175-5973dc0f32e7",
   "welder-salary-2025":                         "photo-1504328345606-18bbc8c9d7d1",
-  "why-college-is-not-worth-it":                "photo-1434030216411-0b793f4b6173",
+  "why-college-is-not-worth-it":                "photo-1579621970563-ebec7560ff3e",
   "wind-turbine-technician-salary":             "photo-1466611653911-95081537e5b7",
 };
 
 function getArticleImage(slug = "") {
-  const id = ARTICLE_IMAGES[slug] || "photo-1523050854058";
+  const id = ARTICLE_IMAGES[slug] || "photo-1523240795612-9a054b0db644";
   return `https://images.unsplash.com/${id}?w=800&h=450&fit=crop&auto=format`;
 }
 
