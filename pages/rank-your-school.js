@@ -107,7 +107,7 @@ export default function RateMySchool() {
 
         {/* ── RATING FORM — top and center ──────────────────────────── */}
         <div className="mb-3 text-center">
-          <p className="text-xs font-bold tracking-widest text-red-400 uppercase mb-2">Anonymous · No Login · 100% Real</p>
+          <p className="text-xs font-bold tracking-widest text-red-400 uppercase mb-2">Anonymous or Named · 100% Real</p>
           <h1 className="text-4xl sm:text-5xl font-black text-white mb-3 leading-tight">
             Rate My School 🔥
           </h1>
