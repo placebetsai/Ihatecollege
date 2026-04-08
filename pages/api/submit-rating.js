@@ -3,7 +3,7 @@
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
 
-  const { school, city, state, displayName, debtScore, mentalHealthScore, overallRating, comment } = req.body || {};
+  const { school, city, state, displayName, debtScore, mentalHealthScore, overallRating, comment, userId } = req.body || {};
 
   if (!school) return res.status(400).json({ error: "school is required" });
 
@@ -18,6 +18,8 @@ export default async function handler(req, res) {
     comment: String(comment || "").slice(0, 2000),
     created_at: new Date().toISOString(),
   };
+
+  if (userId) payload.user_id = userId;
 
   console.log("[RATING]", JSON.stringify(payload));
 

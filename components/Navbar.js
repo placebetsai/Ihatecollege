@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useAuth } from "./AuthProvider";
+import AuthModal from "./AuthModal";
 
 const links = [
   { href: "/",                        label: "Home",          mobileLabel: "Home" },
@@ -19,6 +21,8 @@ const links = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [showAuth, setShowAuth] = useState(false);
+  const { user, profile, signOut } = useAuth();
   const router = useRouter();
 
   useEffect(() => { setOpen(false); }, [router.pathname]);
@@ -49,6 +53,17 @@ export default function Navbar() {
           <a href="https://www.youtube.com/@IHateCollege79" target="_blank" rel="noreferrer" aria-label="YouTube" className="hidden sm:block text-slate-500 hover:text-white transition-colors">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
           </a>
+
+          {user ? (
+            <div className="hidden sm:flex items-center gap-2">
+              <span className="text-xs font-bold text-slate-400">{profile?.username || user.email?.split('@')[0]}</span>
+              <button onClick={signOut} className="text-xs text-red-400 hover:text-red-300 font-bold">Log out</button>
+            </div>
+          ) : (
+            <button onClick={() => setShowAuth(true)} className="hidden sm:block text-xs font-bold px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-500 text-white transition-colors">
+              Sign In
+            </button>
+          )}
 
           <button className="p-1.5 text-slate-300 hover:text-white" onClick={() => setOpen(!open)} aria-label="Toggle menu">
             <div className="w-5 h-4 flex flex-col justify-between">
@@ -100,6 +115,17 @@ export default function Navbar() {
             {link.mobileLabel}
           </Link>
         ))}
+        {user ? (
+          <div className="flex flex-col items-center gap-2 mt-4 pt-4" style={{ borderTop: "1px solid #1a1a1a" }}>
+            <span className="text-sm font-bold text-slate-400">{profile?.username || user.email?.split('@')[0]}</span>
+            <button onClick={() => { signOut(); setOpen(false); }} className="text-sm text-red-400 hover:text-red-300 font-bold">Log out</button>
+          </div>
+        ) : (
+          <button onClick={() => { setShowAuth(true); setOpen(false); }} className="mt-4 px-6 py-2.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-lg text-sm transition-colors">
+            Sign In / Sign Up
+          </button>
+        )}
+
         <div className="flex gap-6 mt-4 pt-4" style={{ borderTop: "1px solid #1a1a1a" }}>
           <a href="https://twitter.com/ihatecollege4u" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
@@ -112,6 +138,8 @@ export default function Navbar() {
           </a>
         </div>
       </nav>
+
+      {showAuth && <AuthModal onClose={() => setShowAuth(false)} onSuccess={() => setShowAuth(false)} />}
     </header>
   );
 }

@@ -3,6 +3,8 @@ import Layout from "../../components/Layout";
 import SEO from "../../components/SEO";
 import AdUnit from "../../components/AdUnit";
 import Image from "next/image";
+import { useAuth } from "../../components/AuthProvider";
+import AuthModal from "../../components/AuthModal";
 
 const US_STATES = [
   "All States","Remote / Nationwide","Alabama","Alaska","Arizona","Arkansas","California","Colorado",
@@ -217,7 +219,7 @@ function JobPreview({ form }) {
   );
 }
 
-function PostForm({ onSuccess }) {
+function PostForm({ onSuccess, user }) {
   const [form, setForm] = useState({
     title: "", company: "", location: "", category: "",
     salary_min: "", salary_max: "", description: "",
@@ -265,7 +267,7 @@ function PostForm({ onSuccess }) {
           className="w-full py-4 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-60 text-white font-black rounded-xl transition-colors text-base">
           {submitting ? "Posting…" : "Looks Good — Post It Free →"}
         </button>
-        <p className="text-xs text-slate-500 text-center">Free · No account needed · We'll confirm by email</p>
+        <p className="text-xs text-slate-500 text-center">Free · Live for 30 days</p>
       </div>
     );
   }
@@ -361,13 +363,15 @@ function PostForm({ onSuccess }) {
         className={`w-full py-4 font-black rounded-xl transition-colors text-base ${canPreview ? "bg-sky-600 hover:bg-sky-500 text-white" : "bg-slate-700 text-slate-400 cursor-not-allowed"}`}>
         Preview My Listing →
       </button>
-      <p className="text-xs text-slate-500 text-center">Free · 30 days · No account needed</p>
+      <p className="text-xs text-slate-500 text-center">Free · Live for 30 days · Account required</p>
     </div>
   );
 }
 
 // ─── Main page ────────────────────────────────────────────────────────────────
 export default function JobBoard() {
+  const { user, profile } = useAuth();
+  const [showAuth, setShowAuth] = useState(false);
   const [view, setView]         = useState(
     typeof window !== "undefined" && window.location.hash === "#post" ? "post" : "browse"
   ); // 'browse' | 'post' | 'success'
@@ -455,7 +459,7 @@ export default function JobBoard() {
               }`}>
               🔍 Search Jobs
             </button>
-            <button onClick={() => setView("post")}
+            <button onClick={() => { if (!user) { setShowAuth(true); } else { setView("post"); } }}
               className={`flex items-center gap-2 py-3 px-6 rounded-xl font-black text-sm transition-all ${
                 view === "post"
                   ? "bg-emerald-600 text-white shadow-lg shadow-emerald-900/40"
@@ -598,7 +602,7 @@ export default function JobBoard() {
           <div className="mt-10 p-8 rounded-2xl bg-slate-900 border border-sky-500/20 text-center">
             <h2 className="text-2xl font-black text-white mb-2">Hiring without degree requirements?</h2>
             <p className="text-slate-400 text-sm mb-5">Post your listing free. Reach motivated candidates who chose skills over debt.</p>
-            <button onClick={() => setView("post")}
+            <button onClick={() => { if (!user) { setShowAuth(true); } else { setView("post"); } }}
               className="inline-block px-8 py-3 bg-sky-600 hover:bg-sky-500 text-white font-black rounded-xl transition-colors">
               Post a Job — Free →
             </button>
@@ -625,6 +629,22 @@ export default function JobBoard() {
                 </button>
               </div>
             </div>
+          ) : !user ? (
+            <div className="text-center py-16">
+              <div className="text-5xl mb-4">🔐</div>
+              <h2 className="text-2xl font-black text-white mb-3">Sign in to post a job</h2>
+              <p className="text-slate-400 text-sm mb-6">Create a free account to post job listings. Takes 30 seconds.</p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <button onClick={() => setShowAuth(true)}
+                  className="px-8 py-3 bg-red-600 hover:bg-red-500 text-white font-black rounded-xl transition-colors">
+                  Sign Up / Log In
+                </button>
+                <button onClick={() => setView("browse")}
+                  className="px-6 py-3 border border-slate-600 hover:border-slate-400 text-white font-bold rounded-xl transition-colors">
+                  ← Browse Jobs
+                </button>
+              </div>
+            </div>
           ) : (
             <>
               <div className="mb-8">
@@ -632,13 +652,15 @@ export default function JobBoard() {
                   ← Back to listings
                 </button>
                 <h2 className="text-3xl font-black text-white mb-2">Post a Job</h2>
-                <p className="text-slate-400 text-sm">Free · Live 30 days · No account needed. No degree requirements only.</p>
+                <p className="text-slate-400 text-sm">Free · Live 30 days · Posting as <span className="text-white font-bold">{profile?.username || user.email?.split('@')[0]}</span></p>
               </div>
-              <PostForm onSuccess={() => setView("success")} />
+              <PostForm onSuccess={() => setView("success")} user={user} />
             </>
           )}
         </div>
       )}
+
+      {showAuth && <AuthModal onClose={() => setShowAuth(false)} onSuccess={() => setShowAuth(false)} />}
     </Layout>
   );
 }
