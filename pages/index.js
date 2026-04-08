@@ -220,9 +220,9 @@ const ARTICLE_IMAGES = {
   "how-to-become-an-electrician-without-college": "photo-1621905252507-b35492cc74b4",
   "how-to-make-money-without-a-degree":         "photo-1515378791036-0648a3ef77b2",
   "hvac-technician-salary-2025":                "photo-1504328345606-18bbc8c9d7d1",
-  "i-hate-college":                             "photo-1517694712202-14dd9538aa97",
-  "i-hate-college-so-much":                     "photo-1516979187457-637abb4f9353",
-  "ironworker-apprenticeship":                  "photo-1504307651254-35680f356dfd",
+  "i-hate-college":                             "photo-1544717305-2782549b5136",
+  "i-hate-college-so-much":                     "photo-1519452635265-7b1fbfd1e4e0",
+  "ironworker-apprenticeship":                  "photo-1524178232363-1fb2b075b655",
   "is-college-worth-it-2025":                   "photo-1543269865-cbf427effbad",
   "lineman-apprenticeship-salary":              "photo-1473341304170-971dccb5ac1e",
   "millwright-trade-school-salary":             "photo-1581091226825-a6a2a5aee158",
@@ -236,44 +236,35 @@ const ARTICLE_IMAGES = {
   "solar-panel-installer-salary-2025":          "photo-1509391366360-2e959784a276",
   "student-loan-debt-crisis-2025":              "photo-1579621970563-ebec7560ff3e",
   "trade-school-salary-vs-college-2025":        "photo-1565688534245-05d6b5be184a",
-  "union-vs-non-union-trade-jobs":              "photo-1556761175-5973dc0f32e7",
-  "welder-salary-2025":                         "photo-1504328345606-18bbc8c9d7d1",
-  "why-college-is-not-worth-it":                "photo-1579621970563-ebec7560ff3e",
+  "union-vs-non-union-trade-jobs":              "photo-1560472355-536de3962603",
+  "welder-salary-2025":                         "photo-1509062522246-3755977927d7",
+  "why-college-is-not-worth-it":                "photo-1559136555-9303baea8ebd",
   "wind-turbine-technician-salary":             "photo-1466611653911-95081537e5b7",
 };
 
 // Fallback images — each article without a mapping gets a unique image based on its slug hash
 const FALLBACK_IMAGES = [
-  "photo-1517245386807-bb43f82c33c4",
-  "photo-1562774053-701939374585",
-  "photo-1571260899304-425eee4c7efc",
-  "photo-1427504494785-3a9ca7044f45",
-  "photo-1513258496099-48168024aec0",
   "photo-1516321497487-e288fb19713f",
-  "photo-1560472355-536de3962603",
-  "photo-1529070538774-1f9c3a5c3d8e",
-  "photo-1522202176988-66273c2fd55f",
-  "photo-1456513080510-7bf3a84b82f8",
-  "photo-1503676260728-1c00da094a0b",
-  "photo-1541339907198-e08954feab68",
-  "photo-1524178232363-1fb2b075b655",
+  "photo-1513258496099-48168024aec0",
+  "photo-1427504494785-3a9ca7044f45",
   "photo-1523289333742-be1143f6b766",
-  "photo-1509062522246-3755977927d7",
   "photo-1497633762265-9d179a990aa6",
-  "photo-1544717305-2782549b5136",
-  "photo-1519452635265-7b1fbfd1e4e0",
   "photo-1498243691581-b145c3f54a5a",
-  "photo-1541178735493-479c1a27ed24",
-  "photo-1551836022-d5d88e9218df",
-  "photo-1559136555-9303baea8ebd",
   "photo-1464582883107-8adf2dca8a9f",
   "photo-1509869175650-a1d97972541a",
   "photo-1543269664-56d93c1b41a6",
-  "photo-1517048676732-d65bc937f952",
   "photo-1531482615713-2afd69097998",
   "photo-1491975474562-1f4e30bc9468",
-  "photo-1517048676732-d65bc937f952",
-  "photo-1454165804606-c3d57bc86b40",
+  "photo-1456513080510-7bf3a84b82f8",
+  "photo-1503676260728-1c00da094a0b",
+  "photo-1517245386807-bb43f82c33c4",
+  "photo-1571260899304-425eee4c7efc",
+  "photo-1522202176988-66273c2fd55f",
+  "photo-1516534775068-ba3e7458af70",
+  "photo-1522071820081-009f0129c71c",
+  "photo-1507679799987-c73779587ccf",
+  "photo-1536148935331-408321065b18",
+  "photo-1551836022-d5d88e9218df",
 ];
 
 function getArticleImage(slug = "") {
@@ -306,7 +297,7 @@ const STORIES = [
     salary: "$94k/yr",
     debtAvoided: "$87,000",
     quote: "Turned down $87k in loans. Went IBEW union. Made $42k my first year as an apprentice. Four years in, I'm clearing six figures with zero debt and a pension.",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&h=560&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=900&h=560&fit=crop&auto=format",
   },
   {
     name: "Kayla R., 26",
@@ -324,7 +315,7 @@ const STORIES = [
     salary: "$112k/yr",
     debtAvoided: "$95,000",
     quote: "Spent $3,200 on AWS certs. Got hired at $95k after 6 months of self-study. My friend with a CS degree has $90k debt and makes less than me. Already been promoted twice.",
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=900&h=560&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1541178735493-479c1a27ed24?w=900&h=560&fit=crop&auto=format",
   },
 ];
 
@@ -380,8 +371,8 @@ export default function HomePage({ articles = [] }) {
         {/* Subtle background image */}
         <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
           <Image
-            src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1600&h=900&fit=crop&auto=format"
-            alt=""
+            src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=1600&h=900&fit=crop&auto=format"
+            alt="Students walking on college campus"
             fill
             priority
             style={{ objectFit: "cover", opacity: 0.06 }}
@@ -433,8 +424,8 @@ export default function HomePage({ articles = [] }) {
             {/* Top: full-width image */}
             <div style={{ gridColumn: "1 / -1", borderRadius: 16, overflow: "hidden", position: "relative" }}>
               <Image
-                src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1000&h=500&fit=crop&auto=format"
-                alt="College debt trap"
+                src="https://images.unsplash.com/photo-1562564055-71e051d33c19?w=1000&h=500&fit=crop&auto=format"
+                alt="Student stressed about college debt"
                 fill
                 priority
                 style={{ objectFit: "cover" }}
@@ -450,7 +441,7 @@ export default function HomePage({ articles = [] }) {
             {/* Bottom left */}
             <div style={{ borderRadius: 14, overflow: "hidden", position: "relative" }}>
               <Image
-                src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=500&h=400&fit=crop&auto=format"
+                src="https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?w=500&h=400&fit=crop&auto=format"
                 alt="Electrician earning six figures"
                 fill
                 style={{ objectFit: "cover" }}
@@ -466,7 +457,7 @@ export default function HomePage({ articles = [] }) {
             {/* Bottom right */}
             <div style={{ borderRadius: 14, overflow: "hidden", position: "relative" }}>
               <Image
-                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&h=400&fit=crop&auto=format"
+                src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=500&h=400&fit=crop&auto=format"
                 alt="Trades worker outearning college grads"
                 fill
                 style={{ objectFit: "cover" }}
