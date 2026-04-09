@@ -1,5 +1,5 @@
 // pages/college-rankings.js
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import fs from "fs";
 import path from "path";
 import Layout from "../components/Layout";
@@ -151,7 +151,7 @@ function StarPicker({ value, onChange }) {
 const STORAGE_KEY = "ihc_ratings_v1";
 const PAGE_SIZE = 100;
 
-export default function CollegeRankings({ colleges }) {
+export default function CollegeRankings({ colleges: initialColleges }) {
   const [query, setQuery]   = useState("");
   const [sortBy, setSortBy] = useState("earnings");
   const [typeFilter, setTypeFilter] = useState("All");
@@ -162,12 +162,49 @@ export default function CollegeRankings({ colleges }) {
   const [draftRating, setDraftRating]   = useState(0);
   const [draftComment, setDraftComment] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [searchResults, setSearchResults] = useState(null);
+  const [searching, setSearching] = useState(false);
+  const debounceRef = useRef(null);
+
+  // The active dataset: search results when searching, otherwise the initial top 100
+  const colleges = searchResults !== null ? searchResults : initialColleges;
 
   useEffect(() => {
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
       setRatings(saved);
     } catch {}
+  }, []);
+
+  // Debounced API search
+  const handleSearch = useCallback((value) => {
+    setQuery(value);
+    setPage(1);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    if (!value.trim() || value.trim().length < 2) {
+      setSearchResults(null);
+      setSearching(false);
+      return;
+    }
+    setSearching(true);
+    debounceRef.current = setTimeout(async () => {
+      try {
+        const res = await fetch(`/api/search-colleges?q=${encodeURIComponent(value.trim())}`);
+        const data = await res.json();
+        setSearchResults(data.results || []);
+      } catch {
+        setSearchResults([]);
+      }
+      setSearching(false);
+    }, 300);
+  }, []);
+
+  const clearSearch = useCallback(() => {
+    setQuery("");
+    setSearchResults(null);
+    setSearching(false);
+    setPage(1);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
   }, []);
 
   function openRating(school) {
@@ -243,12 +280,12 @@ export default function CollegeRankings({ colleges }) {
           <div style={{ display: "flex", gap: 10, maxWidth: 560, margin: "0 auto 20px" }}>
             <input
               type="text" value={query}
-              onChange={(e) => { setQuery(e.target.value); resetPage(); }}
+              onChange={(e) => handleSearch(e.target.value)}
               placeholder="Search any college by name, city, or state..."
               style={{ flex: 1, padding: "13px 16px", background: "#111", border: "1px solid #2a2a2a", borderRadius: 10, color: "#fff", fontSize: 15, outline: "none" }}
             />
             {query && (
-              <button onClick={() => { setQuery(""); resetPage(); }}
+              <button onClick={clearSearch}
                 style={{ padding: "13px 18px", background: "#1a1a1a", border: "1px solid #2a2a2a", borderRadius: 10, color: "#888", cursor: "pointer", fontSize: 14 }}>
                 Clear
               </button>
@@ -258,7 +295,7 @@ export default function CollegeRankings({ colleges }) {
           {/* Quick searches */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center" }}>
             {["Hofstra", "Adelphi", "Harvard", "NYU", "Florida State", "DeVry", "UCLA", "Liberty"].map((s) => (
-              <button key={s} onClick={() => { setQuery(s); resetPage(); }}
+              <button key={s} onClick={() => handleSearch(s)}
                 style={{ padding: "5px 12px", background: "#111", border: "1px solid #2a2a2a", borderRadius: 999, color: "#888", fontSize: 12, cursor: "pointer", fontWeight: 700 }}>
                 {s}
               </button>
@@ -330,7 +367,13 @@ export default function CollegeRankings({ colleges }) {
       {/* Table */}
       <section style={{ maxWidth: 1100, margin: "0 auto", padding: "0 20px 60px" }}>
         <p style={{ color: "#aaa", fontSize: 12, marginBottom: 12 }}>
-          Showing <strong style={{ color: "#fff" }}>{Math.min(visible.length, filtered.length)}</strong> of <strong style={{ color: "#fff" }}>{filtered.length.toLocaleString()}</strong> schools
+          {searching ? (
+            <span style={{ color: "#ff2020" }}>Searching...</span>
+          ) : searchResults !== null ? (
+            <>Found <strong style={{ color: "#fff" }}>{filtered.length}</strong> {filtered.length === 1 ? "school" : "schools"} for &ldquo;{query}&rdquo;</>
+          ) : (
+            <>Showing <strong style={{ color: "#fff" }}>{Math.min(visible.length, filtered.length)}</strong> of <strong style={{ color: "#fff" }}>{filtered.length.toLocaleString()}</strong> top-earning schools</>
+          )}
           {typeFilter !== "All" && <> · Type: <strong style={{ color: "#fff" }}>{typeFilter}</strong></>}
           {leanFilter !== "All" && <> · Politics: <strong style={{ color: LEAN_COLORS[leanFilter]?.color }}>{leanFilter}</strong></>}
         </p>
@@ -437,7 +480,7 @@ export default function CollegeRankings({ colleges }) {
         {filtered.length === 0 && (
           <div style={{ textAlign: "center", padding: "60px 20px" }}>
             <p style={{ color: "#bbb", fontSize: 16 }}>No schools match your search.</p>
-            <button onClick={() => { setQuery(""); setTypeFilter("All"); setLeanFilter("All"); resetPage(); }}
+            <button onClick={() => { clearSearch(); setTypeFilter("All"); setLeanFilter("All"); }}
               style={{ marginTop: 12, color: "#ff2020", background: "none", border: "none", cursor: "pointer", fontSize: 14, fontWeight: 800 }}>
               Clear all filters
             </button>
@@ -507,5 +550,10 @@ export async function getStaticProps() {
     ];
   }
 
-  return { props: { colleges }, revalidate: 86400 };
+  // Sort by earnings descending and only send top 100 to reduce page payload from ~2.7MB to ~50KB
+  const parseEarnings = (s) => parseInt(String(s || "0").replace(/[^0-9]/g, "")) || 0;
+  colleges.sort((a, b) => parseEarnings(b.earnings) - parseEarnings(a.earnings));
+  const top100 = colleges.slice(0, 100);
+
+  return { props: { colleges: top100 }, revalidate: 86400 };
 }
