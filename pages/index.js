@@ -30,13 +30,13 @@ function DebtCounter() {
   return (
     <div className="text-center">
       <div className="flex items-center justify-center gap-2 mb-3">
-        <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#ff2020", display: "inline-block", animation: "pulse 1s ease-in-out infinite", boxShadow: "0 0 0 0 #ff2020" }} />
-        <span style={{ color: "#ff2020", fontSize: 11, fontWeight: 900, letterSpacing: "0.15em", textTransform: "uppercase" }}>Live — U.S. Student Debt</span>
+        <span className="w-2.5 h-2.5 rounded-full bg-red-500 inline-block animate-pulse" />
+        <span className="text-gray-500 text-xs font-semibold tracking-wide">Live — U.S. Student Debt</span>
       </div>
-      <div style={{ fontSize: "clamp(28px, 6vw, 58px)", fontWeight: 900, color: "#fff", fontVariantNumeric: "tabular-nums", letterSpacing: "-0.02em", lineHeight: 1 }}>
+      <div className="font-black text-white tabular-nums tracking-tight leading-none" style={{ fontSize: "clamp(28px, 6vw, 58px)" }}>
         ${fmt(debt)}
       </div>
-      <div style={{ color: "#666", fontSize: 13, marginTop: 8 }}>Growing $2,800 every second · Source: Fed Reserve</div>
+      <div className="text-gray-600 text-xs mt-2">Growing $2,800 every second · Source: Fed Reserve</div>
     </div>
   );
 }
@@ -367,9 +367,9 @@ export default function HomePage({ articles = [] }) {
       <p style={{ display: "none" }}>Impact-Site-Verification: 7a99b8bc-6d3b-4c9c-9f76-ce1301771cc1</p>
 
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
-      <section className="hero-section" style={{ minHeight: "92vh", display: "flex", alignItems: "center", padding: "60px 20px", position: "relative", overflow: "hidden" }}>
+      <section className="hero-section min-h-[92vh] flex items-center py-16 px-5 relative overflow-hidden">
         {/* Subtle background image */}
-        <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+        <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=1600&h=900&fit=crop&auto=format"
             alt="Students walking on college campus"
@@ -380,93 +380,84 @@ export default function HomePage({ articles = [] }) {
           />
         </div>
         {/* Red glow */}
-        <div style={{ position: "absolute", top: "20%", left: "30%", transform: "translate(-50%,-50%)", width: 700, height: 700, background: "radial-gradient(circle, rgba(255,32,32,0.07) 0%, transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
+        <div className="absolute pointer-events-none z-0" style={{ top: "20%", left: "30%", transform: "translate(-50%,-50%)", width: 700, height: 700, background: "radial-gradient(circle, rgba(255,32,32,0.07) 0%, transparent 70%)" }} />
 
-        <div style={{ position: "relative", zIndex: 1, maxWidth: 1200, width: "100%", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 56, alignItems: "center" }} className="hero-grid">
+        <div className="hero-grid relative z-10 w-full max-w-[1200px] mx-auto grid grid-cols-2 gap-14 items-center">
           {/* LEFT: text */}
-          <div>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#1a1a1a", border: "1px solid #2a2a2a", borderRadius: 999, padding: "6px 14px", marginBottom: 28 }}>
-              <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#ff2020", flexShrink: 0 }} />
-              <span style={{ color: "#888", fontSize: 15, fontWeight: 700, letterSpacing: "0.04em" }}>The truth they don&apos;t teach at orientation</span>
+          <div className="animate-fade-up">
+            <div className="inline-flex items-center gap-2 bg-[#1a1a1a] border border-[#2a2a2a] rounded-full px-3.5 py-1.5 mb-7">
+              <span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
+              <span className="text-gray-500 text-sm font-bold tracking-wide">The truth they don&apos;t teach at orientation</span>
             </div>
 
-            <h1 style={{ fontSize: "clamp(38px, 5vw, 76px)", fontWeight: 900, color: "#fff", lineHeight: 1.0, letterSpacing: "-0.03em", marginBottom: 24 }}>
+            <h1 className="font-black text-white leading-none tracking-tighter mb-6" style={{ fontSize: "clamp(38px, 5vw, 76px)" }}>
               College Is A Scam.<br />
-              <span style={{ color: "#ff2020" }}>We Have The Receipts.</span>
+              <span className="text-red-500">We Have The Receipts.</span>
             </h1>
 
-            <p style={{ color: "#888", fontSize: "clamp(16px,2vw,18px)", maxWidth: 480, marginBottom: 40, lineHeight: 1.5 }}>
+            <p className="text-gray-500 max-w-md mb-10 leading-relaxed" style={{ fontSize: "clamp(16px,2vw,18px)" }}>
               Join the generation that said no to debt.
             </p>
 
-            <div style={{ marginBottom: 48 }}>
+            <div className="mb-12">
               <DebtCounter />
             </div>
 
-            <div className="hero-cta-row" style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-              <Link href="/college-rankings" style={{ background: "#ff2020", color: "#fff", fontWeight: 900, fontSize: 15, padding: "14px 28px", borderRadius: 10, textDecoration: "none" }}>
+            <div className="hero-cta-row flex flex-wrap gap-3">
+              <Link href="/college-rankings" className="bg-red-600 hover:bg-red-700 text-white font-black text-sm py-3.5 px-7 rounded-xl no-underline transition-colors">
                 Is My School Worth It? →
               </Link>
-              <Link href="/debt-calculator" style={{ background: "#1a1a1a", color: "#fff", fontWeight: 900, fontSize: 15, padding: "14px 28px", borderRadius: 10, textDecoration: "none", border: "1px solid #2a2a2a" }}>
-                Calculate My Debt
-              </Link>
-              <Link href="/job-board" style={{ background: "#1a1a1a", color: "#fff", fontWeight: 900, fontSize: 15, padding: "14px 28px", borderRadius: 10, textDecoration: "none", border: "1px solid #2a2a2a" }}>
-                Jobs Without Degrees
-              </Link>
-              <Link href="/job-board#post" style={{ background: "#1a1a1a", color: "#f59e0b", fontWeight: 900, fontSize: 15, padding: "14px 28px", borderRadius: 10, textDecoration: "none", border: "1px solid #f59e0b33" }}>
-                Post a Job (Employers) →
+              <Link href="/job-board" className="bg-[#1a1a1a] hover:bg-[#222] text-white font-black text-sm py-3.5 px-7 rounded-xl no-underline border border-[#2a2a2a] transition-colors">
+                Browse No-Degree Jobs
               </Link>
             </div>
           </div>
 
           {/* RIGHT: image mosaic */}
-          <div className="hero-images" style={{ display: "grid", gridTemplateRows: "240px 200px", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+          <div className="hero-images animate-fade-right grid gap-2.5" style={{ gridTemplateRows: "240px 200px", gridTemplateColumns: "1fr 1fr" }}>
             {/* Top: full-width image */}
-            <div style={{ gridColumn: "1 / -1", borderRadius: 16, overflow: "hidden", position: "relative" }}>
+            <div className="col-span-full rounded-2xl overflow-hidden relative card-lift">
               <Image
                 src="https://images.unsplash.com/photo-1562564055-71e051d33c19?w=1000&h=500&fit=crop&auto=format"
                 alt="Student stressed about college debt"
                 fill
                 priority
-                style={{ objectFit: "cover" }}
+                className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%)" }} />
-              <div style={{ position: "absolute", bottom: 16, left: 18, right: 18 }}>
-                <span style={{ background: "rgba(255,32,32,0.9)", color: "#fff", fontSize: 10, fontWeight: 900, letterSpacing: "0.12em", padding: "3px 8px", borderRadius: 4, textTransform: "uppercase" }}>The Trap</span>
-                <div style={{ color: "#fff", fontSize: 15, fontWeight: 800, marginTop: 5, lineHeight: 1.2 }}>4 years · $120k debt · no job guarantee</div>
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%)" }} />
+              <div className="absolute bottom-4 left-4 right-4">
+                <div className="text-white text-sm font-extrabold leading-tight">4 years · $120k debt · no job guarantee</div>
               </div>
             </div>
 
             {/* Bottom left */}
-            <div style={{ borderRadius: 14, overflow: "hidden", position: "relative" }}>
+            <div className="rounded-xl overflow-hidden relative card-hover">
               <Image
                 src="https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?w=500&h=400&fit=crop&auto=format"
                 alt="Electrician earning six figures"
                 fill
-                style={{ objectFit: "cover" }}
+                className="object-cover"
                 sizes="25vw"
               />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%)" }} />
-              <div style={{ position: "absolute", bottom: 10, left: 12, right: 12 }}>
-                <span style={{ background: "rgba(16,185,129,0.9)", color: "#fff", fontSize: 9, fontWeight: 900, letterSpacing: "0.1em", padding: "2px 6px", borderRadius: 3, textTransform: "uppercase" }}>The Move</span>
-                <div style={{ color: "#fff", fontSize: 12, fontWeight: 800, marginTop: 3 }}>Electrician · $94k/yr · $0 debt</div>
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%)" }} />
+              <div className="absolute bottom-2.5 left-3 right-3">
+                <div className="text-white text-xs font-extrabold">Electrician · $94k/yr · $0 debt</div>
               </div>
             </div>
 
             {/* Bottom right */}
-            <div style={{ borderRadius: 14, overflow: "hidden", position: "relative" }}>
+            <div className="rounded-xl overflow-hidden relative card-hover">
               <Image
                 src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=500&h=400&fit=crop&auto=format"
                 alt="Trades worker outearning college grads"
                 fill
-                style={{ objectFit: "cover" }}
+                className="object-cover"
                 sizes="25vw"
               />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%)" }} />
-              <div style={{ position: "absolute", bottom: 10, left: 12, right: 12 }}>
-                <span style={{ background: "rgba(16,185,129,0.9)", color: "#fff", fontSize: 9, fontWeight: 900, letterSpacing: "0.1em", padding: "2px 6px", borderRadius: 3, textTransform: "uppercase" }}>The Move</span>
-                <div style={{ color: "#fff", fontSize: 12, fontWeight: 800, marginTop: 3 }}>Plumber · $88k/yr · $0 debt</div>
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%)" }} />
+              <div className="absolute bottom-2.5 left-3 right-3">
+                <div className="text-white text-xs font-extrabold">Plumber · $88k/yr · $0 debt</div>
               </div>
             </div>
           </div>
@@ -474,19 +465,19 @@ export default function HomePage({ articles = [] }) {
       </section>
 
       {/* ── STATS SECTION ────────────────────────────────────────────────────── */}
-      <section style={{ background: "#000", borderTop: "1px solid #1a1a1a", borderBottom: "1px solid #1a1a1a", padding: "60px 20px" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <p style={{ textAlign: "center", color: "#ff2020", fontSize: 11, fontWeight: 900, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 40 }}>
+      <section className="animate-fade-up bg-black border-y border-[#1a1a1a] py-16 px-5">
+        <div className="max-w-[1100px] mx-auto">
+          <p className="text-center text-gray-500 text-xs font-bold tracking-widest mb-10">
             The Numbers Don&apos;t Lie
           </p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 2 }}>
+          <div className="grid gap-0.5 stagger-children" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))" }}>
             {STATS.map((s) => (
-              <div key={s.num} style={{ textAlign: "center", padding: "32px 20px", borderRight: "1px solid #1a1a1a" }}>
-                <div style={{ fontSize: "clamp(36px,5vw,56px)", fontWeight: 900, color: "#ff2020", lineHeight: 1, marginBottom: 10, letterSpacing: "-0.02em" }}>
+              <div key={s.num} className="text-center py-8 px-5 border-r border-[#1a1a1a]">
+                <div className="font-black text-red-500 leading-none mb-2.5 tracking-tight" style={{ fontSize: "clamp(36px,5vw,56px)" }}>
                   {s.num}
                 </div>
-                <div style={{ color: "#fff", fontSize: 15, fontWeight: 700, marginBottom: 6 }}>{s.label}</div>
-                <div style={{ color: "#444", fontSize: 11, fontWeight: 600, letterSpacing: "0.05em", textTransform: "uppercase" }}>{s.source}</div>
+                <div className="text-white text-sm font-bold mb-1.5">{s.label}</div>
+                <div className="text-gray-700 text-xs font-semibold tracking-wide">{s.source}</div>
               </div>
             ))}
           </div>
@@ -499,22 +490,19 @@ export default function HomePage({ articles = [] }) {
       </div>
 
       {/* ── BLOG / MAGAZINE SECTION ──────────────────────────────────────────── */}
-      <section style={{ maxWidth: 1100, margin: "0 auto", padding: "20px 20px 60px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 28 }}>
+      <section className="animate-fade-up max-w-[1100px] mx-auto pt-5 pb-16 px-5">
+        <div className="flex justify-between items-baseline mb-7">
           <div>
-            <p style={{ color: "#ff2020", fontSize: 11, fontWeight: 900, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 6 }}>Latest</p>
-            <h2 style={{ color: "#fff", fontSize: "clamp(22px,4vw,32px)", fontWeight: 900, margin: 0 }}>From The Files</h2>
+            <p className="text-gray-500 text-xs font-bold tracking-widest mb-1.5">Latest</p>
+            <h2 className="text-white font-black m-0" style={{ fontSize: "clamp(22px,4vw,32px)" }}>From The Files</h2>
           </div>
-          <Link href="/blog" style={{ color: "#ff2020", fontSize: 13, fontWeight: 800, textDecoration: "none" }}>All Articles →</Link>
+          <Link href="/blog" className="text-red-500 text-sm font-extrabold no-underline hover:text-red-400 transition-colors">All Articles →</Link>
         </div>
 
         {/* Featured + side stack */}
-        <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1.7fr) minmax(0,1fr)", gap: 16, marginBottom: 16 }} className="blog-main-grid">
+        <div className="blog-main-grid grid gap-4 mb-4" style={{ gridTemplateColumns: "minmax(0,1.7fr) minmax(0,1fr)" }}>
           {/* Featured */}
-          <Link href={`/blog/${displayArticles[0].slug}`} style={{ textDecoration: "none", display: "block", background: "#111", border: "1px solid #2a2a2a", borderRadius: 12, overflow: "hidden", transition: "border-color 0.2s" }}
-            onMouseOver={e => e.currentTarget.style.borderColor = "#ff2020"}
-            onMouseOut={e => e.currentTarget.style.borderColor = "#2a2a2a"}
-          >
+          <Link href={`/blog/${displayArticles[0].slug}`} className="card-lift block no-underline bg-[#111] border border-[#2a2a2a] rounded-xl overflow-hidden hover:border-red-500 transition-colors">
             <div style={{ height: 240, position: "relative", overflow: "hidden" }}>
               <Image
                 src={getArticleImage(displayArticles[0].slug)}
