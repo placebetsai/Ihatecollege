@@ -1,5 +1,6 @@
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
+import AdUnit from "../components/AdUnit";
 import useSWR from "swr";
 
 const fetcher = (url) => fetch(url, { cache: "no-store" }).then((r) => r.json());
@@ -70,6 +71,10 @@ export default function NewsPage() {
             <div className="loading">No headlines yet — try again in a moment.</div>
           )}
         </div>
+      </div>
+
+      <div className="max-w-2xl mx-auto px-4 pb-8">
+        <AdUnit slot="6600722153" />
       </div>
 
       <style jsx>{`

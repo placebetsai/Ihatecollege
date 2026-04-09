@@ -1,6 +1,7 @@
 // pages/cost.js
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
+import AdUnit from "../components/AdUnit";
 
 export default function CostPage() {
   return (
@@ -29,6 +30,10 @@ export default function CostPage() {
             for a degree that may not guarantee a job.
           </p>
         </div>
+      </section>
+
+      <section className="page-section max-w-2xl mx-auto">
+        <AdUnit slot="6600722153" />
       </section>
     </Layout>
   );

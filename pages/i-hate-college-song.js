@@ -1,5 +1,6 @@
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
+import AdUnit from "../components/AdUnit";
 import Link from "next/link";
 import Head from "next/head";
 
@@ -146,6 +147,10 @@ export default function IHateCollegeSongPage() {
               </Link>
             </div>
           </section>
+        </div>
+
+        <div className="mt-10 max-w-2xl mx-auto">
+          <AdUnit slot="6600722153" />
         </div>
 
         {/* CLEAN BOTTOM LINKS (NO QUESTIONS) */}

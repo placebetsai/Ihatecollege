@@ -1,6 +1,7 @@
 // pages/cheat-sheets.js
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
+import AdUnit from "../components/AdUnit";
 import Link from "next/link";
 
 export default function CheatSheets() {
@@ -188,6 +189,10 @@ export default function CheatSheets() {
               </ul>
             </div>
           </div>
+        </section>
+
+        <section className="section max-w-2xl mx-auto">
+          <AdUnit slot="6600722153" />
         </section>
 
         {/* CTA */}

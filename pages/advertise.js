@@ -1,5 +1,6 @@
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
+import AdUnit from "../components/AdUnit";
 import { useState } from "react";
 
 const AUDIENCE_STATS = [
@@ -156,6 +157,10 @@ export default function Advertise() {
             </ul>
           </div>
         </div>
+      </div>
+
+      <div className="max-w-2xl mx-auto px-4 py-6">
+        <AdUnit slot="6600722153" />
       </div>
 
       {/* Contact Form */}

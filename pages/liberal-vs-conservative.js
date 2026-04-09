@@ -3,6 +3,7 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
+import AdUnit from "../components/AdUnit";
 
 const LEANS = ["Very Liberal", "Liberal", "Moderate", "Conservative", "Very Conservative"];
 
@@ -530,6 +531,10 @@ export default function LiberalVsConservative() {
             })}
           </div>
         )}
+
+        <div className="mt-10 max-w-2xl mx-auto">
+          <AdUnit slot="6600722153" />
+        </div>
 
         <p className="mt-10 text-[11px] text-slate-600 text-center max-w-3xl mx-auto">
           Political lean estimates based on Princeton Review annual surveys, faculty political donation records (OpenSecrets), campus speech/freedom rankings (FIRE), and known institutional affiliations. These are generalizations — individual experiences vary.

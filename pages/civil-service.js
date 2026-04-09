@@ -1,5 +1,6 @@
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
+import AdUnit from "../components/AdUnit";
 import useSWR from 'swr';
 import axios from 'axios';
 
@@ -211,6 +212,10 @@ export default function CivilService() {
             <p className="text-gray-400 text-xs mt-4">Refreshed: {floridaDmvJobs?.length || 0} open positions, e.g., {floridaDmvJobs?.[0]?.MatchedObjectDescriptor.PositionTitle || 'Loading...'} ({floridaDmvJobs?.[0]?.MatchedObjectDescriptor.PositionRemuneration[0].MinimumRange || '$'}). Apply: {floridaDmvJobs?.[0]?.MatchedObjectDescriptor.ApplyURI[0] || ''}</p>
           </div>
         </div>
+      </section>
+
+      <section className="max-w-2xl mx-auto px-4 mt-12">
+        <AdUnit slot="6600722153" />
       </section>
 
       {/* CTA */}
