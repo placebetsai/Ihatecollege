@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * generate-articles.js
- * Generates 13 SEO articles per run, 4x/day = ~52 articles/day.
+ * Generates 3 SEO articles per run, 4x/day = 12 articles/day.
  * Runs 6AM, 10AM, 2PM, 6PM EST via run-daily.js on Railway.
  * Pushes to restore-good with [skip ci] to prevent Railway redeploy loop.
  */
@@ -16,7 +16,7 @@ const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const ROOT = path.join(__dirname, "..");
 const BLOG_DIR = path.join(ROOT, "pages", "blog");
-const SITEMAP_PATH = path.join(ROOT, "pages", "sitemap.xml.js");
+// Sitemap is now generated at build time by scripts/generate-sitemap.js
 
 // Pool of 200+ rotating SEO topics — anti-college / trade / no-degree angle
 const TOPIC_POOL = [
@@ -268,8 +268,8 @@ function getHeroImage(keyword) {
   return `https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&h=500&fit=crop&auto=format`;
 }
 
-// 13 per run × 4 runs/day = 52 articles/day
-const ARTICLES_PER_RUN = 13;
+// 3 per run × 4 runs/day = 12 articles/day (avoids thin content penalty)
+const ARTICLES_PER_RUN = 3;
 
 function shuffle(arr) {
   const a = [...arr];
@@ -303,21 +303,14 @@ function slugify(str) {
   return str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
-function randomPast2026Date() {
-  // Random date between 2026-01-01 and yesterday — always before today
-  const start = new Date("2026-01-01").getTime();
-  const yesterday = Date.now() - 86400000;
-  const ms = start + Math.random() * (yesterday - start);
-  return new Date(ms).toISOString().split("T")[0];
+function todayDate() {
+  return new Date().toISOString().split("T")[0];
 }
 
-function randomAuthor() {
+function getAuthor() {
   const authors = [
-    { name: "Jake Morrison", initials: "JM", color: "from-sky-500 to-blue-700", bio: "Jake spent 6 years in higher education administration before leaving to write about the economics of college. He covers student debt, ROI, and career alternatives." },
-    { name: "Sarah Chen", initials: "SC", color: "from-emerald-500 to-teal-700", bio: "Sarah is a labor economist who tracks trade wages and advises high schoolers on alternatives to four-year degrees. Former consultant, current advocate." },
-    { name: "Marcus Webb", initials: "MW", color: "from-violet-500 to-purple-700", bio: "Marcus dropped out of a finance degree at 19, taught himself to code, and built a six-figure freelance career by 23. He writes about non-traditional paths." },
-    { name: "Danielle Torres", initials: "DT", color: "from-rose-500 to-pink-700", bio: "Danielle is a career counselor who has helped over 400 students find trade apprenticeships and tech certifications as alternatives to expensive four-year degrees." },
-    { name: "Ryan Kowalski", initials: "RK", color: "from-amber-500 to-orange-700", bio: "Ryan is a master electrician turned writer. After 15 years in the trades, he documents the financial realities of skilled work vs. the college path." },
+    { name: "IHateCollege Staff", initials: "IC", color: "from-red-500 to-red-700", bio: "The IHateCollege editorial team researches college ROI, trade careers, and alternative education paths using public data from the BLS, Federal Reserve, and Department of Education." },
+    { name: "Editorial Team", initials: "ET", color: "from-sky-500 to-blue-700", bio: "Our editors cover student debt, trade school outcomes, and career alternatives to four-year degrees using government data and industry reports." },
   ];
   return authors[Math.floor(Math.random() * authors.length)];
 }
@@ -349,12 +342,12 @@ Requirements:
       ...
     ],
     "conclusion": "concluding paragraph",
-    "publishDate": "${randomPast2026Date()}"
+    "publishDate": "${todayDate()}"
   }`;
 
   const message = await client.messages.create({
     model: "claude-haiku-4-5-20251001",
-    max_tokens: 8096,
+    max_tokens: 16000,
     messages: [{ role: "user", content: prompt }],
   });
 
@@ -385,7 +378,7 @@ function buildPageJsx(article, topic, author) {
           <h2 className="text-2xl font-black text-white mb-4">${s.heading}</h2>
           <p className="text-slate-300 leading-relaxed">${s.content.replace(/"/g, "&quot;").replace(/'/g, "&apos;")}</p>
         </section>
-        ${i === 1 || i === 3 ? '<AdUnit slot="6600722153" />' : ""}
+        ${i === 1 || i === 3 || i === 5 ? '<AdUnit slot="6600722153" />' : ""}
       `
     )
     .join("\n");
@@ -489,24 +482,9 @@ export default function BlogPost() {
 `;
 }
 
+// Sitemap is generated at build time — no runtime update needed
 function updateSitemap(newPaths) {
-  let content = fs.readFileSync(SITEMAP_PATH, "utf8");
-  // Find the last entry in staticPaths and insert after it
-  const insertMarker = '"/how-to-make-money-without-a-college-degree",';
-  const newEntries = newPaths.map((p) => `    "${p}",`).join("\n");
-  if (!content.includes(insertMarker)) {
-    console.log("  Warning: sitemap marker not found, skipping sitemap update");
-    return;
-  }
-  // Only add paths not already present
-  const toAdd = newPaths
-    .filter((p) => !content.includes(`"${p}"`))
-    .map((p) => `    "${p}",`)
-    .join("\n");
-  if (!toAdd) return;
-  content = content.replace(insertMarker, `${insertMarker}\n${toAdd}`);
-  fs.writeFileSync(SITEMAP_PATH, content);
-  console.log(`  Sitemap updated with ${newPaths.length} new paths`);
+  console.log(`  ${newPaths.length} new blog paths will appear in sitemap on next build`);
 }
 
 function commitAndPush(slugs) {
@@ -521,7 +499,7 @@ function commitAndPush(slugs) {
         execSync(`git remote set-url origin https://placebetsai:${GITHUB_TOKEN}@github.com/placebetsai/Ihatecollege.git`, { cwd: ROOT });
       } catch {}
     }
-    execSync("git add pages/blog/ pages/sitemap.xml.js .used-topics.json 2>/dev/null || true", { cwd: ROOT });
+    execSync("git add pages/blog/ .used-topics.json 2>/dev/null || true", { cwd: ROOT });
     execSync(
       `git commit -m "Auto-generate ${slugs.length} blog articles for ${dateStr} [skip ci] [railway skip]"`,
       { cwd: ROOT }
@@ -549,7 +527,7 @@ async function run() {
   for (const topic of topics) {
     try {
       const article = await generateArticle(topic);
-      const author = randomAuthor();
+      const author = getAuthor();
       const slug = slugify(topic.keyword);
       const filename = `${slug}.js`;
       const filepath = path.join(BLOG_DIR, filename);

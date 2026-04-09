@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/fetch-colleges.js",
+    "prebuild": "node scripts/fetch-colleges.js && node scripts/generate-sitemap.js",
     "build": "next build",
     "start": "next start",
     "automate": "node scripts/run-daily.js",
@@ -21,7 +21,6 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.0",
     "@supabase/supabase-js": "^2.102.1",
-    "@vercel/og": "^0.10.0",
     "axios": "^1.7.2",
     "dotenv": "^16.4.5",
     "next": "^15.5.14",
