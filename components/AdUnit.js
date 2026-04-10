@@ -9,7 +9,7 @@ export default function AdUnit({ slot = "6600722153", format = "auto", style = {
   }, []);
 
   return (
-    <div className="my-8 w-full overflow-hidden" style={{ minHeight: "250px" }}>
+    <div className="my-8 w-full overflow-hidden" >
       <ins
         className="adsbygoogle"
         style={{ display: "block", width: "100%", ...style }}

@@ -14,7 +14,7 @@ export default function Layout({ children }) {
       <Footer />
       {/* Sticky anchor ad — site-wide, highest RPM format */}
       <div className="fixed bottom-0 left-0 right-0 z-40">
-        <AdUnit slot="6600722153" format="auto" style={{ minHeight: "50px" }} />
+        <AdUnit slot="6600722153" format="auto" style={{ minHeight: "0" }} />
       </div>
     </div>
   );
