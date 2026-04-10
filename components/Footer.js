@@ -71,6 +71,19 @@ export default function Footer() {
         </div>
       </div>
 
+      {/* Our Network */}
+      <div className="max-w-6xl mx-auto px-4 pt-6 border-t border-slate-800/60 mb-6">
+        <p className="text-slate-600 font-bold uppercase tracking-[0.15em] text-[10px] mb-3">More from Israel Joffe</p>
+        <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-slate-500">
+          <a href="https://ihatecollege.com" className="text-yellow-400 hover:text-yellow-300 transition">IHateCollege.com</a>
+          <a href="https://shopkurt.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">ShopKurt.com</a>
+          <a href="https://placebets.ai" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">PlaceBets.ai</a>
+          <a href="https://hiddencameras.tv" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">HiddenCameras.tv</a>
+          <a href="https://spanishtvshows.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">SpanishTVShows.com</a>
+          <a href="https://fashionistas.ai" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Fashionistas.ai</a>
+        </div>
+      </div>
+
       <div className="max-w-6xl mx-auto px-4 pt-6 border-t border-slate-800/60 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-slate-600">
         <p>&copy; {new Date().getFullYear()} IHateCollege.com &mdash; Real data, no brochure fluff.</p>
         <p>Data sourced from U.S. Dept. of Education College Scorecard</p>
