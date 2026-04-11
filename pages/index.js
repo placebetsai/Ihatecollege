@@ -78,7 +78,7 @@ function DebtCalculator() {
   const fmt = (v) => "$" + Math.round(v).toLocaleString("en-US");
 
   return (
-    <div style={{ background: "#111", border: "1px solid #2a2a2a", borderRadius: 16, padding: "32px 28px" }}>
+    <div style={{ background: "#111", border: "1px solid #2a2a2a", borderRadius: 16, padding: "clamp(20px, 4vw, 32px) clamp(16px, 3vw, 28px)" }}>
       <p style={{ color: "#ff2020", fontSize: 11, fontWeight: 900, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 }}>Interactive Calculator</p>
       <h2 style={{ color: "#fff", fontSize: "clamp(22px,4vw,32px)", fontWeight: 900, marginBottom: 28, lineHeight: 1.1 }}>Your Real College Cost</h2>
 
@@ -117,10 +117,10 @@ function DebtCalculator() {
         </div>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 16 }}>
-        <div style={{ background: "rgba(255,32,32,0.08)", border: "1px solid rgba(255,32,32,0.25)", borderRadius: 12, padding: "18px 16px" }}>
+      <div className="calc-compare-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 16 }}>
+        <div style={{ background: "rgba(255,32,32,0.08)", border: "1px solid rgba(255,32,32,0.25)", borderRadius: 12, padding: "clamp(12px, 3vw, 18px) clamp(10px, 2.5vw, 16px)" }}>
           <div style={{ color: "#ff2020", fontSize: 11, fontWeight: 900, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 10 }}>College Path</div>
-          <div style={{ color: "#fff", fontSize: 32, fontWeight: 900, lineHeight: 1, marginBottom: 4 }}>{fmt(principal)}</div>
+          <div style={{ color: "#fff", fontSize: "clamp(22px, 5vw, 32px)", fontWeight: 900, lineHeight: 1, marginBottom: 4 }}>{fmt(principal)}</div>
           <div style={{ color: "#555", fontSize: 11, marginBottom: 12 }}>total debt at graduation</div>
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
             {[
@@ -136,9 +136,9 @@ function DebtCalculator() {
           </div>
         </div>
 
-        <div style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.25)", borderRadius: 12, padding: "18px 16px" }}>
+        <div style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.25)", borderRadius: 12, padding: "clamp(12px, 3vw, 18px) clamp(10px, 2.5vw, 16px)" }}>
           <div style={{ color: "#10b981", fontSize: 11, fontWeight: 900, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 10 }}>Trade Path</div>
-          <div style={{ color: "#fff", fontSize: 32, fontWeight: 900, lineHeight: 1, marginBottom: 4 }}>{fmt(tradeCost)}</div>
+          <div style={{ color: "#fff", fontSize: "clamp(22px, 5vw, 32px)", fontWeight: 900, lineHeight: 1, marginBottom: 4 }}>{fmt(tradeCost)}</div>
           <div style={{ color: "#555", fontSize: 11, marginBottom: 12 }}>total program cost</div>
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
             {[
@@ -380,7 +380,7 @@ export default function HomePage({ articles = [] }) {
           />
         </div>
         {/* Red glow */}
-        <div className="absolute pointer-events-none z-0" style={{ top: "20%", left: "30%", transform: "translate(-50%,-50%)", width: 700, height: 700, background: "radial-gradient(circle, rgba(255,32,32,0.07) 0%, transparent 70%)" }} />
+        <div className="absolute pointer-events-none z-0" style={{ top: "20%", left: "30%", transform: "translate(-50%,-50%)", width: "min(700px, 100vw)", height: "min(700px, 100vw)", background: "radial-gradient(circle, rgba(255,32,32,0.07) 0%, transparent 70%)" }} />
 
         <div className="hero-grid relative z-10 w-full max-w-[1200px] mx-auto grid grid-cols-2 gap-14 items-center">
           {/* LEFT: text */}
@@ -470,7 +470,7 @@ export default function HomePage({ articles = [] }) {
           <p className="text-center text-gray-500 text-xs font-bold tracking-widest mb-10">
             The Numbers Don&apos;t Lie
           </p>
-          <div className="grid gap-0.5 stagger-children" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))" }}>
+          <div className="grid gap-0.5 stagger-children" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(200px, 100%), 1fr))" }}>
             {STATS.map((s) => (
               <div key={s.num} className="text-center py-8 px-5 border-r border-[#1a1a1a]">
                 <div className="font-black text-red-500 leading-none mb-2.5 tracking-tight" style={{ fontSize: "clamp(36px,5vw,56px)" }}>
@@ -553,7 +553,7 @@ export default function HomePage({ articles = [] }) {
         </div>
 
         {/* 3-column grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 12 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(280px, 100%), 1fr))", gap: 12 }}>
           {displayArticles.slice(4).map((a) => (
             <Link key={a.slug} href={`/blog/${a.slug}`} style={{ textDecoration: "none", display: "block", background: "#111", border: "1px solid #2a2a2a", borderRadius: 10, overflow: "hidden", transition: "border-color 0.2s" }}
               onMouseOver={e => e.currentTarget.style.borderColor = "#ff2020"}
@@ -593,7 +593,7 @@ export default function HomePage({ articles = [] }) {
             <h2 style={{ color: "#fff", fontSize: "clamp(22px,4vw,32px)", fontWeight: 900, margin: 0 }}>They Skipped College. Here&apos;s What Happened.</h2>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 16 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(320px, 100%), 1fr))", gap: 16 }}>
             {STORIES.map((s) => (
               <div key={s.name} style={{ background: "#111", border: "1px solid #2a2a2a", borderRadius: 14, overflow: "hidden" }}>
                 <div style={{ height: 200, position: "relative" }}>
@@ -605,14 +605,14 @@ export default function HomePage({ articles = [] }) {
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                   <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%)" }} />
-                  <div style={{ position: "absolute", bottom: 14, left: 16, right: 16, display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+                  <div style={{ position: "absolute", bottom: 14, left: 16, right: 16, display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end", gap: 8 }}>
                     <div>
-                      <div style={{ color: "#10b981", fontSize: 22, fontWeight: 900, lineHeight: 1 }}>{s.salary}</div>
+                      <div style={{ color: "#10b981", fontSize: "clamp(18px, 4vw, 22px)", fontWeight: 900, lineHeight: 1 }}>{s.salary}</div>
                       <div style={{ color: "#aaa", fontSize: 12 }}>{s.career} · {s.location}</div>
                     </div>
                     <div style={{ textAlign: "right" }}>
                       <div style={{ color: "#ff2020", fontSize: 11, fontWeight: 900 }}>DEBT AVOIDED</div>
-                      <div style={{ color: "#fff", fontSize: 16, fontWeight: 900 }}>{s.debtAvoided}</div>
+                      <div style={{ color: "#fff", fontSize: "clamp(14px, 3vw, 16px)", fontWeight: 900 }}>{s.debtAvoided}</div>
                     </div>
                   </div>
                 </div>
@@ -634,9 +634,9 @@ export default function HomePage({ articles = [] }) {
             <h2 style={{ color: "#fff", fontSize: "clamp(22px,4vw,32px)", fontWeight: 900, margin: 0 }}>6 Paths That Pay Without A Degree</h2>
           </div>
 
-          <div style={{ display: "flex", gap: 12, overflowX: "auto", paddingBottom: 12 }}>
+          <div style={{ display: "flex", gap: 12, overflowX: "auto", paddingBottom: 12, WebkitOverflowScrolling: "touch", scrollSnapType: "x mandatory" }}>
             {TRADE_PATHS.map((t) => (
-              <div key={t.title} style={{ background: "#111", border: `1px solid ${t.color}30`, borderRadius: 14, padding: "22px 20px", minWidth: 190, flexShrink: 0 }}>
+              <div key={t.title} style={{ background: "#111", border: `1px solid ${t.color}30`, borderRadius: 14, padding: "22px 20px", minWidth: 190, flexShrink: 0, scrollSnapAlign: "start" }}>
                 <div style={{ fontSize: 32, marginBottom: 10 }}>{t.emoji}</div>
                 <div style={{ color: "#fff", fontSize: 17, fontWeight: 900, marginBottom: 4 }}>{t.title}</div>
                 <div style={{ color: t.color, fontSize: 20, fontWeight: 900, marginBottom: 10 }}>{t.salary}</div>
@@ -675,7 +675,7 @@ export default function HomePage({ articles = [] }) {
               <input
                 type="email" value={email} onChange={e => setEmail(e.target.value)} required
                 placeholder="your@email.com"
-                style={{ flex: "1 1 220px", maxWidth: 300, padding: "13px 16px", background: "#1a1a1a", border: "1px solid #2a2a2a", borderRadius: 8, color: "#fff", fontSize: 14, outline: "none" }}
+                style={{ flex: "1 1 220px", maxWidth: 300, padding: "13px 16px", background: "#1a1a1a", border: "1px solid #2a2a2a", borderRadius: 8, color: "#fff", fontSize: 16, outline: "none" }}
               />
               <button type="submit" disabled={emailStatus === "loading"}
                 style={{ padding: "13px 24px", background: "#ff2020", color: "#fff", fontWeight: 900, fontSize: 14, borderRadius: 8, border: "none", cursor: "pointer", whiteSpace: "nowrap" }}
@@ -706,6 +706,8 @@ export default function HomePage({ articles = [] }) {
           /* CTA buttons: full width on small phones */
           .hero-cta-row { flex-direction: column !important; }
           .hero-cta-row a { width: 100% !important; text-align: center !important; box-sizing: border-box !important; }
+          /* Stack calculator comparison cards on very small screens */
+          .calc-compare-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </Layout>

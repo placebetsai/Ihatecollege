@@ -5,7 +5,7 @@ import AdUnit from "./AdUnit";
 
 export default function Layout({ children }) {
   return (
-    <div className="min-h-screen text-white flex flex-col font-sans" style={{ background: "#0a0a0a" }}>
+    <div className="min-h-screen text-white flex flex-col font-sans" style={{ background: "#0a0a0a", overflowX: "hidden", maxWidth: "100vw" }}>
       <div className="sticky top-0 z-50">
         <Navbar />
         <BreakingTicker />

@@ -60,7 +60,7 @@ export default function BreakingTicker() {
   const repeated = [...items, ...items];
 
   return (
-    <div style={{ background: "#e80000", width: "100%" }}>
+    <div style={{ background: "#e80000", width: "100%", overflowX: "hidden" }}>
 
       {/* ── MOBILE: BREAKING label on its own top row ── */}
       <div className="brk-mobile-label" style={{
