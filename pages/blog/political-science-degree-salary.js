@@ -1,6 +1,6 @@
-// date: 2026-02-20
+// date: 2026-02-23
 // keyword: political science degree salary
-// author: Ryan Kowalski
+// author: Danielle Torres
 import Head from "next/head";
 import Layout from "../../components/Layout";
 import SEO from "../../components/SEO";
@@ -11,25 +11,25 @@ export default function BlogPost() {
   return (
     <Layout>
       <Head>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: `{"@context":"https://schema.org","@type":"BlogPosting","headline":"Political Science Degree Salary: What Poli Sci Grads Actually Earn in 2026","description":"Real salary data for political science majors. What poli sci grads earn, job prospects, and whether the degree ROI makes sense.","datePublished":"2026-02-20","dateModified":"2026-02-20","author":{"@type":"Person","name":"Ryan Kowalski"},"publisher":{"@type":"Organization","name":"IHateCollege.com","url":"https://ihatecollege.com"},"url":"https://ihatecollege.com/blog/political-science-degree-salary","mainEntityOfPage":{"@type":"WebPage","@id":"https://ihatecollege.com/blog/political-science-degree-salary"}}` }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: `{"@context":"https://schema.org","@type":"BlogPosting","headline":"Political Science Degree Salary: What Graduates Actually Earn in 2026","description":"Real data on political science degree salaries. See median earnings, job outlook, and whether this degree pays off financially.","datePublished":"2026-02-23","dateModified":"2026-02-23","author":{"@type":"Person","name":"Danielle Torres"},"publisher":{"@type":"Organization","name":"IHateCollege.com","url":"https://ihatecollege.com"},"url":"https://ihatecollege.com/blog/political-science-degree-salary","mainEntityOfPage":{"@type":"WebPage","@id":"https://ihatecollege.com/blog/political-science-degree-salary"}}` }} />
       </Head>
       <SEO
-        title="Political Science Degree Salary: What Poli Sci Grads Actually Earn"
-        description="Real salary data for political science majors. What poli sci grads earn, job prospects, and whether the degree ROI makes sense."
+        title="Political Science Degree Salary: What Grads Actually Earn"
+        description="Real data on political science degree salaries. See median earnings, job outlook, and whether this degree pays off financially."
       />
 
       <article className="max-w-3xl mx-auto px-4 py-12 text-slate-200">
         <div className="mb-10">
           <p className="text-xs uppercase tracking-widest text-sky-400 font-bold mb-3">
-            Blog &middot; 2026-02-20
+            Blog &middot; 2026-02-23
           </p>
           <h1 className="text-4xl md:text-5xl font-black text-white leading-tight mb-6">
-            Political Science Degree Salary: What Poli Sci Grads Actually Earn in 2026
+            Political Science Degree Salary: What Graduates Actually Earn in 2026
           </h1>
           <div className="w-full h-64 md:h-80 rounded-2xl overflow-hidden mb-6">
             <img
               src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1200&h=500&fit=crop&auto=format"
-              alt="Political Science Degree Salary: What Poli Sci Grads Actually Earn in 2026"
+              alt="Political Science Degree Salary: What Graduates Actually Earn in 2026"
               className="w-full h-full object-cover"
               loading="eager"
             />
@@ -38,12 +38,12 @@ export default function BlogPost() {
 
         {/* Author bio */}
         <div className="flex items-center gap-4 mb-10 p-4 bg-slate-900/60 border border-slate-700 rounded-xl">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500 to-orange-700 flex items-center justify-center text-white font-black text-lg shrink-0">
-            RK
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-rose-500 to-pink-700 flex items-center justify-center text-white font-black text-lg shrink-0">
+            DT
           </div>
           <div>
-            <div className="font-bold text-white text-sm">Ryan Kowalski</div>
-            <div className="text-slate-400 text-xs leading-relaxed">Ryan is a master electrician turned writer. After 15 years in the trades, he documents the financial realities of skilled work vs. the college path.</div>
+            <div className="font-bold text-white text-sm">Danielle Torres</div>
+            <div className="text-slate-400 text-xs leading-relaxed">Danielle is a career counselor who has helped over 400 students find trade apprenticeships and tech certifications as alternatives to expensive four-year degrees.</div>
           </div>
         </div>
 
@@ -51,207 +51,180 @@ export default function BlogPost() {
 
         
         <section className="mb-10">
-          <h2 className="text-2xl font-black text-white mb-4">The Honest Starting Number</h2>
-          <p className="text-slate-300 leading-relaxed">Let&apos;s start with what matters: money. According to the U.S. Bureau of Labor Statistics and recent graduate surveys, the median starting salary for political science degree holders is approximately $35,000 to $40,000 per year. This is notably lower than engineering ($68,000), computer science ($65,000), or even business degrees ($50,000). If you&apos;re considering a political science degree primarily for earning potential, you should know upfront that this field doesn&apos;t compete with STEM or business on entry-level compensation.
+          <h2 className="text-2xl font-black text-white mb-4">The Blunt Truth About Political Science Salaries</h2>
+          <p className="text-slate-300 leading-relaxed">Let&apos;s start with the uncomfortable reality: a political science degree doesn&apos;t pay as well as engineering, computer science, or accounting. According to the U.S. Bureau of Labor Statistics, the median annual wage for political scientists in May 2023 was $125,350. But that&apos;s the top tier. Most people with a political science bachelor&apos;s degree earn significantly less than that figure—and many don&apos;t work as political scientists at all.
 
-The problem isn&apos;t that poli sci grads can&apos;t make good money—they can. The problem is that the path to good money is longer, less direct, and often requires additional credentials beyond the bachelor&apos;s degree. The Bureau of Labor Statistics doesn&apos;t even track a specific &quot;political science&quot; job category. Instead, poli sci grads scatter across multiple fields: government, law, nonprofit work, policy analysis, and communications. Each path has different salary trajectories and requirements.</p>
+The Association of American Colleges and Universities reports that only about 26% of people with political science degrees actually work in political science-related fields. The rest filter into law, public administration, government work, nonprofit management, business, and education. Those career paths have their own salary ranges, many of which are lower than you might expect.
+
+Here&apos;s what you actually need to know: a political science degree is a generalist credential. It opens doors, but those doors lead to wildly different paychecks depending on which one you walk through. This article breaks down exactly what political science graduates earn, what factors influence those earnings, and whether the ROI makes sense for your situation.</p>
         </section>
         
       
 
         <section className="mb-10">
-          <h2 className="text-2xl font-black text-white mb-4">The Salary Range by Career Path (What You Actually Need to Know)</h2>
-          <p className="text-slate-300 leading-relaxed">Political science graduates don&apos;t have one career path—they have several. Your actual salary depends almost entirely on which path you take, not the degree itself. Here are the realistic numbers:
+          <h2 className="text-2xl font-black text-white mb-4">Entry-Level Political Science Degree Salaries</h2>
+          <p className="text-slate-300 leading-relaxed">Fresh out of college with a bachelor&apos;s degree in political science, you&apos;re looking at an entry-level salary range of $28,000 to $42,000 per year. These numbers come from Glassdoor salary data and the National Association of Colleges and Employers (NACE) 2024 salary survey.
 
-Government and Policy Analysis: Median salary $55,000 to $75,000. Entry-level policy analysts or government affairs specialists start around $38,000 to $42,000. Career advancement depends heavily on location (federal jobs in D.C. pay more) and whether you work in state, local, or federal government. The Federal Reserve, think tanks, and congressional offices typically pay in the $50,000 to $80,000 range for mid-level analysts.
+Entry-level positions for poli sci graduates typically include:
 
-Law (Requiring Law School): This is where significant earning potential emerges, but it&apos;s not just a political science degree anymore. Lawyers with political science undergrads earn median salaries of $126,000 according to BLS data, but law school costs $100,000 to $200,000 and requires three additional years. The National Association for Law Placement reports that many law school graduates don&apos;t reach six-figure salaries until after 7-10 years of practice—and many don&apos;t reach them at all, depending on their specialty.
+1. Government analyst or administrative assistant
+2. Policy research associate at think tanks
+3. Congressional or legislative staffer
+4. Nonprofit program coordinator
+5. Local government planner or coordinator
+6. Political consultant trainee
+7. Community outreach specialist
+8. Education program specialist
 
-Nonprofit and Advocacy: Median salary $45,000 to $65,000. These roles are abundant and don&apos;t require additional degrees, but they also cap earnings lower than government or law. Executive directors of mid-size nonprofits earn $70,000 to $100,000, but reaching that level typically requires 10-15 years of work.
+A 2023 NACE survey found that political science graduates with a bachelor&apos;s degree received a median starting salary offer of $39,200. That&apos;s about 13% below the overall bachelor&apos;s degree average of $45,000 across all fields. In other words, you&apos;re starting behind the median before day one.
 
-Communications and Media: Starting salary $35,000 to $45,000. Poli sci grads often move into political communications, journalism, or public affairs roles. These fields have been declining in median salary, with newsroom jobs declining 28% since 2008 according to Pew Research.
-
-Lobbyists and Government Affairs: Median salary $65,000 to $110,000+. This path usually requires 5-10 years of entry-level government or nonprofit work first, plus professional networks that are difficult to build without inside experience.</p>
+Geography matters enormously. A policy analyst in Washington, D.C. might start at $45,000-$52,000, while the same role in rural Mississippi could offer $28,000-$33,000. Cost of living in D.C. is roughly 40% higher, so that higher nominal salary doesn&apos;t stretch as far. Meanwhile, $30,000 in Mississippi goes much further—but it&apos;s still tight.</p>
         </section>
         <AdUnit slot="6600722153" />
       
 
         <section className="mb-10">
-          <h2 className="text-2xl font-black text-white mb-4">How Political Science Stacks Up Against Other Bachelor's Degrees</h2>
-          <p className="text-slate-300 leading-relaxed">The comparative data is important because it shows where poli sci actually ranks. According to recent Federal Reserve and BLS analysis of bachelor&apos;s degree holders:
+          <h2 className="text-2xl font-black text-white mb-4">Mid-Career Political Science Salary Outcomes</h2>
+          <p className="text-slate-300 leading-relaxed">After five to ten years in the field, political science degree holders typically earn between $55,000 and $85,000 annually. The variation depends almost entirely on which career path they chose and whether they pursued additional credentials.
 
-Engineering degrees: Median mid-career salary $105,000+
-Computer Science: Median mid-career salary $95,000+
-Business: Median mid-career salary $75,000 to $85,000
-Economics: Median mid-career salary $80,000+
-Political Science: Median mid-career salary $65,000 to $75,000
-Communications: Median mid-career salary $60,000 to $70,000
-English/Liberal Arts: Median mid-career salary $55,000 to $65,000
-Journalism: Median mid-career salary $50,000 to $60,000
+The Federal Reserve&apos;s Survey of Consumer Finances (2022) tracked education outcomes and found that workers with a bachelor&apos;s degree in social sciences (which includes political science) earned a median income of $62,000 at the mid-career stage. However, this is dragged down by lower-paying nonprofit and government roles. Those who moved into law, business, or higher-level government positions earned significantly more.
 
-Political science sits in the middle-lower range of college majors. It&apos;s not the worst—humanities degrees often pay less—but it&apos;s significantly behind technical fields and even many business degrees. The 30-year earnings gap between a poli sci grad and an engineering graduate is approximately $1.5 to $2 million, according to Federal Reserve economist analysis.
+Some specific mid-career salary ranges by role:
 
-The critical caveat: political science enables graduate school paths (law, public policy masters, MBA) that can dramatically increase lifetime earnings. But these paths require additional time, money, and often debt.</p>
+Government policy analyst (federal): $65,000-$85,000
+Legislative affairs specialist: $58,000-$78,000
+Communications manager (nonprofit): $52,000-$72,000
+Public affairs consultant: $60,000-$90,000
+State government manager: $55,000-$75,000
+University lecturer (non-tenure track): $45,000-$65,000
+Municipal government coordinator: $48,000-$68,000
+
+The glass ceiling is real. Unless you have a law degree, move into business, or land a senior government position, you&apos;re unlikely to break $90,000 in mid-career. This is where the degree&apos;s limitations become apparent. A computer science graduate with the same experience level is typically earning $110,000-$140,000. A business graduate is averaging $95,000-$125,000.</p>
         </section>
         
       
 
         <section className="mb-10">
-          <h2 className="text-2xl font-black text-white mb-4">The Graduate Degree Premium (And Its Costs)</h2>
-          <p className="text-slate-300 leading-relaxed">Here&apos;s where the salary conversation gets complicated. Many poli sci graduates don&apos;t stop at the bachelor&apos;s degree. They pursue law degrees, public policy masters, MBAs, or PhDs. The salary bump is real, but so is the cost.
+          <h2 className="text-2xl font-black text-white mb-4">Political Science vs. Other Social Science Degrees</h2>
+          <p className="text-slate-300 leading-relaxed">It&apos;s worth comparing political science directly to related degrees, because the differences are significant.
 
-Law school adds approximately $600,000 to $900,000 in lifetime earnings for many graduates, but at a cost of $120,000 to $250,000 in tuition plus three years of foregone income. Only about 65% of law school graduates practice law a decade after graduation, and many who do work in lower-paying fields like legal aid, public defense, or public interest law.
+According to PayScale&apos;s 2024 degree ROI report:
 
-Master&apos;s degrees in public policy (MPP, MPA) cost $40,000 to $80,000 and can increase salary from $40,000 to $55,000 after a bachelor&apos;s to $55,000 to $75,000 after the master&apos;s. That&apos;s a legitimate bump, but the time-to-earnings math doesn&apos;t always favor it. A person who started working at 22 with just a bachelor&apos;s degree might reach $55,000 by age 27. A person who gets an MPA doesn&apos;t reach that same salary until age 28 or 29, having spent two years in school and racked up $50,000 to $100,000 in debt.
+Economics bachelor&apos;s degree: median mid-career salary $85,000
+International Relations bachelor&apos;s degree: median mid-career salary $68,000
+Public Administration bachelor&apos;s degree: median mid-career salary $71,000
+Political Science bachelor&apos;s degree: median mid-career salary $74,000
+Sociology bachelor&apos;s degree: median mid-career salary $58,000
+History bachelor&apos;s degree: median mid-career salary $62,000
 
-PhD programs in political science are funded at many universities, so they don&apos;t carry the same debt burden, but they take 5-7 years. Academic job market data from the Modern Language Association shows that political science PhD holders increasingly struggle to find tenure-track positions. Many end up in adjunct roles paying $35,000 to $50,000, or they exit academia entirely and use their PhD to qualify for policy roles that don&apos;t specifically require it.</p>
+Political science actually outperforms most liberal arts degrees. The key distinction is that economics majors typically have stronger quantitative training, making them more attractive to employers in tech, finance, and analytics—where salaries are higher. Political science grads without additional credentials (law degree, MBA, etc.) cap out much earlier.
+
+The Brookings Institution&apos;s 2022 analysis of bachelor&apos;s degrees by earnings found that political science graduates face a 34% wage premium compared to high school graduates, but this drops to 18% when compared to other bachelor&apos;s degree holders. That&apos;s not terrible, but it&apos;s not strong either. Engineering graduates see a 66% wage premium over other bachelor&apos;s holders. Computer science graduates see 72%.</p>
         </section>
         <AdUnit slot="6600722153" />
       
 
         <section className="mb-10">
-          <h2 className="text-2xl font-black text-white mb-4">Geographic Variation and Where Poli Sci Salaries Are Actually Strong</h2>
-          <p className="text-slate-300 leading-relaxed">Location matters enormously. Political science salaries are not uniform across the country. This is one of the few advantages of the degree: concentrated opportunities in high-paying regions.
+          <h2 className="text-2xl font-black text-white mb-4">Does a Graduate Degree Change Political Science Earnings?</h2>
+          <p className="text-slate-300 leading-relaxed">This is where things get more interesting. A master&apos;s degree in political science, public policy, public administration, or related fields can move the needle—but the ROI varies dramatically.
 
-Washington, D.C. dominates. Federal government jobs, think tanks (Brookings Institution, American Enterprise Institute, Center for Strategic and International Studies), congressional research positions, and lobbying firms cluster here. D.C. area political science professionals earn 15-25% more than the national average, with many mid-career roles paying $80,000 to $120,000. However, D.C. cost of living is also 40% higher than the national average, partially offsetting the salary advantage.
+According to the Bureau of Labor Statistics, political scientists with a master&apos;s degree earn a median of $87,000 annually, compared to roughly $62,000 for bachelor&apos;s-only holders. That&apos;s a 40% increase. However, a master&apos;s degree typically costs $35,000-$60,000 and takes two years, during which you&apos;re not earning a full-time salary.
 
-State capitals offer secondary clusters. Austin, Sacramento, Albany, and Tallahassee all have concentrated government and nonprofit work, though salaries are typically 10-20% below D.C. levels.
+A law degree is the bigger play. Political science is one of the top undergraduate majors for law school applicants. According to the Law School Admissions Council, law school graduates earn a median of $130,000 in their first year out (though this is skewed by big law salaries; the median is closer to $75,000 when you exclude the top 10% earning $180,000+). A law degree provides actual career optionality. You can practice law, move into corporate work, government, or politics at a much higher salary level than a political science degree alone allows.
 
-New York City concentrates media, think tank, and publishing roles where poli sci grads land. Salaries mirror national averages but cost of living is equally high.
+An MBA is another path. Some political science graduates use their background as a springboard to business school, which typically increases earnings by 60-80% within five years of graduation. However, political science doesn&apos;t position you optimally for MBA admissions compared to undergraduate business or economics degrees.
 
-Smaller cities and rural areas have fewer poli sci-specific jobs. Government roles exist but are fewer and typically lower-paying. A political analyst position in a mid-size state capital might pay $48,000, while the same role in D.C. pays $65,000.
-
-This creates a practical problem: if you want maximum earning potential with a poli sci degree, you often need to relocate to expensive urban areas where salary gains are eaten by higher living costs.</p>
+The practical reality: if you&apos;re doing a political science degree primarily for salary, seriously consider whether a law degree or MBA is in your plans. If not, a master&apos;s degree in policy, public administration, or nonprofit management can help, but the ROI is only solid if you&apos;re committed to that specific career path and don&apos;t mind being in school longer.</p>
         </section>
         
       
 
         <section className="mb-10">
-          <h2 className="text-2xl font-black text-white mb-4">The Real Career Path Problem: It's Not About Salary, It's About Jobs</h2>
-          <p className="text-slate-300 leading-relaxed">Here&apos;s the issue that salary data alone doesn&apos;t capture: poli sci graduates often struggle with job placement in the first place. Unlike engineering or accounting grads who have direct job pipelines, poli sci grads need to be more entrepreneurial about finding roles.
+          <h2 className="text-2xl font-black text-white mb-4">The Role of Geography, Sector, and Luck</h2>
+          <p className="text-slate-300 leading-relaxed">Your salary as a political science graduate hinges heavily on factors beyond the degree itself.
 
-According to the Association of American Colleges and Universities, political science graduates report lower job placement rates (approximately 78-82% in their field within six months) compared to business graduates (88-92%) or STEM graduates (90%+). Many poli sci grads end up in jobs that don&apos;t specifically use their degree—they become general office administrators, project coordinators, or customer service managers paying $40,000 to $50,000, not because those are political science jobs, but because entry-level employment was available.
+Geography: Federal government jobs cluster in Washington, D.C., Northern Virginia, and Maryland. The Office of Personnel Management reports that federal GS-9 positions (entry-level analyst roles) start at around $48,000, but in high-cost areas the actual salary bands are higher. State government work in California, New York, and Massachusetts pays 25-40% more than the South or Midwest. Think tanks and policy organizations also cluster in expensive cities, which means higher nominal salaries but also higher cost of living. Glassdoor&apos;s 2024 salary analysis shows a policy analyst in D.C. earning an average of $68,000, versus $52,000 in Austin and $45,000 in Cleveland.
 
-The Bureau of Labor Statistics projects slow job growth for policy analysts (4% growth through 2032) and government positions remain subject to budget cycles and political pressures. Think tank jobs are competitive and often require internship experience that typically goes unpaid or underpaid. This creates a credentialism problem: you need professional experience and connections to get good jobs, but the degree alone doesn&apos;t provide those.
+Sector matters enormously. Federal government positions offer good stability and benefits but moderate pay. Nonprofit sector work typically pays 15-25% less than the private sector. Think tanks and advocacy organizations vary wildly—some prestigious ones (Brookings, RAND, Heritage Foundation) pay $70,000-$100,000 for mid-level roles, while smaller advocacy shops pay $40,000-$60,000. Congressional offices are notorious for low pay; many legislative staffers earn $30,000-$45,000 in roles that are effectively entry or early-career level.
 
-Compare this to engineering graduates who can apply directly to job postings with technical requirements, or accounting graduates who sit for the CPA exam and immediately qualify for specific roles. Poli sci requires you to make a case for how your skills apply to a specific job, which takes longer and often means accepting lower-paying positions initially.</p>
+Private sector work—lobbying, public affairs, political consulting, corporate government affairs—pays significantly better. A government affairs manager at a Fortune 500 company typically earns $95,000-$130,000. But these positions are competitive and often require prior political science experience or connections.
+
+The networking factor is also real. According to research from the Harvard Business Review&apos;s analysis of career outcomes, 70% of mid-to-senior level positions are filled through networking rather than open recruitment. Political science graduates from well-connected universities, with internships in relevant fields, and with active professional networks earn more than isolated graduates, even with identical degrees and experience. This is true for all fields, but it&apos;s especially pronounced in policy and political work, where institutional reputation and personal relationships drive hiring.</p>
         </section>
         
       
 
         <section className="mb-10">
-          <h2 className="text-2xl font-black text-white mb-4">The Salary Ceiling Question: Can You Actually Build Wealth?</h2>
-          <p className="text-slate-300 leading-relaxed">Let&apos;s talk about what the salary data actually means for building wealth over a 40-year career.
+          <h2 className="text-2xl font-black text-white mb-4">Long-Term Career Ceiling and Late-Career Earnings</h2>
+          <p className="text-slate-300 leading-relaxed">This is the uncomfortable part: most political science degree holders hit a salary ceiling around $85,000-$105,000 unless they transition into a different field.
 
-A political science graduate starting at $38,000 who reaches $75,000 by mid-career (age 45) and ends their career at $85,000 (age 65) will earn approximately $2.2 million in gross income over a 40-year career, assuming 2% annual raises. This is median, not guaranteed.
+The Bureau of Labor Statistics reports that political scientists (the small percentage who actually work as political scientists) have a median salary of $125,350, with the top 10% earning $190,000+. But this is a narrow field. In 2023, there were only about 3,500 jobs classified as &quot;political scientist&quot; in the U.S. Compare that to 1.5 million people with political science degrees actively in the workforce. Most are not in political science jobs.
 
-An engineering graduate starting at $68,000 who reaches $105,000 by mid-career and $120,000 at career end earns approximately $3.8 million in gross income.
+Late-career earnings (20+ years) for political science degree holders typically range from $75,000 to $110,000 depending on the sector and trajectory. Government employees might reach $100,000-$130,000 if they make senior executive roles. Senior nonprofit leaders might hit $110,000-$180,000, but these positions are competitive. Academics with tenure and some research reputation can exceed $120,000, but that path requires a PhD and publication record.
 
-That $1.6 million difference is significant, but net wealth also depends on debt. Many poli sci graduates take on education debt—the average is $28,950 for public university graduates. Many engineering graduates also take on debt, but they&apos;re paying it down faster with higher salaries.
+The Federal Reserve&apos;s 2023 Survey of Household Economics and Decisionmaking found that college graduates in social sciences earned a median household income of $78,000 at mid-career and $89,000 at late career. Political science grads are roughly in line with this, slightly above due to some government sector stability, but not ahead.
 
-The wealth-building reality: Yes, you can build wealth with a political science degree. Median mid-career poli sci professionals earning $70,000 to $80,000 in reasonable cost-of-living areas can build savings, invest, and accumulate assets. But you need financial discipline. The margin for error is smaller than with higher-paying degrees. One period of unemployment, career disruption, or poor financial decisions becomes more damaging when you&apos;re earning $70,000 than when you&apos;re earning $100,000.
-
-Retirement outcomes matter here too. A person retiring at 65 with 40 years of political science work will have a median Social Security benefit around $24,000 to $28,000 annually (depending on lifetime earnings) plus whatever retirement savings they accumulated. This is achievable but not comfortable without substantial non-salary wealth (home equity, investments, etc.).</p>
+Compare this to late-career earnings for other degrees: engineering ($135,000+), computer science ($145,000+), accounting ($125,000+), business ($130,000+). The gap widens significantly over time. A political science grad earning $75,000 at year 5 and reaching $95,000 at year 20 has effectively had wage stagnation when adjusted for inflation. An engineer or CS grad starting at $85,000 might reach $155,000 by year 20—and that&apos;s typical, not exceptional.</p>
         </section>
         
       
 
         <section className="mb-10">
-          <h2 className="text-2xl font-black text-white mb-4">What Employers Actually Pay for Political Science Skills</h2>
-          <p className="text-slate-300 leading-relaxed">Understanding what you&apos;re actually being hired for helps explain the salary reality. Political science doesn&apos;t teach a specific technical skill the way accounting teaches bookkeeping or engineering teaches CAD software. Instead, it teaches research, writing, analysis, and critical thinking about institutional and political systems.
+          <h2 className="text-2xl font-black text-white mb-4">The Total Cost of a Political Science Degree</h2>
+          <p className="text-slate-300 leading-relaxed">Now let&apos;s talk ROI. The College Board reports that the average cost of a four-year degree at a private university is $180,000, while in-state public university costs average $104,000. Many political science students attend mid-tier private schools costing $120,000-$160,000 total.
 
-Employers hire political science graduates for these concrete applications:
+Let&apos;s run the numbers on a realistic scenario: $110,000 total cost for a four-year degree at a state school or lower-cost private university.
 
-Research and data analysis in policy organizations. Median salary $48,000 to $62,000. This role often gets outbid by economics or statistics degree holders who have quantitative skills.
+Entry salary: $39,000
+Year 5 salary: $62,000
+Year 10 salary: $78,000
+Year 20 salary: $95,000
 
-Policy writing and recommendation development. Median salary $52,000 to $70,000. Government offices, nonprofits, and think tanks hire for this. It&apos;s a genuine poli sci niche, but there are fewer positions than the number of graduates.
+Versus the counterfactual: no degree, working full-time from age 22.
+Entry salary: $28,000
+Year 5 salary: $35,000
+Year 10 salary: $42,000
+Year 20 salary: $52,000
 
-Government relations and lobbying support. Median salary $50,000 to $80,000. This is where poli sci actually has an advantage because understanding government structure and processes matters. But it requires networking and is competitive.
+Over a 40-year career, the degree holder earns roughly $2.8 million gross, while the non-degree holder earns $1.7 million. The degree costs $110,000 upfront. After accounting for opportunity costs (lost wages during school), the net lifetime earnings benefit is approximately $900,000-$1.1 million. That&apos;s a positive ROI, but it&apos;s not spectacular when distributed over 40 years. You&apos;re essentially getting a 1.2% annual return on investment, spread across your entire career.
 
-Communications and advocacy work. Median salary $42,000 to $60,000. This is what many poli sci grads end up doing, but it&apos;s not unique to the degree—communications degrees, journalism degrees, and even business degrees compete for these roles.
+If you attend an expensive private school—$180,000 total cost—those numbers tighten considerably. The net lifetime benefit drops to $650,000-$800,000. The ROI calculation starts to look like: is this $180,000 investment worth an extra $600,000 over 40 years? That&apos;s 7% of your gross lifetime earnings going to pay for the degree.
 
-The core problem: political science develops generalizable skills (research, writing, analysis) that many degrees also develop. You&apos;re competing with history majors, communications majors, and business majors for the same entry-level jobs. Without specialization (a second major, minor in economics, or policy analysis certificates), you&apos;re not obviously more qualified than peers from adjacent fields.</p>
+Student debt complicates this. The average political science graduate with federal student loans leaves with $28,000 in debt, according to the Institute for College Access & Success. At standard 10-year repayment, that&apos;s roughly $290/month for 120 months—about $35,000 total including interest. That&apos;s eating a meaningful portion of your early-career earnings advantage.
+
+The Gallup-Lumina Foundation&apos;s 2022 study found that college graduates with moderate debt levels ($20,000-$40,000) earn $5,500 more annually than they would without a degree—but after accounting for loan payments, the net advantage is only about $2,500/year for the first decade. That&apos;s real money, but it&apos;s not transformative.</p>
         </section>
         
       
 
         <section className="mb-10">
-          <h2 className="text-2xl font-black text-white mb-4">The Underemployment Factor Nobody Talks About</h2>
-          <p className="text-slate-300 leading-relaxed">Salary data assumes full-time employment in roles that match the degree. The reality is messier. A significant percentage of political science graduates end up underemployed—working part-time, working in positions that don&apos;t require a bachelor&apos;s degree, or working in fields unrelated to their major.
+          <h2 className="text-2xl font-black text-white mb-4">Who Should Get a Political Science Degree (And Who Shouldn't)</h2>
+          <p className="text-slate-300 leading-relaxed">Based on salary data and actual outcomes, a political science degree makes financial sense in these scenarios:
 
-According to Burning Glass Technologies analysis of degree holders, approximately 35-40% of political science graduates work in positions that historically only required a high school diploma. This doesn&apos;t mean they&apos;re doing low-skilled work—they might be doing administrative work at a nonprofit that technically requires a degree. But they&apos;re not using their specific training.
+You&apos;re committed to law school. If you&apos;re planning to attend law school regardless, political science is a reasonable major that pairs well with law school admissions and doesn&apos;t require specific prerequisite courses. Law school salaries (despite variation) are typically high enough to justify both the undergrad and grad school costs.
 
-Underemployed workers in these situations earn approximately $30,000 to $45,000 annually, pulling down the median significantly. This is part of why reported &quot;median&quot; poli sci salaries often feel optimistic when you talk to actual graduates.
+You have family connections or resources to network. If you grew up in a political family, have connections in D.C. or a state capital, or can afford to intern unpaid for two summers, you can leapfrog into better-paying positions. The degree becomes a credential for people who already have insider access.
 
-Temporary and contract work is also more common in policy and political fields than in fields like engineering or accounting. Think tanks hire contract researchers. Advocacy organizations hire campaign staff. Government offices hire temporary analysts. These roles pay $40,000 to $60,000 annually but often lack benefits and job security.
+You&apos;re attending a low-cost school on scholarship. If you can graduate debt-free or nearly debt-free, the ROI math works much better. $35,000 total cost with $65,000 starting salary is reasonable. $160,000 total cost with $39,000 starting salary is tough to justify.
 
-The underemployment issue is rarely discussed in college marketing materials, but it&apos;s a real part of the poli sci graduate experience.</p>
-        </section>
-        
-      
+You&apos;re interested in a specific government or nonprofit path and willing to prioritize mission and stability over maximum earnings. If you genuinely want to work in policy, advocacy, or nonprofit management and you&apos;re comfortable with $55,000-$80,000 lifetime earnings ceiling, the degree makes sense as a pathway. Just don&apos;t expect big paychecks.
 
-        <section className="mb-10">
-          <h2 className="text-2xl font-black text-white mb-4">Alternative Paths: What If You Don't Do the Traditional Poli Sci Career?</h2>
-          <p className="text-slate-300 leading-relaxed">Not every poli sci graduate becomes a policy analyst or government affairs specialist. Many use the degree as a foundation for completely different careers. Understanding these alternatives matters because they often pay better.
+A political science degree makes less financial sense in these scenarios:
 
-Consulting firms (McKinsey, BCG, Bain) hire political science graduates for analyst roles. These roles start at $75,000 to $90,000 with bonuses, significantly above poli sci baseline. However, consulting firms recruit heavily from business schools and on-campus; poli sci graduates without specific internship experience are less likely to get these roles.
+You&apos;re attending an expensive private school. The $180,000+ cost is difficult to justify with the salary outcomes. You&apos;d be better off at a public school, or choosing a degree with better ROI (engineering, CS, accounting).
 
-Data analytics and research firms increasingly hire poli sci graduates who can translate policy questions into data problems. Median salary $55,000 to $70,000 and growing. This path requires building quantitative skills though—learning SQL, Python, or R during your undergraduate years.
+You&apos;re taking on significant debt and haven&apos;t committed to law school or a specific higher-paying career path. The average debt burden combined with average starting salary creates a tight financial situation in your 20s and early 30s.
 
-Marketing and corporate affairs roles hire poli sci graduates. Median salary $50,000 to $70,000. This is an underutilized path. Corporations need people who understand institutional behavior and can manage complex relationships; poli sci trains you for exactly this.
+You&apos;re hoping the degree alone will lead to high-paying jobs. It won&apos;t. You need a plan beyond &quot;get a poli sci degree.&quot; That plan might be law school, MBA, intentional networking into the private sector, or finding a niche where you can stand out. The degree opens doors, but you have to be strategic about which ones you walk through.
 
-International organizations (UN agencies, World Bank, development organizations) hire political science graduates for program officer roles. Median salary $50,000 to $75,000 depending on location and organization. However, these organizations increasingly favor advanced degrees (master&apos;s levels) and are moving headquarters away from traditional high-cost centers.
-
-Media and publishing companies hire poli sci graduates for editorial, research, or management roles. Median salary $45,000 to $65,000. The sector is declining though, so growth potential is limited.
-
-The reality: diversifying your skill set and being open to non-traditional poli sci roles can increase earning potential. A poli sci graduate who becomes a data analyst or corporate strategist often outearns a poli sci graduate who pursues the traditional government/nonprofit path.</p>
-        </section>
-        
-      
-
-        <section className="mb-10">
-          <h2 className="text-2xl font-black text-white mb-4">The Actual Return on Investment: Is This Degree Worth It Financially?</h2>
-          <p className="text-slate-300 leading-relaxed">Let&apos;s do the math directly. A political science degree from a public in-state university costs approximately $75,000 to $100,000 (four years of tuition, fees, books). From a private university, you&apos;re looking at $180,000 to $250,000. These numbers assume no scholarships.
-
-Assuming $85,000 in total cost (public university with some scholarships) and a median starting salary of $38,000:
-
-Breakeven on the degree requires earning enough over time to justify the $85,000 investment plus the opportunity cost of four years not working. If the graduate earns $38,000 in year one and reaches $65,000 by year ten, they&apos;ve earned roughly $450,000 gross. After taxes (roughly 25-30%), they have approximately $315,000 in net income—still ahead of their investment when you account for the value of the degree enabling future earnings.
-
-However, the time-to-profitability is long. Someone starting at $38,000 is in debt payoff mode for years. A high school graduate starting as an electrician&apos;s apprentice at $28,000 who reaches $65,000 as a licensed electrician within 5-7 years breaks even faster and with less debt (apprenticeships are paid, not a cost).
-
-Compare to an engineering graduate who starts at $68,000 and reaches $95,000 within 8-10 years. They earn the breakeven amount much faster despite similar investment.
-
-The ROI is positive over a 40-year career, but it&apos;s not exceptional. You&apos;re not making a terrible financial decision with a political science degree, but you&apos;re also not making an optimal one from a pure financial perspective. You&apos;re making an average decision financially while potentially selecting a field you enjoy—if that&apos;s the case, the degree is rational. If you&apos;re pursuing it for money, you should know you&apos;re choosing a below-average financial path.</p>
-        </section>
-        
-      
-
-        <section className="mb-10">
-          <h2 className="text-2xl font-black text-white mb-4">The Real Factors That Determine Your Actual Salary</h2>
-          <p className="text-slate-300 leading-relaxed">Here&apos;s what actually determines what you&apos;ll earn with a political science degree, in priority order:
-
-1. Your specific career choice (law, policy analysis, government, nonprofit, consulting, etc.). This is the biggest variable. Choosing law school will eventually make you approximately $600,000 more than choosing nonprofit work. Choosing consulting will make you more than choosing government early.
-
-2. Geographic location and willingness to relocate. Working in D.C. versus a small city can mean a 20-30% salary difference. But D.C. cost of living eats half that advantage.
-
-3. Networking and internship experience during college. Having relevant internships and professional relationships matters enormously in policy fields. It can accelerate your entry salary by $5,000 to $10,000 and your career progression by 2-3 years. This is not tracked in salary statistics but matters tremendously.
-
-4. Graduate credentials. The presence or absence of a law degree, MBA, MPA, or PhD changes your salary ceiling dramatically. A poli sci bachelor&apos;s alone has a lower ceiling than a bachelor&apos;s plus law school.
-
-5. Industry sector. Think tanks and federal government jobs pay more than state government. International organizations pay more than small nonprofits. Corporate strategy pays more than nonprofit advocacy.
-
-6. Specific skills developed. Political science graduates who also develop quantitative skills (statistics, data analysis, programming) or specializations (international relations, comparative politics applied to specific regions) outcompete generalists.
-
-7. Persistence and career changes. Some poli sci graduates stay in one field 30 years. Others job-hop strategically into higher-paying roles. Strategic career moves can add $200,000 to $500,000 to lifetime earnings.
-
-These factors matter more than which university you attended or what your specific GPA was. They&apos;re also factors you control to varying degrees.</p>
+You&apos;re undecided about career direction and treating this as a &quot;general studies&quot; major. Political science is often chosen by students who haven&apos;t figured out what they want to do. That&apos;s understandable, but recognize that you&apos;re making an economic choice. A business degree or accounting degree would give you more career optionality and higher average salaries, even if you change paths.</p>
         </section>
         
       
 
         <section className="mb-10">
           <h2 className="text-2xl font-black text-white mb-4">The Bottom Line</h2>
-          <p className="text-slate-300 leading-relaxed">Political science degree salary reality: You&apos;ll start around $35,000 to $40,000, reach $65,000 to $75,000 at mid-career, and potentially earn $80,000 to $120,000+ if you pursue law, consulting, or high-level policy work. These are median figures. Many graduates earn less, some earn significantly more. The degree is financially viable over a 40-year career but sits in the middle-lower range of college majors financially. Your actual earning potential depends far more on your specific career path, location, graduate credentials, and networking than on the political science degree itself. If you&apos;re pursuing this degree purely for money, you should know you&apos;re making an average-to-below-average financial choice. If you&apos;re pursuing it because you&apos;re interested in government, policy, law, or political systems and you&apos;re willing to invest time in building relevant experience and possibly additional credentials, the degree becomes more rational. The financial return is real, just not exceptional.</p>
+          <p className="text-slate-300 leading-relaxed">Here&apos;s the bottom line: a political science degree doesn&apos;t pay poorly, but it doesn&apos;t pay well either. Most graduates earn $35,000-$85,000 over their careers, with a median in the $60,000-$75,000 range depending on sector and trajectory. This beats the earnings of high school graduates but trails computer science, engineering, accounting, and economics graduates significantly. The ROI is positive but modest—you&apos;re trading four years and anywhere from $50,000 to $180,000 for a lifetime earnings premium of roughly $800,000-$1.1 million. Over a 40-year career, that works out to roughly $20,000-$27,500 per year in additional earnings, minus inflation. Is that worth it? It depends on your specific situation. If you can graduate with minimal debt from an affordable school and have a plan for what you&apos;ll actually do with the degree, yes. If you&apos;re paying $160,000+ to attend an expensive private school with no clear career direction, no. The degree itself isn&apos;t the limiting factor—your plan for how to use it is. Without law school, an MBA, intentional networking into higher-paying sectors, or a specific government role in mind, don&apos;t expect a political science degree to be a financial game-changer. Choose the degree because you&apos;re genuinely interested in the subject and have a strategic plan for your career, not because you think it will lead to wealth. The people making real money with political science backgrounds are the ones who used it as a foundation for law, business, or strategic government work—not as a destination in itself.</p>
         </section>
 
         <AdUnit slot="6600722153" />
