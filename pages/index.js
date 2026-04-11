@@ -464,6 +464,11 @@ export default function HomePage({ articles = [] }) {
         </div>
       </section>
 
+      {/* ── AD (after hero) ─────────────────────────────────────────────────── */}
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 20px" }}>
+        <AdUnit slot="6600722153" />
+      </div>
+
       {/* ── STATS SECTION ────────────────────────────────────────────────────── */}
       <section className="animate-fade-up bg-black border-y border-[#1a1a1a] py-16 px-5">
         <div className="max-w-[1100px] mx-auto">
@@ -625,6 +630,11 @@ export default function HomePage({ articles = [] }) {
           </div>
         </div>
       </section>
+
+      {/* ── AD (between stories and trade paths) ─────────────────────────────── */}
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 20px" }}>
+        <AdUnit slot="6600722153" />
+      </div>
 
       {/* ── TRADE PATHS ──────────────────────────────────────────────────────── */}
       <section style={{ padding: "60px 0", background: "#050505", borderTop: "1px solid #1a1a1a" }}>

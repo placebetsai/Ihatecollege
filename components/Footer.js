@@ -62,27 +62,7 @@ export default function Footer() {
             <li><Link href="/privacy" className="hover:text-white transition">Privacy Policy</Link></li>
             <li><Link href="/terms" className="hover:text-white transition">Terms of Use</Link></li>
             <li><Link href="/i-hate-college-song" className="text-sky-400 hover:text-sky-300 transition font-semibold">&quot;I Hate College&quot; Song</Link></li>
-            <li className="pt-2 border-t border-slate-800 mt-2">
-              <span className="text-slate-600 text-[10px] uppercase tracking-wider block mb-1.5">Partner Sites</span>
-              <a href="https://hiddencameras.tv" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-yellow-400 transition text-xs block">HiddenCameras.tv — Dorm Security Cameras &amp; Reviews</a>
-              <a href="https://spanishtvshows.com" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-yellow-400 transition text-xs block mt-1">SpanishTVShows.com — Stream Spanish Series</a>
-            </li>
           </ul>
-        </div>
-      </div>
-
-      {/* Our Network */}
-      <div className="sr-only">
-        <div className="max-w-6xl mx-auto px-4 pt-6 border-t border-slate-800/60 mb-6">
-          <p className="text-slate-600 font-bold uppercase tracking-[0.15em] text-[10px] mb-3">More from Israel Joffe</p>
-          <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-slate-500">
-            <a href="https://ihatecollege.com" className="text-yellow-400 hover:text-yellow-300 transition">IHateCollege.com</a>
-            <a href="https://shopkurt.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">ShopKurt.com</a>
-            <a href="https://placebets.ai" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">PlaceBets.ai</a>
-            <a href="https://hiddencameras.tv" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">HiddenCameras.tv</a>
-            <a href="https://spanishtvshows.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">SpanishTVShows.com</a>
-            <a href="https://fashionistas.ai" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Fashionistas.ai</a>
-          </div>
         </div>
       </div>
 
