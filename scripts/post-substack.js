@@ -7,10 +7,10 @@
  */
 
 require("dotenv").config({ path: require("path").join(__dirname, "../.env") });
-const Anthropic = require("@anthropic-ai/sdk");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 const axios = require("axios");
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const PUB_URL = (process.env.SUBSTACK_PUB_URL || "https://mondaynightwrestling.com").replace(/\/$/, "");
 
 // ─── Fake author pool ────────────────────────────────────────────────────────
@@ -112,21 +112,16 @@ async function generateArticle(topic, author) {
   console.log(`  Generating: "${topic.subject}"...`);
   const today = new Date().toISOString().split("T")[0];
 
+  const geminiModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
   // Step 1: get title + subtitle
-  const metaMsg = await client.messages.create({
-    model: "claude-haiku-4-5-20251001",
-    max_tokens: 200,
-    messages: [{ role: "user", content: `You are ${author.name}, wrestling journalist. Give a title (under 90 chars) and subtitle (under 140 chars) for an article about: "${topic.subject}". Return JSON only: {"title":"...","subtitle":"..."}` }],
-  });
-  const metaText = metaMsg.content[0].text;
+  const metaResult = await geminiModel.generateContent(`You are ${author.name}, wrestling journalist. Give a title (under 90 chars) and subtitle (under 140 chars) for an article about: "${topic.subject}". Return JSON only: {"title":"...","subtitle":"..."}`);
+  const metaText = metaResult.response.text();
   const metaMatch = metaText.match(/\{[\s\S]*\}/);
   const meta = JSON.parse(metaMatch[0]);
 
   // Step 2: get body HTML separately
-  const bodyMsg = await client.messages.create({
-    model: "claude-haiku-4-5-20251001",
-    max_tokens: 3000,
-    messages: [{ role: "user", content: `You are ${author.name}, a wrestling journalist for MondayNightWrestling.com. Bio: ${author.bio}
+  const bodyResult = await geminiModel.generateContent(`You are ${author.name}, a wrestling journalist for MondayNightWrestling.com. Bio: ${author.bio}
 
 Write a 700-900 word article on: "${topic.subject}" (angle: ${topic.angle})
 
@@ -135,10 +130,9 @@ Requirements:
 - 3-4 H2 section headings
 - One bullet list
 - Include ONE natural backlink: if wrestlers/careers/money mentioned use <a href="https://ihatecollege.com">IHateCollege.com</a>; if Latin/Spanish wrestling mentioned use <a href="https://spanishtvshows.com">SpanishTVShows.com</a>
-- Return ONLY the HTML body — no JSON, no wrapper, just the article HTML starting with <p> or <h2>` }],
-  });
+- Return ONLY the HTML body — no JSON, no wrapper, just the article HTML starting with <p> or <h2>`);
 
-  const bodyHtml = bodyMsg.content[0].text.trim();
+  const bodyHtml = bodyResult.response.text().trim();
 
   return { title: meta.title, subtitle: meta.subtitle, bodyHtml, publishDate: today };
 }
@@ -201,7 +195,7 @@ async function run() {
   console.log("\n=== Monday Night Wrestling — Substack Poster ===");
   console.log(`Date: ${new Date().toISOString()}\n`);
 
-  if (!process.env.ANTHROPIC_API_KEY) { console.error("ERROR: ANTHROPIC_API_KEY not set"); process.exit(1); }
+  if (!process.env.GEMINI_API_KEY) { console.error("ERROR: GEMINI_API_KEY not set"); process.exit(1); }
   if (!process.env.SUBSTACK_EMAIL)    { console.error("ERROR: SUBSTACK_EMAIL not set"); process.exit(1); }
 
   const cookie = getSessionCookie();

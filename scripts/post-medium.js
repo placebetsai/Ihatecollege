@@ -13,10 +13,10 @@
  */
 
 require("dotenv").config({ path: require("path").join(__dirname, "../.env") });
-const Anthropic = require("@anthropic-ai/sdk");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 const https = require("https");
 
-const claude = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const ts = () => new Date().toISOString().replace("T", " ").slice(0, 19);
 
 const PERSONAS = [
@@ -53,12 +53,8 @@ async function generateArticle(persona, topic) {
   ];
   const toolLink = toolLinks[Math.floor(Math.random() * toolLinks.length)];
 
-  const msg = await claude.messages.create({
-    model: "claude-haiku-4-5-20251001",
-    max_tokens: 1800,
-    messages: [{
-      role: "user",
-      content: `You are ${persona.name}. Bio: ${persona.bio}.
+  const geminiModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  const geminiResult = await geminiModel.generateContent(`You are ${persona.name}. Bio: ${persona.bio}.
 
 Write an article for Dev.to on this topic: "${topic}"
 
@@ -76,11 +72,9 @@ Requirements:
 Return format (exactly):
 TITLE: [title here]
 ---
-[article body in markdown here]`,
-    }],
-  });
+[article body in markdown here]`);
 
-  const raw = msg.content[0].text.trim();
+  const raw = geminiResult.response.text().trim();
   const titleMatch = raw.match(/^TITLE:\s*(.+)/m);
   const bodyMatch = raw.match(/---\n([\s\S]+)/);
 

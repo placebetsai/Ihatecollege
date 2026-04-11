@@ -54,23 +54,21 @@ async function checkTwitter() {
   }
 }
 
-async function checkAnthropic() {
-  console.log("\n── Anthropic (Claude AI) ────────────────────────────────");
-  if (!process.env.ANTHROPIC_API_KEY) {
-    console.log(`${ERR} ANTHROPIC_API_KEY not set`);
+async function checkGemini() {
+  console.log("\n── Gemini (Google AI) ───────────────────────────────────");
+  if (!process.env.GEMINI_API_KEY) {
+    console.log(`${ERR} GEMINI_API_KEY not set`);
     return;
   }
   try {
-    const Anthropic = require("@anthropic-ai/sdk");
-    const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-    const msg = await client.messages.create({
-      model: "claude-haiku-4-5-20251001",
-      max_tokens: 10,
-      messages: [{ role: "user", content: "Say hi" }],
-    });
-    console.log(`${OK} Anthropic API working (model: ${msg.model})`);
+    const { GoogleGenerativeAI } = require("@google/generative-ai");
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const result = await model.generateContent("Say hi");
+    const text = result.response.text();
+    console.log(`${OK} Gemini API working (model: gemini-2.5-flash)`);
   } catch (e) {
-    console.log(`${ERR} Anthropic failed: ${e.message}`);
+    console.log(`${ERR} Gemini failed: ${e.message}`);
   }
 }
 
@@ -175,7 +173,7 @@ async function main() {
   console.log("═══════════════════════════════════════════════════════");
 
   await checkEnv();
-  await checkAnthropic();
+  await checkGemini();
   await checkTwitter();
   await checkSubstack();
   await checkTikTok();

@@ -7,12 +7,12 @@
  */
 
 require("dotenv").config({ path: require("path").join(__dirname, "../.env") });
-const Anthropic = require("@anthropic-ai/sdk");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 const ROOT = path.join(__dirname, "..");
 const BLOG_DIR = path.join(ROOT, "pages", "blog");
@@ -345,13 +345,9 @@ Requirements:
     "publishDate": "${todayDate()}"
   }`;
 
-  const message = await client.messages.create({
-    model: "claude-haiku-4-5-20251001",
-    max_tokens: 16000,
-    messages: [{ role: "user", content: prompt }],
-  });
-
-  const text = message.content[0].text;
+  const geminiModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  const geminiResult = await geminiModel.generateContent(prompt);
+  const text = geminiResult.response.text();
   // Extract JSON — strip markdown code fences if present
   const stripped = text.replace(/```(?:json)?\n?/g, "").trim();
   const jsonMatch = stripped.match(/\{[\s\S]*\}/);
@@ -516,8 +512,8 @@ async function run() {
   console.log("\n=== Article Generator ===");
   console.log(`Date: ${new Date().toISOString()}\n`);
 
-  if (!process.env.ANTHROPIC_API_KEY || process.env.ANTHROPIC_API_KEY === "your-anthropic-key-here") {
-    console.error("ERROR: ANTHROPIC_API_KEY not set in .env");
+  if (!process.env.GEMINI_API_KEY) {
+    console.error("ERROR: GEMINI_API_KEY not set in .env");
     process.exit(1);
   }
 

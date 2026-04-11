@@ -11,10 +11,10 @@
  */
 
 require("dotenv").config({ path: require("path").join(__dirname, "../.env") });
-const Anthropic = require("@anthropic-ai/sdk");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 const https = require("https");
 
-const claude = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const ts = () => new Date().toISOString().replace("T", " ").slice(0, 19);
 
 // ── Get fresh access token via refresh token ───────────────────────────────
@@ -67,12 +67,8 @@ async function generatePost() {
   ];
   const style = STYLES[Math.floor(Math.random() * STYLES.length)];
 
-  const msg = await claude.messages.create({
-    model: "claude-haiku-4-5-20251001",
-    max_tokens: 512,
-    messages: [{
-      role: "user",
-      content: `You run the IHateCollege.com YouTube channel. Write a YouTube Community Post (like a tweet but on YouTube) in this style: "${style}".
+  const geminiModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  const geminiResult = await geminiModel.generateContent(`You run the IHateCollege.com YouTube channel. Write a YouTube Community Post (like a tweet but on YouTube) in this style: "${style}".
 
 Rules:
 - 150-400 characters
@@ -81,11 +77,9 @@ Rules:
 - End with a link or CTA to ihatecollege.com
 - No hashtags
 
-Return just the post text, nothing else.`,
-    }],
-  });
+Return just the post text, nothing else.`);
 
-  return msg.content[0].text.trim();
+  return geminiResult.response.text().trim();
 }
 
 // ── Post a Community Post to YouTube ──────────────────────────────────────

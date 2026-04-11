@@ -7,10 +7,10 @@
  */
 
 require("dotenv").config({ path: require("path").join(__dirname, "../.env") });
-const Anthropic = require("@anthropic-ai/sdk");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 const { TwitterApi } = require("twitter-api-v2");
 
-const claude = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 const TWEET_STYLES = [
   "shocking stat about student debt or underemployment — cite a source like BLS, Fed, or Gallup",
@@ -63,13 +63,9 @@ Rules:
 Return a JSON array of exactly ${count} strings:
 ["tweet one", "tweet two"]`;
 
-  const msg = await claude.messages.create({
-    model: "claude-haiku-4-5-20251001",
-    max_tokens: 512,
-    messages: [{ role: "user", content: prompt }],
-  });
-
-  const match = msg.content[0].text.match(/\[[\s\S]*\]/);
+  const geminiModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  const geminiResult = await geminiModel.generateContent(prompt);
+  const match = geminiResult.response.text().match(/\[[\s\S]*\]/);
   if (!match) throw new Error("No JSON array in response");
   const tweets = JSON.parse(match[0]);
   if (!Array.isArray(tweets)) throw new Error("Response is not an array");
@@ -80,7 +76,7 @@ async function run() {
   const ts = () => new Date().toISOString().replace("T", " ").slice(0, 19);
   console.log(`\n[${ts()}] === Twitter Poster ===`);
 
-  const required = ["ANTHROPIC_API_KEY", "X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET"];
+  const required = ["GEMINI_API_KEY", "X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET"];
   for (const key of required) {
     if (!process.env[key]) { console.error(`ERROR: ${key} not set`); process.exit(1); }
   }

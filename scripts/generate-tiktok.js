@@ -6,12 +6,12 @@
  */
 
 require("dotenv").config({ path: require("path").join(__dirname, "../.env") });
-const Anthropic = require("@anthropic-ai/sdk");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 const fs = require("fs");
 const path = require("path");
 const { execSync, spawnSync } = require("child_process");
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 const ROOT = path.join(__dirname, "..");
 const QUEUE_DIR = path.join(ROOT, "tiktok-queue");
@@ -60,13 +60,9 @@ Return as JSON:
   "tags": ["tag1", "tag2", "tag3"]
 }`;
 
-  const message = await client.messages.create({
-    model: "claude-haiku-4-5-20251001",
-    max_tokens: 1024,
-    messages: [{ role: "user", content: prompt }],
-  });
-
-  const text = message.content[0].text;
+  const geminiModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  const geminiResult = await geminiModel.generateContent(prompt);
+  const text = geminiResult.response.text();
   const jsonMatch = text.match(/\{[\s\S]*\}/);
   if (!jsonMatch) throw new Error("No JSON in response");
   return JSON.parse(jsonMatch[0]);
@@ -165,8 +161,8 @@ async function run() {
   console.log("\n=== TikTok Generator & Uploader ===");
   console.log(`Date: ${new Date().toISOString()}\n`);
 
-  if (!process.env.ANTHROPIC_API_KEY || process.env.ANTHROPIC_API_KEY === "your-anthropic-key-here") {
-    console.error("ERROR: ANTHROPIC_API_KEY not set");
+  if (!process.env.GEMINI_API_KEY) {
+    console.error("ERROR: GEMINI_API_KEY not set");
     process.exit(1);
   }
 
