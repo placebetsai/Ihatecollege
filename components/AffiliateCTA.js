@@ -1,5 +1,6 @@
-// Affiliate CTA component - update href links with your affiliate IDs when approved
-// Programs to apply to: Coursera (Google Certs), UTI, Lincoln Tech, BloomTech, MyComputerCareer
+// Affiliate CTA component — all links marked data-affiliate="pending"
+// Replace href values with real affiliate IDs when approved by each program
+// Programs to apply to: Coursera, Springboard, SoFi, Skillshare, UTI, Lincoln Tech
 
 export default function AffiliateCTA({ topic = "trade" }) {
   const offers = {
@@ -19,18 +20,18 @@ export default function AffiliateCTA({ topic = "trade" }) {
         color: "#1d3557",
       },
       {
-        name: "Tulsa Welding School",
-        desc: "7-month welding program. Graduates earn $45k–$85k.",
-        url: "https://www.tws.edu/?utm_source=ihatecollege&utm_medium=affiliate",
-        cta: "View Schedule",
-        color: "#d62828",
+        name: "SoFi — Refinance Student Loans",
+        desc: "Already have debt? Refinance at a lower rate. Check your rate in 2 min.",
+        url: "https://www.sofi.com/refinance-student-loans/?utm_source=ihatecollege",
+        cta: "Check Your Rate",
+        color: "#00b4d8",
       },
     ],
     tech: [
       {
-        name: "Google Career Certificates",
+        name: "Coursera — Google Career Certificates",
         desc: "IT, Data, UX, Cybersecurity. 6 months. No degree needed.",
-        url: "https://grow.google/certificates/?utm_source=ihatecollege&utm_medium=affiliate",
+        url: "https://www.coursera.org/professional-certificates/google-it-support?utm_source=ihatecollege&utm_medium=affiliate",
         cta: "Start Free Trial",
         color: "#4285f4",
       },
@@ -42,57 +43,64 @@ export default function AffiliateCTA({ topic = "trade" }) {
         color: "#e63946",
       },
       {
-        name: "My Computer Career",
-        desc: "IT certifications with job placement. Financing available.",
-        url: "https://www.mycomputercareer.edu/?utm_source=ihatecollege&utm_medium=affiliate",
-        cta: "Get Started",
-        color: "#2a9d8f",
+        name: "Skillshare",
+        desc: "Thousands of tech & design classes. Free trial available.",
+        url: "https://www.skillshare.com/signup?via=ihatecollege",
+        cta: "Start Free Trial",
+        color: "#00c853",
       },
     ],
     coding: [
       {
         name: "Springboard",
         desc: "Data science & software engineering bootcamp. Job guarantee.",
-        url: "https://www.springboard.com/?utm_source=ihatecollege&utm_medium=affiliate",
+        url: "https://www.springboard.com/?ref=ihatecollege",
         cta: "Apply Now",
         color: "#7b2d8b",
       },
       {
-        name: "General Assembly",
-        desc: "Coding, data & design bootcamps. Hire-ready in 12 weeks.",
-        url: "https://generalassemb.ly/?utm_source=ihatecollege&utm_medium=affiliate",
-        cta: "See Courses",
-        color: "#ff6b35",
-      },
-      {
-        name: "Google Career Certificates",
+        name: "Coursera — Google Career Certificates",
         desc: "IT Support & Data Analytics. 6 months, starts at $49/mo.",
-        url: "https://grow.google/certificates/?utm_source=ihatecollege&utm_medium=affiliate",
+        url: "https://www.coursera.org/professional-certificates/google-it-support?utm_source=ihatecollege&utm_medium=affiliate",
         cta: "Start Free Trial",
         color: "#4285f4",
+      },
+      {
+        name: "Skillshare",
+        desc: "Design, coding, business classes. Learn new skills on your schedule.",
+        url: "https://www.skillshare.com/signup?via=ihatecollege",
+        cta: "Try Free",
+        color: "#00c853",
       },
     ],
     general: [
       {
-        name: "Google Career Certificates",
+        name: "Coursera — Google Career Certificates",
         desc: "IT, Data, UX, Project Management. No degree needed. 6 months.",
-        url: "https://grow.google/certificates/?utm_source=ihatecollege&utm_medium=affiliate",
+        url: "https://www.coursera.org/professional-certificates/google-it-support?utm_source=ihatecollege&utm_medium=affiliate",
         cta: "Start Free Trial",
         color: "#4285f4",
       },
       {
-        name: "Universal Technical Institute",
-        desc: "Trade programs in automotive, welding, HVAC. Financial aid available.",
-        url: "https://www.uti.edu/?utm_source=ihatecollege&utm_medium=affiliate",
-        cta: "Get Free Info",
-        color: "#e85d04",
-      },
-      {
         name: "Springboard",
         desc: "Tech bootcamps with job guarantees. Pay after you're hired.",
-        url: "https://www.springboard.com/?utm_source=ihatecollege&utm_medium=affiliate",
+        url: "https://www.springboard.com/?ref=ihatecollege",
         cta: "Apply Now",
         color: "#7b2d8b",
+      },
+      {
+        name: "SoFi — Refinance Student Loans",
+        desc: "Already stuck with debt? Refinance at a lower rate in minutes.",
+        url: "https://www.sofi.com/refinance-student-loans/?utm_source=ihatecollege",
+        cta: "Check Your Rate",
+        color: "#00b4d8",
+      },
+      {
+        name: "Skillshare",
+        desc: "Thousands of classes in design, business, tech & more. Free trial.",
+        url: "https://www.skillshare.com/signup?via=ihatecollege",
+        cta: "Start Free Trial",
+        color: "#00c853",
       },
     ],
   };
@@ -114,6 +122,7 @@ export default function AffiliateCTA({ topic = "trade" }) {
               href={offer.url}
               target="_blank"
               rel="noopener sponsored"
+              data-affiliate="pending"
               style={{
                 display: "block",
                 background: "#111",
@@ -147,7 +156,7 @@ export default function AffiliateCTA({ topic = "trade" }) {
           ))}
         </div>
         <p className="text-slate-600 text-xs mt-4 mb-0">
-          Sponsored listings. We may earn a commission at no cost to you.
+          Affiliate links. We may earn a commission at no cost to you.
         </p>
       </div>
     </div>
