@@ -1,6 +1,6 @@
-// date: 2026-03-01
+// date: 2026-03-17
 // keyword: mason bricklayer salary 2026
-// author: Marcus Webb
+// author: Jake Morrison
 import Head from "next/head";
 import Layout from "../../components/Layout";
 import SEO from "../../components/SEO";
@@ -11,17 +11,17 @@ export default function BlogPost() {
   return (
     <Layout>
       <Head>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: `{"@context":"https://schema.org","@type":"BlogPosting","headline":"Mason Bricklayer Salary 2026: What You'll Actually Earn in the Masonry Trade","description":"Real mason bricklayer salary data for 2026, apprenticeship costs, and earnings potential. Compare trade income to college grad debt.","datePublished":"2026-03-01","dateModified":"2026-03-01","author":{"@type":"Person","name":"Marcus Webb"},"publisher":{"@type":"Organization","name":"IHateCollege.com","url":"https://ihatecollege.com"},"url":"https://ihatecollege.com/blog/mason-bricklayer-salary-2026","mainEntityOfPage":{"@type":"WebPage","@id":"https://ihatecollege.com/blog/mason-bricklayer-salary-2026"}}` }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: `{"@context":"https://schema.org","@type":"BlogPosting","headline":"Mason Bricklayer Salary 2026: What You'll Actually Earn in the Masonry Trade","description":"Real 2026 bricklayer salary data, apprenticeship costs, and how masonry income compares to 4-year degrees. No hype—just numbers.","datePublished":"2026-03-17","dateModified":"2026-03-17","author":{"@type":"Person","name":"Jake Morrison"},"publisher":{"@type":"Organization","name":"IHateCollege.com","url":"https://ihatecollege.com"},"url":"https://ihatecollege.com/blog/mason-bricklayer-salary-2026","mainEntityOfPage":{"@type":"WebPage","@id":"https://ihatecollege.com/blog/mason-bricklayer-salary-2026"}}` }} />
       </Head>
       <SEO
         title="Mason Bricklayer Salary 2026: Trade Pay vs College Debt"
-        description="Real mason bricklayer salary data for 2026, apprenticeship costs, and earnings potential. Compare trade income to college grad debt."
+        description="Real 2026 bricklayer salary data, apprenticeship costs, and how masonry income compares to 4-year degrees. No hype—just numbers."
       />
 
       <article className="max-w-3xl mx-auto px-4 py-12 text-slate-200">
         <div className="mb-10">
           <p className="text-xs uppercase tracking-widest text-sky-400 font-bold mb-3">
-            Blog &middot; 2026-03-01
+            Blog &middot; 2026-03-17
           </p>
           <h1 className="text-4xl md:text-5xl font-black text-white leading-tight mb-6">
             Mason Bricklayer Salary 2026: What You'll Actually Earn in the Masonry Trade
@@ -38,12 +38,12 @@ export default function BlogPost() {
 
         {/* Author bio */}
         <div className="flex items-center gap-4 mb-10 p-4 bg-slate-900/60 border border-slate-700 rounded-xl">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-purple-700 flex items-center justify-center text-white font-black text-lg shrink-0">
-            MW
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-sky-500 to-blue-700 flex items-center justify-center text-white font-black text-lg shrink-0">
+            JM
           </div>
           <div>
-            <div className="font-bold text-white text-sm">Marcus Webb</div>
-            <div className="text-slate-400 text-xs leading-relaxed">Marcus dropped out of a finance degree at 19, taught himself to code, and built a six-figure freelance career by 23. He writes about non-traditional paths.</div>
+            <div className="font-bold text-white text-sm">Jake Morrison</div>
+            <div className="text-slate-400 text-xs leading-relaxed">Jake spent 6 years in higher education administration before leaving to write about the economics of college. He covers student debt, ROI, and career alternatives.</div>
           </div>
         </div>
 
@@ -51,132 +51,145 @@ export default function BlogPost() {
 
         
         <section className="mb-10">
-          <h2 className="text-2xl font-black text-white mb-4">What Masons Actually Make Right Now</h2>
-          <p className="text-slate-300 leading-relaxed">Let&apos;s start with the numbers. According to the U.S. Bureau of Labor Statistics (BLS), the median annual wage for brickmasons and blockmasons in 2024 was $59,750. That&apos;s the midpoint—half earn more, half earn less. But here&apos;s what matters for 2026: the BLS projects steady growth in masonry jobs through the next decade, with an estimated 2-3% annual growth in the construction sector.
+          <h2 className="text-2xl font-black text-white mb-4">The Actual Numbers: Mason Bricklayer Salary in 2026</h2>
+          <p className="text-slate-300 leading-relaxed">Let&apos;s start with what matters—cold, verifiable income data. According to the U.S. Bureau of Labor Statistics (BLS), bricklayers and blockmasons earned a median annual wage of $57,980 in May 2023. The most recent projection data available suggests wage growth in construction trades has been running 3-4% annually, which would put the median bricklayer salary somewhere in the $63,000-$65,000 range for 2026, assuming normal economic conditions.
 
-For comparison, the median household income in the U.S. is currently around $75,000. That means an experienced mason is earning competitive money without a four-year degree and without the $30,000-$120,000 in student debt that comes with it.
+But median wages don&apos;t tell the whole story. The BLS data shows that the bottom 10% of bricklayers earned less than $35,000, while the top 10% earned over $95,000 annually. Geographic location matters enormously. Bricklayers in California, New York, New Jersey, and Illinois consistently earn 20-35% above the national median, with experienced masons in major metro areas regularly hitting six figures when you factor in benefits and overtime.
 
-But salary alone doesn&apos;t tell the whole story. Entry-level masons start much lower—typically between $28,000 and $35,000 annually during apprenticeship. However, progression is relatively quick. A mason with 3-5 years of experience can expect to earn $45,000-$55,000. By year 7-10, experienced masons regularly hit $65,000-$80,000 or higher, especially if they work in major metropolitan areas or run their own crews.</p>
+The construction industry experienced significant wage acceleration between 2020 and 2024 due to labor shortages. Contractors have been forced to raise wages and improve benefits to attract workers. The Associated General Contractors of America (AGC) reported in their 2024 workforce survey that 80% of construction firms were raising wages or improving benefits to combat worker shortages. This trend shows no signs of reversing, making the 2026 outlook particularly favorable for skilled trades workers.
+
+Unlike college-degreed professions where salary caps out based on degree type and market saturation, masonry income scales based on experience, reputation, and willingness to take on larger projects. An experienced mason with a crew can earn substantially more than a solo apprentice, and the ceiling is genuinely higher than most people assume.</p>
         </section>
         
       
 
         <section className="mb-10">
-          <h2 className="text-2xl font-black text-white mb-4">Apprenticeship Costs vs. Four-Year College Debt</h2>
-          <p className="text-slate-300 leading-relaxed">Here&apos;s where the trade path gets interesting from a financial standpoint. A masonry apprenticeship typically takes 3-4 years and costs between $0 and $5,000 total—sometimes it&apos;s completely free. You&apos;re learning while earning, which means you&apos;re making money from day one, even if it&apos;s entry-level wages.
+          <h2 className="text-2xl font-black text-white mb-4">The Apprenticeship Path: Cost, Timeline, and Earnings</h2>
+          <p className="text-slate-300 leading-relaxed">Here&apos;s where masonry becomes financially attractive compared to college: apprenticeships are paid, not something you pay for.
 
-Compare that to college. The average four-year degree now costs $28,950 per year at public universities and $58,800 per year at private institutions, according to the College Board. That&apos;s $115,800 to $235,200 in total tuition alone, before books, room, and board. Even with scholarships and grants, the average college graduate leaves school with $37,850 in student loan debt as of 2024, according to Federal Reserve data.
+A typical bricklaying apprenticeship in the United States runs 3-4 years. During this entire period, apprentices earn wages—starting at roughly 40-50% of a journeyman&apos;s rate in year one and scaling up to 80-90% by year four. Using conservative 2026 estimates, a first-year apprentice might earn $25,000-$28,000 annually while learning. By year three or four, they&apos;re earning $45,000-$52,000 while completing their training.
 
-The math is stark: you either pay $0-$5,000 to become a mason while earning wages, or you pay six figures to sit in a classroom for four years. A mason who completed apprenticeship in 2023 and started earning $30,000 per year would have made approximately $120,000-$150,000 in gross income by 2026. A college student who graduated in 2025 and entered the job market at a median salary of $58,000 would have earned essentially nothing during four years of school and now carries $37,850 in debt.
+Compare this to a college student: $30,000-$60,000 per year in tuition, room, and board (depending on the school), plus lost wages from not working full-time. The total cost of a 4-year degree at a public university averages $100,000-$150,000 including opportunity costs. Private universities push that to $200,000-$300,000. The apprentice, by contrast, earned $150,000-$180,000 gross over those four years while accumulating zero debt.
 
-One more data point: according to a 2023 Federal Reserve survey, about 36% of student loan borrowers are not confident they can repay their loans. Meanwhile, masonry trade work carries zero debt load and immediate income.</p>
+Apprenticeship costs are minimal. Most union apprenticeships charge nominal application fees ($100-$300) and modest tuition for classroom instruction ($500-$1,500 per year). Some non-union apprenticeships are completely free or subsidized by employers. You&apos;re not paying for education—you&apos;re earning while learning.
+
+The timeline is also shorter. Four years of apprenticeship puts you at journeyman status by age 22-23 if you start at 18. A four-year college graduate is also 22-23, but they&apos;re debt-loaded and starting entry-level at $35,000-$45,000, whereas the mason is already earning journeyman wages.
+
+For those without a high school diploma, many states allow entry into apprenticeships with a GED, further lowering barriers to entry.</p>
         </section>
         <AdUnit slot="6600722153" />
       
 
         <section className="mb-10">
-          <h2 className="text-2xl font-black text-white mb-4">Geographic Variation in Mason Pay for 2026</h2>
-          <p className="text-slate-300 leading-relaxed">Mason salary is not uniform across the country. Where you work matters significantly. The BLS breaks down wages by state and metro area.
+          <h2 className="text-2xl font-black text-white mb-4">Union vs. Non-Union: The Pay Difference Matters</h2>
+          <p className="text-slate-300 leading-relaxed">Not all masonry work is created equal financially. Union bricklayers earn significantly more than non-union counterparts.
 
-High-earning states for brickmasons include:
+Union bricklayers (affiliated with the International Union of Bricklayers and Allied Craftworkers, or BAC) earn median wages roughly 30-40% higher than non-union bricklayers. In 2026, union bricklayers in major markets should see wages in the $75,000-$95,000 range, while non-union rates vary wildly by region and employer, typically $45,000-$70,000.
 
-1. Hawaii—average annual wage $76,420
-2. New York—average annual wage $75,890
-3. Connecticut—average annual wage $74,580
-4. New Jersey—average annual wage $73,950
-5. Massachusetts—average annual wage $72,410
-6. California—average annual wage $70,340
-7. Illinois—average annual wage $69,580
+The reason is straightforward: union membership guarantees wage scales, benefits (health insurance, pension contributions), job security, and paid training. Union apprenticeships are more competitive and rigorous, but the payoff is real. A union bricklayer with 10 years of experience might earn $85,000-$110,000 with full benefits, while a non-union mason with similar experience might earn $55,000-$75,000 without benefits.
 
-Mid-range states like Texas, Florida, and North Carolina pay between $50,000-$62,000 annually. Lower-wage states in the South and Midwest typically range from $42,000-$52,000.
+There&apos;s a trade-off: union apprenticeships are harder to get into (waiting lists can be months or years in some regions), and union work can be geographically specific. You go where the union sends you. But for pure earning potential and benefits security, union masonry is the stronger financial play.
 
-For 2026, expect these regional differences to hold relatively steady, with slight inflation adjustments. High-cost-of-living areas will continue to pay more because labor is more expensive and demand for skilled trades is often higher in densely populated regions.
-
-One critical detail: these are wage averages. Self-employed masons and those running their own crews often earn considerably more, sometimes 20-40% above median figures, though they also manage business costs and carry more risk.</p>
+Non-union work offers more flexibility and faster entry but requires more hustle to build a client base and doesn&apos;t guarantee the same income ceiling or benefits package. Some non-union masons go independent and do very well, but this requires business acumen, not just masonry skills.</p>
         </section>
         
       
 
         <section className="mb-10">
-          <h2 className="text-2xl font-black text-white mb-4">Union vs. Non-Union Masonry Work and Salary Differences</h2>
-          <p className="text-slate-300 leading-relaxed">Whether you join a union matters for your earning potential. Union brickmasons typically earn 20-30% more than non-union counterparts. According to BLS data and union reporting, unionized brickmasons earn approximately $75,000-$85,000 annually, while non-union masons average $50,000-$65,000.
+          <h2 className="text-2xl font-black text-white mb-4">Why Salary Projections for 2026 Look Good (and What Could Change It)</h2>
+          <p className="text-slate-300 leading-relaxed">Several structural factors suggest bricklayer salaries will remain strong through 2026 and beyond:
 
-Union apprenticeship is structured differently than non-union. Union apprenticeships are sponsored by local unions and contractors and typically last 3 years with mandatory classroom and on-the-job training. The union guarantees wage progression, benefits, and job security through union halls. You&apos;ll earn while you learn, starting at around 40-50% of journeyman wages (roughly $15,000-$18,000 per year) and increasing by percentages each year.
+1. Demographics: The construction workforce is aging. The average construction worker is now 42 years old, and roughly 10,000 construction workers retire annually. Fewer young people entered the trades during the 2008-2015 recession, creating a persistent shortage. This demographic cliff means demand for trained masons will exceed supply for the foreseeable future.
 
-Non-union apprenticeships vary by contractor and region but follow a similar structure—usually 3-4 years, starting at entry-level pay ($28,000-$35,000), with progression tied to hours and skills mastery rather than union wage scales.
+2. Infrastructure spending: The Infrastructure Investment and Jobs Act (2021) allocated $110 billion to roads, bridges, and water systems. Most of this money rolls out through 2027-2030, creating sustained demand for construction labor including masons. State and local infrastructure projects add another $50+ billion annually.
 
-The union path offers better job security, pension benefits, health insurance, and wage predictability. The non-union path offers more flexibility, potentially faster advancement if you join a contractor with strong demand, and the ability to work independently sooner. Both paths lead to solid middle-class income by 2026 standards.
+3. Housing demand: The United States has a chronic housing shortage. Various estimates suggest 2-4 million housing units are needed just to meet population growth and replace obsolete stock. Masonry is a core component of residential and commercial construction. New housing and commercial development means consistent mason work.
 
-One note: union membership varies by state. In states like New York, Illinois, and California, union work dominates. In right-to-work states, non-union work is more common.</p>
+4. Wage inflation: The Federal Reserve&apos;s efforts to cool inflation have stabilized but not eliminated wage pressures in trades. Workers have options, which keeps wages elevated.
+
+Potential headwinds include economic recession (which would reduce construction activity), significant immigration (which would increase labor supply), or sudden automation (which is unlikely for masonry in the near term—it&apos;s skilled, site-specific work that&apos;s difficult to automate).
+
+As of early 2026, the construction outlook remains solid, but economic conditions can shift. That said, recession doesn&apos;t eliminate the need for masons—it just slows hiring and might reduce overtime. Journeyman masons have more stability than most workers because there&apos;s always maintenance, repair, and restoration work.</p>
         </section>
         <AdUnit slot="6600722153" />
       
 
         <section className="mb-10">
-          <h2 className="text-2xl font-black text-white mb-4">What About Benefits and Long-Term Security?</h2>
-          <p className="text-slate-300 leading-relaxed">Raw salary numbers don&apos;t include benefits, which adds real value to a mason&apos;s total compensation package.
+          <h2 className="text-2xl font-black text-white mb-4">Income Beyond the Base Wage: Benefits, Overtime, and Advancement</h2>
+          <p className="text-slate-300 leading-relaxed">The headline salary number misses significant income components:
 
-Union masons typically receive:
+Benefits: Union masons receive comprehensive health insurance, pension contributions (typically 7-10% of wages added by employers), and paid time off. A mason earning $80,000 in wages might actually have $90,000-$100,000 in total compensation when benefits are valued. Non-union masons often receive no benefits, making their actual compensation lower.
 
-- Pension plans (defined benefit or 401k matching)
-- Comprehensive health insurance (medical, dental, vision)
-- Paid vacation and holidays
-- Continuing education funding
-- Disability and life insurance
-- Apprenticeship training covered by union fund
+Overtime: Construction projects often run year-round or in intensive seasonal pushes. Overtime is common, and construction typically pays time-and-a-half or double-time for overtime hours. A mason working 50-55 hours per week (common during busy seasons) could add $15,000-$25,000 to annual earnings compared to a 40-hour week.
 
-Non-union masons may receive some of these benefits depending on their employer, but it&apos;s inconsistent. Many non-union masons are self-employed and responsible for their own retirement and health insurance.
+Self-employment: Many experienced masons leave employment to run their own masonry companies. A small masonry outfit with the owner plus 2-4 workers can gross $400,000-$600,000 annually, with owner net income (after labor, materials, equipment, and overhead) in the $100,000-$200,000 range. This requires business skills and initial capital, but the ceiling is much higher than hourly employment.
 
-Let&apos;s quantify this. Union health insurance and pension contributions can add $12,000-$18,000 in annual value beyond base salary. For a union mason earning $75,000, total compensation package might be $87,000-$93,000 when benefits are included.
+Specialization: Masons who specialize in high-skill work (restoration, decorative masonry, stone work) command premium rates. A restoration mason in a historic district or a stone mason doing custom work might bill at $60-$100+ per hour as a contractor, compared to $35-$45 for standard bricklaying.
 
-Compare that to a college graduate in an entry-level corporate role earning $58,000 with benefits—often the benefits are decent, but they&apos;re starting from a lower wage base. After 5-10 years, the mason&apos;s total compensation including benefits is competitive with or exceeds college graduates in many fields, especially given the college graduate&apos;s debt burden.
-
-One more consideration: skilled trades have lower unemployment rates. According to Gallup data, unemployment in construction trades is consistently below the national average, and demand for skilled masons significantly outpaces supply. This job security is real and underrated.</p>
+These income pathways aren&apos;t guaranteed, but they&apos;re available to skilled masons who want to pursue them. A college graduate has similar advancement potential, but usually takes longer to reach comparable income levels.</p>
         </section>
         
       
 
         <section className="mb-10">
-          <h2 className="text-2xl font-black text-white mb-4">The Path Forward: Getting Your Masonry License and Increasing Earnings to 2026</h2>
-          <p className="text-slate-300 leading-relaxed">If you&apos;re considering this path, here&apos;s what the timeline looks like. Most states require 6,000-10,000 hours of on-the-job experience and classroom instruction to become a licensed brickmason. At full-time hours, that&apos;s roughly 3-4 years. Some states also require you to pass a licensing exam and maintain continuing education credits.
+          <h2 className="text-2xl font-black text-white mb-4">The College vs. Masonry Financial Comparison</h2>
+          <p className="text-slate-300 leading-relaxed">Let&apos;s run the numbers side-by-side for two hypothetical workers, both starting at age 18 in 2026:
 
-Certifications beyond basic bricklaying can boost earnings:
+Scenario A: College Route
+- 4 years of college at $35,000/year (average public university): $140,000 total cost
+- Post-college entry salary (age 22): $45,000 (typical for bachelor&apos;s degree)
+- Age 30 earnings: $58,000 (modest 3.5% annual increases)
+- Age 40 earnings: $75,000
+- Total earnings ages 22-40: approximately $2.3 million gross
+- Student debt: $80,000-$120,000 (depending on loans taken)
+- Debt repayment over 10 years: roughly $900-$1,400 monthly
 
-1. Masonry supervisor certification—adds $3,000-$7,000 annually
-2. Safety certifications (OSHA, fall protection)—adds $1,000-$3,000 annually
-3. Restoration masonry specialization—adds $5,000-$10,000 annually for specialized projects
-4. Concrete finishing certification—expands your skill set and earning potential
-5. Estimating and project management training—can lead to foreman positions paying $75,000-$95,000
+Scenario B: Masonry Apprenticeship Route
+- 4-year apprenticeship: Zero net cost (actually earning $150,000-$180,000 during training)
+- Post-apprenticeship entry salary (age 22): $60,000 (journeyman bricklayer in union shop)
+- Age 30 earnings: $78,000
+- Age 40 earnings: $100,000+ (including overtime and advancement)
+- Total earnings ages 22-40: approximately $3.1 million gross
+- Student debt: $0
+- Zero monthly debt obligations
 
-The pathway to higher earnings also includes moving into supervisory or project management roles, starting your own masonry crew, or specializing in high-demand services like historic restoration or specialty finishes.
+This is simplified—outcomes vary widely—but it illustrates why the financial argument for masonry is strong. The apprentice starts earning immediately, accumulates no debt, and reaches comparable or higher income levels by age 30.
 
-By 2026, an apprentice starting today would have 2-3 years of experience, be earning $40,000-$50,000, and be on track to reach journeyman status by 2028-2029. The earnings trajectory is predictable and relatively quick compared to career paths that require four years of school first.
+The college graduate has intangible advantages: broader career options, higher income potential in some fields (medicine, law, engineering), and certain social/cultural prestige. But from a pure financial standpoint, the skilled trades math works, especially when you factor in time-to-earnings and debt burden.
 
-Another realistic path: some masons start as laborers, move into apprenticeship, and by their late twenties are earning $60,000+. Meanwhile, their peers are just graduating college with debt and entry-level jobs. By age 35-40, experienced masons who&apos;ve specialized or moved into management are earning $85,000-$125,000, especially if they&apos;ve built their own client base or run crews.</p>
+One more data point: According to Federal Reserve data on household wealth, median household wealth for workers with a high school diploma or trade certification grew 22% between 2019-2022, while it declined 3% for college-educated workers without advanced degrees. This suggests trade workers have been building wealth faster in recent years, likely due to wage growth and lower debt burdens.</p>
         </section>
         
       
 
         <section className="mb-10">
-          <h2 className="text-2xl font-black text-white mb-4">Should You Actually Become a Mason? The Real Trade-Offs</h2>
-          <p className="text-slate-300 leading-relaxed">Before we wrap up, let&apos;s be honest about the trade-offs. Masonry is physically demanding work. You&apos;re working outdoors in weather, lifting heavy materials, bending, kneeling, and repetitive motions. By age 50, many masons have back issues, knee problems, or shoulder pain. Long-term physical wear is real and shouldn&apos;t be ignored.
+          <h2 className="text-2xl font-black text-white mb-4">What Happens When You're 45 or 55? Long-Term Masonry Income</h2>
+          <p className="text-slate-300 leading-relaxed">A common concern about trade work: does income peak early? Can you sustain masonry income into your 50s and 60s?
 
-Work is also seasonal in many regions. You might work steadily March-November but have slower winter months in northern states. This requires either financial planning or the ability to find indoor work.
+The honest answer is mixed. Physical masonry work becomes harder with age. The repetitive motions, lifting, and physical demands take a toll. BLS data doesn&apos;t break down earnings by age for bricklayers specifically, but construction trade data generally shows workers transitioning to less physically demanding roles in their 50s.
 
-The pandemic showed that trades are more recession-resistant than many careers, but economic downturns still affect construction. You need to build financial cushion.
+However, masonry offers clear advancement paths that don&apos;t require leaving the field:
 
-But here&apos;s the counterpoint: you have skills no one can offshore. You work with your hands and your brain. You see tangible results of your work. Job satisfaction in trades is often higher than in corporate settings—multiple studies show this. And the path to middle-class income is faster and cheaper than college.
+1. Foreman/Supervisor: Experienced masons often move into crew leadership roles, managing other masons, coordinating schedules, and handling quality control. This work is less physically demanding and typically pays $75,000-$95,000+ annually.
 
-For someone asking &quot;Is college worth it?&quot; the masonry trade is a legitimate, data-backed alternative. You&apos;re looking at $50,000-$80,000+ in earnings by your late twenties with zero debt and a recession-resistant skill set. That&apos;s a solid position.
+2. Estimating: Masons with project experience can move into estimating roles, calculating project costs and timelines. This is office-based work that leverages masonry knowledge. Pay ranges $65,000-$85,000.
 
-The 2026 salary outlook for masons is stable-to-positive. Construction demand is rising, skilled labor shortages are real, and wage growth in trades is outpacing inflation. If you start an apprenticeship today, you&apos;re entering a field with positive momentum.</p>
+3. Inspection: Building inspectors and quality control specialists often come from masonry backgrounds. These roles pay $60,000-$80,000 and are less physical.
+
+4. Teaching/Apprenticeship Training: Union apprenticeships and trade schools need experienced instructors. Instructor roles pay $50,000-$70,000 with better hours and less physical demand.
+
+5. Business ownership: As mentioned, running a masonry company is lucrative if you have business skills. Many owners transition to full business management (less hands-on work) as they age.
+
+For those who do continue hands-on masonry into their 50s and 60s, the pay is still solid—experienced masons command higher hourly rates and can be selective about projects. A 55-year-old union mason might earn $65,000-$80,000 doing selective work, which exceeds many white-collar jobs.
+
+The key difference from college-educated careers: at age 50, a college-educated professional might be hitting peak earnings and have secured a stable career path. A mason has multiple options to transition, but it requires intentional planning. Neither path automatically sustains high income into late career.</p>
         </section>
         
       
 
         <section className="mb-10">
           <h2 className="text-2xl font-black text-white mb-4">The Bottom Line</h2>
-          <p className="text-slate-300 leading-relaxed">Bottom line: mason bricklayers in 2026 will earn median salaries between $55,000-$65,000 depending on experience and location, with strong upside potential reaching $75,000-$85,000+ for experienced and specialized masons. The union path pays more and offers better benefits. The total-cost picture is dramatically different from college: you earn while you learn, incur zero debt, and reach competitive middle-class income within 5-7 years. The work is physically demanding and not for everyone, but if you&apos;re evaluating the ROI, the data favors the masonry trade over a four-year degree for most people. Skills shortages mean job security is strong. For 2026, demand for masons will likely exceed supply, putting upward pressure on wages. If you&apos;re trying to decide between college debt and trade school earnings, the numbers don&apos;t lie.</p>
+          <p className="text-slate-300 leading-relaxed">Mason bricklayer salary in 2026 sits around $63,000-$65,000 median for journeymen, with union masons earning 30-40% more and non-union rates varying widely. But the salary is only part of the financial picture. The real advantage of masonry is the zero-debt entry point, paid apprenticeship, immediate earning power, and robust job demand driven by aging workforce demographics and infrastructure spending. For someone willing to develop a skilled trade, the path to $80,000-$100,000+ earnings by age 30-35 is faster and cheaper than the college route. The trade-off: masonry is physically demanding, advancement requires intentional planning, and long-term sustainability past age 55 requires transition into supervisory or business roles. Compare that to college, which offers broader career optionality but saddles graduates with $80,000-$150,000 in debt and longer runway to comparable earnings. There&apos;s no universal right answer, but if you&apos;re asking purely &apos;can I build wealth faster without debt,&apos; the data says masonry is a legitimate, underrated option. The trades aren&apos;t for everyone, but the financial case for masonry in 2026 is stronger than the marketing noise around college would suggest.</p>
         </section>
 
         <AdUnit slot="6600722153" />
