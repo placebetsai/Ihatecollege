@@ -1,0 +1,37 @@
+name: Deploy to Render
+
+# Bypass for Render's native GitHub webhook, which silently broke in April 2026
+# (webhook was wiped from all placebetsai repos, probably during a re-auth).
+# Instead of relying on Render → GitHub integration, we call Render's deploy API
+# directly with RENDER_API_KEY on every push to main. Self-contained, can't drift
+# the same way.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Render deploy
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+          RENDER_SERVICE_ID: srv-d78ph0ea2pns73dnjnb0
+        run: |
+          set -e
+          RESPONSE=$(curl -sS -w "\nHTTP_CODE:%{http_code}" \
+            -X POST \
+            -H "Authorization: Bearer $RENDER_API_KEY" \
+            -H "Content-Type: application/json" \
+            "https://api.render.com/v1/services/$RENDER_SERVICE_ID/deploys" \
+            -d '{"clearCache":"do_not_clear"}')
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1 | sed 's/HTTP_CODE://')
+          BODY=$(echo "$RESPONSE" | sed '$d')
+          echo "HTTP $HTTP_CODE"
+          echo "$BODY"
+          if [ "$HTTP_CODE" -ge 400 ]; then
+            echo "Render deploy trigger failed"
+            exit 1
+          fi
