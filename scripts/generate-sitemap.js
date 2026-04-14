@@ -13,35 +13,26 @@ const PAGES_DIR = path.join(ROOT, "pages");
 const BLOG_DIR = path.join(PAGES_DIR, "blog");
 const OUT = path.join(ROOT, "public", "sitemap.xml");
 const SITE_URL = "https://ihatecollege.com";
+const COLLEGES_JSON = path.join(ROOT, "data", "colleges.json");
 
-const COLLEGE_SLUGS = [
-  "harvard-university","mit","stanford-university","yale-university",
-  "princeton-university","columbia-university","university-of-pennsylvania",
-  "dartmouth-college","brown-university","cornell-university",
-  "duke-university","northwestern-university","vanderbilt-university",
-  "georgetown-university","carnegie-mellon-university","washington-univ-in-st-louis",
-  "rice-university","notre-dame-university","emory-university","tufts-university",
-  "university-of-southern-california","boston-university","northeastern-university",
-  "new-york-university","wake-forest-university","tulane-university",
-  "lehigh-university","rensselaer-polytechnic-institute","uc-berkeley","ucla",
-  "university-of-michigan","unc-chapel-hill","university-of-virginia","georgia-tech",
-  "uc-san-diego","uc-santa-barbara","uc-davis","university-of-illinois-urbana",
-  "university-of-wisconsin-madison","purdue-university","university-of-washington",
-  "ohio-state-university","penn-state-university","michigan-state-university",
-  "university-of-florida","florida-state-university","university-of-texas-at-austin",
-  "texas-a-m-university","university-of-maryland","rutgers-university",
-  "university-of-minnesota","indiana-university","university-of-colorado-boulder",
-  "arizona-state-university","university-of-arizona","university-of-oregon",
-  "virginia-tech","nc-state-university","clemson-university","auburn-university",
-  "university-of-alabama","louisiana-state-university","university-of-tennessee",
-  "university-of-iowa","university-of-pittsburgh","suny-buffalo",
-  "stony-brook-university","university-of-nebraska","university-of-kansas",
-  "university-of-missouri","west-virginia-university","mississippi-state-university",
-  "devry-university","full-sail-university","strayer-university",
-  "grand-canyon-university","santa-monica-college","miami-dade-college",
-  "valencia-college","broward-college","houston-community-college",
-  "ivy-tech-community-college",
-];
+// Pull every college slug from data/colleges.json — this is the same
+// dataset pages/college/[slug].js (edge runtime) serves at request time.
+// 6000+ URLs; hardcoding a subset made Search Console discover only ~80.
+function loadCollegeSlugs() {
+  try {
+    const raw = JSON.parse(fs.readFileSync(COLLEGES_JSON, "utf8"));
+    const list = Array.isArray(raw) ? raw : raw.colleges || [];
+    const slugs = list.map(c => c.slug).filter(Boolean);
+    if (!slugs.length) throw new Error("no slugs");
+    return slugs;
+  } catch (e) {
+    console.error(`WARN: could not load ${COLLEGES_JSON}: ${e.message}`);
+    return [];
+  }
+}
+
+const COLLEGE_SLUGS = loadCollegeSlugs();
+console.log(`Loaded ${COLLEGE_SLUGS.length} college slugs from data/colleges.json`);
 
 const HIGH_PRIORITY = new Set([
   "", "/blog", "/job-board", "/trade-schools", "/alternatives",
