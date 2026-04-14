@@ -13,14 +13,34 @@ html, body {
 }
 
 /* Prevent horizontal overflow on all screen sizes */
-html {
+html, body {
   max-width: 100vw;
+  overflow-x: hidden;
 }
 
 /* Ensure images never break layout */
 img, video, iframe {
   max-width: 100%;
   height: auto;
+}
+
+/* ── Mobile responsive safety net ──
+   Force 2-column hero grids and image mosaics to stack on mobile.
+   Hardcoded `grid-cols-2` without an `md:` prefix was pushing images
+   off-screen on phones. This override stacks them below 768px. */
+@media (max-width: 767px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  .hero-images {
+    grid-template-rows: 200px auto !important;
+    grid-template-columns: 1fr !important;
+  }
+  /* Constrain any Next.js fill image to its positioned parent on mobile */
+  img[data-nimg="fill"] {
+    max-width: 100% !important;
+  }
 }
 
 /* iOS: prevent auto-zoom on input focus (font-size must be >= 16px) */
