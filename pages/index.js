@@ -489,11 +489,6 @@ export default function HomePage({ articles = [] }) {
         </div>
       </section>
 
-      {/* ── AD ───────────────────────────────────────────────────────────────── */}
-      <div style={{ maxWidth: 1100, margin: "40px auto", padding: "0 20px" }}>
-        <AdUnit slot="6600722153" />
-      </div>
-
       {/* ── BLOG / MAGAZINE SECTION ──────────────────────────────────────────── */}
       <section className="animate-fade-up max-w-[1100px] mx-auto pt-5 pb-16 px-5">
         <div className="flex justify-between items-baseline mb-7">
