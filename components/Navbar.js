@@ -7,8 +7,11 @@ import AuthModal from "./AuthModal";
 const links = [
   { href: "/",                        label: "Home" },
   { href: "/college-rankings",        label: "Rankings" },
+  { href: "/liberal-vs-conservative", label: "Lib vs Con" },
+  { href: "/rank-your-school",        label: "Rate My School" },
   { href: "/alternatives",            label: "Alternatives" },
   { href: "/trade-schools",           label: "Trades" },
+  { href: "/civil-service",           label: "Gov Jobs" },
   { href: "/debt-calculator",         label: "Debt Calc" },
   { href: "/job-board",               label: "Jobs" },
   { href: "/blog",                    label: "Blog" },
