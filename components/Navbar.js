@@ -5,12 +5,15 @@ import { useAuth } from "./AuthProvider";
 import AuthModal from "./AuthModal";
 
 const links = [
-  { href: "/",              label: "Home" },
-  { href: "/alternatives",  label: "Alternatives" },
-  { href: "/blog",          label: "Blog" },
-  { href: "/job-board",     label: "Jobs" },
-  { href: "/about",         label: "About" },
-  { href: "/contact",       label: "Contact" },
+  { href: "/",                        label: "Home" },
+  { href: "/college-rankings",        label: "Rankings" },
+  { href: "/alternatives",            label: "Alternatives" },
+  { href: "/trade-schools",           label: "Trades" },
+  { href: "/debt-calculator",         label: "Debt Calc" },
+  { href: "/job-board",               label: "Jobs" },
+  { href: "/blog",                    label: "Blog" },
+  { href: "/news",                    label: "News" },
+  { href: "/contact",                 label: "Contact" },
 ];
 
 export default function Navbar() {
