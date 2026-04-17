@@ -354,14 +354,7 @@ export default function HomePage({ articles = [] }) {
         title="IHateCollege.com — College Is A Scam. We Have The Receipts."
         description="$1.77 trillion in student debt. 44 million borrowers. 53% underemployed. Find high-paying careers without a degree — trades, certs, government jobs."
         keywords="college alternatives, is college worth it, student debt crisis, trade school vs college, no degree jobs, high paying careers without degree"
-        schema={{
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          "name": "IHateCollege.com",
-          "url": "https://ihatecollege.com",
-          "description": "The anti-college movement. Real data on student debt and high-paying alternatives.",
-          "potentialAction": { "@type": "SearchAction", "target": "https://ihatecollege.com/college-rankings?q={search_term_string}", "query-input": "required name=search_term_string" }
-        }}
+        schema={null}
       />
 
       <p style={{ display: "none" }}>Impact-Site-Verification: 7a99b8bc-6d3b-4c9c-9f76-ce1301771cc1</p>
