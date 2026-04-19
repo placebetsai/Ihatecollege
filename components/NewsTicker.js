@@ -34,7 +34,6 @@ function decodeEntities(s = "") {
 
 export default function NewsTicker() {
   const [items, setItems] = useState([]);
-  const [ready, setReady] = useState(false);
   const [runKey, setRunKey] = useState(0);
 
   const [pausedMobile, setPausedMobile] = useState(false);
@@ -51,20 +50,14 @@ export default function NewsTicker() {
 
         const list = Array.isArray(data?.items) ? data.items : [];
         setItems(list.slice(0, 18));
-
-        // Safari: restart animation after DOM paint
-        setReady(false);
+        // Single rAF is enough to let layout settle before animation restarts
         requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            if (!alive) return;
-            setRunKey((k) => k + 1);
-            setReady(true);
-          });
+          if (!alive) return;
+          setRunKey((k) => k + 1);
         });
       } catch {
         if (!alive) return;
         setItems([]);
-        setReady(false);
       }
     }
 
@@ -76,7 +69,15 @@ export default function NewsTicker() {
     };
   }, []);
 
-  const contentItems = useMemo(() => items.slice(0, 18), [items]);
+  // Decode once, not on every render pass inside .map()
+  const contentItems = useMemo(
+    () => items.slice(0, 18).map((it) => ({
+      ...it,
+      _title: decodeEntities(it.title),
+      _source: decodeEntities(it.source || ""),
+    })),
+    [items]
+  );
   const hasItems = contentItems.length > 0;
 
   return (
@@ -90,11 +91,11 @@ export default function NewsTicker() {
             {!hasItems ? (
               <div className="idle">Loading jobs + economy headlines…</div>
             ) : (
-              <div key={runKey} className={`track ${ready ? "run desktopSpeed" : ""}`}>
+              <div key={runKey} className="track run desktopSpeed">
                 <div className="content">
                   {contentItems.map((it, i) => {
-                    const title = decodeEntities(it.title);
-                    const source = decodeEntities(it.source);
+                    const title = it._title;
+                    const source = it._source;
                     return (
                       <a
                         key={`${it.link}-${i}`}
@@ -116,8 +117,8 @@ export default function NewsTicker() {
 
                 <div className="content" aria-hidden="true">
                   {contentItems.map((it, i) => {
-                    const title = decodeEntities(it.title);
-                    const source = decodeEntities(it.source);
+                    const title = it._title;
+                    const source = it._source;
                     return (
                       <a
                         key={`${it.link}-dup-${i}`}
@@ -160,12 +161,12 @@ export default function NewsTicker() {
             ) : (
               <div
                 key={`m-${runKey}`}
-                className={`track ${ready ? "run mobileSpeed" : ""} ${pausedMobile ? "paused" : ""}`}
+                className={`track run mobileSpeed ${pausedMobile ? "paused" : ""}`}
               >
                 <div className="content">
                   {contentItems.map((it, i) => {
-                    const title = decodeEntities(it.title);
-                    const source = decodeEntities(it.source);
+                    const title = it._title;
+                    const source = it._source;
                     return (
                       <a
                         key={`${it.link}-m-${i}`}
@@ -188,8 +189,8 @@ export default function NewsTicker() {
 
                 <div className="content" aria-hidden="true">
                   {contentItems.map((it, i) => {
-                    const title = decodeEntities(it.title);
-                    const source = decodeEntities(it.source);
+                    const title = it._title;
+                    const source = it._source;
                     return (
                       <a
                         key={`${it.link}-m-dup-${i}`}
