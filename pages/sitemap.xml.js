@@ -38,6 +38,7 @@ const STATIC_PATHS = [
   "/is-college-worth-it-2025","/is-college-worth-it-2026",
   "/trade-school-vs-college-salary-2025","/trade-school-vs-college-salary-2026",
   "/how-to-make-money-without-a-college-degree",
+    "/blog/how-to-start-a-roofing-company",
     "/blog/crane-operator-salary-2026",
     "/blog/cybersecurity-analyst-no-degree-2026",
     "/blog/how-much-do-plumbers-make-2026",
