@@ -3,6 +3,13 @@
 
 const resources = [
   {
+    label: "Interview Style",
+    name: "Fashionistas.ai",
+    desc: "Affordable shoes, bags, and basics for interviews, internships, and first-job outfits.",
+    url: "https://fashionistas.ai/interview-shoes",
+    color: "#f59e0b",
+  },
+  {
     label: "Coding Bootcamp",
     name: "Springboard",
     desc: "Software engineering & data science bootcamp with a job guarantee.",

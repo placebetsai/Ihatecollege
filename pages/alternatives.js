@@ -3,6 +3,8 @@ import Link from "next/link";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 import AdUnit from "../components/AdUnit";
+import AffiliateCTA from "../components/AffiliateCTA";
+import MoneyPathsHub from "../components/MoneyPathsHub";
 
 const PATHS = [
   {
@@ -362,6 +364,17 @@ export default function AlternativesPage() {
             </Link>
           </div>
         </div>
+      </section>
+
+      <section className="section max-w-5xl mx-auto px-4">
+        <MoneyPathsHub
+          title="Open The Pages That Help You Decide Faster"
+          subtitle="People searching for alternatives usually need cost comparison, salary proof, and a direct entry point. Route them into those pages instead of ending the session here."
+        />
+      </section>
+
+      <section className="section max-w-5xl mx-auto px-4">
+        <AffiliateCTA topic="trade" />
       </section>
 
       {/* FAQ */}

@@ -5,6 +5,8 @@ import BreakingTicker from "./BreakingTicker";
 
 import AffiliateDisclosure from "./AffiliateDisclosure";
 import RecommendedResources from "./RecommendedResources";
+import CareerStyleCta from "./CareerStyleCta";
+import MoneyPathsHub from "./MoneyPathsHub";
 
 export default function Layout({ children }) {
   const router = useRouter();
@@ -22,6 +24,11 @@ export default function Layout({ children }) {
         {isBlogPost && (
           <div className="max-w-3xl mx-auto px-4">
             <RecommendedResources />
+            <MoneyPathsHub
+              title="Where To Go Next"
+              subtitle="Readers who finish an article usually want one of four things: a better path, a real salary comparison, a no-degree job lead, or a way to avoid debt."
+            />
+            <CareerStyleCta />
           </div>
         )}
       </main>

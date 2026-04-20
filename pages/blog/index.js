@@ -4,6 +4,9 @@ import Layout from "../../components/Layout";
 import SEO from "../../components/SEO";
 import AdUnit from "../../components/AdUnit";
 import Link from "next/link";
+import EmailCapture from "../../components/EmailCapture";
+import AffiliateCTA from "../../components/AffiliateCTA";
+import MoneyPathsHub from "../../components/MoneyPathsHub";
 
 // Root-level pages that appear in the blog feed (not under /blog/)
 const ROOT_ARTICLES = [
@@ -114,6 +117,11 @@ export default function BlogIndex({ blogArticles = [] }) {
 
         <AdUnit slot="6600722153" />
 
+        <MoneyPathsHub
+          title="Best Pages To Open After The Blog"
+          subtitle="These are the pages that turn broad blog traffic into higher-value actions: calculators, salary pages, job intent, and affiliate-ready career research."
+        />
+
         <div className="mt-10 space-y-6">
           {allArticles.map((article) => {
             const href = article.rootPage ? article.slug : `/blog/${article.slug}`;
@@ -145,6 +153,12 @@ export default function BlogIndex({ blogArticles = [] }) {
 
         <div className="mt-12">
           <AdUnit slot="6600722153" />
+        </div>
+
+        <AffiliateCTA topic="general" />
+
+        <div className="mt-12">
+          <EmailCapture variant="banner" />
         </div>
 
         <div className="mt-12 p-6 rounded-2xl bg-slate-900 border border-sky-500/30 text-center">

@@ -4,6 +4,8 @@ import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 import Link from "next/link";
 import AdUnit from "../components/AdUnit";
+import CareerStyleCta from "../components/CareerStyleCta";
+import MoneyPathsHub from "../components/MoneyPathsHub";
 
 // ── Animated debt counter ───────────────────────────────────────────────────
 const DEBT_BASE = 1_770_000_000_000;
@@ -578,6 +580,14 @@ export default function HomePage({ articles = [] }) {
         </div>
       </section>
 
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 20px" }}>
+        <MoneyPathsHub
+          title="Start Here If You Want Results"
+          subtitle="The strongest pages on IHateCollege turn outrage into action: compare the cost, find the path, check the salary, and move toward a real job instead of another semester."
+        />
+        <CareerStyleCta />
+      </div>
+
       {/* ── REAL STORIES ─────────────────────────────────────────────────────── */}
       <section style={{ padding: "60px 20px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
@@ -656,6 +666,10 @@ export default function HomePage({ articles = [] }) {
           <p style={{ color: "#444", fontSize: 11, marginTop: 10 }}>Scroll for more →</p>
         </div>
       </section>
+
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 20px" }}>
+        <AdUnit slot="6600722153" format="rectangle" />
+      </div>
 
       {/* ── EMAIL CAPTURE ────────────────────────────────────────────────────── */}
       <section style={{ background: "#0d0d0d", borderTop: "1px solid #1a1a1a", padding: "60px 20px", textAlign: "center" }}>

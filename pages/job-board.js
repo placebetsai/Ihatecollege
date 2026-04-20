@@ -2,6 +2,8 @@ import { useState } from "react";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 import AdUnit from "../components/AdUnit";
+import AffiliateCTA from "../components/AffiliateCTA";
+import MoneyPathsHub from "../components/MoneyPathsHub";
 
 const JOBS = [
   {
@@ -187,6 +189,17 @@ export default function JobBoardPage() {
 
       <section className="section max-w-2xl mx-auto px-4">
         <AdUnit slot="6600722153" />
+      </section>
+
+      <section className="section max-w-5xl mx-auto px-4">
+        <MoneyPathsHub
+          title="Not Sure Which Job Path Fits?"
+          subtitle="Use these pages to compare debt, salary, and training time before you apply. They keep job-board traffic moving deeper into the site instead of dying on one page."
+        />
+      </section>
+
+      <section className="section max-w-5xl mx-auto px-4">
+        <AffiliateCTA topic="trade" />
       </section>
 
       {/* BOTTOM CTA */}
