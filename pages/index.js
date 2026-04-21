@@ -1,11 +1,13 @@
+import dynamic from "next/dynamic";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 import Link from "next/link";
 import AdUnit from "../components/AdUnit";
-import CareerStyleCta from "../components/CareerStyleCta";
-import MoneyPathsHub from "../components/MoneyPathsHub";
+
+const CareerStyleCta = dynamic(() => import("../components/CareerStyleCta"));
+const MoneyPathsHub = dynamic(() => import("../components/MoneyPathsHub"));
 
 // ── Animated debt counter ───────────────────────────────────────────────────
 const DEBT_BASE = 1_770_000_000_000;

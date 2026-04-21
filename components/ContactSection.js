@@ -1,37 +1,4 @@
-import { useState } from "react";
-
 export default function ContactSection() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState("idle"); // idle | sending | success | error
-  const set = (f) => (e) => setForm((p) => ({ ...p, [f]: e.target.value }));
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setStatus("sending");
-    try {
-      const r = await fetch("https://formsubmit.co/ajax/info@ihatecollege.com", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          name: form.name || "Anonymous",
-          email: form.email,
-          message: form.message,
-          _subject: `IHateCollege.com contact from ${form.name || form.email}`,
-          _template: "table",
-        }),
-      });
-      const d = await r.json();
-      if (d.success === "true" || d.success === true) {
-        setStatus("success");
-        setForm({ name: "", email: "", message: "" });
-      } else {
-        setStatus("error");
-      }
-    } catch {
-      setStatus("error");
-    }
-  }
-
   const input = "w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm transition-all";
 
   return (
@@ -43,46 +10,61 @@ export default function ContactSection() {
 
       <div className="contact-grid">
         <div className="card form-card">
-          {status === "success" ? (
-            <div className="text-center py-10">
-              <div className="text-5xl mb-4">✓</div>
-              <h3 className="text-xl font-black text-white mb-2">Message Sent!</h3>
-              <p className="text-slate-400 text-sm mb-6">We'll get back to you within a few hours.</p>
-              <button onClick={() => setStatus("idle")}
-                className="text-sky-400 text-sm font-bold hover:underline">
-                Send another →
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-1.5">Name</label>
-                  <input type="text" value={form.name} onChange={set("name")} placeholder="Your name" className={input} />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-1.5">Email <span className="text-red-400">*</span></label>
-                  <input type="email" required value={form.email} onChange={set("email")} placeholder="you@example.com" className={input} />
-                </div>
+          <form
+            action="https://formsubmit.co/info@ihatecollege.com"
+            method="POST"
+            className="space-y-4"
+          >
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value="https://ihatecollege.com/contact" />
+            <input type="hidden" name="_subject" value="IHateCollege Contact Form" />
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="contact-section-name" className="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-1.5">Name</label>
+                <input
+                  id="contact-section-name"
+                  type="text"
+                  name="name"
+                  placeholder="Your name"
+                  autoComplete="name"
+                  className={input}
+                />
               </div>
               <div>
-                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-1.5">Message <span className="text-red-400">*</span></label>
-                <textarea required rows={5} value={form.message} onChange={set("message")}
+                <label htmlFor="contact-section-email" className="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-1.5">Email <span className="text-red-400">*</span></label>
+                <input
+                  id="contact-section-email"
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="you@example.com"
+                  autoComplete="email"
+                  className={input}
+                />
+              </div>
+            </div>
+            <div>
+              <label htmlFor="contact-section-message" className="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-1.5">Message <span className="text-red-400">*</span></label>
+              <textarea
+                  id="contact-section-message"
+                  name="message"
+                  required
+                  rows={5}
                   placeholder="Tell us what's on your mind..."
                   className={`${input} resize-none leading-relaxed`} />
-              </div>
-              {status === "error" && (
-                <div className="p-3 rounded-xl bg-red-900/30 border border-red-700 text-red-300 text-sm">
-                  Something went wrong. Email us directly at <strong>info@ihatecollege.com</strong>.
-                </div>
-              )}
-              <button type="submit" disabled={status === "sending"}
-                className="w-full py-3.5 bg-sky-600 hover:bg-sky-500 disabled:opacity-60 text-white font-black rounded-xl transition-colors text-sm">
-                {status === "sending" ? "Sending…" : "Send Message →"}
-              </button>
-              <p className="text-xs text-slate-500 text-center">We respond within a few hours · info@ihatecollege.com</p>
-            </form>
-          )}
+            </div>
+            <div className="p-3 rounded-xl bg-slate-900/70 border border-slate-700 text-slate-300 text-sm">
+              This form submits directly and does not depend on app state. If the redirect stalls, email <strong>info@ihatecollege.com</strong>.
+            </div>
+            <button
+              type="submit"
+              className="w-full py-3.5 bg-sky-600 hover:bg-sky-500 text-white font-black rounded-xl transition-colors text-sm"
+            >
+              Send Message →
+            </button>
+            <p className="text-xs text-slate-500 text-center">We respond within a few hours · info@ihatecollege.com</p>
+          </form>
         </div>
 
         <div className="card">

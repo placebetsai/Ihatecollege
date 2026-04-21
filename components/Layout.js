@@ -1,12 +1,13 @@
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import BreakingTicker from "./BreakingTicker";
 
-import AffiliateDisclosure from "./AffiliateDisclosure";
-import RecommendedResources from "./RecommendedResources";
-import CareerStyleCta from "./CareerStyleCta";
-import MoneyPathsHub from "./MoneyPathsHub";
+const AffiliateDisclosure = dynamic(() => import("./AffiliateDisclosure"));
+const RecommendedResources = dynamic(() => import("./RecommendedResources"));
+const CareerStyleCta = dynamic(() => import("./CareerStyleCta"));
+const MoneyPathsHub = dynamic(() => import("./MoneyPathsHub"));
 
 export default function Layout({ children }) {
   const router = useRouter();

@@ -1,13 +1,14 @@
 import Layout from "../components/Layout";
 
 const SHOP = "https://fashionistas.ai";
+const CATALOG = "https://js0hy0-ux.myshopify.com";
 const COLLECTION = "ihatecollege-merch";
 
 const SUBSECTIONS = [
-  { tag: "work-boots", title: "Blue-Collar Work Gear", blurb: "Steel-toe boots, first-job picks, and trade-friendly items tied to the no-degree workforce lane." },
-  { tag: "study-supplies", title: "Study Supplies", blurb: "Planners, notebooks, and desk helpers for students who still need to get through class without overspending." },
-  { tag: "dorm-decor", title: "Dorm Decor", blurb: "Wall decor, room accents, and low-cost dorm upgrades that fit the college audience." },
-  { tag: "greek-life", title: "Greek Life", blurb: "Sorority and campus-style accessories that fit IHateCollege's social and campus culture traffic." },
+  { tag: "work-boots", title: "Blue-Collar Work Gear", blurb: "Steel-toe boots, first-job picks, and trade-friendly items tied to the no-degree workforce lane.", href: `${SHOP}/blue-collar-essentials` },
+  { tag: "study-supplies", title: "Study Supplies", blurb: "Planners, notebooks, and desk helpers for students who still need to get through class without overspending.", href: `${SHOP}/study-supplies` },
+  { tag: "dorm-decor", title: "Dorm Decor", blurb: "Wall decor, room accents, and low-cost dorm upgrades that fit the college audience.", href: `${SHOP}/dorm-decor` },
+  { tag: "greek-life", title: "Greek Life", blurb: "Sorority and campus-style accessories that fit IHateCollege's social and campus culture traffic.", href: `${SHOP}/greek-life` },
 ];
 
 function ProductCard({ p }) {
@@ -44,6 +45,9 @@ function ProductCard({ p }) {
 }
 
 export default function ShopPage({ subsections, totalCount, lastUpdated }) {
+  const populatedSections = subsections.filter((section) => section.products.length > 0);
+  const hasProducts = populatedSections.length > 0;
+
   return (
     <Layout>
       <section className="max-w-7xl mx-auto px-4 pt-12 pb-20">
@@ -59,22 +63,54 @@ export default function ShopPage({ subsections, totalCount, lastUpdated }) {
             but this page filters the inventory down to what actually fits the audience: work boots, dorm decor,
             study gear, and Greek-life accessories.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.18em] text-slate-400">
-            <span>{totalCount} live items</span>
-            <span>Fashionistas.ai inventory</span>
-            <span>last refresh {lastUpdated}</span>
-          </div>
+        <div className="mt-6 flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.18em] text-slate-400">
+          <span>{totalCount} live items</span>
+          <span>Fashionistas.ai inventory</span>
+          <span>last refresh {lastUpdated}</span>
         </div>
 
+        {!hasProducts && (
+          <div className="mt-8 max-w-3xl rounded-2xl border border-amber-400/25 bg-amber-300/[0.08] p-5">
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-amber-300">Catalog reroute</p>
+            <h2 className="mt-2 text-2xl font-black text-white">This merch slice is empty right now.</h2>
+            <p className="mt-3 text-sm leading-7 text-slate-300">
+              Instead of showing a dead blank store, we are routing you to live Fashionistas collections that still match the IHateCollege audience:
+              work gear, dorm upgrades, study supplies, and Greek-life accessories.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              {subsections.map((section) => (
+                <a
+                  key={section.tag}
+                  href={section.href}
+                  target="_blank"
+                  rel="noopener nofollow"
+                  className="px-4 py-2 rounded-full border border-white/10 text-xs font-bold uppercase tracking-[0.16em] text-slate-200 hover:text-white hover:border-red-500/50 transition-all"
+                >
+                  {section.title}
+                </a>
+              ))}
+              <a
+                href={SHOP}
+                target="_blank"
+                rel="noopener nofollow"
+                className="px-4 py-2 rounded-full bg-red-600 text-white text-xs font-black uppercase tracking-[0.16em] hover:bg-red-500 transition-colors"
+              >
+                Open full catalog
+              </a>
+            </div>
+          </div>
+        )}
+      </div>
+
         <div className="flex flex-wrap gap-2 mt-8 mb-10">
-          {subsections.filter((s) => s.products.length > 0).map((s) => (
+          {populatedSections.map((s) => (
             <a key={s.tag} href={`#${s.tag}`} className="px-4 py-2 rounded-full border border-white/10 text-xs font-bold uppercase tracking-[0.16em] text-slate-300 hover:text-white hover:border-red-500/50 transition-all">
               {s.title} ({s.products.length})
             </a>
           ))}
         </div>
 
-        {subsections.map((section) => section.products.length === 0 ? null : (
+        {populatedSections.map((section) => (
           <section key={section.tag} id={section.tag} className="mb-14 scroll-mt-24">
             <div className="flex items-end justify-between gap-4 mb-3">
               <h2 className="text-2xl md:text-3xl font-black text-white">{section.title}</h2>
@@ -94,7 +130,7 @@ export default function ShopPage({ subsections, totalCount, lastUpdated }) {
 export async function getStaticProps() {
   let products = [];
   try {
-    const res = await fetch(`${SHOP}/collections/${COLLECTION}/products.json?limit=250`);
+    const res = await fetch(`${CATALOG}/collections/${COLLECTION}/products.json?limit=250`);
     if (res.ok) {
       const data = await res.json();
       products = data.products || [];
