@@ -14,6 +14,7 @@ const links = [
   { href: "/civil-service",           label: "Gov Jobs" },
   { href: "/debt-calculator",         label: "Debt Calc" },
   { href: "/job-board",               label: "Jobs" },
+  { href: "/shop",                    label: "Shop" },
   { href: "/blog",                    label: "Blog" },
   { href: "/news",                    label: "News" },
   { href: "/contact",                 label: "Contact" },
