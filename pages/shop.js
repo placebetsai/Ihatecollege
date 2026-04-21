@@ -152,6 +152,6 @@ export async function getStaticProps() {
       totalCount: products.length,
       lastUpdated: new Date().toISOString().slice(0, 16).replace("T", " ") + " UTC",
     },
-    revalidate: 3600,
+    revalidate: 300,
   };
 }
