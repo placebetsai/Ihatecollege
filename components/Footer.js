@@ -59,6 +59,7 @@ export default function Footer() {
           <ul className="space-y-2">
             <li><Link href="/about" className="hover:text-white transition">About</Link></li>
             <li><Link href="/contact" className="hover:text-white transition">Contact</Link></li>
+            <li><Link href="/affiliate-disclosure" className="hover:text-white transition">Affiliate Disclosure</Link></li>
             <li><Link href="/privacy" className="hover:text-white transition">Privacy Policy</Link></li>
             <li><Link href="/terms" className="hover:text-white transition">Terms of Use</Link></li>
             <li><Link href="/i-hate-college-song" className="text-sky-400 hover:text-sky-300 transition font-semibold">&quot;I Hate College&quot; Song</Link></li>
