@@ -4,7 +4,7 @@
 const resources = [
   {
     label: "Interview Style",
-    name: "Fashionistas.ai",
+    name: "Interview Shoes Shop",
     desc: "Affordable shoes, bags, and basics for interviews, internships, and first-job outfits.",
     url: "https://fashionistas.ai/interview-shoes",
     color: "#f59e0b",

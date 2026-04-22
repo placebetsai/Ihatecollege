@@ -86,7 +86,7 @@ function ProductCard({ p }) {
         <h3 className="text-base font-black text-white leading-snug line-clamp-2 min-h-[3.1rem]">{p.title}</h3>
         <div className="mt-3 flex items-baseline gap-2">
           {compareAt && <span className="text-slate-500 text-xs line-through">${compareAt}</span>}
-          <span className="ml-auto text-[10px] uppercase tracking-[0.18em] text-slate-400">Open on Fashionistas →</span>
+          <span className="ml-auto text-[10px] uppercase tracking-[0.18em] text-slate-400">View product →</span>
         </div>
       </div>
     </a>
@@ -180,7 +180,7 @@ export default function ShopPage({ subsections, lastUpdated, state, message, fea
     <Layout>
       <SEO
         title="Shop | I Hate College"
-        description="Work boots, dorm decor, study supplies, and Greek-life picks for students and first-job workers. Curated from the Fashionistas.ai catalog — no brochure fluff."
+        description="Work boots, dorm decor, study supplies, and Greek-life picks for students and first-job workers. No brochure fluff — live inventory with fast US shipping."
         keywords="ihatecollege shop, dorm decor, work boots, study supplies, greek life, college merch, trade school gear, student essentials"
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
@@ -194,9 +194,8 @@ export default function ShopPage({ subsections, lastUpdated, state, message, fea
             Blue-Collar, Dorm, Study, and Greek Life Picks
           </h1>
         <p className="mt-5 text-slate-300 text-base md:text-lg leading-8 max-w-3xl">
-          This is the commerce lane for IHateCollege.com. Every item lives in the Fashionistas.ai catalog,
-          but this page filters the inventory down to what actually fits the audience: work boots, dorm decor,
-          study gear, and Greek-life accessories.
+          This is the commerce lane for IHateCollege.com — filtered down to what actually fits the audience:
+          work boots, dorm decor, study gear, and Greek-life accessories. Live inventory, fast US shipping.
         </p>
         <div className="mt-8 grid max-w-3xl grid-cols-3 gap-3 text-[11px] uppercase tracking-[0.18em]">
           <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-slate-400">
@@ -213,7 +212,7 @@ export default function ShopPage({ subsections, lastUpdated, state, message, fea
           </div>
         </div>
         <div className="mt-4 flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.18em] text-slate-400">
-          <span>Fashionistas.ai inventory</span>
+          <span>Live inventory</span>
           <span>last refresh {lastUpdated}</span>
         </div>
 
@@ -231,7 +230,7 @@ export default function ShopPage({ subsections, lastUpdated, state, message, fea
             </h2>
             <p className="mt-3 text-sm leading-7 text-slate-300">
               {state !== "ready"
-                ? `${message} We are only linking to live Fashionistas products and the storefront until the feed is healthy again.`
+                ? `${message} We are only linking to verified live products and the storefront until the feed is healthy again.`
                 : "Empty categories stay hidden on purpose. If a section looks light, that reflects the real live catalog instead of a fake filled-out grid."}
             </p>
           </div>
@@ -242,7 +241,7 @@ export default function ShopPage({ subsections, lastUpdated, state, message, fea
             <p className="text-xs font-black uppercase tracking-[0.22em] text-amber-300">Catalog reroute</p>
             <h2 className="mt-2 text-2xl font-black text-white">This merch slice is empty right now.</h2>
             <p className="mt-3 text-sm leading-7 text-slate-300">
-              Instead of sending people into dead collection paths, we are exposing only verified live product pages plus the working Fashionistas storefront.
+              Instead of sending people into dead collection paths, we are exposing only verified live product pages plus the working storefront.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               {featuredFallbacks.map((product) => (
@@ -360,9 +359,9 @@ export async function getStaticProps() {
     products = live;
     if (products.length === 0) {
       state = "empty";
-      message = `All tagged products are missing on Fashionistas.ai right now (dropped ${dropped.length} dead links).`;
+      message = `All tagged products are out of stock right now (dropped ${dropped.length} dead links).`;
     } else if (dropped.length > 0) {
-      message = `Filtered ${dropped.length} product(s) whose Fashionistas.ai pages are not live.`;
+      message = `Filtered ${dropped.length} product(s) that are not available right now.`;
     }
   }
 
