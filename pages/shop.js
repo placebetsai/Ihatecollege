@@ -55,7 +55,7 @@ function shopifyImage(url, width = 700) {
 
 function ProductCard({ p }) {
   const variant = p.variants[0] || {};
-  const image = shopifyImage((p.images || [])[0]?.src, 700);
+  const image = shopifyImage((p.images || [])[0]?.src, 400);
   const compareAt = variant.compare_at_price && parseFloat(variant.compare_at_price) > parseFloat(variant.price)
     ? variant.compare_at_price
     : null;
@@ -65,28 +65,23 @@ function ProductCard({ p }) {
       href={`${SHOP}/products/${p.handle}?ref=${REF}`}
       target="_blank"
       rel="noopener nofollow"
-      className="block rounded-[28px] overflow-hidden border border-white/10 bg-white/[0.04] hover:border-red-500/50 hover:-translate-y-1 transition-all shadow-[0_18px_40px_-24px_rgba(0,0,0,0.85)]"
+      className="block rounded-2xl overflow-hidden border border-white/10 bg-white/[0.04] hover:border-red-500/50 hover:-translate-y-0.5 transition-all"
     >
-      <div className="aspect-[4/5] bg-black/30 overflow-hidden relative">
+      <div className="aspect-square bg-black/30 overflow-hidden relative">
         {image ? (
-          <img src={image} alt={p.title} loading="lazy" className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-500" />
+          <img src={image} alt={p.title} loading="lazy" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-500" />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-xs uppercase tracking-[0.2em] text-slate-500">No image</div>
+          <div className="w-full h-full flex items-center justify-center text-[10px] uppercase tracking-[0.18em] text-slate-500">No image</div>
         )}
-        <div className="absolute inset-x-3 bottom-3 flex items-center justify-between gap-3">
-          <span className="rounded-full border border-white/15 bg-black/60 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white backdrop-blur">
-            {(getSectionTag(p) || "shop").replace("-", " ")}
-          </span>
-          <span className="rounded-full border border-white/15 bg-black/60 px-3 py-1 text-xs font-black text-red-300 backdrop-blur">
-            ${variant.price || "?"}
-          </span>
-        </div>
+        <span className="absolute top-2 right-2 rounded-full bg-black/70 px-2 py-0.5 text-[11px] font-black text-red-300 backdrop-blur">
+          ${variant.price || "?"}
+        </span>
       </div>
-      <div className="p-5">
-        <h3 className="text-base font-black text-white leading-snug line-clamp-2 min-h-[3.1rem]">{p.title}</h3>
-        <div className="mt-3 flex items-baseline gap-2">
-          {compareAt && <span className="text-slate-500 text-xs line-through">${compareAt}</span>}
-          <span className="ml-auto text-[10px] uppercase tracking-[0.18em] text-slate-400">View product →</span>
+      <div className="p-3">
+        <h3 className="text-[13px] font-bold text-white leading-tight line-clamp-2 min-h-[2.4rem]">{p.title}</h3>
+        <div className="mt-1.5 flex items-baseline gap-2">
+          {compareAt && <span className="text-slate-500 text-[11px] line-through">${compareAt}</span>}
+          <span className="ml-auto text-[10px] uppercase tracking-[0.14em] text-slate-400">{(getSectionTag(p) || "shop").replace("-", " ")}</span>
         </div>
       </div>
     </a>
@@ -318,7 +313,7 @@ export default function ShopPage({ subsections, lastUpdated, state, message, fea
                 This section is thin right now, so we are only showing the live item we could verify.
               </p>
             )}
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
               {section.products.map((p) => <ProductCard key={p.id} p={p} />)}
             </div>
           </section>
