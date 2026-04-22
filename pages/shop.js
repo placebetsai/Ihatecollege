@@ -14,6 +14,37 @@ const SUBSECTIONS = [
   { tag: "greek-life", title: "Greek Life", blurb: "Sorority and campus-style accessories that fit IHateCollege's social and campus culture traffic." },
 ];
 
+function productText(product) {
+  return [
+    product?.title,
+    ...(product?.tags || []),
+    product?.product_type,
+    product?.body_html,
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+}
+
+function getSectionTag(product) {
+  const text = productText(product);
+
+  if (/(steel toe|work boot|cowhide|anti-puncture|slip-resistant|flyknit upper|high-top work)/.test(text)) {
+    return "work-boots";
+  }
+  if (/(planner|notebook|study|grad prep|daily planner|spiral notebook)/.test(text)) {
+    return "study-supplies";
+  }
+  if (/(tapestry|wall decor|throw pillow|dorm)/.test(text)) {
+    return "dorm-decor";
+  }
+  if (/(sorority|fraternity|greek|aka|finer women)/.test(text)) {
+    return "greek-life";
+  }
+
+  return null;
+}
+
 function ProductCard({ p }) {
   const variant = p.variants[0] || {};
   const image = (p.images || [])[0]?.src;
@@ -56,14 +87,13 @@ function getCollectionHref() {
 }
 
 function getFullCatalogHref() {
-  return `${CATALOG}/collections/all`;
+  return `${SHOP}/products?ref=${REF}`;
 }
 
 export default function ShopPage({ subsections, lastUpdated, state, message, featuredFallbacks }) {
   const populatedSections = subsections.filter((section) => section.products.length > 0);
   const hasProducts = populatedSections.length > 0;
-  const thinSections = populatedSections.filter((section) => section.products.length < THIN_SECTION_COUNT);
-  const showCatalogNotice = state !== "ready" || thinSections.length > 0;
+  const showCatalogNotice = state !== "ready";
   const visibleCount = populatedSections.reduce((sum, section) => sum + section.products.length, 0);
 
   return (
@@ -232,7 +262,7 @@ export async function getStaticProps() {
 
   const subsections = SUBSECTIONS.map((section) => ({
     ...section,
-    products: products.filter((p) => (p.tags || []).includes(section.tag)),
+    products: products.filter((p) => getSectionTag(p) === section.tag),
   }));
 
   return {
