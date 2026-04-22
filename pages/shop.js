@@ -45,9 +45,15 @@ function getSectionTag(product) {
   return null;
 }
 
+function shopifyImage(url, width = 700) {
+  if (!url) return url;
+  const sep = url.includes("?") ? "&" : "?";
+  return `${url}${sep}width=${width}`;
+}
+
 function ProductCard({ p }) {
   const variant = p.variants[0] || {};
-  const image = (p.images || [])[0]?.src;
+  const image = shopifyImage((p.images || [])[0]?.src, 700);
   const compareAt = variant.compare_at_price && parseFloat(variant.compare_at_price) > parseFloat(variant.price)
     ? variant.compare_at_price
     : null;
@@ -57,21 +63,28 @@ function ProductCard({ p }) {
       href={`${SHOP}/products/${p.handle}?ref=${REF}`}
       target="_blank"
       rel="noopener nofollow"
-      className="block rounded-2xl overflow-hidden border border-white/10 bg-white/[0.03] hover:border-red-500/50 transition-all"
+      className="block rounded-[28px] overflow-hidden border border-white/10 bg-white/[0.04] hover:border-red-500/50 hover:-translate-y-1 transition-all shadow-[0_18px_40px_-24px_rgba(0,0,0,0.85)]"
     >
-      <div className="aspect-[4/5] bg-black/30 overflow-hidden">
+      <div className="aspect-[4/5] bg-black/30 overflow-hidden relative">
         {image ? (
           <img src={image} alt={p.title} loading="lazy" className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-500" />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-xs uppercase tracking-[0.2em] text-slate-500">No image</div>
         )}
+        <div className="absolute inset-x-3 bottom-3 flex items-center justify-between gap-3">
+          <span className="rounded-full border border-white/15 bg-black/60 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white backdrop-blur">
+            {(getSectionTag(p) || "shop").replace("-", " ")}
+          </span>
+          <span className="rounded-full border border-white/15 bg-black/60 px-3 py-1 text-xs font-black text-red-300 backdrop-blur">
+            ${variant.price || "?"}
+          </span>
+        </div>
       </div>
-      <div className="p-4">
-        <h3 className="text-sm font-bold text-white leading-snug line-clamp-2 min-h-[2.8rem]">{p.title}</h3>
+      <div className="p-5">
+        <h3 className="text-base font-black text-white leading-snug line-clamp-2 min-h-[3.1rem]">{p.title}</h3>
         <div className="mt-3 flex items-baseline gap-2">
-          <span className="text-red-400 font-black">${variant.price || "?"}</span>
           {compareAt && <span className="text-slate-500 text-xs line-through">${compareAt}</span>}
-          <span className="ml-auto text-[10px] uppercase tracking-[0.18em] text-slate-400">Shop →</span>
+          <span className="ml-auto text-[10px] uppercase tracking-[0.18em] text-slate-400">Open on Fashionistas →</span>
         </div>
       </div>
     </a>
@@ -111,13 +124,26 @@ export default function ShopPage({ subsections, lastUpdated, state, message, fea
           <h1 className="text-4xl md:text-6xl font-black italic tracking-tight text-white leading-none">
             Blue-Collar, Dorm, Study, and Greek Life Picks
           </h1>
-          <p className="mt-5 text-slate-300 text-base md:text-lg leading-8 max-w-3xl">
-            This is the commerce lane for IHateCollege.com. Every item lives in the Fashionistas.ai catalog,
-            but this page filters the inventory down to what actually fits the audience: work boots, dorm decor,
-            study gear, and Greek-life accessories.
-          </p>
-        <div className="mt-6 flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.18em] text-slate-400">
-          <span>{visibleCount} visible live items</span>
+        <p className="mt-5 text-slate-300 text-base md:text-lg leading-8 max-w-3xl">
+          This is the commerce lane for IHateCollege.com. Every item lives in the Fashionistas.ai catalog,
+          but this page filters the inventory down to what actually fits the audience: work boots, dorm decor,
+          study gear, and Greek-life accessories.
+        </p>
+        <div className="mt-8 grid max-w-3xl grid-cols-3 gap-3 text-[11px] uppercase tracking-[0.18em]">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-slate-400">
+            <div className="text-2xl font-black text-white">{visibleCount}</div>
+            <div className="mt-1">visible items</div>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-slate-400">
+            <div className="text-2xl font-black text-white">{populatedSections.length}</div>
+            <div className="mt-1">live lanes</div>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-slate-400">
+            <div className="text-2xl font-black text-white">{state === "ready" ? "Live" : "Check"}</div>
+            <div className="mt-1">catalog status</div>
+          </div>
+        </div>
+        <div className="mt-4 flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.18em] text-slate-400">
           <span>Fashionistas.ai inventory</span>
           <span>last refresh {lastUpdated}</span>
         </div>
