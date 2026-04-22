@@ -5,7 +5,9 @@ const SHOP = "https://fashionistas.ai";
 const CATALOG = "https://js0hy0-ux.myshopify.com";
 const COLLECTION = "ihatecollege-merch";
 const REF = "ihatecollege";
-const THIN_SECTION_COUNT = 2;
+const THIN_SECTION_COUNT = 4;
+const VERIFY_CHUNK = 5;
+const VERIFY_TIMEOUT_MS = 7000;
 
 const SUBSECTIONS = [
   { tag: "work-boots", title: "Blue-Collar Work Gear", blurb: "Steel-toe boots, first-job picks, and trade-friendly items tied to the no-degree workforce lane." },
@@ -103,11 +105,76 @@ function getFullCatalogHref() {
   return `${SHOP}/products?ref=${REF}`;
 }
 
+async function verifyFashionistasHandles(products) {
+  if (!Array.isArray(products) || products.length === 0) {
+    return { live: [], dropped: [] };
+  }
+
+  async function checkOne(handle) {
+    const url = `${SHOP}/products/${handle}`;
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), VERIFY_TIMEOUT_MS);
+    try {
+      let res = await fetch(url, { method: "HEAD", redirect: "follow", signal: controller.signal });
+      if (res.status === 405 || res.status === 501) {
+        res = await fetch(url, { method: "GET", redirect: "follow", signal: controller.signal });
+      }
+      return { handle, status: res.status, ok: res.status === 200 };
+    } catch (err) {
+      return { handle, status: 0, ok: false, error: err?.name || "fetch_error" };
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  const results = [];
+  for (let i = 0; i < products.length; i += VERIFY_CHUNK) {
+    const slice = products.slice(i, i + VERIFY_CHUNK);
+    results.push(...(await Promise.all(slice.map((p) => checkOne(p.handle)))));
+  }
+
+  const byHandle = new Map(results.map((r) => [r.handle, r]));
+  const live = [];
+  const dropped = [];
+  for (const product of products) {
+    const result = byHandle.get(product.handle);
+    if (result?.ok) {
+      live.push(product);
+    } else {
+      dropped.push({ handle: product.handle, status: result?.status ?? 0, error: result?.error });
+    }
+  }
+
+  return { live, dropped };
+}
+
 export default function ShopPage({ subsections, lastUpdated, state, message, featuredFallbacks }) {
   const populatedSections = subsections.filter((section) => section.products.length > 0);
   const hasProducts = populatedSections.length > 0;
   const showCatalogNotice = state !== "ready";
   const visibleCount = populatedSections.reduce((sum, section) => sum + section.products.length, 0);
+  const itemListProducts = populatedSections.flatMap((section) => section.products);
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "IHateCollege Shop",
+    url: "https://ihatecollege.com/shop",
+    numberOfItems: itemListProducts.length,
+    itemListElement: itemListProducts.map((p, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: `${SHOP}/products/${p.handle}?ref=${REF}`,
+      name: p.title,
+    })),
+  };
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://ihatecollege.com" },
+      { "@type": "ListItem", position: 2, name: "Shop", item: "https://ihatecollege.com/shop" },
+    ],
+  };
 
   return (
     <Layout>
@@ -116,6 +183,8 @@ export default function ShopPage({ subsections, lastUpdated, state, message, fea
         description="Work boots, dorm decor, study supplies, and Greek-life picks for students and first-job workers. Curated from the Fashionistas.ai catalog — no brochure fluff."
         keywords="ihatecollege shop, dorm decor, work boots, study supplies, greek life, college merch, trade school gear, student essentials"
       />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <section className="max-w-7xl mx-auto px-4 pt-12 pb-20">
         <div className="max-w-4xl">
           <div className="inline-block px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-[0.2em] text-red-400 bg-red-500/10 mb-4">
@@ -250,7 +319,7 @@ export default function ShopPage({ subsections, lastUpdated, state, message, fea
                 This section is thin right now, so we are only showing the live item we could verify.
               </p>
             )}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
               {section.products.map((p) => <ProductCard key={p.id} p={p} />)}
             </div>
           </section>
@@ -284,6 +353,17 @@ export async function getStaticProps() {
   if (state === "ready" && products.length === 0) {
     state = "empty";
     message = "The live merch feed is up, but none of the tagged products in this collection are available right now.";
+  }
+
+  if (state === "ready" && products.length > 0) {
+    const { live, dropped } = await verifyFashionistasHandles(products);
+    products = live;
+    if (products.length === 0) {
+      state = "empty";
+      message = `All tagged products are missing on Fashionistas.ai right now (dropped ${dropped.length} dead links).`;
+    } else if (dropped.length > 0) {
+      message = `Filtered ${dropped.length} product(s) whose Fashionistas.ai pages are not live.`;
+    }
   }
 
   const subsections = SUBSECTIONS.map((section) => ({
