@@ -10,9 +10,9 @@ const VERIFY_CHUNK = 5;
 const VERIFY_TIMEOUT_MS = 7000;
 
 const SUBSECTIONS = [
-  { tag: "work-boots", title: "Blue-Collar Work Gear", blurb: "Steel-toe boots, first-job picks, and trade-friendly items tied to the no-degree workforce lane." },
+  { tag: "work-boots", title: "Blue-Collar Work Gear", blurb: "Steel-toe boots, cowhide work boots, and slip-resistant picks for trade jobs." },
   { tag: "study-supplies", title: "Study Supplies", blurb: "Planners, notebooks, and desk helpers for students who still need to get through class without overspending." },
-  { tag: "dorm-decor", title: "Dorm Decor", blurb: "Wall decor, room accents, and low-cost dorm upgrades that fit the college audience." },
+  { tag: "dorm-decor", title: "Dorm Decor", blurb: "Tapestries, throw pillows, and wall accents for dorm rooms." },
   { tag: "greek-life", title: "Greek Life", blurb: "Sorority and campus-style accessories that fit IHateCollege's social and campus culture traffic." },
 ];
 
@@ -189,7 +189,7 @@ export default function ShopPage({ subsections, lastUpdated, state, message, fea
             Blue-Collar, Dorm, Study, and Greek Life Picks
           </h1>
         <p className="mt-5 text-slate-300 text-base md:text-lg leading-8 max-w-3xl">
-          This is the commerce lane for IHateCollege.com — filtered down to what actually fits the audience:
+          The IHateCollege shop — filtered down to what fits our readers:
           work boots, dorm decor, study gear, and Greek-life accessories. Live inventory, fast US shipping.
         </p>
         <div className="mt-8 grid max-w-3xl grid-cols-3 gap-3 text-[11px] uppercase tracking-[0.18em]">
@@ -199,7 +199,7 @@ export default function ShopPage({ subsections, lastUpdated, state, message, fea
           </div>
           <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-slate-400">
             <div className="text-2xl font-black text-white">{populatedSections.length}</div>
-            <div className="mt-1">live lanes</div>
+            <div className="mt-1">categories</div>
           </div>
           <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-slate-400">
             <div className="text-2xl font-black text-white">{state === "ready" ? "Live" : "Check"}</div>
@@ -220,7 +220,7 @@ export default function ShopPage({ subsections, lastUpdated, state, message, fea
               {state === "error"
                 ? "The merch feed did not load cleanly."
                 : state === "empty"
-                  ? "This audience slice is empty right now."
+                  ? "Nothing tagged for this shop right now."
                   : "Some IHateCollege sections only have one live item right now."}
             </h2>
             <p className="mt-3 text-sm leading-7 text-slate-300">
