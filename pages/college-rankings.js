@@ -268,12 +268,14 @@ export default function CollegeRankings({ colleges: initialColleges }) {
       {/* HERO */}
       <section style={{ background: "#050505", borderBottom: "1px solid #1a1a1a", padding: "56px 20px 40px", textAlign: "center" }}>
         <div style={{ maxWidth: 720, margin: "0 auto" }}>
-          <p style={{ color: "#ff2020", fontSize: 11, fontWeight: 900, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 12 }}>Government Data · No Spin</p>
+          <p style={{ color: "#ff2020", fontSize: 11, fontWeight: 900, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 12 }}>
+            {(initialColleges || []).length.toLocaleString()} Colleges · Government Data · No Spin
+          </p>
           <h1 style={{ color: "#fff", fontSize: "clamp(28px,5vw,52px)", fontWeight: 900, lineHeight: 1.05, marginBottom: 14 }}>
             Is Your College a <span style={{ color: "#ff2020" }}>Debt Trap?</span>
           </h1>
           <p style={{ color: "#ccc", fontSize: 16, marginBottom: 32, maxWidth: 540, margin: "0 auto 32px" }}>
-            Every U.S. college ranked by real cost, average debt, and median earnings 10 years out.
+            All {(initialColleges || []).length.toLocaleString()} U.S. colleges ranked by real cost, average debt, and median earnings 10 years out.
           </p>
 
           {/* Search */}
@@ -529,31 +531,29 @@ export async function getStaticProps() {
     colleges = (data.colleges || []).filter((c) => c.name && c.slug);
   } catch {}
 
-  // Fallback to hardcoded top schools if JSON missing
   if (colleges.length === 0) {
     colleges = [
       { id: 1, name: "Harvard University", slug: "harvard-university", city: "Cambridge", state: "MA", type: "Private", cost: "$57,261", debt: "$17,500", earnings: "$87,200" },
       { id: 2, name: "MIT", slug: "mit", city: "Cambridge", state: "MA", type: "Private", cost: "$57,986", debt: "$17,100", earnings: "$116,100" },
-      { id: 3, name: "Stanford University", slug: "stanford-university", city: "Stanford", state: "CA", type: "Private", cost: "$56,169", debt: "$15,200", earnings: "$91,000" },
-      { id: 4, name: "Princeton University", slug: "princeton-university", city: "Princeton", state: "NJ", type: "Private", cost: "$57,410", debt: "$10,800", earnings: "$76,200" },
-      { id: 5, name: "Yale University", slug: "yale-university", city: "New Haven", state: "CT", type: "Private", cost: "$59,950", debt: "$17,300", earnings: "$77,400" },
-      { id: 6, name: "Columbia University", slug: "columbia-university", city: "New York", state: "NY", type: "Private", cost: "$63,530", debt: "$25,100", earnings: "$71,400" },
-      { id: 7, name: "University of Pennsylvania", slug: "university-of-pennsylvania", city: "Philadelphia", state: "PA", type: "Private", cost: "$57,770", debt: "$22,000", earnings: "$80,300" },
-      { id: 8, name: "Duke University", slug: "duke-university", city: "Durham", state: "NC", type: "Private", cost: "$60,244", debt: "$22,100", earnings: "$73,200" },
-      { id: 9, name: "Northwestern University", slug: "northwestern-university", city: "Evanston", state: "IL", type: "Private", cost: "$60,768", debt: "$23,400", earnings: "$72,100" },
-      { id: 10, name: "Dartmouth College", slug: "dartmouth-college", city: "Hanover", state: "NH", type: "Private", cost: "$58,336", debt: "$20,100", earnings: "$72,100" },
-      { id: 11, name: "UC Berkeley", slug: "uc-berkeley", city: "Berkeley", state: "CA", type: "Public", cost: "$14,312", debt: "$18,200", earnings: "$72,100" },
-      { id: 12, name: "UCLA", slug: "ucla", city: "Los Angeles", state: "CA", type: "Public", cost: "$13,240", debt: "$19,100", earnings: "$65,300" },
-      { id: 13, name: "University of Michigan", slug: "university-of-michigan", city: "Ann Arbor", state: "MI", type: "Public", cost: "$15,948", debt: "$22,100", earnings: "$66,200" },
-      { id: 14, name: "Georgia Tech", slug: "georgia-tech", city: "Atlanta", state: "GA", type: "Public", cost: "$12,682", debt: "$22,100", earnings: "$82,400" },
-      { id: 15, name: "New York University", slug: "new-york-university", city: "New York", state: "NY", type: "Private", cost: "$56,500", debt: "$47,300", earnings: "$57,100" },
     ];
   }
 
-  // Sort by earnings descending and only send top 100 to reduce page payload from ~2.7MB to ~50KB
   const parseEarnings = (s) => parseInt(String(s || "0").replace(/[^0-9]/g, "")) || 0;
   colleges.sort((a, b) => parseEarnings(b.earnings) - parseEarnings(a.earnings));
-  const top100 = colleges.slice(0, 100);
 
-  return { props: { colleges: top100 }, revalidate: 86400 };
+  // Ship ALL 6,322 colleges with compact fields. Raw ~1.3MB, gzipped ~238KB —
+  // acceptable so users can actually browse every school instead of only top 100.
+  const lean = colleges.map((c) => ({
+    id: c.id,
+    name: c.name,
+    slug: c.slug,
+    city: c.city || "",
+    state: c.state || "",
+    type: c.type || "",
+    cost: c.cost || "",
+    debt: c.debt || "",
+    earnings: c.earnings || "",
+  }));
+
+  return { props: { colleges: lean }, revalidate: 86400 };
 }
