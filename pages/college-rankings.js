@@ -149,11 +149,11 @@ function StarPicker({ value, onChange }) {
 }
 
 const STORAGE_KEY = "ihc_ratings_v1";
-const PAGE_SIZE = 100;
+const PAGE_SIZE = 300;
 
 export default function CollegeRankings({ colleges: initialColleges }) {
   const [query, setQuery]   = useState("");
-  const [sortBy, setSortBy] = useState("earnings");
+  const [sortBy, setSortBy] = useState("name");
   const [typeFilter, setTypeFilter] = useState("All");
   const [leanFilter, setLeanFilter] = useState("All");
   const [page, setPage]     = useState(1);
@@ -357,7 +357,7 @@ export default function CollegeRankings({ colleges: initialColleges }) {
         {/* Sort */}
         <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
           <span style={{ color: "#aaa", fontSize: 12, fontWeight: 700 }}>Sort:</span>
-          {[["earnings", "10yr Earnings"], ["debt", "Lowest Debt"], ["cost", "Lowest Cost"], ["name", "A–Z"]].map(([k, l]) => (
+          {[["name", "A–Z"], ["earnings", "10yr Earnings"], ["debt", "Lowest Debt"], ["cost", "Lowest Cost"]].map(([k, l]) => (
             <button key={k} onClick={() => { setSortBy(k); resetPage(); }}
               style={{ padding: "5px 12px", borderRadius: 999, fontSize: 12, fontWeight: 800, cursor: "pointer", border: "1px solid", borderColor: sortBy === k ? "#ff2020" : "#2a2a2a", background: sortBy === k ? "#ff2020" : "#111", color: sortBy === k ? "#fff" : "#ccc" }}>
               {l}
