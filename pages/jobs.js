@@ -145,39 +145,59 @@ export default function JobsBoard() {
       {/* JOB CARDS */}
       <section className="max-w-5xl mx-auto px-4 pb-16">
         <div className="grid sm:grid-cols-2 gap-4">
-          {filtered.map((job) => (
-            <Link key={job.title} href={job.path}
-              className="block p-5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 transition-all group">
-              <div className="flex items-start justify-between gap-3 mb-3">
-                <div>
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <h2 className="text-white font-bold text-lg group-hover:text-emerald-400 transition-colors">
-                      {job.title}
-                    </h2>
-                    {job.hot && (
-                      <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-red-900/40 border border-red-700 text-red-400">
-                        HOT
-                      </span>
-                    )}
+          {filtered.map((job) => {
+            const indeedUrl = `https://www.indeed.com/jobs?q=${encodeURIComponent(job.title + " no degree")}&fromage=14`;
+            return (
+              <div key={job.title}
+                className="p-5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 transition-all">
+                <div className="flex items-start justify-between gap-3 mb-3">
+                  <div>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h2 className="text-white font-bold text-lg">
+                        {job.title}
+                      </h2>
+                      {job.hot && (
+                        <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-red-900/40 border border-red-700 text-red-400">
+                          HOT
+                        </span>
+                      )}
+                    </div>
+                    <span className={`mt-1 inline-block text-xs font-bold px-2 py-0.5 rounded-full border ${CAT_COLORS[job.category]}`}>
+                      {job.category}
+                    </span>
                   </div>
-                  <span className={`mt-1 inline-block text-xs font-bold px-2 py-0.5 rounded-full border ${CAT_COLORS[job.category]}`}>
-                    {job.category}
-                  </span>
+                  <div className="text-right shrink-0">
+                    <div className="text-emerald-400 font-black text-sm">{fmt(job.salaryLow)}–{fmt(job.salaryHigh)}</div>
+                    <div className="text-xs text-slate-500">per year</div>
+                  </div>
                 </div>
-                <div className="text-right shrink-0">
-                  <div className="text-emerald-400 font-black text-sm">{fmt(job.salaryLow)}–{fmt(job.salaryHigh)}</div>
-                  <div className="text-xs text-slate-500">per year</div>
+
+                <p className="text-slate-400 text-sm mb-4 leading-relaxed">{job.description}</p>
+
+                <div className="flex gap-4 text-xs text-slate-500 mb-4">
+                  <span>⚡ Growth: <span className="text-emerald-400 font-bold">{job.growth}</span></span>
+                  <span>⏱ Time in: <span className="text-white font-semibold">{job.time}</span></span>
+                </div>
+
+                <div className="flex gap-2">
+                  <a
+                    href={indeedUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 text-center px-3 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition-colors"
+                  >
+                    See Open Jobs →
+                  </a>
+                  <Link
+                    href={job.path}
+                    className="flex-1 text-center px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs transition-colors"
+                  >
+                    Training Path
+                  </Link>
                 </div>
               </div>
-
-              <p className="text-slate-400 text-sm mb-4 leading-relaxed">{job.description}</p>
-
-              <div className="flex gap-4 text-xs text-slate-500">
-                <span>⚡ Growth: <span className="text-emerald-400 font-bold">{job.growth}</span></span>
-                <span>⏱ Time in: <span className="text-white font-semibold">{job.time}</span></span>
-              </div>
-            </Link>
-          ))}
+            );
+          })}
         </div>
 
         {filtered.length === 0 && (
