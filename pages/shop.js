@@ -185,7 +185,7 @@ export default function ShopPage({ subsections, lastUpdated, state, message, fea
           <div className="inline-block px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-[0.2em] text-red-400 bg-red-500/10 mb-4">
             Shop
           </div>
-          <h1 className="text-4xl md:text-6xl font-black italic tracking-tight text-white leading-none">
+          <h1 className="text-3xl md:text-5xl font-black italic tracking-tight text-white leading-none">
             Blue-Collar, Dorm, Study, and Greek Life Picks
           </h1>
         <p className="mt-5 text-slate-300 text-base md:text-lg leading-8 max-w-3xl">
