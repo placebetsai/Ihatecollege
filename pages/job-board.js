@@ -163,7 +163,7 @@ export default function JobBoardPage() {
                 {job.description}
               </p>
               <a
-                href={`https://www.indeed.com/jobs?q=${encodeURIComponent(job.title)}&fromage=14`}
+                href={`https://www.google.com/search?q=${encodeURIComponent(job.title + " jobs")}&ibp=htl;jobs`}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{

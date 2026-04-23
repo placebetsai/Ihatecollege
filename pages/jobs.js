@@ -146,7 +146,7 @@ export default function JobsBoard() {
       <section className="max-w-5xl mx-auto px-4 pb-16">
         <div className="grid sm:grid-cols-2 gap-4">
           {filtered.map((job) => {
-            const indeedUrl = `https://www.indeed.com/jobs?q=${encodeURIComponent(job.title + " no degree")}&fromage=14`;
+            const indeedUrl = `https://www.google.com/search?q=${encodeURIComponent(job.title + " no degree jobs")}&ibp=htl;jobs`;
             return (
               <div key={job.title}
                 className="p-5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 transition-all">

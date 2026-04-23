@@ -101,7 +101,7 @@ const FEATURED = [
     location: "Nationwide", state: "Nationwide", category: "Trades", sector: "Trades",
     salary_min: 55000, salary_max: 95000,
     description: "Install, maintain, and repair heating and cooling systems. No degree required — certification takes 6 months to 2 years. Huge demand as older systems are replaced. Overtime in summer and winter is routine.",
-    apply_url: "https://www.indeed.com/jobs?q=hvac+technician",
+    apply_url: "https://www.google.com/search?ibp=htl;jobs&q=hvac+technician",
     image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&h=400&fit=crop&auto=format",
   },
   {
@@ -109,7 +109,7 @@ const FEATURED = [
     location: "Nationwide · Remote Available", state: "Nationwide", category: "Tech", sector: "Tech",
     salary_min: 45000, salary_max: 80000,
     description: "Help desks and IT support roles often require only a CompTIA A+ certification (3 months to earn). No degree needed. Many are remote. Strong path to sysadmin, network admin, or cybersecurity roles.",
-    apply_url: "https://www.indeed.com/jobs?q=it+support+no+degree",
+    apply_url: "https://www.google.com/search?ibp=htl;jobs&q=it+support+no+degree",
     image: "https://images.unsplash.com/photo-1587440871875-191322ee64b0?w=800&h=400&fit=crop&auto=format",
   },
   {
