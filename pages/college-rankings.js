@@ -258,6 +258,27 @@ export default function CollegeRankings({ colleges: initialColleges }) {
   // Reset to page 1 on filter/sort change
   const resetPage = () => setPage(1);
 
+  // Build letter-index of first occurrence per letter (A-Z default sort only)
+  const letterIndex = (() => {
+    if (sortBy !== "name") return null;
+    const idx = {};
+    for (let i = 0; i < filtered.length; i++) {
+      const letter = (filtered[i].name[0] || "").toUpperCase();
+      if (!idx[letter] && /[A-Z]/.test(letter)) idx[letter] = i;
+    }
+    return idx;
+  })();
+
+  const jumpToLetter = (letter) => {
+    const i = letterIndex?.[letter];
+    if (i == null) return;
+    setPage(Math.ceil((i + 1) / PAGE_SIZE));
+    setTimeout(() => {
+      const el = document.getElementById(`letter-anchor-${letter}`);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 60);
+  };
+
   return (
     <Layout>
       <SEO
@@ -368,13 +389,41 @@ export default function CollegeRankings({ colleges: initialColleges }) {
 
       {/* Table */}
       <section style={{ maxWidth: 1100, margin: "0 auto", padding: "0 20px 60px" }}>
+        {letterIndex && (
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 4, marginBottom: 14, justifyContent: "center" }}>
+            {"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map((L) => {
+              const enabled = letterIndex[L] != null;
+              return (
+                <button
+                  key={L}
+                  disabled={!enabled}
+                  onClick={() => enabled && jumpToLetter(L)}
+                  style={{
+                    width: 28, height: 28, borderRadius: 6,
+                    fontSize: 12, fontWeight: 800,
+                    border: "1px solid",
+                    borderColor: enabled ? "#2a2a2a" : "transparent",
+                    background: enabled ? "#111" : "transparent",
+                    color: enabled ? "#fff" : "#444",
+                    cursor: enabled ? "pointer" : "default",
+                    transition: "all 0.1s",
+                  }}
+                  onMouseOver={e => { if (enabled) { e.currentTarget.style.background = "#ff2020"; e.currentTarget.style.borderColor = "#ff2020"; } }}
+                  onMouseOut={e => { if (enabled) { e.currentTarget.style.background = "#111"; e.currentTarget.style.borderColor = "#2a2a2a"; } }}
+                >
+                  {L}
+                </button>
+              );
+            })}
+          </div>
+        )}
         <p style={{ color: "#aaa", fontSize: 12, marginBottom: 12 }}>
           {searching ? (
             <span style={{ color: "#ff2020" }}>Searching...</span>
           ) : searchResults !== null ? (
             <>Found <strong style={{ color: "#fff" }}>{filtered.length}</strong> {filtered.length === 1 ? "school" : "schools"} for &ldquo;{query}&rdquo;</>
           ) : (
-            <>Showing <strong style={{ color: "#fff" }}>{Math.min(visible.length, filtered.length)}</strong> of <strong style={{ color: "#fff" }}>{filtered.length.toLocaleString()}</strong> top-earning schools</>
+            <>Showing <strong style={{ color: "#fff" }}>{Math.min(visible.length, filtered.length)}</strong> of <strong style={{ color: "#fff" }}>{filtered.length.toLocaleString()}</strong> colleges</>
           )}
           {typeFilter !== "All" && <> · Type: <strong style={{ color: "#fff" }}>{typeFilter}</strong></>}
           {leanFilter !== "All" && <> · Politics: <strong style={{ color: LEAN_COLORS[leanFilter]?.color }}>{leanFilter}</strong></>}
@@ -391,9 +440,11 @@ export default function CollegeRankings({ colleges: initialColleges }) {
             const isOpen = expanded === school.id;
             const lean = school.lean;
             const lc = lean ? LEAN_COLORS[lean] : null;
+            const letter = (school.name[0] || "").toUpperCase();
+            const isFirstOfLetter = sortBy === "name" && letterIndex?.[letter] === i;
 
             return (
-              <div key={school.id || i} style={{ borderRadius: 12, overflow: "hidden", border: "1px solid #2a2a2a", background: "#141414" }}
+              <div key={school.id || i} id={isFirstOfLetter ? `letter-anchor-${letter}` : undefined} style={{ borderRadius: 12, overflow: "hidden", border: "1px solid #2a2a2a", background: "#141414", scrollMarginTop: 80 }}
                 onMouseOver={e => e.currentTarget.style.borderColor = "#ff2020"}
                 onMouseOut={e => e.currentTarget.style.borderColor = "#2a2a2a"}>
                 <div className="rank-card-row" style={{ display: "flex", alignItems: "center" }}>
