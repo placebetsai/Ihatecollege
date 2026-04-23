@@ -113,10 +113,10 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile full-screen menu */}
+      {/* Mobile full-screen menu — scrollable, top-aligned so nothing gets clipped */}
       <nav
-        className={`fixed inset-0 flex flex-col items-center justify-center gap-4 transition-all duration-300 md:hidden ${open ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"}`}
-        style={{ background: "#0a0a0a", zIndex: 60 }}
+        className={`fixed inset-0 flex flex-col items-center gap-4 transition-all duration-300 md:hidden overflow-y-auto ${open ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"}`}
+        style={{ background: "#0a0a0a", zIndex: 60, paddingTop: "80px", paddingBottom: "40px", WebkitOverflowScrolling: "touch" }}
       >
         <button
           onClick={() => setOpen(false)}
