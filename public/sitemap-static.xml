@@ -44,7 +44,7 @@
   </url>
   <url>
     <loc>https://ihatecollege.com/college-rankings</loc>
-    <lastmod>2026-04-14T14:17:28.762Z</lastmod>
+    <lastmod>2026-04-23T17:41:22.625Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
@@ -92,7 +92,7 @@
   </url>
   <url>
     <loc>https://ihatecollege.com/job-board</loc>
-    <lastmod>2026-04-14T14:17:28.764Z</lastmod>
+    <lastmod>2026-04-23T21:46:26.442Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
@@ -104,7 +104,7 @@
   </url>
   <url>
     <loc>https://ihatecollege.com/jobs</loc>
-    <lastmod>2026-04-14T14:17:28.764Z</lastmod>
+    <lastmod>2026-04-23T21:46:09.318Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -125,6 +125,12 @@
     <lastmod>2026-04-14T14:17:28.765Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://ihatecollege.com/no-degree-jobs</loc>
+    <lastmod>2026-04-28T19:31:04.122Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
   </url>
   <url>
     <loc>https://ihatecollege.com/press</loc>
@@ -152,7 +158,7 @@
   </url>
   <url>
     <loc>https://ihatecollege.com/shop</loc>
-    <lastmod>2026-04-22T15:03:25.872Z</lastmod>
+    <lastmod>2026-04-23T11:02:05.427Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -161,6 +167,12 @@
     <lastmod>2026-04-14T14:17:28.766Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://ihatecollege.com/trade-school-jobs</loc>
+    <lastmod>2026-04-28T19:31:05.211Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
   </url>
   <url>
     <loc>https://ihatecollege.com/trade-school-vs-college-salary-2025</loc>
