@@ -18,8 +18,9 @@ export default function Contact() {
         <div className="bg-green-900/20 border border-green-700/60 rounded-xl p-5 mb-8 text-center">
           <h2 className="text-green-400 font-bold text-lg mb-2">Fastest way to reach us</h2>
           <p className="text-green-200 text-sm">
-            This form submits directly without needing app state or Supabase. If the thank-you redirect does not load,
-            email <a href="mailto:info@ihatecollege.com" className="font-bold underline underline-offset-2">info@ihatecollege.com</a>.
+            Send a message here or email{" "}
+            <a href="mailto:info@ihatecollege.com" className="font-bold underline underline-offset-2">info@ihatecollege.com</a>.
+            We review site tips, corrections, stories, job posts, and partnership requests.
           </p>
         </div>
 

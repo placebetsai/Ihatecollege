@@ -55,7 +55,7 @@ export default function ContactSection() {
                   className={`${input} resize-none leading-relaxed`} />
             </div>
             <div className="p-3 rounded-xl bg-slate-900/70 border border-slate-700 text-slate-300 text-sm">
-              This form submits directly and does not depend on app state. If the redirect stalls, email <strong>info@ihatecollege.com</strong>.
+              You can also email <strong>info@ihatecollege.com</strong> with stories, corrections, job posts, or partnership requests.
             </div>
             <button
               type="submit"
