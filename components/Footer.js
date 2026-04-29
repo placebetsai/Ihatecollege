@@ -46,7 +46,10 @@ export default function Footer() {
           <ul className="space-y-2">
             <li><Link href="/job-board" className="hover:text-white transition">Post a Job</Link></li>
             <li><Link href="/jobs" className="hover:text-white transition">Jobs Board</Link></li>
+            <li><Link href="/jobs-without-college" className="hover:text-white transition">Jobs Without College</Link></li>
+            <li><Link href="/no-degree-jobs" className="hover:text-white transition">No Degree Jobs</Link></li>
             <li><Link href="/trade-schools" className="hover:text-white transition">Trade Schools</Link></li>
+            <li><Link href="/apprenticeships" className="hover:text-white transition">Apprenticeships</Link></li>
             <li><Link href="/civil-service" className="hover:text-white transition">Gov Jobs</Link></li>
             <li><Link href="/alternatives" className="hover:text-white transition">All Alternatives</Link></li>
             <li><Link href="/blog" className="hover:text-white transition">Blog</Link></li>
